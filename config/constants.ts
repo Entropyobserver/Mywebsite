@@ -97,7 +97,8 @@ export type ValidSkills =
   | "Prophet"
   | "LSTM"
   | "A/B Testing"
-  | "Data Visualization";     
+  | "Data Visualization"
+  | "Customer Segmentation";
 
 export type ValidCategory =
   | "Full Stack"
