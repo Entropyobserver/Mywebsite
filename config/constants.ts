@@ -98,7 +98,9 @@ export type ValidSkills =
   | "LSTM"
   | "A/B Testing"
   | "Data Visualization"
-  | "Customer Segmentation";
+  | "Customer Segmentation"
+  | "FAISS";
+  
 
 export type ValidCategory =
   | "Full Stack"
