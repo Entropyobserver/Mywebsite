@@ -36,14 +36,14 @@ export default function ProjectsPage() {
       content: renderContent("all"),
     },
     {
-      value: "personal",
-      label: "Personal",
-      content: renderContent("personal"),
+      value: "ai",
+      label: "AI",
+      content: renderContent("AI"),
     },
     {
-      value: "professional",
-      label: "Professional",
-      content: renderContent("professional"),
+      value: "data-science",
+      label: "Data Science",
+      content: renderContent("Data Science"),
     },
   ];
 

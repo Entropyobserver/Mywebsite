@@ -1,12 +1,12 @@
 export const siteConfig = {
   name: "Nordic AI Solutions | AI Developer & Consultant",
   authorName: "Jean Young",
-  username: "Jean Young",
+  username: "Home",
   description:
     "Jean Young's Nordic AI Solutions - AI developer and consultant specializing in machine learning, natural language processing, and intelligent automation. Offering both personal expertise and professional AI consulting services.",
-  url: "https://nbarkiya.xyz",
+  url: "https://nordic-ai.top",
   links: {
-    twitter: "https://x.com/namanbarkiya",
+    twitter: "https://x.com/Entropyobserver",
     github: "https://github.com/Entropyobserver",
   },
   ogImage: "/profile-img.jpg",
