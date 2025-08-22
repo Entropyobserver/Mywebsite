@@ -99,8 +99,12 @@ export type ValidSkills =
   | "A/B Testing"
   | "Data Visualization"
   | "Customer Segmentation"
-  | "FAISS";
-  
+  | "FAISS"
+  | "RAG"
+  | "NLP"
+  | "Information Retrieval"
+  | "Prompt Engineering"
+
 
 export type ValidCategory =
   | "Full Stack"
