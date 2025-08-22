@@ -84,7 +84,16 @@ export type ValidSkills =
   | "Seaborn"
   | "OpenCV"
   | "NLTK"
-  | "spaCy";
+  | "spaCy"
+  | "Next.js"
+  | "React"
+  | "spaCy"
+  | "Power BI"
+  | "Machine Learning"
+  | "ARIMA"
+  | "Time Series"
+  | "Data Analysis"
+  | "Statistics";     
 
 export type ValidCategory =
   | "Full Stack"
