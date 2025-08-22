@@ -71,7 +71,7 @@ export type ValidCategory =
   | "Mobile Dev"
   | "3D Modeling";
 
-export type ValidExpType = "Personal" | "Professional";
+export type ValidExpType = "AI" | "Data Science";
 
 export type ValidPages =
   | "home"

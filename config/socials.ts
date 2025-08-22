@@ -10,26 +10,26 @@ interface SocialInterface {
 export const SocialLinks: SocialInterface[] = [
   {
     name: "Github",
-    username: "@namanbarkiya",
+    username: "@Entropyobserver",
     icon: Icons.gitHub,
-    link: "https://github.com/namanbarkiya",
+    link: "https://github.com/Entropyobserver",
   },
   {
     name: "LinkedIn",
-    username: "Naman Barkiya",
+    username: "Jean Young",
     icon: Icons.linkedin,
-    link: "https://www.linkedin.com/in/namanbarkiya",
+    link: "https://www.linkedin.com/in/jean-young-3a36912a0/",
   },
   {
     name: "Twitter",
-    username: "@namanbarkiya",
+    username: "@Entropyobserver",
     icon: Icons.twitter,
-    link: "https://twitter.com/namanbarkiya",
+    link: "https://twitter.com/Entropyobserver",
   },
   {
     name: "Gmail",
-    username: "naman.barkiya02",
+    username: "Entropyobserver",
     icon: Icons.gmail,
-    link: "mailto:naman.barkiya02@gmail.com",
+    link: "mailto:sicper2011@gmail.com",
   },
 ];

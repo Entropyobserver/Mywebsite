@@ -29,81 +29,78 @@ export interface ProjectInterface {
 
 export const Projects: ProjectInterface[] = [
   {
-    id: "built-design",
-    companyName: "Builtdesign",
-    type: "Professional",
-    category: ["Web Dev", "Full Stack", "UI/UX"],
-    shortDescription:
-      "Developed and optimized a high-performing website catering to over 4000 users, emphasizing efficiency and maintainability.",
-    websiteLink: "https://builtdesign.in",
+    id: "multilingual-sentiment",
+    companyName: "Multilingual Sentiment Analysis Platform",
+    type: "AI",
+    category: ["AI/ML", "NLP"],
+    shortDescription: "Led the full-cycle development of a multilingual sentiment analysis platform using BERT-family models, achieving up to 93% accuracy in binary sentiment classification.",
+    websiteLink: "https://huggingface.co/spaces/entropy25/multilingual-sentiment-analyzer",
     techStack: [
-      "Next.js",
-      "React",
-      "Node.js",
-      "MongoDB",
-      "GraphQL",
-      "Nest.js",
-      "Typescript",
+      "Python",
+      "BERT",
+      "DistilBERT",
+      "RoBERTa",
+      "Fine-tuning",
+      "LoRA",
+      "Gradio",
+      "SHAP",
+      "Lime"
     ],
-    startDate: new Date("2021-07-01"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/projects/builtdesign/logo.png",
+    startDate: new Date("2024-09-01"),
+    endDate: new Date("2025-3-01"),
+    companyLogoImg: "/projects/Multilingual-Sentiment-Analyzer/logo.png",
     pagesInfoArr: [
       {
-        title: "Landing Page",
+        title: "Single Analysis Page",
         description:
-          "Modern and responsive landing page showcasing company services and portfolio",
+          "User-friendly interface for analyzing single text inputs. Results are displayed with clear visualizations of sentiment probabilities.",
         imgArr: [
-          "/projects/builtdesign/landing_1.webp",
-          "/projects/builtdesign/landing_3.webp",
-          "/projects/builtdesign/landing_5.webp",
-          "/projects/builtdesign/landing_6.webp",
-          "/projects/builtdesign/landing_2.webp",
-          "/projects/builtdesign/landing_4.webp",
+          "/projects/Multilingual-Sentiment-Analyzer/landing_1.webp",
+
         ],
       },
       {
-        title: "Custom PDF Reader and optimizer",
+        title: "Batch Analysis Page",
         description:
-          "Specialized PDF viewer with optimization features for improved performance and user experience",
-        imgArr: ["/projects/builtdesign/pdf_opt.webp"],
+          "User-friendly interface for processing entire files in batches. Results are displayed with clear visualizations of sentiment probabilities.",
+        imgArr: ["/projects/Multilingual-Sentiment-Analyzer/landing_2.webp"],
       },
       {
-        title: "Clients Dashboard",
+        title: "Explainable AI (XAI) Dashboard",
         description:
-          "Comprehensive client portal with project tracking, document management, and communication tools",
+          "Interactive dashboard to run SHAP and LIME analyses. It visualizes which words or tokens contribute most to the sentiment prediction, making the AI's decisions transparent.",
         imgArr: [
-          "/projects/builtdesign/cli_dashboard_1.webp",
-          "/projects/builtdesign/cli_dashboard_2.webp",
-          "/projects/builtdesign/cli_dashboard_3.webp",
+          "/projects/Multilingual-Sentiment-Analyzer/cli_dashboard_1.webp",
+          "/projects/Multilingual-Sentiment-Analyzer/cli_dashboard_2.webp",
         ],
       },
       {
-        title: "Admin Dashboard",
+        title: "History & Analytics",
         description:
-          "Powerful administrative interface for managing users, projects, and system settings",
-        imgArr: ["/projects/builtdesign/logo.png"],
+          "A dedicated tab to view the history of all analyses performed. Provides summary statistics and allows users to export the complete history for external use.",
+        imgArr: ["/projects/Multilingual-Sentiment-Analyzer/landing_3.webp"],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "During my time at Builtdesign, I had the opportunity to work on a dynamic and user-focused project that involved designing and optimizing a website catering to a user base of over 4000 individuals. My role as a full-stack web developer was to ensure a seamless experience for users by creating an efficient and maintainable platform.",
-        "I collaborated closely with the product team to integrate cutting-edge features, employing technologies like Next.js and React with TypeScript for captivating front-end experiences. Additionally, I contributed significantly to the backend by utilizing Node.js, MongoDB, and GraphQL to design robust APIs and ensure smooth system functionality.",
-        "This experience allowed me to enhance my skills in various areas of web development and deliver a high-quality product. I gained proficiency in front-end technologies such as Material UI and Tailwind CSS, as well as backend technologies including Nest.js and MySQL. The project's success in catering to a large user base and providing an intuitive user interface has further motivated me to pursue excellence in web development.",
+        "This project is an advanced AI application designed to provide robust, multi-language sentiment analysis. The core objective was to build a tool that not only accurately predicts sentiment (positive, negative, neutral) across languages like English and Chinese but also makes the decision-making process transparent and understandable for the user.",
+        "The technical foundation relies on state-of-the-art Transformer models from the Hugging Face ecosystem, including RoBERTa and other BERT variants. The backend is engineered for efficiency, featuring an LRU caching system to manage model memory and parallel processing for handling batch requests, ensuring high throughput and stability for over 4000 potential users.",
+        "A key differentiator of this platform is its integration of Explainable AI (XAI) techniques. By leveraging SHAP and LIME, the application generates intuitive visualizations that highlight which specific words or tokens most influenced the model's sentiment prediction. This layer of transparency is crucial for building user trust and providing deeper insights beyond a simple classification score."
       ],
       bullets: [
-        "Developed and optimized a high-performing website catering to over 4000 users.",
-        "Collaborated closely with the product team to implement cutting-edge features.",
-        "Created an intuitive admin dashboard to efficiently manage and announce contest winners.",
-        "Leveraged Next.js, React with TypeScript for captivating front-end experiences.",
-        "Utilized Node.js, MongoDB, and GraphQL to design and manage databases.",
+        "Implemented high-accuracy sentiment analysis for multiple languages using Transformer models like RoBERTa.",
+        "Integrated Explainable AI (XAI) frameworks (SHAP & LIME) to visualize and interpret model predictions.",
+        "Developed an interactive and user-friendly interface with Gradio for single, batch, and XAI analysis.",
+        "Engineered a performance-optimized backend with LRU model caching and efficient memory management.",
+        "Enabled comprehensive data interaction with features for history tracking and data export to CSV/JSON formats.",
       ],
     },
   },
+
   {
     id: "the-super-quotes",
     companyName: "The Super Quotes",
-    type: "Professional",
+    type: "AI",
     category: ["Mobile Dev", "Full Stack", "UI/UX"],
     shortDescription:
       "Elevated The Super Quotes app with JavaScript, React Native, APIs, Redux magic, and Google Play Store debut.",

@@ -9,155 +9,110 @@ export interface skillsInterface {
 
 export const skillsUnsorted: skillsInterface[] = [
   {
-    name: "Next.js",
+    name: "Python",
     description:
-      "Effortlessly build dynamic apps with routing, layouts, loading UI, and API routes.",
+      "The core programming language for AI and data science, supporting machine learning and deep learning development.",
     rating: 5,
-    icon: Icons.nextjs,
+    icon: Icons.python,
   },
   {
-    name: "React",
+    name: "PyTorch",
     description:
-      "Craft interactive user interfaces using components, state, props, and virtual DOM.",
+      "Facebook's deep learning framework providing dynamic computation graphs and flexible model building.",
     rating: 5,
-    icon: Icons.react,
+    icon: Icons.pytorch,
   },
   {
-    name: "GraphQL",
+    name: "OpenCV",
     description:
-      "Fetch data precisely with a powerful query language for APIs and runtime execution.",
+      "Computer vision library for image processing, object detection, and multimodal AI applications.",
     rating: 4,
-    icon: Icons.graphql,
+    icon: Icons.opencv,
   },
   {
-    name: "Nest.js",
+    name: "Pandas",
     description:
-      "Create scalable and modular applications with a progressive Node.js framework.",
+      "Powerful data analysis and manipulation library, the go-to tool for handling structured data.",
+    rating: 5,
+    icon: Icons.pandas,
+  },
+  {
+    name: "NumPy",
+    description:
+      "Fundamental package for scientific computing, providing high-performance multidimensional array operations.",
+    rating: 5,
+    icon: Icons.numpy,
+  },
+  {
+    name: "SciPy",
+    description:
+      "Scientific computing library built on NumPy, providing algorithms for optimization, statistics, and signal processing.",
     rating: 4,
-    icon: Icons.nestjs,
+    icon: Icons.scipy,
   },
   {
-    name: "express.js",
+    name: "Scikit-learn",
     description:
-      "Build web applications and APIs quickly using a fast, unopinionated Node.js framework.",
-    rating: 5,
-    icon: Icons.express,
-  },
-  {
-    name: "Node.js",
-    description:
-      "Run JavaScript on the server side, enabling dynamic and responsive applications.",
-    rating: 5,
-    icon: Icons.nodejs,
-  },
-  {
-    name: "MongoDB",
-    description:
-      "Store and retrieve data seamlessly with a flexible and scalable NoSQL database.",
-    rating: 5,
-    icon: Icons.mongodb,
-  },
-  {
-    name: "Typescript",
-    description:
-      "Enhance JavaScript with static types, making code more understandable and reliable.",
-    rating: 5,
-    icon: Icons.typescript,
-  },
-  {
-    name: "Javascript",
-    description:
-      "Create interactive and dynamic web experiences with the versatile scripting language.",
-    rating: 5,
-    icon: Icons.javascript,
-  },
-  {
-    name: "HTML 5",
-    description:
-      "Structure web content beautifully with the latest version of HyperText Markup Language.",
+      "Machine learning library featuring classification, regression, clustering and dimensionality reduction algorithms.",
     rating: 4,
-    icon: Icons.html5,
+    icon: Icons.scikitlearn,
   },
   {
-    name: "CSS 3",
+    name: "Jupyter",
     description:
-      "Style web pages creatively with the latest iteration of Cascading Style Sheets.",
+      "Interactive computing environment for data analysis, prototyping, and collaborative research.",
     rating: 4,
-    icon: Icons.css3,
+    icon: Icons.jupyter,
   },
   {
-    name: "React Native",
+    name: "Streamlit",
     description:
-      "Develop cross-platform mobile apps using React for consistent and engaging experiences.",
+      "Open-source framework for building and deploying interactive web applications for machine learning and data science.",
     rating: 4,
-    icon: Icons.react,
+    icon: Icons.streamlit,
   },
   {
-    name: "Angular",
+  name: "Git/GitHub",
+  description: "Version control system and collaborative development platform for managing code repositories.",
+  rating: 5,
+  icon: Icons.github,
+  },
+  {
+    name: "MLflow",
     description:
-      "Build dynamic web apps with a TypeScript-based open-source framework by Google.",
+      "Open-source platform for managing machine learning lifecycle including experimentation and deployment.",
+    rating: 4,
+    icon: Icons.mlflow,
+  },
+  {
+    name: "Docker",
+    description:
+      "Containerization platform for packaging applications and ensuring consistent deployment across environments.",
+    rating: 4,
+    icon: Icons.docker,
+  },
+  {
+    name: "Microsoft Azure",
+    description:
+      "Cloud computing platform providing AI services, machine learning tools, and scalable infrastructure.",
     rating: 3,
-    icon: Icons.angular,
+    icon: Icons.microsoftazure,
   },
   {
-    name: "Redux",
+    name: "Vercel",
     description:
-      "Manage app state effectively using a predictable and centralized state container.",
+      "Frontend deployment platform optimized for modern web applications and AI-powered interfaces.",
     rating: 4,
-    icon: Icons.redux,
+    icon: Icons.vercel,
   },
   {
-    name: "Socket.io",
+    name: "Plotly",
     description:
-      "Enable real-time, bidirectional communication between clients and servers effortlessly.",
-    rating: 3,
-    icon: Icons.socketio,
-  },
-  {
-    name: "Material UI",
-    description:
-      "Create stunning and responsive UIs with a popular React UI framework.",
+      "Interactive data visualization library for creating dynamic charts, dashboards, and analytical applications.",
     rating: 4,
-    icon: Icons.mui,
-  },
-
-  {
-    name: "Tailwind CSS",
-    description:
-      "Design beautiful, modern websites faster with a utility-first CSS framework.",
-    rating: 5,
-    icon: Icons.tailwindcss,
-  },
-  {
-    name: "AWS",
-    description:
-      "Utilize Amazon Web Services to build and deploy scalable, reliable, and secure applications.",
-    rating: 3,
-    icon: Icons.amazonaws,
-  },
-  {
-    name: "Bootstrap",
-    description:
-      "Quickly create responsive and appealing web designs using a popular CSS framework.",
-    rating: 2,
-    icon: Icons.bootstrap,
-  },
-  {
-    name: "MySQL",
-    description:
-      "Manage and organize relational databases efficiently for data-driven applications.",
-    rating: 2,
-    icon: Icons.mysql,
-  },
-  {
-    name: "Netlify",
-    description:
-      "Manage and organize relational databases efficiently for data-driven applications.",
-    rating: 4,
-    icon: Icons.netlify,
+    icon: Icons.plotly,
   },
 ];
-
 export const skills = skillsUnsorted
   .slice()
   .sort((a, b) => b.rating - a.rating);
