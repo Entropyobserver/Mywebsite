@@ -93,7 +93,11 @@ export type ValidSkills =
   | "ARIMA"
   | "Time Series"
   | "Data Analysis"
-  | "Statistics";     
+  | "Statistics"
+  | "Prophet"
+  | "LSTM"
+  | "A/B Testing"
+  | "Data Visualization";     
 
 export type ValidCategory =
   | "Full Stack"
