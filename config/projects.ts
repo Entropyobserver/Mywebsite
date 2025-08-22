@@ -166,7 +166,7 @@ export const Projects: ProjectInterface[] = [
   {
     id: "apex-shopping",
     companyName: "Apex Shopping App",
-    type: "Personal",
+    type: "AI",
     category: ["Mobile Dev", "Full Stack", "UI/UX"],
     shortDescription:
       "Developed a feature-rich mobile shopping application with admin panel, user authentication, and seamless product management using React Native and Firebase.",
@@ -230,7 +230,7 @@ export const Projects: ProjectInterface[] = [
   {
     id: "builtdesign-blogs",
     companyName: "Builtdesign Blogs",
-    type: "Professional",
+    type: "AI",
     category: ["Web Dev", "Full Stack", "UI/UX"],
     shortDescription:
       "Crafted Builtdesign's vibrant Blogs Website using Netlify CMS and React for engaging content experiences.",
@@ -288,7 +288,7 @@ export const Projects: ProjectInterface[] = [
   {
     id: "portfolio-card",
     companyName: "Portfolio Card",
-    type: "Personal",
+    type: "Data Science",
     category: ["Web Dev", "Frontend", "3D Modeling"],
     shortDescription:
       "Forged an immersive 3D Portfolio Card utilizing the prowess of Three.js and Blender, where art and technology converge in an interactive masterpiece.",
@@ -339,7 +339,7 @@ export const Projects: ProjectInterface[] = [
   {
     id: "cirql-dashboard",
     companyName: "Cirql Dashboard",
-    type: "Personal",
+    type: "Data Science",
     category: ["Web Dev", "Frontend", "UI/UX"],
     shortDescription:
       "Created a dashboard project using React and Tailwind CSS, focusing on UI design and routing implementation.",
@@ -382,7 +382,7 @@ export const Projects: ProjectInterface[] = [
   {
     id: "inscript-hindi-typing",
     companyName: "Inscript Hindi Typing",
-    type: "Personal",
+    type: "Data Science",
     category: ["Web Dev", "UI/UX"],
     shortDescription:
       "Developed a user-friendly website for Inscript Hindi typing, addressing the need for a simple tool for Hindi writers to convey data digitally.",
