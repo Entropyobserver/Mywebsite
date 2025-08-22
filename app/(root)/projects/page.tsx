@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 const renderContent = (tabVal: string) => {
   let projectArr = Projects;
   if (tabVal === "personal") {
-    projectArr = projectArr.filter((val) => val.type === "Personal");
+    projectArr = projectArr.filter((val) => val.type === "AI");
   } else if (tabVal === "professional") {
-    projectArr = projectArr.filter((val) => val.type === "Professional");
+    projectArr = projectArr.filter((val) => val.type === "Data Science");
   }
 
   return (
