@@ -104,7 +104,8 @@ export type ValidSkills =
   | "NLP"
   | "Information Retrieval"
   | "Prompt Engineering"
-  | "Plotly";
+  | "Plotly"
+  | "SQLite";
 
 
 export type ValidCategory =
