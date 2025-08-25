@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Nordic AI Solutions | AI Developer & Consultant",
-  authorName: "Jean Young",
+  authorName: "Home",
   username: "Home",
   description:
     "Jean Young's Nordic AI Solutions - AI developer and consultant specializing in machine learning, natural language processing, and intelligent automation. Offering both personal expertise and professional AI consulting services.",

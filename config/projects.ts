@@ -98,17 +98,25 @@ export const Projects: ProjectInterface[] = [
   },
 
   {
-    id: "the-super-quotes",
-    companyName: "The Super Quotes",
+    id: "SmartReview",
+    companyName: "SmartReview Pro",
     type: "AI",
-    category: ["Mobile Dev", "Full Stack", "UI/UX"],
+    category: ["AI/ML", "NLP", "Full Stack"],
     shortDescription:
-      "Elevated The Super Quotes app with JavaScript, React Native, APIs, Redux magic, and Google Play Store debut.",
+      "An all-in-one AI platform for e-commerce review analysis, offering 9 distinct insights from sentiment to fake review detection.",
     websiteLink:
-      "https://play.google.com/store/apps/details?id=com.thesuperlife",
-    techStack: ["React Native", "Node.js", "MongoDB", "Javascript"],
-    startDate: new Date("2021-07-01"),
-    endDate: new Date("2022-07-01"),
+      "https://huggingface.co/spaces/entropy25/SmartReview",
+    techStack: ["Python",
+      "RoBERTa",
+      "DistilBERT",
+      "Transformers",
+      "PyTorch",
+      "Gradio",
+      "Plotly",
+      "Pandas",
+      "SQLite"],
+    startDate: new Date("2025-03-01"),
+    endDate: new Date("2025-07-01"),
     companyLogoImg: "/projects/superquotes/logo.png",
     pagesInfoArr: [
       {
@@ -150,16 +158,16 @@ export const Projects: ProjectInterface[] = [
     ],
     descriptionDetails: {
       paragraphs: [
-        `Venturing into the world of creativity at The Super Quotes was an exhilarating journey. As a passionate developer, I led the charge in crafting a compelling application from inception to completion, using the dynamic duo of JavaScript and React Native.`,
-        `The heart of my achievement lay in the seamless integration of APIs, threading a tapestry of data flow that propelled the application's functionality to new heights.`,
-        `With the wizardry of Redux, I choreographed a symphony of state management and performance optimization, orchestrating a ballet of responsiveness that wowed users with every interaction.`,
-        `A crescendo awaited as I unveiled the culmination of my work on the grand stage of the Google Play Store. The app's debut marked an epoch, opening doors to an expansive audience eager to embrace the charm of The Super Quotes.`,
+        `Building SmartReview Pro was an ambitious endeavor to create a definitive, all-in-one platform for e-commerce intelligence. My mission was to empower businesses by transforming raw customer feedback into a spectrum of clear, actionable insights using the power of AI.`,
+        `The core of this platform is a sophisticated analysis engine built in Python, leveraging state-of-the-art Transformer models like RoBERTa and DistilBERT. I engineered a modular system capable of performing nine distinct types of analysis—from sentiment and emotion to complex tasks like fake review detection and quality assessment.`,
+        `A significant challenge was managing performance and resources. I designed a lazy-loading model manager and an SQLite-based caching system to ensure the platform remained responsive and efficient, even when processing thousands of reviews.`,
+        `The final product, presented through an intuitive Gradio interface with rich Plotly visualizations, is a testament to end-to-end AI application development. It's a powerful tool that offers businesses a 360-degree view of their customer feedback landscape.`,
       ],
       bullets: [
-        "Led the end-to-end development of a captivating application using JavaScript and React Native.",
-        "Championed the integration of APIs, harmonizing data flow and enhancing application functionality.",
-        "Conducted Redux magic to ensure state management and optimize performance, delivering a mesmerizing user experience.",
-        "Premiered the application on the Google Play Store, capturing hearts and expanding its user base.",
+        "Architected and developed a comprehensive AI platform with 9 distinct review analysis modules.",
+        "Integrated advanced Transformer models (RoBERTa, DistilBERT) for high-accuracy, multi-faceted NLP tasks.",
+        "Engineered an efficient backend with lazy-loading for models and an SQLite caching layer to optimize performance.",
+        "Designed and delivered an intuitive, data-rich user interface using Gradio and Plotly for interactive data visualization.",
       ],
     },
   },

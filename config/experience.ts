@@ -57,7 +57,7 @@ export const experiences: ExperienceInterface[] = [
   },
   {
     id: "freelance-ai",
-    position: "Freelance AI / NLP Developer",
+    position: "AI Engineer / Machine Learning Engineer",
     company: "Independent Projects",
     location: "Remote",
     startDate: new Date("2024-06-01"),
