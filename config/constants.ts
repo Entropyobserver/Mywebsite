@@ -4,7 +4,10 @@ export type ValidSkills =
   | "GraphQL"
   | "Nest.js"
   | "express.js"
-  | "Node.js"
+  | "N  | "NLP"
+  | "Information Retrieval"
+  | "Prompt Engineering"
+  | "Plotly";.js"
   | "MongoDB"
   | "Typescript"
   | "Javascript"
@@ -104,6 +107,7 @@ export type ValidSkills =
   | "NLP"
   | "Information Retrieval"
   | "Prompt Engineering"
+  | "Plotly";
 
 
 export type ValidCategory =
