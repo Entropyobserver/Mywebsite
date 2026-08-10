@@ -19,7 +19,7 @@ export const publications: PublicationInterface[] = [
     title:
       "Parameter-Efficient Neural Machine Translation for Low-Resource Language Pairs: English-Norwegian in the Oil & Gas Domain",
     authors:
-      "Xiaojing Yang, Zhihan Li, Guoxiong Sun, Meng Li, Meriem Beloucif",
+      "Xiaojing Yang, Meriem Beloucif, Zhihan Li, Gege Sun, Mengyue Li",
     status: "Published",
     venue: "EAMT",
     date: "June 2026",
@@ -30,8 +30,8 @@ export const publications: PublicationInterface[] = [
   },
   {
     title:
-      "When Routing Is Not the Bottleneck: Modular LoRA Experts for Low-Resource Multilingual Petroleum Domain Translation",
-    authors: "Xiaojing Yang, Meriem Beloucif",
+      "Beyond Routing: Diagnosing Modular LoRA Experts for Low-Resource Multilingual Petroleum-Domain Translation",
+    authors: "Xiaojing Yang, Zhihan Li, Meriem Beloucif",
     status: "Under Review",
     venue: "EMNLP 2026",
     date: "October 2026",
@@ -41,8 +41,8 @@ export const publications: PublicationInterface[] = [
   },
   {
     title:
-      "A Systematic Study of Retrieval-Augmented Generation for Long-Form Enterprise Documents",
-    authors: "Xiaojing Yang, Meriem Beloucif, Zhihan Li",
+      "Structure-Aware Graph Retrieval for Evidence Grounding over Long Annual Reports",
+    authors: "Xiaojing Yang, Zhihan Li, Meriem Beloucif",
     status: "Under Review",
     venue: "EMNLP 2026",
     date: "October 2026",
