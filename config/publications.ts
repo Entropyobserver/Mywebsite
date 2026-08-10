@@ -17,8 +17,9 @@ export interface PublicationInterface {
 export const publications: PublicationInterface[] = [
   {
     title:
-      "LoRA Fine-Tuning of English-Norwegian NMT for the Oil & Gas Industry",
-    authors: "Xiaojing Yang et al.",
+      "Parameter-Efficient Neural Machine Translation for Low-Resource Language Pairs: English-Norwegian in the Oil & Gas Domain",
+    authors:
+      "Xiaojing Yang, Zhihan Li, Guoxiong Sun, Meng Li, Meriem Beloucif",
     status: "Published",
     venue: "EAMT",
     date: "June 2026",
@@ -29,8 +30,8 @@ export const publications: PublicationInterface[] = [
   },
   {
     title:
-      "Beyond Routing: Diagnosing Modular LoRA Experts for Low-Resource Multilingual Petroleum-Domain Translation",
-    authors: "Xiaojing Yang et al.",
+      "When Routing Is Not the Bottleneck: Modular LoRA Experts for Low-Resource Multilingual Petroleum Domain Translation",
+    authors: "Xiaojing Yang, Meriem Beloucif",
     status: "Under Review",
     venue: "EMNLP 2026",
     date: "October 2026",
@@ -40,8 +41,8 @@ export const publications: PublicationInterface[] = [
   },
   {
     title:
-      "Structure-Aware Graph Retrieval for Evidence Grounding over Long Annual Reports",
-    authors: "Xiaojing Yang et al.",
+      "A Systematic Study of Retrieval-Augmented Generation for Long-Form Enterprise Documents",
+    authors: "Xiaojing Yang, Meriem Beloucif, Zhihan Li",
     status: "Under Review",
     venue: "EMNLP 2026",
     date: "October 2026",
@@ -52,7 +53,7 @@ export const publications: PublicationInterface[] = [
   {
     title:
       "Group-level Training Data Attribution with Exact Shapley Analysis: A Controlled Machine Translation Case Study",
-    authors: "Xiaojing Yang et al.",
+    authors: "Xiaojing Yang, Zhihan Li",
     status: "Planned Submission",
     venue: "TBD",
     date: "December 2026",
@@ -63,18 +64,18 @@ export const publications: PublicationInterface[] = [
   {
     title:
       "Target-Standard Bias from Data Filtering in Norwegian Machine Translation",
-    authors: "Xiaojing Yang et al.",
+    authors: "Zhihan Li, Xiaojing Yang",
     status: "Planned Submission",
     venue: "WMT",
     date: "December 2026",
-    role: "First author; controlled experiment design and analysis lead",
+    role: "Co-author; controlled experiment design and analysis lead",
     description:
       "Studies how target-side data filtering affects written-standard preferences in English-Norwegian machine translation using controlled LoRA-based NLLB experiments and paired statistical validation.",
   },
   {
     title:
       "A Human-Validated Benchmark for Long-Form Financial Document Question Answering",
-    authors: "Xiaojing Yang et al.",
+    authors: "Xiaojing Yang, Zhihan Li, Meriem Beloucif",
     status: "Planned Submission",
     venue: "TBD",
     date: "December 2026",
