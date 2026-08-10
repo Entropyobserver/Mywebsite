@@ -15,7 +15,6 @@ export const siteConfig = {
   logoIcon:
     "/logo.png",
   keywords: [
-    "Jean Young",
     "Xiaojing Yang",
     "Nordic AI Solutions",
     "AI Researcher",

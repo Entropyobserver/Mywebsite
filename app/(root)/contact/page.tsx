@@ -1,9 +1,11 @@
 import { Metadata } from "next";
+import Link from "next/link";
 
+import { Icons } from "@/components/common/icons";
 import PageContainer from "@/components/common/page-container";
-import GithubRedirectCard from "@/components/contact/github-redirect-card";
 import { ContactForm } from "@/components/forms/contact-form";
 import { pagesConfig } from "@/config/pages";
+import { SocialLinks } from "@/config/socials";
 
 export const metadata: Metadata = {
   title: pagesConfig.contact.metadata.title,
@@ -16,26 +18,69 @@ export default function ContactPage() {
       title={pagesConfig.contact.title}
       description={pagesConfig.contact.description}
     >
-      <div className="flex flex-col lg:flex-row gap-8">
+      <div className="flex flex-col gap-8 lg:flex-row">
         <div className="flex-1">
           <ContactForm />
         </div>
         <div className="flex-1">
-          <div className="bg-muted/50 rounded-lg p-6 h-fit">
-            <h3 className="text-xl font-semibold mb-4">Get In Touch</h3>
-            <div className="space-y-4">
-              <div>
-                <h4 className="font-medium text-sm uppercase tracking-wide text-muted-foreground mb-2">Response Time</h4>
-                <p className="text-sm">Usually within 24 hours</p>
-              </div>
-              <div>
-                <h4 className="font-medium text-sm uppercase tracking-wide text-muted-foreground mb-2">Services</h4>
-                <ul className="text-sm space-y-1">
-                  <li>• AI/ML Consulting</li>
-                  <li>• Data Science Solutions</li>
-                  <li>• Custom Software Development</li>
-                  <li>• Technical Research</li>
-                </ul>
+          <div className="h-fit space-y-6 rounded-lg bg-muted/50 p-6">
+            <div>
+              <h3 className="mb-2 text-xl font-semibold">Direct Contact</h3>
+              <Link
+                href="mailto:sicper2011@gmail.com"
+                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+              >
+                <Icons.gmail className="h-4 w-4" />
+                sicper2011@gmail.com
+              </Link>
+            </div>
+
+            <div>
+              <h4 className="mb-2 text-sm font-medium uppercase tracking-wide text-muted-foreground">
+                Research Interests
+              </h4>
+              <ul className="space-y-1 text-sm text-muted-foreground">
+                <li>Data attribution and model behaviour</li>
+                <li>Responsible AI and bias evaluation</li>
+                <li>Multilingual NLP and machine translation</li>
+                <li>Retrieval, RAG, and evidence grounding</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="mb-2 text-sm font-medium uppercase tracking-wide text-muted-foreground">
+                Best For
+              </h4>
+              <ul className="space-y-1 text-sm text-muted-foreground">
+                <li>Research collaboration</li>
+                <li>PhD or academic opportunities</li>
+                <li>Paper, project, or dataset discussion</li>
+                <li>Technical ML/NLP conversations</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="mb-3 text-sm font-medium uppercase tracking-wide text-muted-foreground">
+                Profiles
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {SocialLinks.map((social) => {
+                  const Icon = social.icon;
+
+                  return (
+                    <Link
+                      href={social.link}
+                      target={
+                        social.link.startsWith("mailto:") ? undefined : "_blank"
+                      }
+                      key={social.name}
+                      className="inline-flex items-center gap-2 rounded-md border bg-background px-3 py-2 text-sm hover:bg-accent"
+                    >
+                      <Icon className="h-4 w-4" />
+                      {social.name}
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </div>

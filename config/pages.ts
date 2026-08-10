@@ -40,10 +40,12 @@ export const pagesConfig: PagesConfig = {
   },
   contact: {
     title: "Contact",
-    description: "Let's connect and explore collaborations.",
+    description:
+      "For research collaboration, PhD opportunities, academic questions, or technical discussion, feel free to reach out.",
     metadata: {
       title: "Contact",
-      description: "Contact Xiaojing Yang.",
+      description:
+        "Contact Xiaojing Yang for research collaboration, academic opportunities, and AI or NLP discussions.",
     },
   },
   publications: {

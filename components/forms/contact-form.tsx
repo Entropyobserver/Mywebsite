@@ -59,7 +59,7 @@ export function ContactForm() {
 
       if (response.status === 200) {
         storeModal.onOpen({
-          title: "Thankyou!",
+          title: "Thank you!",
           description:
             "Your message has been received! I appreciate your contact and will get back to you shortly.",
           icon: Icons.successAnimated,
@@ -83,7 +83,7 @@ export function ContactForm() {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your name" {...field} />
+                <Input placeholder="Your name" {...field} />
               </FormControl>
               {/* <FormDescription>
                                 This is your public display name.
@@ -99,7 +99,7 @@ export function ContactForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your email" {...field} />
+                <Input placeholder="your.email@example.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -112,7 +112,10 @@ export function ContactForm() {
             <FormItem>
               <FormLabel>Message</FormLabel>
               <FormControl>
-                <Textarea placeholder="Enter your message" {...field} />
+                <Textarea
+                  placeholder="Tell me about the research question, collaboration idea, opportunity, or technical topic you would like to discuss."
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -123,9 +126,9 @@ export function ContactForm() {
           name="social"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Social (optional)</FormLabel>
+              <FormLabel>Website / Profile (optional)</FormLabel>
               <FormControl>
-                <Input placeholder="Link for social account" {...field} />
+                <Input placeholder="LinkedIn, GitHub, lab page, or personal site" {...field} />
               </FormControl>
               {/* <FormDescription>
                                 This is your public display name.
@@ -134,7 +137,7 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Send Message</Button>
       </form>
     </Form>
   );

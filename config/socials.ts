@@ -16,7 +16,7 @@ export const SocialLinks: SocialInterface[] = [
   },
   {
     name: "LinkedIn",
-    username: "Jean Young",
+    username: "Xiaojing Yang",
     icon: Icons.linkedin,
     link: "https://www.linkedin.com/in/jean-young-3a36912a0/",
   },
@@ -31,5 +31,11 @@ export const SocialLinks: SocialInterface[] = [
     username: "Entropyobserver",
     icon: Icons.gmail,
     link: "mailto:sicper2011@gmail.com",
+  },
+  {
+    name: "Hugging Face",
+    username: "entropy25",
+    icon: Icons.openai,
+    link: "https://huggingface.co/entropy25",
   },
 ];
