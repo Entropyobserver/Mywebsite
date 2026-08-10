@@ -105,7 +105,11 @@ export type ValidSkills =
   | "Information Retrieval"
   | "Prompt Engineering"
   | "Plotly"
-  | "SQLite";
+  | "SQLite"
+  | "NLLB-200"
+  | "PEFT"
+  | "Optuna"
+  | "SacreBLEU";
 
 
 export type ValidCategory =
@@ -117,9 +121,12 @@ export type ValidCategory =
   | "Mobile Dev"
   | "3D Modeling"
   | "AI/ML"       
-  | "NLP";         
+  | "NLP"
+  | "Research"
+  | "Machine Translation"
+  | "Evaluation";         
 
-export type ValidExpType = "AI" | "Data Science";
+export type ValidExpType = "AI" | "Data Science" | "Research";
 
 export type ValidPages =
   | "home"

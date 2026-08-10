@@ -29,6 +29,62 @@ export interface ProjectInterface {
 
 export const Projects: ProjectInterface[] = [
   {
+    id: "lora-nmt-petroleum",
+    companyName:
+      "Parameter-Efficient Neural Machine Translation for Low-Resource Languages",
+    type: "Research",
+    category: ["Research", "Machine Translation", "NLP", "Evaluation"],
+    shortDescription:
+      "Published EAMT research on LoRA-based English-Norwegian petroleum-domain NMT, comparing parameter-efficient adaptation with full fine-tuning under low-resource conditions.",
+    websiteLink: "https://huggingface.co/spaces/entropy25/mt",
+    githubLink: "https://github.com/Entropyobserver/mt",
+    techStack: [
+      "Python",
+      "PyTorch",
+      "Transformers",
+      "Hugging Face",
+      "NLLB-200",
+      "LoRA",
+      "PEFT",
+      "Optuna",
+      "SacreBLEU",
+      "Pandas",
+      "Statistics",
+    ],
+    startDate: new Date("2025-09-01"),
+    endDate: new Date("2026-06-01"),
+    companyLogoImg: "/projects/lora-nmt-petroleum/length_analysis.png",
+    pagesInfoArr: [
+      {
+        title: "Corpus Diagnostics",
+        description:
+          "Exploratory analysis of the English-Norwegian petroleum corpus, including source and target length distributions, length-ratio filtering, and source-target alignment behavior.",
+        imgArr: ["/projects/lora-nmt-petroleum/length_analysis.png"],
+      },
+      {
+        title: "Domain Vocabulary Analysis",
+        description:
+          "Frequency analysis highlighting petroleum-domain terminology and distributional patterns in the English source and Norwegian target data.",
+        imgArr: ["/projects/lora-nmt-petroleum/word_frequency.png"],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "This research project investigates parameter-efficient adaptation of neural machine translation for a low-resource English-Norwegian petroleum domain. The work fine-tunes NLLB-200 distilled 600M with LoRA adapters and evaluates how domain-specific adaptation behaves under constrained data and compute settings.",
+        "The study combines data-quality assessment, corpus cleaning, LoRA hyperparameter search, model-scale evaluation, and comparison against full fine-tuning and commercial machine translation systems. The resulting paper, LoRA Fine-Tuning of English-Norwegian NMT for the Oil & Gas Industry, was published at EAMT.",
+        "My contribution covered the end-to-end experimental pipeline: data processing, training orchestration, LoRA configuration search, evaluation with BLEU and chrF, analysis of adaptation trade-offs, and preparation of reproducible code and documentation.",
+      ],
+      bullets: [
+        "Built a reproducible English-Norwegian petroleum-domain NMT pipeline using NLLB-200, LoRA, and Hugging Face tooling.",
+        "Designed corpus diagnostics for alignment quality, text length distributions, vocabulary coverage, and domain terminology patterns.",
+        "Optimized LoRA configurations with grid search and Optuna/ASHA, identifying key hyperparameter effects on translation quality.",
+        "Compared parameter-efficient LoRA adaptation with full fine-tuning and external MT baselines under low-resource conditions.",
+        "Evaluated translation quality with BLEU, chrF, and terminology-oriented analysis for domain-specific adequacy.",
+      ],
+    },
+  },
+
+  {
     id: "multilingual-sentiment",
     companyName: "Multilingual Sentiment Analysis Platform",
     type: "AI",
