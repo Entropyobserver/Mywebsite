@@ -1,9 +1,9 @@
 export const siteConfig = {
-  name: "Nordic AI Solutions | AI Developer & Consultant",
-  authorName: "Home",
-  username: "Home",
+  name: "Xiaojing Yang | AI Researcher & Machine Learning Engineer",
+  authorName: "Xiaojing Yang",
+  username: "Entropyobserver",
   description:
-    "Jean Young's Nordic AI Solutions - AI developer and consultant specializing in machine learning, natural language processing, and intelligent automation. Offering both personal expertise and professional AI consulting services.",
+    "Xiaojing Yang is an AI researcher and machine learning engineer working across NLP, responsible AI, data-centric ML, and intelligent systems.",
   url: "https://nordic-ai.top",
   links: {
     twitter: "https://x.com/Entropyobserver",
@@ -16,11 +16,14 @@ export const siteConfig = {
     "/logo.png",
   keywords: [
     "Jean Young",
+    "Xiaojing Yang",
     "Nordic AI Solutions",
-    "AI Developer",
-    "AI Consultant",
+    "AI Researcher",
     "Machine Learning Engineer",
-    "NLP Developer",
+    "NLP",
+    "Responsible AI",
+    "Data-Centric ML",
+    "Intelligent Systems",
     "AI Portfolio",
     "Next.js portfolio template",
     "React portfolio template",

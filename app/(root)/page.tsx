@@ -22,8 +22,8 @@ import { cn } from "@/lib/utils";
 import profileImg from "@/public/profile-img.jpg";
 
 export const metadata: Metadata = {
-  title: `${pagesConfig.home.metadata.title} | Nordic AI Solutions`,
-  description: `${pagesConfig.home.metadata.description} This open-source Next.js portfolio template is customizable to showcase your skills and projects.`,
+  title: `${pagesConfig.home.metadata.title} | ${siteConfig.name}`,
+  description: siteConfig.description,
   alternates: {
     canonical: siteConfig.url,
   },
@@ -37,7 +37,7 @@ export default function IndexPage() {
     name: siteConfig.authorName,
     url: siteConfig.url,
     image: siteConfig.ogImage,
-    jobTitle: "Full Stack Developer",
+    jobTitle: "AI Researcher & Machine Learning Engineer",
     sameAs: [siteConfig.links.github, siteConfig.links.twitter],
   };
 
@@ -81,7 +81,7 @@ export default function IndexPage() {
             width={100}
             sizes="100vw"
             className="bg-primary rounded-full mb-0 h-auto md:mb-2 w-[60%] max-w-[16rem] border-8 border-primary"
-            alt="Naman Barkiya - Full Stack Developer Portfolio"
+            alt="Xiaojing Yang - AI Researcher and Machine Learning Engineer"
             priority
           />
           <AnimatedText
@@ -89,18 +89,18 @@ export default function IndexPage() {
             delay={0.2}
             className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            Nordic AI Solutions
+            Xiaojing Yang
           </AnimatedText>
           <AnimatedText
             as="h3"
             delay={0.4}
             className="font-heading text-base sm:text-xl md:text-xl lg:text-2xl"
           >
-            AI Engineer & Consultant
+            AI Researcher & Machine Learning Engineer
           </AnimatedText>
           <div className="mt-4 max-w-[42rem] text-center">
             <p className="leading-normal text-muted-foreground text-sm sm:text-base">
-            Nordic AI Solutions – bridging academic AI research and practical business applications, led by Jean Young.
+              NLP | Responsible AI | Data-Centric ML | Intelligent Systems
             </p>
           </div>
 
@@ -110,7 +110,7 @@ export default function IndexPage() {
                 href={"https://github.com/Entropyobserver"}
                 target="_blank"
                 className={cn(buttonVariants({ size: "lg" }))}
-                aria-label="View Jean Young's GitHub profile"
+                aria-label="View Xiaojing Yang's GitHub profile"
               >
                 <Icons.gitHub className="w-4 h-4 mr-2" /> GitHub
               </Link>
@@ -125,7 +125,7 @@ export default function IndexPage() {
                     size: "lg",
                   })
                 )}
-                aria-label="Contact Jean Young"
+                aria-label="Contact Xiaojing Yang"
               >
                 <Icons.contact className="w-4 h-4 mr-2" /> Contact
               </Link>
