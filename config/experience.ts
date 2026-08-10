@@ -2,6 +2,7 @@ import { ValidSkills } from "./constants";
 
 export interface ExperienceInterface {
   id: string;
+  section: "Research Experience" | "Work Experience" | "Teaching & Mentoring";
   position: string;
   company: string;
   location: string;
@@ -16,7 +17,43 @@ export interface ExperienceInterface {
 
 export const experiences: ExperienceInterface[] = [
   {
+    id: "research-language-technology",
+    section: "Research Experience",
+    position: "Research Projects in Language Technology",
+    company: "Uppsala University / Independent Research",
+    location: "Uppsala, Sweden",
+    startDate: new Date("2024-08-01"),
+    endDate: "Present",
+    description: [
+      "Designed and led research projects across multilingual NLP, machine translation, retrieval, data attribution, and bias evaluation.",
+      "Developed parameter-efficient adaptation pipelines using LoRA, Mixture-of-Experts, NLLB-200, and controlled synthetic data generation.",
+      "Built long-document retrieval and GraphRAG evaluation pipelines for evidence grounding over annual reports.",
+      "Designed reusable evaluation workflows for language and vision-language model bias, including controlled prompts, metrics, annotation guidelines, and validation reports.",
+      "Conducted statistical and robustness analyses using bootstrap confidence intervals, paired tests, ablations, and controlled baselines.",
+    ],
+    achievements: [
+      "Published EAMT 2026 work on LoRA fine-tuning for English-Norwegian petroleum-domain NMT.",
+      "Submitted EMNLP 2026 manuscripts on modular LoRA experts and structure-aware graph retrieval.",
+      "Developed ongoing work on group-level training data attribution using exact Shapley analysis.",
+      "Released or prepared research code and demos for LoRA NMT, modular expert adaptation, and bias evaluation.",
+    ],
+    skills: [
+      "Python",
+      "PyTorch",
+      "Transformers",
+      "Hugging Face",
+      "LoRA",
+      "NLLB-200",
+      "PEFT",
+      "RAG",
+      "Information Retrieval",
+      "Statistics",
+      "Optuna",
+    ],
+  },
+  {
     id: "saitisite",
+    section: "Work Experience",
     position: "Data Analyst",
     company: "SAITISITE CHENGDU E-COMMERCE CO., LTD",
     location: "Chengdu, China",
@@ -56,39 +93,56 @@ export const experiences: ExperienceInterface[] = [
     ],
   },
   {
-    id: "freelance-ai",
-    position: "AI Engineer / Machine Learning Engineer",
-    company: "Independent Projects",
-    location: "Remote",
-    startDate: new Date("2024-06-01"),
-    endDate: "Present",
+    id: "machine-translation-ta",
+    section: "Teaching & Mentoring",
+    position: "Teaching Assistant, Machine Translation",
+    company: "Uppsala University",
+    location: "Uppsala, Sweden",
+    startDate: new Date("2026-04-01"),
+    endDate: new Date("2026-06-30"),
     description: [
-      "Led full-cycle development of multilingual sentiment analysis platform using BERT-family models, supporting full fine-tuning and LoRA parameter-efficient tuning.",
-      "Developed Smart View Platform for review analysis: sentiment, topic classification, review quality, fake review detection, and ABSA.",
-      "Built LLM-powered data assistant on Streamlit for automated EDA, data quality checks, and conversational summarization.",
-      "Architected hybrid e-commerce search & recommendation engine (dense + sparse + cross-encoder re-ranking), improving nDCG@10 by 30%.",
-      "Developed modular RAG system combining FAISS, CrossEncoder, and Flan-T5-large for natural language product search and comparison.",
+      "Supported 25 students across assignment marking, lab sessions, and project supervision in a machine translation course.",
+      "Guided students on translation model implementation, training pipelines, experimental design, and HPC cluster usage.",
+      "Provided feedback on project methodology, evaluation setup, and reproducibility practices.",
     ],
     achievements: [
-      "Achieved 93% accuracy in English binary sentiment classification; 70%+ in multilingual three-class tasks across six languages.",
-      "Optimized NLP models with quantization and distillation for efficient deployment.",
-      "Delivered interactive Gradio web apps for real-time and batch analysis with interpretability (SHAP, LIME).",
-      "Built scalable web interfaces with configurable search strategies and intelligent metadata extraction.",
-      "Demonstrated 0.73+ semantic similarity in RAG product retrieval, supporting e-commerce search and comparison.",
+      "Helped students connect theoretical MT concepts with practical model training and evaluation.",
+      "Supported project supervision around reproducible experiments and HPC workflows.",
     ],
     skills: [
       "Python",
       "PyTorch",
       "Transformers",
-      "Streamlit",
-      "Gradio",
-      "FAISS",
-      "RAG",
       "NLP",
       "Machine Learning",
+      "Git",
+      "Statistics",
+    ],
+  },
+  {
+    id: "data-analysis-mentor",
+    section: "Teaching & Mentoring",
+    position: "Data Analysis Mentor",
+    company: "SAITISITE CHENGDU E-COMMERCE CO., LTD",
+    location: "Chengdu, China",
+    startDate: new Date("2023-01-01"),
+    endDate: new Date("2023-12-31"),
+    description: [
+      "Mentored 3 junior team members in Python programming, machine learning model evaluation, and data analysis workflows.",
+      "Prepared practical tutorials and explained statistical and technical concepts for applied business analytics tasks.",
+      "Supported junior analysts in building reproducible Python and SQL workflows for reporting and model evaluation.",
+    ],
+    achievements: [
+      "Improved team capability in Python-based analysis, reproducible reporting, and model evaluation.",
+      "Helped junior analysts translate business questions into structured data analysis workflows.",
+    ],
+    skills: [
+      "Python",
+      "Pandas",
+      "SQL",
+      "Machine Learning",
       "Data Analysis",
-      "Information Retrieval",
-      "Prompt Engineering",
+      "Statistics",
     ],
   },
 ];

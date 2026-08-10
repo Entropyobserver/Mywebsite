@@ -65,11 +65,12 @@ export const pagesConfig: PagesConfig = {
   },
   experience: {
     title: "Experience",
-    description: "Professional journey and career timeline.",
+    description:
+      "Research, work, and teaching experience across AI, NLP, data analysis, and machine learning.",
     metadata: {
       title: "Experience",
       description:
-        "Xiaojing Yang's research, teaching, and professional experience timeline.",
+        "Xiaojing Yang's research, work, teaching, and mentoring experience.",
     },
   },
 };
