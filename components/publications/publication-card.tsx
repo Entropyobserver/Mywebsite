@@ -43,6 +43,9 @@ export default function PublicationCard({
                 <h3 className="font-heading text-xl leading-snug">
                   {publication.title}
                 </h3>
+                <p className="text-sm font-medium text-foreground">
+                  {publication.authors}
+                </p>
                 <p className="text-sm text-muted-foreground">
                   {publication.description}
                 </p>
