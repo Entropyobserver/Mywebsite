@@ -9,7 +9,7 @@ export const siteConfig = {
     twitter: "https://x.com/Entropyobserver",
     github: "https://github.com/Entropyobserver",
   },
-  ogImage: "/profile-img.jpg",
+  ogImage: "/profile-avatar.png",
   iconIco:
     "/favicon.ico",
   logoIcon:
