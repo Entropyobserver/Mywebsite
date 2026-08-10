@@ -19,7 +19,7 @@ export const publications: PublicationInterface[] = [
     title:
       "Parameter-Efficient Neural Machine Translation for Low-Resource Language Pairs: English-Norwegian in the Oil & Gas Domain",
     authors:
-      "Xiaojing Yang, Meriem Beloucif, Zhihan Li, Gege Sun, Mengyue Li",
+      "Xiaojing Yang, Zhihan Li, Gege Sun, Mengyue Li, Meriem Beloucif",
     status: "Published",
     venue: "EAMT",
     date: "June 2026",
