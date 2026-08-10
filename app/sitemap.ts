@@ -14,10 +14,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/skills`,
+      url: `${baseUrl}/publications`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
-      priority: 0.8,
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/projects`,
@@ -32,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/contributions`,
+      url: `${baseUrl}/skills`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.8,

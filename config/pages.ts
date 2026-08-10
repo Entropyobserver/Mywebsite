@@ -18,24 +18,24 @@ export const pagesConfig: PagesConfig = {
     description: "Welcome to my portfolio website.",
     metadata: {
       title: "Home",
-      description: "Jean Young's portfolio website.",
+      description: "Xiaojing Yang's research portfolio website.",
     },
   },
   skills: {
     title: "Skills",
-    description: "Key skills that define my professional identity.",
+    description: "Methods, tools, and technical strengths supporting my research and applied AI work.",
     metadata: {
       title: "Skills",
       description:
-        "Jean Young's key skills that define his professional identity.",
+        "Xiaojing Yang's skills in AI, machine learning, NLP, evaluation, and research engineering.",
     },
   },
   projects: {
     title: "Projects",
-    description: "Completed 20+ real-world projects involving text classification, sequence labeling (NER, POS), semantic search, information retrieval, Retrieval-Augmented Generation (RAG), LLM fine-tuning, and prompt engineering.",
+    description: "Selected research and technical projects in machine learning, NLP, retrieval, evaluation, and applied AI systems.",
     metadata: {
       title: "Projects",
-      description: "Jean Young's projects in building web applications.",
+      description: "Xiaojing Yang's research and technical projects.",
     },
   },
   contact: {
@@ -43,24 +43,24 @@ export const pagesConfig: PagesConfig = {
     description: "Let's connect and explore collaborations.",
     metadata: {
       title: "Contact",
-      description: "Contact Jean Young.",
+      description: "Contact Xiaojing Yang.",
     },
   },
-  contributions: {
-    title: "Contributions",
-    description: "Open-source contributions and community involvement.",
+  publications: {
+    title: "Publications",
+    description: "Published, submitted, and planned research outputs in machine learning, NLP, retrieval, and model evaluation.",
     metadata: {
-      title: "Contributions",
+      title: "Publications",
       description:
-        "Jean Young's open-source contributions and community involvement.",
+        "Xiaojing Yang's publications, submitted manuscripts, and planned research outputs.",
     },
   },
   resume: {
-    title: "Resume",
-    description: "Jean Young's resume.",
+    title: "CV",
+    description: "Xiaojing Yang's academic CV.",
     metadata: {
-      title: "Resume",
-      description: "Jean Young's resume.",
+      title: "CV",
+      description: "Xiaojing Yang's academic CV.",
     },
   },
   experience: {
@@ -69,7 +69,7 @@ export const pagesConfig: PagesConfig = {
     metadata: {
       title: "Experience",
       description:
-        "Jean Young's professional journey and experience timeline.",
+        "Xiaojing Yang's research, teaching, and professional experience timeline.",
     },
   },
 };

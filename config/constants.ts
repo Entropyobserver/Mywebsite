@@ -134,5 +134,5 @@ export type ValidPages =
   | "projects"
   | "experience"
   | "contact"
-  | "contributions"
+  | "publications"
   | "resume";
