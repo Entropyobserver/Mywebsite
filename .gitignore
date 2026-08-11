@@ -18,6 +18,7 @@
 # misc
 .DS_Store
 *.pem
+project_materials/
 
 # debug
 npm-debug.log*

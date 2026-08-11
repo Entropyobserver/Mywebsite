@@ -31,11 +31,11 @@ export const Projects: ProjectInterface[] = [
   {
     id: "lora-nmt-petroleum",
     companyName:
-      "Parameter-Efficient Neural Machine Translation for Low-Resource Languages",
+      "Low-Resource Petroleum-Domain Machine Translation with LoRA",
     type: "Research",
     category: ["Research", "Machine Translation", "NLP", "Evaluation"],
     shortDescription:
-      "Published EAMT research on LoRA-based English-Norwegian petroleum-domain NMT, comparing parameter-efficient adaptation with full fine-tuning under low-resource conditions.",
+      "Published EAMT research on parameter-efficient English-Norwegian petroleum-domain NMT, showing how LoRA can adapt NLLB-200 with strong quality gains while updating less than 0.4% of model parameters.",
     websiteLink: "https://huggingface.co/spaces/entropy25/mt",
     githubLink: "https://github.com/Entropyobserver/mt",
     techStack: [
@@ -48,49 +48,347 @@ export const Projects: ProjectInterface[] = [
       "PEFT",
       "Optuna",
       "SacreBLEU",
+      "COMET",
+      "chrF",
       "Pandas",
       "Statistics",
+      "Weights & Biases",
     ],
     startDate: new Date("2025-09-01"),
     endDate: new Date("2026-06-01"),
-    companyLogoImg: "/projects/lora-nmt-petroleum/length_analysis.png",
+    companyLogoImg: "/projects/lora-nmt-petroleum/framework_v3.png",
     pagesInfoArr: [
       {
-        title: "Corpus Diagnostics",
+        title: "Three-Stage Adaptation Framework",
         description:
-          "Exploratory analysis of the English-Norwegian petroleum corpus, including source and target length distributions, length-ratio filtering, and source-target alignment behavior.",
-        imgArr: ["/projects/lora-nmt-petroleum/length_analysis.png"],
+          "The project combines corpus preparation, data-scaling analysis, dual-track LoRA hyperparameter search, and final benchmarking against open-source, full fine-tuning, and commercial MT baselines.",
+        imgArr: ["/projects/lora-nmt-petroleum/framework_v3.png"],
       },
       {
-        title: "Domain Vocabulary Analysis",
+        title: "Data Scaling and Training Budget",
         description:
-          "Frequency analysis highlighting petroleum-domain terminology and distributional patterns in the English source and Norwegian target data.",
-        imgArr: ["/projects/lora-nmt-petroleum/word_frequency.png"],
+          "The analysis identifies an efficient training subset before expensive hyperparameter search, showing that 8,000 samples recover most of the full-data performance in this domain.",
+        imgArr: ["/projects/lora-nmt-petroleum/data_scaling_analysis.png"],
+      },
+      {
+        title: "LoRA Hyperparameter Landscape",
+        description:
+          "Grid search and Optuna-ASHA were used as complementary search strategies to identify stable LoRA rank, scaling, and dropout settings.",
+        imgArr: ["/projects/lora-nmt-petroleum/hyperparameter_heatmaps.png"],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "This research project investigates parameter-efficient adaptation of neural machine translation for a low-resource English-Norwegian petroleum domain. The work fine-tunes NLLB-200 distilled 600M with LoRA adapters and evaluates how domain-specific adaptation behaves under constrained data and compute settings.",
-        "The study combines data-quality assessment, corpus cleaning, LoRA hyperparameter search, model-scale evaluation, and comparison against full fine-tuning and commercial machine translation systems. The resulting paper, LoRA Fine-Tuning of English-Norwegian NMT for the Oil & Gas Industry, was published at EAMT.",
-        "My contribution covered the end-to-end experimental pipeline: data processing, training orchestration, LoRA configuration search, evaluation with BLEU and chrF, analysis of adaptation trade-offs, and preparation of reproducible code and documentation.",
+        "This published research project studies how to adapt a multilingual neural machine translation model to a specialized low-resource domain. The target setting is English-to-Norwegian Bokmal petroleum translation, where terminology, regulatory language, and domain style make general-purpose MT unreliable.",
+        "The method fine-tunes NLLB-200 distilled 600M with LoRA adapters, combining data-scaling analysis, systematic hyperparameter optimization, and final benchmarking. The adapted model reaches 61.48 BLEU and 0.9298 COMET while updating less than 0.4% of model parameters.",
+        "My role was end-to-end: I built the data-processing and training pipeline, ran data-scaling experiments, designed the LoRA search space, evaluated BLEU/chrF/COMET and terminology behavior, analyzed trade-offs against full fine-tuning, and prepared the reproducible research artifact.",
       ],
       bullets: [
-        "Built a reproducible English-Norwegian petroleum-domain NMT pipeline using NLLB-200, LoRA, and Hugging Face tooling.",
-        "Designed corpus diagnostics for alignment quality, text length distributions, vocabulary coverage, and domain terminology patterns.",
-        "Optimized LoRA configurations with grid search and Optuna/ASHA, identifying key hyperparameter effects on translation quality.",
-        "Compared parameter-efficient LoRA adaptation with full fine-tuning and external MT baselines under low-resource conditions.",
-        "Evaluated translation quality with BLEU, chrF, and terminology-oriented analysis for domain-specific adequacy.",
+        "Built a reproducible LoRA fine-tuning pipeline for NLLB-200 in a low-resource petroleum translation setting.",
+        "Designed corpus diagnostics for sentence length, alignment quality, domain vocabulary, and data filtering.",
+        "Ran data-scaling experiments to identify an efficient training budget before full hyperparameter optimization.",
+        "Used grid search and Optuna-ASHA to map LoRA rank, alpha, and dropout sensitivity.",
+        "Compared the final adapted model with the base model, full fine-tuning, and commercial MT baselines using BLEU, chrF, COMET, and terminology-oriented analysis.",
       ],
     },
   },
-
+  {
+    id: "modular-lora-experts",
+    companyName:
+      "Diagnosing Modular LoRA Experts for Multilingual Domain Translation",
+    type: "Research",
+    category: ["Research", "Machine Translation", "NLP", "Evaluation"],
+    shortDescription:
+      "Under-review research on whether learned routing is actually the bottleneck in a modular LoRA expert system for multilingual petroleum-domain translation.",
+    techStack: [
+      "Python",
+      "PyTorch",
+      "Transformers",
+      "Hugging Face",
+      "NLLB-200",
+      "LoRA",
+      "PEFT",
+      "SacreBLEU",
+      "COMET",
+      "chrF",
+      "Data Curation",
+      "Statistics",
+    ],
+    startDate: new Date("2026-01-01"),
+    endDate: new Date("2026-08-01"),
+    companyLogoImg:
+      "/projects/modular-lora-experts/tsne_encoder_features.png",
+    pagesInfoArr: [
+      {
+        title: "Language Representation Diagnostics",
+        description:
+          "Encoder representation analysis is used as one diagnostic lens for understanding whether multilingual source languages form separable routing signals.",
+        imgArr: ["/projects/modular-lora-experts/tsne_encoder_features.png"],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "This project examines a modular adaptation hypothesis: if each source language has its own LoRA expert, can a learned router improve low-resource multilingual petroleum translation by selecting the right expert?",
+        "The study uses a frozen NLLB-200 backbone, language-specific LoRA experts, a learned router, and a synthetic corpus construction pipeline for German-, French-, and Dutch-to-Norwegian petroleum translation. The central finding is intentionally diagnostic: better routing accuracy does not necessarily translate into better BLEU or terminology accuracy.",
+        "My contribution was to frame the experiment as a routing diagnosis rather than a simple model-improvement story, implement the expert and router comparisons, analyze cross-expert transfer, and interpret why shared multitask adaptation and independent experts can outperform a learned-router MoE in this low-resource domain setting.",
+      ],
+      bullets: [
+        "Designed a modular LoRA expert setup with language-specific adapters and router-based expert selection.",
+        "Developed the Target-Anchored Synthesis idea for creating multilingual petroleum-domain training pairs when parallel data is unavailable.",
+        "Compared learned-router MoE, shared multitask LoRA, independent experts, and cross-expert transfer settings.",
+        "Analyzed routing accuracy, BLEU, terminology accuracy, and expert specialization to separate routing quality from end-task translation quality.",
+        "Presented the project conservatively as under review, with high-level methods and diagnostics but no public manuscript link.",
+      ],
+    },
+  },
+  {
+    id: "finrag-equinor",
+    companyName: "FinRAG-Equinor: Evidence-Grounded RAG Benchmark",
+    type: "Research",
+    category: ["Research", "RAG", "Information Retrieval", "Evaluation"],
+    shortDescription:
+      "A reliability-audited benchmark candidate for evidence-grounded RAG over 15 Equinor/Statoil annual reports, focusing on traceable report, page, and object-level evidence.",
+    techStack: [
+      "Python",
+      "RAG",
+      "Information Retrieval",
+      "BM25",
+      "E5",
+      "Cross-encoder",
+      "Reranking",
+      "Pandas",
+      "Benchmarking",
+      "Bootstrap",
+      "Cohen's Kappa",
+    ],
+    startDate: new Date("2026-02-01"),
+    endDate: new Date("2026-08-01"),
+    companyLogoImg: "/projects/finrag-equinor/cover.png",
+    pagesInfoArr: [
+      {
+        title: "PDF-to-Benchmark Pipeline",
+        description:
+          "The benchmark turns annual-report PDFs into traceable retrieval units, candidate questions, answers, evidence metadata, audit labels, and evaluation scripts.",
+        imgArr: ["/projects/finrag-equinor/cover.png"],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "This project builds a benchmark candidate for evidence-grounded RAG over long financial and annual-report PDFs. Instead of treating retrieval as generic passage search, it asks whether a system can reach the correct report year, localize the relevant page, and identify the exact supporting evidence object.",
+        "The benchmark covers 15 Equinor/Statoil annual reports from 2010 to 2024 and contains 720 questions across numerical extraction, table lookup, temporal comparison, multi-hop reasoning, visual/layout questions, and unanswerable cases. Retrieval experiments compare sparse, dense, hybrid, hierarchical, and reranked settings.",
+        "My contribution was the benchmark design and retrieval evaluation pipeline: parsing report structure into retrieval units, designing evidence metadata, building QA and hard-negative diagnostics, running retrieval baselines, and analyzing failure modes across report selection, page localization, and object grounding.",
+      ],
+      bullets: [
+        "Built a controlled annual-report QA benchmark with page- and object-level evidence metadata.",
+        "Evaluated BM25, dense retrieval, hybrid fusion, hierarchical page-to-object retrieval, and cross-encoder reranking.",
+        "Analyzed retrieval failures by report/year mismatch, same-page wrong-object errors, same-report wrong-page errors, and adjacent-page confusions.",
+        "Framed evidence-grounded RAG as a hierarchical localization problem rather than a single retrieval score.",
+        "Kept the public portfolio description high-level while the manuscript remains under review or preparation.",
+      ],
+    },
+  },
+  {
+    id: "structure-aware-graph-rag",
+    companyName: "Structure-Aware Graph Retrieval for Long Annual Reports",
+    type: "Research",
+    category: ["Research", "RAG", "Information Retrieval", "Evaluation"],
+    shortDescription:
+      "Under-review research showing when typed document-structure graphs help evidence retrieval over long annual reports, and when naive structural proximity introduces noise.",
+    techStack: [
+      "Python",
+      "GraphRAG",
+      "RAG",
+      "Information Retrieval",
+      "BM25",
+      "E5",
+      "Cross-encoder",
+      "Reranking",
+      "Pandas",
+      "Bootstrap",
+      "Statistics",
+    ],
+    startDate: new Date("2026-03-01"),
+    endDate: new Date("2026-08-01"),
+    companyLogoImg: "/projects/graph-rag-evidence/cover.png",
+    pagesInfoArr: [
+      {
+        title: "Typed Evidence Graph",
+        description:
+          "A high-level view of the retrieval design: annual reports are parsed into pages and evidence objects, linked through typed relations, expanded through graph neighborhoods, and reranked for object-level grounding.",
+        imgArr: ["/projects/graph-rag-evidence/cover.png"],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "This project studies structure-aware retrieval for evidence grounding over long annual reports. The key question is not only whether retrieved text is semantically similar, but whether the system can navigate document structure to find the exact evidence supporting an answer.",
+        "The method builds a typed metadata evidence graph over reports, pages, retrieval objects, entities, and metric categories. Graph expansion is used as a candidate-generation step, followed by cross-encoder reranking. The analysis shows that structure helps selectively: same-page and entity links can bridge evidence, same-metric links help modestly, and adjacent-page links can introduce distracting neighbors.",
+        "My contribution was to design the GraphRAG retrieval experiments, implement the typed graph expansion and edge ablations, evaluate object Recall@10, page Recall@10, MRR, and validation splits, and interpret the trade-off between relaxed page localization and exact evidence-object grounding.",
+      ],
+      bullets: [
+        "Constructed a typed evidence graph connecting reports, years, pages, objects, entities, and metric categories.",
+        "Tested graph expansion as retrieval candidate generation rather than as final ranking.",
+        "Ran edge-type ablations to separate useful structure from noisy proximity links.",
+        "Added a lightweight structure-aware routing and ordering layer for interpretable retrieval control.",
+        "Presented the work as under review, with enough method clarity for portfolio readers but without exposing the full manuscript.",
+      ],
+    },
+  },
+  {
+    id: "group-shapley-attribution",
+    companyName: "Group-Level Training Data Attribution with Exact Shapley Analysis",
+    type: "Research",
+    category: ["Research", "Data-Centric ML", "Machine Translation", "Evaluation"],
+    shortDescription:
+      "A data-centric ML project using exact group-level Shapley values to study which training-data groups shape translation quality, terminology behavior, and written-standard output.",
+    techStack: [
+      "Python",
+      "PyTorch",
+      "Transformers",
+      "Hugging Face",
+      "NLLB-200",
+      "LoRA",
+      "PEFT",
+      "SacreBLEU",
+      "chrF",
+      "Data Curation",
+      "Bootstrap",
+      "Statistics",
+      "SLIDE",
+    ],
+    startDate: new Date("2026-04-01"),
+    endDate: new Date("2026-08-01"),
+    companyLogoImg:
+      "/projects/group-shapley-attribution/random-baseline-barchart.png",
+    pagesInfoArr: [
+      {
+        title: "Size-Matched Baseline Diagnostic",
+        description:
+          "The project compares true linguistically defined groups with random size-matched baselines to separate group identity effects from group-size effects.",
+        imgArr: [
+          "/projects/group-shapley-attribution/random-baseline-barchart.png",
+        ],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "This project asks a data-centric question: which interpretable groups of training examples are responsible for different aspects of model behavior after fine-tuning?",
+        "The method defines auditable training-data groups based on written-standard labels, enumerates all feasible data coalitions, trains models across the coalition space, and computes exact group-level Shapley values for multiple utility functions. The evaluation separates translation quality, terminology accuracy, and written-standard behavior instead of reducing data contribution to one scalar score.",
+        "My contribution was the research framing, coalition protocol, Shapley computation design, model training setup, metric design, random size-matched baselines, and cross-architecture validation plan. Because the work is still manuscript-stage, the site presents the method and contribution at a high level.",
+      ],
+      bullets: [
+        "Formulated group-level data attribution as an exact Shapley analysis over interpretable data groups.",
+        "Enumerated all 16 coalitions for four written-standard groups and evaluated multiple behavior-specific utility functions.",
+        "Compared true groups with repeated random size-matched groups to test whether attribution patterns are reducible to group size.",
+        "Extended the protocol from encoder-decoder MT to decoder-only instruction-format LoRA validation.",
+        "Used bootstrap confidence intervals and manual audit planning to make the attribution analysis more robust.",
+      ],
+    },
+  },
+  {
+    id: "target-standard-bias",
+    companyName: "Target-Standard Bias from Data Filtering in Norwegian MT",
+    type: "Research",
+    category: ["Research", "Responsible AI", "Machine Translation", "Evaluation"],
+    shortDescription:
+      "A responsible AI project studying how target-side data filtering can silently specialize Norwegian MT systems toward one written standard and change metric interpretation.",
+    techStack: [
+      "Python",
+      "PyTorch",
+      "Transformers",
+      "Hugging Face",
+      "NLLB-200",
+      "LoRA",
+      "SacreBLEU",
+      "chrF",
+      "Data Curation",
+      "Bootstrap",
+      "Statistics",
+      "SLIDE",
+    ],
+    startDate: new Date("2026-05-01"),
+    endDate: new Date("2026-08-01"),
+    companyLogoImg:
+      "/projects/target-standard-bias/random-baseline-barchart.png",
+    pagesInfoArr: [
+      {
+        title: "Written-Standard Data Diagnostics",
+        description:
+          "The project treats filtering as a modeling decision, not a neutral preprocessing step, and evaluates how written-standard distributions affect MT scores and output behavior.",
+        imgArr: ["/projects/target-standard-bias/random-baseline-barchart.png"],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "This project studies target-standard bias in Norwegian machine translation. The core question is whether target-side filtering toward Bokmal changes both model behavior and the way automatic metrics reward that behavior.",
+        "The method compares original, filtered, and size-controlled training conditions across NLLB-200 model scales. It combines automatic MT metrics, terminology evaluation, written-standard identification, out-of-domain FLORES checks, and diagnostic human assessment.",
+        "My contribution was to connect data filtering with responsible evaluation: I helped frame filtering as an auditable source of target-standard specialization, designed the size-controlled comparison, analyzed written-standard output shifts, and translated the result into practical safeguards for MT evaluation.",
+      ],
+      bullets: [
+        "Designed a size-controlled comparison between original mixed-standard data and Bokmal-filtered data.",
+        "Evaluated translation quality, terminology behavior, written-standard output rates, and robustness across model scales.",
+        "Showed why reference-based metrics can encode target-standard preferences in multi-standard languages.",
+        "Added human-evaluation and deployment-interpretation framing to avoid treating all specialization as either good or bad.",
+        "Kept the project summary high-level until the manuscript path is settled.",
+      ],
+    },
+  },
+  {
+    id: "vlm-bias-evaluation",
+    companyName: "Reusable Bias Evaluation Framework for LMs and VLMs",
+    type: "Technical Project",
+    category: ["Technical Project", "Responsible AI", "NLP", "Evaluation"],
+    shortDescription:
+      "A reusable evaluation framework for matched-prompt and image-instruction bias studies, covering geographic, gender-occupation, and political/moral VLM framing cases.",
+    techStack: [
+      "Python",
+      "Transformers",
+      "Hugging Face",
+      "VLM",
+      "Prompt Engineering",
+      "Pandas",
+      "Data Analysis",
+      "Bootstrap",
+      "Cohen's Kappa",
+      "Statistics",
+    ],
+    startDate: new Date("2025-11-01"),
+    endDate: new Date("2026-08-01"),
+    companyLogoImg:
+      "/projects/vlm-bias-evaluation/vlm-image-review-contact-sheet.jpg",
+    pagesInfoArr: [
+      {
+        title: "Image Review and Validation Workflow",
+        description:
+          "The VLM case study uses reviewed image sets, metadata, captioning instructions, automatic framing metrics, and human validation sheets.",
+        imgArr: [
+          "/projects/vlm-bias-evaluation/vlm-image-review-contact-sheet.jpg",
+        ],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "This technical research framework evaluates whether language and vision-language models introduce systematic framing differences across social, political, or cultural groups.",
+        "The framework supports both text-only matched prompts and image-instruction VLM tasks. It separates case-specific resources from shared code for data loading, prompt construction, model execution, metric scoring, group disparity analysis, bootstrap summaries, annotation sheet creation, and agreement analysis.",
+        "My contribution was to design the reusable framework, implement the shared evaluation modules, structure three case studies, and define a validation boundary: automatic metrics are screening signals, while strong bias claims require human annotation and agreement analysis.",
+      ],
+      bullets: [
+        "Built a configuration-driven framework for geographic, gender-occupation, and VLM political/moral bias case studies.",
+        "Implemented matched-prompt generation, model inference wrappers, automatic framing metrics, and group disparity summaries.",
+        "Extended the framework from text-only variables to image-instruction VLM description tasks.",
+        "Added human annotation sheet generation and Cohen's kappa support for validation.",
+        "Positioned the project as a reusable research tool and case-study platform rather than a finished benchmark claim.",
+      ],
+    },
+  },
   {
     id: "multilingual-sentiment",
     companyName: "Multilingual Sentiment Analysis Platform",
-    type: "AI",
-    category: ["AI/ML", "NLP"],
-    shortDescription: "Led the full-cycle development of a multilingual sentiment analysis platform using BERT-family models, achieving up to 93% accuracy in binary sentiment classification.",
-    websiteLink: "https://huggingface.co/spaces/entropy25/multilingual-sentiment-analyzer",
+    type: "Technical Project",
+    category: ["Technical Project", "AI/ML", "NLP"],
+    shortDescription:
+      "An applied NLP platform for multilingual sentiment analysis with Transformer models, batch processing, and explainability views.",
+    websiteLink:
+      "https://huggingface.co/spaces/entropy25/multilingual-sentiment-analyzer",
     techStack: [
       "Python",
       "BERT",
@@ -100,69 +398,56 @@ export const Projects: ProjectInterface[] = [
       "LoRA",
       "Gradio",
       "SHAP",
-      "Lime"
+      "Lime",
+      "Pandas",
     ],
     startDate: new Date("2024-09-01"),
-    endDate: new Date("2025-3-01"),
+    endDate: new Date("2025-03-01"),
     companyLogoImg: "/projects/Multilingual-Sentiment-Analyzer/logo.png",
     pagesInfoArr: [
       {
-        title: "Single Analysis Page",
+        title: "Single and Batch Analysis",
         description:
-          "User-friendly interface for analyzing single text inputs. Results are displayed with clear visualizations of sentiment probabilities.",
+          "The interface supports direct text analysis and file-based batch processing, returning sentiment probabilities and downloadable outputs.",
         imgArr: [
           "/projects/Multilingual-Sentiment-Analyzer/landing_1.webp",
-
+          "/projects/Multilingual-Sentiment-Analyzer/landing_2.webp",
         ],
       },
       {
-        title: "Batch Analysis Page",
+        title: "Explainable AI View",
         description:
-          "User-friendly interface for processing entire files in batches. Results are displayed with clear visualizations of sentiment probabilities.",
-        imgArr: ["/projects/Multilingual-Sentiment-Analyzer/landing_2.webp"],
-      },
-      {
-        title: "Explainable AI (XAI) Dashboard",
-        description:
-          "Interactive dashboard to run SHAP and LIME analyses. It visualizes which words or tokens contribute most to the sentiment prediction, making the AI's decisions transparent.",
+          "SHAP and LIME views help users inspect which tokens contribute most to a prediction.",
         imgArr: [
           "/projects/Multilingual-Sentiment-Analyzer/cli_dashboard_1.webp",
           "/projects/Multilingual-Sentiment-Analyzer/cli_dashboard_2.webp",
         ],
       },
-      {
-        title: "History & Analytics",
-        description:
-          "A dedicated tab to view the history of all analyses performed. Provides summary statistics and allows users to export the complete history for external use.",
-        imgArr: ["/projects/Multilingual-Sentiment-Analyzer/landing_3.webp"],
-      },
     ],
     descriptionDetails: {
       paragraphs: [
-        "This project is an advanced AI application designed to provide robust, multi-language sentiment analysis. The core objective was to build a tool that not only accurately predicts sentiment (positive, negative, neutral) across languages like English and Chinese but also makes the decision-making process transparent and understandable for the user.",
-        "The technical foundation relies on state-of-the-art Transformer models from the Hugging Face ecosystem, including RoBERTa and other BERT variants. The backend is engineered for efficiency, featuring an LRU caching system to manage model memory and parallel processing for handling batch requests, ensuring high throughput and stability for over 4000 potential users.",
-        "A key differentiator of this platform is its integration of Explainable AI (XAI) techniques. By leveraging SHAP and LIME, the application generates intuitive visualizations that highlight which specific words or tokens most influenced the model's sentiment prediction. This layer of transparency is crucial for building user trust and providing deeper insights beyond a simple classification score."
+        "This applied NLP project turns sentiment classification into a usable analysis platform. The focus is not only model accuracy, but also batch usability, result export, and interpretability.",
+        "The system uses BERT-family Transformer models through the Hugging Face ecosystem and exposes single-text, batch, and explainability workflows through a Gradio interface.",
+        "My contribution covered model integration, interface design, batch processing, prediction history, export logic, and SHAP/LIME explainability support.",
       ],
       bullets: [
-        "Implemented high-accuracy sentiment analysis for multiple languages using Transformer models like RoBERTa.",
-        "Integrated Explainable AI (XAI) frameworks (SHAP & LIME) to visualize and interpret model predictions.",
-        "Developed an interactive and user-friendly interface with Gradio for single, batch, and XAI analysis.",
-        "Engineered a performance-optimized backend with LRU model caching and efficient memory management.",
-        "Enabled comprehensive data interaction with features for history tracking and data export to CSV/JSON formats.",
+        "Integrated BERT, DistilBERT, and RoBERTa-style sentiment models into a multilingual analysis workflow.",
+        "Built single-input and batch-file workflows for practical analysis use.",
+        "Added SHAP and LIME explainability views to make predictions inspectable.",
+        "Implemented history and export features for CSV/JSON result reuse.",
       ],
     },
   },
-
   {
     id: "SmartReview",
     companyName: "SmartReview Pro",
-    type: "AI",
-    category: ["AI/ML", "NLP", "Full Stack"],
+    type: "Technical Project",
+    category: ["Technical Project", "AI/ML", "NLP"],
     shortDescription:
-      "An all-in-one AI platform for e-commerce review analysis, offering 9 distinct insights from sentiment to fake review detection.",
-    websiteLink:
-      "https://huggingface.co/spaces/entropy25/SmartReview",
-    techStack: ["Python",
+      "An AI review-intelligence platform that analyzes e-commerce feedback across sentiment, emotion, quality, and suspicious-review signals.",
+    websiteLink: "https://huggingface.co/spaces/entropy25/SmartReview",
+    techStack: [
+      "Python",
       "RoBERTa",
       "DistilBERT",
       "Transformers",
@@ -170,326 +455,30 @@ export const Projects: ProjectInterface[] = [
       "Gradio",
       "Plotly",
       "Pandas",
-      "SQLite"],
+      "SQLite",
+    ],
     startDate: new Date("2025-03-01"),
     endDate: new Date("2025-07-01"),
-    companyLogoImg: "/projects/superquotes/logo.png",
+    companyLogoImg: "/projects/smartreview/logo.png",
     pagesInfoArr: [
       {
-        title: "Quotes View Page",
+        title: "Review Intelligence Workflow",
         description:
-          "Elegantly designed quotes display with customizable themes and sharing options",
-        imgArr: ["/projects/superquotes/app_2.webp"],
-      },
-      {
-        title: "Quotes Download Component",
-        description:
-          "Feature allowing users to download quotes as beautiful images for social media sharing",
-        imgArr: [
-          "/projects/superquotes/app_4.webp",
-          "/projects/superquotes/app_7.webp",
-        ],
-      },
-      {
-        title: "Account Management",
-        description:
-          "User profile management with favorites, history, and personalization settings",
-        imgArr: ["/projects/superquotes/app_6.webp"],
-      },
-      {
-        title: "Interest Selection and Update Page",
-        description:
-          "Interactive interface for users to select and update their quote preferences and interests",
-        imgArr: [
-          "/projects/superquotes/app_1.webp",
-          "/projects/superquotes/app_3.webp",
-        ],
-      },
-      {
-        title: "Responsiveness",
-        description:
-          "Adaptive design ensuring optimal user experience across various device sizes and orientations",
-        imgArr: ["/projects/superquotes/app_5.webp"],
+          "The platform combines multiple NLP modules into a single workflow for e-commerce review understanding and reporting.",
+        imgArr: ["/projects/smartreview/logo.png"],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        `Building SmartReview Pro was an ambitious endeavor to create a definitive, all-in-one platform for e-commerce intelligence. My mission was to empower businesses by transforming raw customer feedback into a spectrum of clear, actionable insights using the power of AI.`,
-        `The core of this platform is a sophisticated analysis engine built in Python, leveraging state-of-the-art Transformer models like RoBERTa and DistilBERT. I engineered a modular system capable of performing nine distinct types of analysis—from sentiment and emotion to complex tasks like fake review detection and quality assessment.`,
-        `A significant challenge was managing performance and resources. I designed a lazy-loading model manager and an SQLite-based caching system to ensure the platform remained responsive and efficient, even when processing thousands of reviews.`,
-        `The final product, presented through an intuitive Gradio interface with rich Plotly visualizations, is a testament to end-to-end AI application development. It's a powerful tool that offers businesses a 360-degree view of their customer feedback landscape.`,
+        "SmartReview Pro is an applied AI platform for turning raw e-commerce reviews into structured business signals. It combines multiple NLP modules so users can move beyond a single sentiment label.",
+        "The system uses Transformer-based classifiers, a modular analysis pipeline, SQLite-backed caching, and interactive Plotly/Gradio visualizations.",
+        "My contribution was to design the multi-module analysis workflow, integrate model inference, optimize repeated analysis with caching, and build the user-facing dashboard for review-level and aggregate insights.",
       ],
       bullets: [
-        "Architected and developed a comprehensive AI platform with 9 distinct review analysis modules.",
-        "Integrated advanced Transformer models (RoBERTa, DistilBERT) for high-accuracy, multi-faceted NLP tasks.",
-        "Engineered an efficient backend with lazy-loading for models and an SQLite caching layer to optimize performance.",
-        "Designed and delivered an intuitive, data-rich user interface using Gradio and Plotly for interactive data visualization.",
-      ],
-    },
-  },
-  {
-    id: "apex-shopping",
-    companyName: "Apex Shopping App",
-    type: "AI",
-    category: ["Mobile Dev", "Full Stack", "UI/UX"],
-    shortDescription:
-      "Developed a feature-rich mobile shopping application with admin panel, user authentication, and seamless product management using React Native and Firebase.",
-    githubLink: "https://github.com/namanbarkiya/apex-shopping-app",
-    techStack: ["React Native", "Javascript", "Redux", "Node.js", "express.js"],
-    startDate: new Date("2021-07-14"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/projects/apex/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Splash Screen",
-        description: "Custom animated splash screen with app branding",
-        imgArr: ["/projects/apex/app_7.webp"],
-      },
-      {
-        title: "Login/Signup Authentication",
-        description: "Secure user authentication system with Firebase",
-        imgArr: ["/projects/apex/app_1.webp"],
-      },
-      {
-        title: "All Products Explore Screen",
-        description: "Interactive product browsing with categories and filters",
-        imgArr: ["/projects/apex/app_3.webp"],
-      },
-      {
-        title: "Admin Panel",
-        description:
-          "Comprehensive admin dashboard for product and order management",
-        imgArr: ["/projects/apex/app_4.webp", "/projects/apex/app_6.webp"],
-      },
-      {
-        title: "Sidenav Navigation",
-        description: "Intuitive side navigation for easy app navigation",
-        imgArr: ["/projects/apex/app_5.webp"],
-      },
-      {
-        title: "Firebase Database",
-        description:
-          "Real-time database structure for efficient data management",
-        imgArr: ["/projects/apex/db.webp"],
-      },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        "The Apex Shopping App represents a comprehensive mobile e-commerce solution that I developed from the ground up using React Native and Firebase. This project showcases my ability to create a full-featured shopping application with both user and admin functionalities.",
-        "The application features a robust authentication system, allowing users to securely sign up and log in. The product exploration interface is designed with user experience in mind, incorporating smooth navigation and intuitive filtering options.",
-        "One of the key highlights is the admin panel, which provides complete control over product management, order processing, and inventory tracking. The integration with Firebase ensures real-time data synchronization and reliable data persistence.",
-        "The app's architecture emphasizes scalability and performance, utilizing Redux for state management and following best practices for mobile app development. The UI/UX design focuses on providing a seamless shopping experience across different device sizes.",
-      ],
-      bullets: [
-        "Implemented secure user authentication and authorization using Firebase",
-        "Designed and developed an intuitive product browsing and shopping cart system",
-        "Created a comprehensive admin panel for product and order management",
-        "Integrated real-time data synchronization using Firebase Database",
-        "Implemented state management using Redux for optimal performance",
-        "Designed responsive UI components following mobile-first principles",
-        "Incorporated smooth animations and transitions for enhanced user experience",
-      ],
-    },
-  },
-  {
-    id: "builtdesign-blogs",
-    companyName: "Builtdesign Blogs",
-    type: "AI",
-    category: ["Web Dev", "Full Stack", "UI/UX"],
-    shortDescription:
-      "Crafted Builtdesign's vibrant Blogs Website using Netlify CMS and React for engaging content experiences.",
-    websiteLink: "https://blog.builtdesign.in",
-    techStack: ["Next.js", "React", "Node.js", "MongoDB", "Typescript"],
-    startDate: new Date("2022-03-01"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/projects/builtdesign-blogs/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Blog Landing Page",
-        description:
-          "Modern and responsive landing page showcasing featured articles",
-        imgArr: ["/projects/builtdesign-blogs/blog_2.webp"],
-      },
-      {
-        title: "Blog Listing",
-        description:
-          "Organized display of all blog posts with search and filtering",
-        imgArr: ["/projects/builtdesign-blogs/blog_3.webp"],
-      },
-      {
-        title: "Category Navigation",
-        description: "Intuitive category-based navigation system",
-        imgArr: ["/projects/builtdesign-blogs/blog_1.webp"],
-      },
-      {
-        title: "Article View",
-        description:
-          "Clean and readable article layout with rich media support",
-        imgArr: [
-          "/projects/builtdesign-blogs/blog_4.webp",
-          "/projects/builtdesign-blogs/blog_5.webp",
-        ],
-      },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        "As part of the Builtdesign platform, I developed a sophisticated blog website that serves as a content hub for the company's thought leadership and industry insights. The project leveraged Next.js and React to create a fast, SEO-friendly platform.",
-        "The blog platform features a modern, responsive design that prioritizes readability and user engagement. I implemented a robust content management system using Netlify CMS, enabling the content team to easily publish and manage blog posts.",
-        "The architecture includes server-side rendering for optimal performance and SEO, while MongoDB provides flexible content storage. TypeScript ensures code reliability and maintainability throughout the application.",
-        "Key features include category-based navigation, search functionality, and a rich text editor for content creation. The platform supports various content types including images, code snippets, and embedded media.",
-      ],
-      bullets: [
-        "Developed a modern blog platform using Next.js and React with TypeScript",
-        "Implemented Netlify CMS for efficient content management",
-        "Created a responsive design that prioritizes readability and user engagement",
-        "Built server-side rendering for optimal performance and SEO",
-        "Integrated MongoDB for flexible content storage and management",
-        "Developed category-based navigation and search functionality",
-        "Implemented rich text editing capabilities for content creation",
-      ],
-    },
-  },
-  {
-    id: "portfolio-card",
-    companyName: "Portfolio Card",
-    type: "Data Science",
-    category: ["Web Dev", "Frontend", "3D Modeling"],
-    shortDescription:
-      "Forged an immersive 3D Portfolio Card utilizing the prowess of Three.js and Blender, where art and technology converge in an interactive masterpiece.",
-    websiteLink: "https://card.namanbarkiya.xyz/",
-    githubLink: "https://github.com/namanbarkiya/3d-portfolio-card",
-    techStack: ["React", "Javascript", "HTML 5", "CSS 3"],
-    startDate: new Date("2022-03-01"),
-    endDate: new Date("2022-07-01"),
-    companyLogoImg: "/projects/card/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Card Views",
-        description: "Front and back views of the interactive 3D card",
-        imgArr: ["/projects/card/card_2.webp", "/projects/card/card_3.webp"],
-      },
-      {
-        title: "Interactive Elements",
-        description:
-          "Custom links embedded in the 3D model with interactive animations",
-        imgArr: ["/projects/card/card_1.webp"],
-      },
-      {
-        title: "3D Model Development",
-        description: "Blender project showcasing the model creation process",
-        imgArr: ["/projects/card/card_4.webp"],
-      },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        "In my personal, I've ventured into the world of creativity, fashioning a distinctive portfolio card through the utilization of Three.js.",
-        "This portfolio card transcends convention; it emerges as a captivating 3D model, adorned with meticulous lighting arrangements that conjure a spellbinding visual journey.",
-        "To materialize this concept, I've harnessed the combined potential of Three.js and Blender, orchestrating a meticulous crafting of the central 3D model that serves as the cornerstone of the card's allure.",
-        "Yet, the allure extends beyond aesthetics. I've ingeniously interwoven custom links directly into the fabric of Three.js components. Through the creation and seamless integration of novel components, these additions elegantly rest upon the card's surface, mirroring its rotations and delivering an interactive dimension to my portfolio.",
-        "The portfolio card itself is an opus of motion, perpetually swaying in an auto-rotational dance that unfurls its multifaceted essence. As an enhancement, I've introduced an instinctive user interaction element. A simple, intuitive drag of the card in specific directions grants viewers a comprehensive vantage, enabling exploration from every conceivable angle.",
-        "At its core, my personal epitomizes technical finesse, artistic expression, and interactive design. The amalgamation of Three.js, Blender's prowess, and the innovation of component integration has birthed not only a portfolio card, but a dynamic encounter leaving an indelible imprint on all who partake.",
-      ],
-      bullets: [
-        "Conceptualized and realized a distinct portfolio card using Three.js, highlighting creative exploration.",
-        "Crafted a mesmerizing 3D model enhanced by thoughtful lighting arrangements, resulting in a captivating visual voyage.",
-        "Leveraged the synergy of Three.js and Blender to meticulously sculpt and refine the central 3D model, embodying meticulous attention to detail.",
-        "Innovatively integrated custom links within Three.js components, introducing an interactive layer via seamlessly incorporated new elements.",
-        "Enabled an auto-rotating feature for the portfolio card, perpetually showcasing its various facets to observers.",
-        "Introduced an instinctual user interaction mechanism, allowing viewers to comprehensively explore the card's dimensions through simple, intuitive dragging motions.",
-        "Represented a fusion of technical prowess, artistic ingenuity, and interactive design in a project that reshapes the boundaries of conventional portfolio representation.",
-      ],
-    },
-  },
-  {
-    id: "cirql-dashboard",
-    companyName: "Cirql Dashboard",
-    type: "Data Science",
-    category: ["Web Dev", "Frontend", "UI/UX"],
-    shortDescription:
-      "Created a dashboard project using React and Tailwind CSS, focusing on UI design and routing implementation.",
-    websiteLink: "https://cirql-ui.namanbarkiya.xyz/",
-    techStack: ["React", "Tailwind CSS", "Google Auth"],
-    startDate: new Date("2023-01-01"),
-    endDate: new Date("2023-02-15"),
-    companyLogoImg: "/projects/cirql/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Dashboard Home",
-        description:
-          "Main dashboard view with analytics widgets and data visualization",
-        imgArr: ["/projects/cirql/web_1.png", "/projects/cirql/web_2.png"],
-      },
-      {
-        title: "Profile Page",
-        description:
-          "User profile management interface with customization options",
-        imgArr: ["/projects/cirql/web_3.png", "/projects/cirql/web_4.png"],
-      },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        "For the 'Cirql Dashboard' personal, I aimed to enhance my UI design skills and deepen my understanding of routing within a React application.",
-        "I utilized React and Tailwind CSS to craft an intuitive dashboard interface that provides users with an organized overview of data and functionalities. The UI components were thoughtfully designed to ensure a seamless user experience.",
-        "Incorporating Google Sign-In Authentication further fortified the project by adding a layer of security and convenience. Users are required to authenticate before accessing certain routes, ensuring the safety of sensitive information.",
-        "The routing system was meticulously implemented to enable smooth navigation between different sections of the dashboard, simulating real-world use cases.",
-        "Through this project, I've gained valuable insights into UI/UX design principles and the implementation of secure and efficient routing in React applications.",
-      ],
-      bullets: [
-        "Created a user-friendly dashboard project using React and Tailwind CSS.",
-        "Implemented Google Sign-In Authentication to ensure secure access to sensitive routes.",
-        "Designed UI components to provide an intuitive and visually pleasing experience.",
-        "Focused on implementing a smooth routing system to simulate real-world use cases.",
-        "Enhanced my skills in UI design, routing, and component architecture.",
-      ],
-    },
-  },
-  {
-    id: "inscript-hindi-typing",
-    companyName: "Inscript Hindi Typing",
-    type: "Data Science",
-    category: ["Web Dev", "UI/UX"],
-    shortDescription:
-      "Developed a user-friendly website for Inscript Hindi typing, addressing the need for a simple tool for Hindi writers to convey data digitally.",
-    websiteLink: "https://hindityping.namanbarkiya.xyz",
-    githubLink: "https://github.com/namanbarkiya/inscript-hindi-keyboard",
-    techStack: ["HTML 5", "CSS 3", "Javascript"],
-    startDate: new Date("2022-05-01"),
-    endDate: new Date("2022-06-15"),
-    companyLogoImg: "/projects/hindi-keyboard/logo.png",
-    pagesInfoArr: [
-      {
-        title: "Typing Interface",
-        description: "Minimal and user-friendly Inscript Hindi typing area",
-        imgArr: ["/projects/hindi-keyboard/web_1.png"],
-      },
-      {
-        title: "Copy and Download the file",
-        description:
-          "Export functionality allowing users to copy text or download as a document file",
-        imgArr: [
-          "/projects/hindi-keyboard/web_2.png",
-          "/projects/hindi-keyboard/web_3.png",
-        ],
-      },
-    ],
-    descriptionDetails: {
-      paragraphs: [
-        "The 'Inscript Hindi Typing Website' project emerged from the need to provide a simple and accessible tool for Hindi writers, especially those in digital news and media, who wished to convey data in Hindi.",
-        "Recognizing the challenges posed by complex software in the market, I set out to create a minimalistic typing area that catered to the needs of a vast community of Hindi typists in India.",
-        "The project was designed to address the specific requirements of users familiar with the Inscript keyboard layout, mapping English and Hindi alphabets for seamless typing. The intuitive interface allowed users to effortlessly switch between languages, streamlining the process of content creation.",
-        "Leveraging HTML and CSS, I crafted the website's UI to ensure a user-friendly experience. Additionally, Local Storage was utilized to enable users to save and retrieve their work, enhancing convenience and productivity.",
-        "The website's focus on user experience and simplicity proved to be a key factor in its popularity among Hindi writers. By offering a tool that reduced the barriers to entry, I contributed to the digital empowerment of Hindi typists who previously faced challenges in conveying their message effectively.",
-        "This project marked one of my initial forays into web development and highlighted the transformative potential of technology in addressing real-world challenges.",
-      ],
-      bullets: [
-        "Developed a user-friendly website for Inscript Hindi typing.",
-        "Catered to the needs of Hindi writers in digital news and media.",
-        "Created a minimalistic and intuitive typing interface for the Inscript keyboard layout.",
-        "Mapped English and Hindi alphabets to provide a seamless typing experience.",
-        "Utilized HTML and CSS to design a user-friendly UI.",
-        "Implemented Local Storage to enable users to save and retrieve their work.",
-        "Contributed to the digital empowerment of Hindi typists by offering a simple tool.",
-        "Marked one of my first web development projects, showcasing technology's potential for addressing real-world needs.",
+        "Built analysis modules for sentiment, emotion, review quality, and suspicious-review signals.",
+        "Integrated RoBERTa/DistilBERT-family models through a modular Python pipeline.",
+        "Used lazy loading and SQLite caching to improve responsiveness for repeated review analysis.",
+        "Designed interactive Gradio and Plotly views for interpretable business-facing outputs.",
       ],
     },
   },

@@ -109,7 +109,22 @@ export type ValidSkills =
   | "NLLB-200"
   | "PEFT"
   | "Optuna"
-  | "SacreBLEU";
+  | "SacreBLEU"
+  | "COMET"
+  | "chrF"
+  | "Weights & Biases"
+  | "GraphRAG"
+  | "BM25"
+  | "E5"
+  | "Cross-encoder"
+  | "Reranking"
+  | "Bootstrap"
+  | "Cohen's Kappa"
+  | "VLM"
+  | "Data Curation"
+  | "Benchmarking"
+  | "LaTeX"
+  | "SLIDE";
 
 
 export type ValidCategory =
@@ -124,9 +139,14 @@ export type ValidCategory =
   | "NLP"
   | "Research"
   | "Machine Translation"
-  | "Evaluation";         
+  | "Evaluation"
+  | "RAG"
+  | "Information Retrieval"
+  | "Responsible AI"
+  | "Data-Centric ML"
+  | "Technical Project";         
 
-export type ValidExpType = "AI" | "Data Science" | "Research";
+export type ValidExpType = "AI" | "Data Science" | "Research" | "Technical Project";
 
 export type ValidPages =
   | "home"

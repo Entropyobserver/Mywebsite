@@ -115,7 +115,7 @@ export default function Project({ params }: ProjectPageProps) {
 
       <div className="mb-7 ">
         <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-5">
-          Page Info
+          Project Highlights
         </h2>
         {project.pagesInfoArr.map((page, ind) => (
           <div key={ind}>
