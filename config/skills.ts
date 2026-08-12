@@ -1,120 +1,157 @@
 import { Icons } from "@/components/common/icons";
 
-export interface skillsInterface {
-  name: string;
-  description: string;
-  rating: number;
-  icon: any;
+export interface SkillEvidenceLink {
+  label: string;
+  href: string;
 }
 
-export const skillsUnsorted: skillsInterface[] = [
+export interface SkillsInterface {
+  name: string;
+  description: string;
+  skills: string[];
+  evidence: SkillEvidenceLink[];
+  icon: any;
+  accent: "sky" | "emerald" | "violet" | "amber" | "rose" | "cyan" | "slate";
+}
+
+export const skillGroups: SkillsInterface[] = [
   {
-    name: "Python",
+    name: "AI & Machine Learning",
     description:
-      "The core programming language for AI and data science, supporting machine learning and deep learning development.",
-    rating: 5,
-    icon: Icons.python,
+      "Deep learning, Transformer adaptation, fine-tuning workflows, and model evaluation for research and applied AI systems.",
+    skills: [
+      "Machine Learning",
+      "Deep Learning",
+      "Transformers",
+      "Fine-tuning",
+      "LoRA / PEFT",
+      "Model Evaluation",
+    ],
+    evidence: [
+      { label: "LoRA NMT", href: "/projects/lora-nmt-petroleum" },
+      { label: "Modular Experts", href: "/projects/modular-lora-experts" },
+      { label: "SmartReview", href: "/projects/SmartReview" },
+    ],
+    icon: Icons.aurora,
+    accent: "sky",
   },
   {
-    name: "PyTorch",
+    name: "NLP & Language Technology",
     description:
-      "Facebook's deep learning framework providing dynamic computation graphs and flexible model building.",
-    rating: 5,
-    icon: Icons.pytorch,
+      "Multilingual NLP, machine translation, retrieval, and language-technology systems for specialized domains.",
+    skills: [
+      "Machine Translation",
+      "RAG",
+      "Information Retrieval",
+      "LLM Evaluation",
+      "Multilingual NLP",
+      "Terminology Analysis",
+    ],
+    evidence: [
+      { label: "EAMT Publication", href: "/publications" },
+      { label: "FinRAG", href: "/projects/finrag-equinor" },
+      { label: "Graph Retrieval", href: "/projects/structure-aware-graph-rag" },
+    ],
+    icon: Icons.gitRepoIcon,
+    accent: "emerald",
   },
   {
-    name: "OpenCV",
+    name: "Responsible AI & Evaluation",
     description:
-      "Computer vision library for image processing, object detection, and multimodal AI applications.",
-    rating: 4,
-    icon: Icons.opencv,
+      "Bias evaluation, human validation, statistical testing, and model behavior analysis for social and linguistic AI risks.",
+    skills: [
+      "Bias Evaluation",
+      "Human Annotation",
+      "Bootstrap Testing",
+      "Error Analysis",
+      "Cohen's Kappa",
+      "VLM Framing",
+    ],
+    evidence: [
+      { label: "Bias Framework", href: "/projects/vlm-bias-evaluation" },
+      { label: "Target-Standard Bias", href: "/projects/target-standard-bias" },
+    ],
+    icon: Icons.check,
+    accent: "violet",
   },
   {
-    name: "Pandas",
+    name: "Data-Centric ML",
     description:
-      "Powerful data analysis and manipulation library, the go-to tool for handling structured data.",
-    rating: 5,
-    icon: Icons.pandas,
+      "Dataset diagnostics, filtering, attribution, and quality control for understanding how training data shapes model behavior.",
+    skills: [
+      "Data Filtering",
+      "Data Attribution",
+      "Shapley Analysis",
+      "Corpus Diagnostics",
+      "Quality Control",
+      "Data Auditing",
+    ],
+    evidence: [
+      { label: "Shapley Attribution", href: "/projects/group-shapley-attribution" },
+      { label: "Target-Standard Bias", href: "/projects/target-standard-bias" },
+      { label: "LoRA NMT", href: "/projects/lora-nmt-petroleum" },
+    ],
+    icon: Icons.gitBranch,
+    accent: "amber",
   },
   {
-    name: "NumPy",
+    name: "ML Engineering",
     description:
-      "Fundamental package for scientific computing, providing high-performance multidimensional array operations.",
-    rating: 5,
-    icon: Icons.numpy,
+      "Research engineering skills for building reproducible model-training pipelines, experiments, demos, and deployments.",
+    skills: [
+      "PyTorch",
+      "Hugging Face",
+      "Python",
+      "Docker",
+      "Git",
+      "Experiment Tracking",
+    ],
+    evidence: [
+      { label: "Projects", href: "/projects" },
+      { label: "GitHub", href: "https://github.com/Entropyobserver" },
+    ],
+    icon: Icons.laptop,
+    accent: "rose",
   },
   {
-    name: "SciPy",
+    name: "Applied AI Systems",
     description:
-      "Scientific computing library built on NumPy, providing algorithms for optimization, statistics, and signal processing.",
-    rating: 4,
-    icon: Icons.scipy,
+      "User-facing AI tools, dashboards, and interactive prototypes that turn model outputs into usable workflows.",
+    skills: [
+      "Gradio",
+      "Streamlit",
+      "Dashboards",
+      "Plotly",
+      "SQLite",
+      "User-facing AI Tools",
+    ],
+    evidence: [
+      { label: "Sentiment Platform", href: "/projects/multilingual-sentiment" },
+      { label: "SmartReview", href: "/projects/SmartReview" },
+    ],
+    icon: Icons.settings,
+    accent: "cyan",
   },
   {
-    name: "Scikit-learn",
+    name: "Data Analysis & Visualization",
     description:
-      "Machine learning library featuring classification, regression, clustering and dimensionality reduction algorithms.",
-    rating: 4,
-    icon: Icons.scikitlearn,
-  },
-  {
-    name: "Jupyter",
-    description:
-      "Interactive computing environment for data analysis, prototyping, and collaborative research.",
-    rating: 4,
-    icon: Icons.jupyter,
-  },
-  {
-    name: "Streamlit",
-    description:
-      "Open-source framework for building and deploying interactive web applications for machine learning and data science.",
-    rating: 4,
-    icon: Icons.streamlit,
-  },
-  {
-  name: "Git/GitHub",
-  description: "Version control system and collaborative development platform for managing code repositories.",
-  rating: 5,
-  icon: Icons.github,
-  },
-  {
-    name: "MLflow",
-    description:
-      "Open-source platform for managing machine learning lifecycle including experimentation and deployment.",
-    rating: 4,
-    icon: Icons.mlflow,
-  },
-  {
-    name: "Docker",
-    description:
-      "Containerization platform for packaging applications and ensuring consistent deployment across environments.",
-    rating: 4,
-    icon: Icons.docker,
-  },
-  {
-    name: "Microsoft Azure",
-    description:
-      "Cloud computing platform providing AI services, machine learning tools, and scalable infrastructure.",
-    rating: 3,
-    icon: Icons.microsoftazure,
-  },
-  {
-    name: "Vercel",
-    description:
-      "Frontend deployment platform optimized for modern web applications and AI-powered interfaces.",
-    rating: 4,
-    icon: Icons.vercel,
-  },
-  {
-    name: "Plotly",
-    description:
-      "Interactive data visualization library for creating dynamic charts, dashboards, and analytical applications.",
-    rating: 4,
+      "Statistical analysis, visualization, and exploratory data work for experiments, reports, and decision support.",
+    skills: [
+      "Pandas",
+      "NumPy",
+      "scikit-learn",
+      "Statistical Analysis",
+      "Data Visualization",
+      "Reporting",
+    ],
+    evidence: [
+      { label: "Experience", href: "/experience" },
+      { label: "Research Projects", href: "/projects" },
+    ],
     icon: Icons.plotly,
+    accent: "slate",
   },
 ];
-export const skills = skillsUnsorted
-  .slice()
-  .sort((a, b) => b.rating - a.rating);
 
-export const featuredSkills = skills.slice(0, 6);
+export const skills = skillGroups;
+export const featuredSkills = skillGroups.slice(0, 4);
