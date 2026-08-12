@@ -79,15 +79,14 @@ export const Projects: ProjectInterface[] = [
     ],
     descriptionDetails: {
       paragraphs: [
-        "Investigated parameter-efficient LoRA adaptation for domain-specific English-Norwegian neural machine translation in low-resource settings.",
-        "The project focused on English-to-Norwegian petroleum-domain translation, where noisy parallel corpora, specialized terminology, and limited domain data make adaptation difficult for general-purpose multilingual MT models.",
-        "My role covered the full experimental workflow: data-quality assessment, corpus cleaning, LoRA hyperparameter optimization, model-scale robustness analysis, and comparison against full fine-tuning and commercial MT systems.",
+        "This project investigated how parameter-efficient fine-tuning can adapt multilingual neural machine translation to a specialized low-resource domain. The case study focused on English-to-Norwegian petroleum translation, where noisy parallel corpora, specialized terminology, and limited domain data make direct adaptation difficult.",
+        "Using NLLB-200 with LoRA adapters, the study combined corpus diagnostics, data scaling, hyperparameter optimization, and final benchmarking. The adapted model achieved competitive translation quality while updating fewer than 0.4% of model parameters.",
       ],
       bullets: [
         "Designed a data-quality assessment and cleaning pipeline for noisy parallel corpora, evaluating alignment, completeness, uniqueness, and domain coverage.",
         "Optimized LoRA configurations using grid search and Optuna/ASHA, with fANOVA identifying the scaling factor as a key driver of performance.",
         "Evaluated model-scale robustness and compared LoRA with full fine-tuning and commercial MT systems.",
-        "Demonstrated competitive translation quality with substantially fewer trainable parameters, using BLEU, chrF, COMET, and terminology-oriented analysis.",
+        "Analyzed translation quality using BLEU, chrF, COMET, and terminology-oriented evaluation.",
       ],
     },
   },
