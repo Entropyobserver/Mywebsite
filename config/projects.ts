@@ -77,21 +77,14 @@ export const Projects: ProjectInterface[] = [
         imgArr: ["/projects/lora-nmt-petroleum/hyperparameter_heatmaps.png"],
       },
       {
-        title: "Optuna/ASHA Search Diagnostics",
+        title: "Parameter Importance and Optuna Selection",
         description:
-          "Optuna/ASHA was used as a complementary continuous search strategy. The diagnostic plots show parameter importance, search trajectories, and Pareto behavior across candidate configurations.",
+          "The paper reports the main effects of LoRA hyperparameters, fANOVA-based Optuna importance, and the Pareto front used to select the final configuration.",
         imgArr: [
-          "/projects/lora-nmt-petroleum/optuna_importance.png",
           "/projects/lora-nmt-petroleum/parameter_importance.png",
-          "/projects/lora-nmt-petroleum/parallel_coordinates.png",
+          "/projects/lora-nmt-petroleum/optuna_importance.png",
           "/projects/lora-nmt-petroleum/pareto_front.png",
         ],
-      },
-      {
-        title: "Final Model and Robustness Checks",
-        description:
-          "Final evaluation compares the selected LoRA configuration with full fine-tuning and commercial MT systems, while sanity checks help verify that the reported gains are not driven by obvious data or evaluation artifacts.",
-        imgArr: ["/projects/lora-nmt-petroleum/sanity.png"],
       },
     ],
     descriptionDetails: {
