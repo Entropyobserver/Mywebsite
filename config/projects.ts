@@ -56,7 +56,7 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2025-09-01"),
     endDate: new Date("2026-06-01"),
-    companyLogoImg: "/projects/lora-nmt-petroleum/framework_v3.png",
+    companyLogoImg: "/projects/lora-nmt-petroleum/cover.png",
     pagesInfoArr: [
       {
         title: "Three-Stage Adaptation Framework",
@@ -79,16 +79,15 @@ export const Projects: ProjectInterface[] = [
     ],
     descriptionDetails: {
       paragraphs: [
-        "This published research project studies how to adapt a multilingual neural machine translation model to a specialized low-resource domain. The target setting is English-to-Norwegian Bokmal petroleum translation, where terminology, regulatory language, and domain style make general-purpose MT unreliable.",
-        "The method fine-tunes NLLB-200 distilled 600M with LoRA adapters, combining data-scaling analysis, systematic hyperparameter optimization, and final benchmarking. The adapted model reaches 61.48 BLEU and 0.9298 COMET while updating less than 0.4% of model parameters.",
-        "My role was end-to-end: I built the data-processing and training pipeline, ran data-scaling experiments, designed the LoRA search space, evaluated BLEU/chrF/COMET and terminology behavior, analyzed trade-offs against full fine-tuning, and prepared the reproducible research artifact.",
+        "Investigated parameter-efficient LoRA adaptation for domain-specific English-Norwegian neural machine translation in low-resource settings.",
+        "The project focused on English-to-Norwegian petroleum-domain translation, where noisy parallel corpora, specialized terminology, and limited domain data make adaptation difficult for general-purpose multilingual MT models.",
+        "My role covered the full experimental workflow: data-quality assessment, corpus cleaning, LoRA hyperparameter optimization, model-scale robustness analysis, and comparison against full fine-tuning and commercial MT systems.",
       ],
       bullets: [
-        "Built a reproducible LoRA fine-tuning pipeline for NLLB-200 in a low-resource petroleum translation setting.",
-        "Designed corpus diagnostics for sentence length, alignment quality, domain vocabulary, and data filtering.",
-        "Ran data-scaling experiments to identify an efficient training budget before full hyperparameter optimization.",
-        "Used grid search and Optuna-ASHA to map LoRA rank, alpha, and dropout sensitivity.",
-        "Compared the final adapted model with the base model, full fine-tuning, and commercial MT baselines using BLEU, chrF, COMET, and terminology-oriented analysis.",
+        "Designed a data-quality assessment and cleaning pipeline for noisy parallel corpora, evaluating alignment, completeness, uniqueness, and domain coverage.",
+        "Optimized LoRA configurations using grid search and Optuna/ASHA, with fANOVA identifying the scaling factor as a key driver of performance.",
+        "Evaluated model-scale robustness and compared LoRA with full fine-tuning and commercial MT systems.",
+        "Demonstrated competitive translation quality with substantially fewer trainable parameters, using BLEU, chrF, COMET, and terminology-oriented analysis.",
       ],
     },
   },
