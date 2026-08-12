@@ -129,11 +129,11 @@ export const Projects: ProjectInterface[] = [
   {
     id: "modular-lora-experts",
     companyName:
-      "Diagnosing Modular LoRA Experts for Multilingual Domain Translation",
+      "Modular LoRA Experts for Multilingual Domain Translation",
     type: "Research",
     category: ["Research", "Machine Translation", "NLP", "Evaluation"],
     shortDescription:
-      "Under-review research on whether learned routing is actually the bottleneck in a modular LoRA expert system for multilingual petroleum-domain translation.",
+      "Research-in-progress summary on modular parameter-efficient adaptation for multilingual petroleum-domain MT, focusing on expert specialization, routing behavior, and terminology-aware evaluation.",
     techStack: [
       "Python",
       "PyTorch",
@@ -153,24 +153,29 @@ export const Projects: ProjectInterface[] = [
     companyLogoImg: "/projects/modular-lora-experts/cover.png",
     pagesInfoArr: [
       {
+        title: "High-Level Modular Adaptation Framework",
+        description:
+          "The public version presents the research design at a high level: domain data construction, language-specific LoRA experts, router diagnostics, and terminology-aware evaluation. Detailed paper-level results are intentionally limited while the manuscript is being revised.",
+        imgArr: ["/projects/modular-lora-experts/cover.png"],
+      },
+      {
         title: "Language Representation Diagnostics",
         description:
-          "Encoder representation analysis is used as one diagnostic lens for understanding whether multilingual source languages form separable routing signals.",
+          "Encoder representation analysis is used as one diagnostic lens for understanding whether multilingual source languages form separable routing signals before expert selection is evaluated.",
         imgArr: ["/projects/modular-lora-experts/tsne_encoder_features.png"],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "This project examines a modular adaptation hypothesis: if each source language has its own LoRA expert, can a learned router improve low-resource multilingual petroleum translation by selecting the right expert?",
-        "The study uses a frozen NLLB-200 backbone, language-specific LoRA experts, a learned router, and a synthetic corpus construction pipeline for German-, French-, and Dutch-to-Norwegian petroleum translation. The central finding is intentionally diagnostic: better routing accuracy does not necessarily translate into better BLEU or terminology accuracy.",
-        "My contribution was to frame the experiment as a routing diagnosis rather than a simple model-improvement story, implement the expert and router comparisons, analyze cross-expert transfer, and interpret why shared multitask adaptation and independent experts can outperform a learned-router MoE in this low-resource domain setting.",
+        "This project explores modular parameter-efficient adaptation for multilingual domain machine translation. It asks whether source-language-specific LoRA experts and routing mechanisms can support terminology-sensitive translation when direct parallel data is scarce.",
+        "The current public summary is intentionally high-level while the manuscript is being revised for a future review cycle. It emphasizes the research question, system design, diagnostic methods, and evaluation logic rather than exposing full experimental results or manuscript details.",
       ],
       bullets: [
-        "Designed a modular LoRA expert setup with language-specific adapters and router-based expert selection.",
-        "Developed the Target-Anchored Synthesis idea for creating multilingual petroleum-domain training pairs when parallel data is unavailable.",
-        "Compared learned-router MoE, shared multitask LoRA, independent experts, and cross-expert transfer settings.",
-        "Analyzed routing accuracy, BLEU, terminology accuracy, and expert specialization to separate routing quality from end-task translation quality.",
-        "Presented the project conservatively as under review, with high-level methods and diagnostics but no public manuscript link.",
+        "Designed a modular LoRA expert setup with source-language-specific adapters over a frozen multilingual backbone.",
+        "Developed a target-anchored synthetic data construction strategy for low-resource multilingual petroleum-domain training signals.",
+        "Implemented router and cross-expert diagnostics to analyze expert specialization, capacity sharing, and terminology-sensitive behavior.",
+        "Evaluated translation quality and terminology behavior using automatic metrics and controlled comparisons.",
+        "Kept the public website version conservative: full paper-level results and manuscript links can be added after the review process.",
       ],
     },
   },
