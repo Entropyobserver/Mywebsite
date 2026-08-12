@@ -65,6 +65,12 @@ export const Projects: ProjectInterface[] = [
         imgArr: ["/projects/lora-nmt-petroleum/three-stage-framework.png"],
       },
       {
+        title: "Corpus Diagnostics",
+        description:
+          "The raw EN-NO petroleum corpus was checked before modeling to understand alignment quality, completeness, duplication, length behavior, and domain coverage. This step motivates why data cleaning and diagnostics are part of the contribution, not just preprocessing.",
+        imgArr: ["/projects/lora-nmt-petroleum/sanity.png"],
+      },
+      {
         title: "Data Scaling and Training Budget",
         description:
           "The analysis identifies an efficient training subset before expensive hyperparameter search, showing that 8,000 samples recover most of the full-data performance in this domain.",
@@ -77,14 +83,34 @@ export const Projects: ProjectInterface[] = [
         imgArr: ["/projects/lora-nmt-petroleum/hyperparameter_heatmaps.png"],
       },
       {
-        title: "Parameter Importance and Optuna Selection",
+        title: "LoRA Hyperparameter Main Effects",
         description:
-          "The paper reports the main effects of LoRA hyperparameters, fANOVA-based Optuna importance, and the Pareto front used to select the final configuration.",
-        imgArr: [
-          "/projects/lora-nmt-petroleum/parameter_importance.png",
-          "/projects/lora-nmt-petroleum/optuna_importance.png",
-          "/projects/lora-nmt-petroleum/pareto_front.png",
-        ],
+          "This figure isolates the average effect of rank, alpha, and dropout on validation BLEU. It shows that the scaling factor alpha is the strongest driver of performance in the searched configuration space.",
+        imgArr: ["/projects/lora-nmt-petroleum/parameter_importance.png"],
+      },
+      {
+        title: "Optuna fANOVA Importance",
+        description:
+          "The Optuna study confirms the grid-search pattern with fANOVA: LoRA alpha dominates relative hyperparameter importance, while rank and dropout contribute much less.",
+        imgArr: ["/projects/lora-nmt-petroleum/optuna_importance.png"],
+      },
+      {
+        title: "Pareto Front for Final Configuration Selection",
+        description:
+          "The Pareto front compares BLEU and chrF from the Optuna study. Pareto-optimal candidates are highlighted, and the selected configuration balances both metrics rather than optimizing only one score.",
+        imgArr: ["/projects/lora-nmt-petroleum/pareto_front.png"],
+      },
+      {
+        title: "Experiment 3: Final Model Performance",
+        description:
+          "The optimized LoRA model is compared with the zero-shot NLLB baseline and commercial MT systems. It achieves 61.48 BLEU and 79.19 chrF++, outperforming evaluated commercial systems on lexical metrics while reaching comparable COMET semantic adequacy.",
+        imgArr: ["/projects/lora-nmt-petroleum/final_model_performance.png"],
+      },
+      {
+        title: "Experiment 4: LoRA vs. Full Fine-Tuning",
+        description:
+          "This comparison evaluates whether the parameter-efficient LoRA setup remains competitive against full fine-tuning across training sizes. The maximum observed gap stays below one BLEU point, supporting LoRA as an efficient alternative for this resource-constrained domain.",
+        imgArr: ["/projects/lora-nmt-petroleum/lora_vs_full_ft.png"],
       },
     ],
     descriptionDetails: {
