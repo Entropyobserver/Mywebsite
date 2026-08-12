@@ -71,31 +71,31 @@ export const Projects: ProjectInterface[] = [
         imgArr: ["/projects/lora-nmt-petroleum/sanity.png"],
       },
       {
-        title: "Data Scaling and Training Budget",
+        title: "Experiment 1: Data Scaling and Training Budget",
         description:
           "The analysis identifies an efficient training subset before expensive hyperparameter search, showing that 8,000 samples recover most of the full-data performance in this domain.",
         imgArr: ["/projects/lora-nmt-petroleum/data_scaling_analysis.png"],
       },
       {
-        title: "Grid Search Hyperparameter Landscape",
+        title: "Experiment 2a: Grid Search Hyperparameter Landscape",
         description:
           "The grid search maps how LoRA rank, scaling factor, and dropout interact, providing a systematic view of the hyperparameter landscape before selecting final candidates.",
         imgArr: ["/projects/lora-nmt-petroleum/hyperparameter_heatmaps.png"],
       },
       {
-        title: "LoRA Hyperparameter Main Effects",
+        title: "Experiment 2b: LoRA Hyperparameter Main Effects",
         description:
           "This figure isolates the average effect of rank, alpha, and dropout on validation BLEU. It shows that the scaling factor alpha is the strongest driver of performance in the searched configuration space.",
         imgArr: ["/projects/lora-nmt-petroleum/parameter_importance.png"],
       },
       {
-        title: "Optuna fANOVA Importance",
+        title: "Experiment 2c: Optuna fANOVA Importance",
         description:
           "The Optuna study confirms the grid-search pattern with fANOVA: LoRA alpha dominates relative hyperparameter importance, while rank and dropout contribute much less.",
         imgArr: ["/projects/lora-nmt-petroleum/optuna_importance.png"],
       },
       {
-        title: "Pareto Front for Final Configuration Selection",
+        title: "Experiment 2d: Pareto Front for Final Configuration Selection",
         description:
           "The Pareto front compares BLEU and chrF from the Optuna study. Pareto-optimal candidates are highlighted, and the selected configuration balances both metrics rather than optimizing only one score.",
         imgArr: ["/projects/lora-nmt-petroleum/pareto_front.png"],
