@@ -71,10 +71,27 @@ export const Projects: ProjectInterface[] = [
         imgArr: ["/projects/lora-nmt-petroleum/data_scaling_analysis.png"],
       },
       {
-        title: "LoRA Hyperparameter Landscape",
+        title: "Grid Search Hyperparameter Landscape",
         description:
-          "Grid search and Optuna-ASHA were used as complementary search strategies to identify stable LoRA rank, scaling, and dropout settings.",
+          "The grid search maps how LoRA rank, scaling factor, and dropout interact, providing a systematic view of the hyperparameter landscape before selecting final candidates.",
         imgArr: ["/projects/lora-nmt-petroleum/hyperparameter_heatmaps.png"],
+      },
+      {
+        title: "Optuna/ASHA Search Diagnostics",
+        description:
+          "Optuna/ASHA was used as a complementary continuous search strategy. The diagnostic plots show parameter importance, search trajectories, and Pareto behavior across candidate configurations.",
+        imgArr: [
+          "/projects/lora-nmt-petroleum/optuna_importance.png",
+          "/projects/lora-nmt-petroleum/parameter_importance.png",
+          "/projects/lora-nmt-petroleum/parallel_coordinates.png",
+          "/projects/lora-nmt-petroleum/pareto_front.png",
+        ],
+      },
+      {
+        title: "Final Model and Robustness Checks",
+        description:
+          "Final evaluation compares the selected LoRA configuration with full fine-tuning and commercial MT systems, while sanity checks help verify that the reported gains are not driven by obvious data or evaluation artifacts.",
+        imgArr: ["/projects/lora-nmt-petroleum/sanity.png"],
       },
     ],
     descriptionDetails: {
