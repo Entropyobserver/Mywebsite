@@ -150,8 +150,7 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2026-01-01"),
     endDate: new Date("2026-08-01"),
-    companyLogoImg:
-      "/projects/modular-lora-experts/tsne_encoder_features.png",
+    companyLogoImg: "/projects/modular-lora-experts/cover.png",
     pagesInfoArr: [
       {
         title: "Language Representation Diagnostics",
