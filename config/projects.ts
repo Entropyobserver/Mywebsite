@@ -62,7 +62,7 @@ export const Projects: ProjectInterface[] = [
         title: "Three-Stage Adaptation Framework",
         description:
           "The project combines corpus preparation, data-scaling analysis, dual-track LoRA hyperparameter search, and final benchmarking against open-source, full fine-tuning, and commercial MT baselines.",
-        imgArr: ["/projects/lora-nmt-petroleum/framework_v3.png"],
+        imgArr: ["/projects/lora-nmt-petroleum/three-stage-framework.png"],
       },
       {
         title: "Data Scaling and Training Budget",
