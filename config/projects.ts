@@ -59,10 +59,10 @@ export const Projects: ProjectInterface[] = [
     companyLogoImg: "/projects/lora-nmt-petroleum/cover.png",
     pagesInfoArr: [
       {
-        title: "Three-Stage Adaptation Framework",
+        title: "Project Overview: Corpus to Evaluation",
         description:
-          "The project combines corpus preparation, data-scaling analysis, dual-track LoRA hyperparameter search, and final benchmarking against open-source, full fine-tuning, and commercial MT baselines.",
-        imgArr: ["/projects/lora-nmt-petroleum/three-stage-framework.png"],
+          "The website overview summarizes the full workflow: corpus diagnostics, data-scaling analysis, dual-track LoRA hyperparameter search, final benchmarking, and evaluation with automatic metrics, terminology review, and human error analysis.",
+        imgArr: ["/projects/lora-nmt-petroleum/cover.png"],
       },
       {
         title: "Corpus Diagnostics",
@@ -116,13 +116,13 @@ export const Projects: ProjectInterface[] = [
     descriptionDetails: {
       paragraphs: [
         "This project investigated how parameter-efficient fine-tuning can adapt multilingual neural machine translation to a specialized low-resource domain. The case study focused on English-to-Norwegian petroleum translation, where noisy parallel corpora, specialized terminology, and limited domain data make direct adaptation difficult.",
-        "Using NLLB-200 with LoRA adapters, the study combined corpus diagnostics, data scaling, hyperparameter optimization, and final benchmarking. The adapted model achieved competitive translation quality while updating fewer than 0.4% of model parameters.",
+        "Using NLLB-200 with LoRA adapters, the study combined corpus diagnostics, data scaling, hyperparameter optimization, final benchmarking, and human error analysis. The adapted model achieved competitive translation quality while updating fewer than 0.4% of model parameters.",
       ],
       bullets: [
         "Designed a data-quality assessment and cleaning pipeline for noisy parallel corpora, evaluating alignment, completeness, uniqueness, and domain coverage.",
         "Optimized LoRA configurations using grid search and Optuna/ASHA, with fANOVA identifying the scaling factor as a key driver of performance.",
         "Evaluated model-scale robustness and compared LoRA with full fine-tuning and commercial MT systems.",
-        "Analyzed translation quality using BLEU, chrF, COMET, and terminology-oriented evaluation.",
+        "Analyzed translation quality using BLEU, chrF, COMET, terminology-oriented review, and a 50-sentence human error analysis with annotator agreement.",
       ],
     },
   },
