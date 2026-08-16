@@ -61,7 +61,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Project Overview: Corpus to Evaluation",
         description:
-          "The website overview summarizes the full workflow: corpus diagnostics, data-scaling analysis, dual-track LoRA hyperparameter search, final benchmarking, and evaluation with automatic metrics, terminology review, and human error analysis.",
+          "The website overview summarizes the main experimental workflow: corpus diagnostics, data-scaling analysis, dual-track LoRA hyperparameter search, final benchmarking, and automatic evaluation with BLEU, chrF, COMET, and terminology review.",
         imgArr: ["/projects/lora-nmt-petroleum/cover.png"],
       },
       {
@@ -111,6 +111,12 @@ export const Projects: ProjectInterface[] = [
         description:
           "This comparison evaluates whether the parameter-efficient LoRA setup remains competitive against full fine-tuning across training sizes. The maximum observed gap stays below one BLEU point, supporting LoRA as an efficient alternative for this resource-constrained domain.",
         imgArr: ["/projects/lora-nmt-petroleum/lora_vs_full_ft.png"],
+      },
+      {
+        title: "Human Error Analysis",
+        description:
+          "After the automatic experiments, the paper adds a separate human error analysis: 50 stratified test sentences were manually reviewed across error categories and severity levels, with two annotators and reported Cohen's kappa agreement. This final step shows why BLEU, chrF, and COMET need to be complemented by domain-aware inspection for critical terminology, numeric, and directional errors.",
+        imgArr: ["/projects/lora-nmt-petroleum/human-error-analysis.png"],
       },
     ],
     descriptionDetails: {
