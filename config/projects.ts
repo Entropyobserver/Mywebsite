@@ -62,7 +62,7 @@ export const Projects: ProjectInterface[] = [
         title: "Project Overview: Corpus to Evaluation",
         description:
           "The website overview summarizes the main experimental workflow: corpus diagnostics, data-scaling analysis, dual-track LoRA hyperparameter search, final benchmarking, and automatic evaluation with BLEU, chrF, COMET, and terminology review.",
-        imgArr: ["/projects/lora-nmt-petroleum/cover.png"],
+        imgArr: ["/projects/lora-nmt-petroleum/three-stage-framework.png"],
       },
       {
         title: "Corpus Diagnostics",
