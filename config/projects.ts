@@ -115,8 +115,8 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Human Error Analysis",
         description:
-          "After the automatic experiments, the paper adds a separate human error analysis: 50 stratified test sentences were manually reviewed across error categories and severity levels, with two annotators and reported Cohen's kappa agreement. This final step shows why BLEU, chrF, and COMET need to be complemented by domain-aware inspection for critical terminology, numeric, and directional errors.",
-        imgArr: ["/projects/lora-nmt-petroleum/human-error-analysis.png"],
+          "The final analysis complements BLEU, chrF, and COMET with a manual review of 50 stratified test sentences. Errors were labeled by type and severity, with two annotators and reported Cohen's kappa agreement. Most observed errors were minor, but the analysis also surfaced critical domain errors involving terminology, numbers, and directions that automatic metrics can miss.",
+        imgArr: ["/projects/lora-nmt-petroleum/human_evaluation.png"],
       },
     ],
     descriptionDetails: {
