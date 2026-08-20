@@ -1,7 +1,13 @@
 export type PublicationStatus =
   | "Published"
+  | "Thesis"
   | "Under Review"
   | "Planned Submission";
+
+export interface PublicationLinkInterface {
+  label: string;
+  href: string;
+}
 
 export interface PublicationInterface {
   title: string;
@@ -12,21 +18,54 @@ export interface PublicationInterface {
   role: string;
   description: string;
   link?: string;
+  links?: PublicationLinkInterface[];
 }
 
 export const publications: PublicationInterface[] = [
   {
-    title:
-      "Parameter-Efficient Neural Machine Translation for Low-Resource Language Pairs: English-Norwegian in the Oil & Gas Domain",
+    title: "LoRA Fine-Tuning of English-Norwegian NMT for the Oil & Gas Industry",
     authors:
       "Xiaojing Yang, Zhihan Li, Gege Sun, Mengyue Li, Meriem Beloucif",
     status: "Published",
-    venue: "EAMT",
+    venue: "EAMT 2026, Proceedings Volume 2",
     date: "June 2026",
     role: "First author; lead experimental contributor",
     description:
-      "Investigates parameter-efficient adaptation of neural machine translation for the Norwegian oil and gas domain, covering LoRA fine-tuning, hyperparameter optimisation, data-quality assessment, and model-scale evaluation.",
-    link: "https://github.com/Entropyobserver/mt",
+      'Published in the official EAMT 2026 proceedings. The ACL Anthology entry is forthcoming; to locate the paper in the proceedings PDF, search for the title "LoRA Fine-Tuning of English-Norwegian NMT for the Oil & Gas Industry".',
+    links: [
+      {
+        label: "Official Proceedings PDF",
+        href: "https://eamt2026.org/assets/pdfs/EAMT2026_proceedings_Vol_2.pdf",
+      },
+      {
+        label: "Code",
+        href: "https://github.com/Entropyobserver/lora-nmt-petroleum",
+      },
+      {
+        label: "Demo",
+        href: "https://huggingface.co/spaces/entropy25/mt",
+      },
+    ],
+  },
+  {
+    title: "Modular Expert Architectures for Multilingual Domain Adaptation",
+    authors: "Xiaojing Yang",
+    status: "Thesis",
+    venue: "MSc Thesis, Uppsala University",
+    date: "May 2026",
+    role: "Thesis author; framework design and experimental lead",
+    description:
+      "Master's thesis on modular LoRA expert architectures for low-resource multilingual petroleum-domain NMT. Publicly summarized at a high level because the work forms the basis of an ongoing manuscript revision.",
+    links: [
+      {
+        label: "Code",
+        href: "https://github.com/Entropyobserver/lora-moe-petroleum",
+      },
+      {
+        label: "Demo",
+        href: "https://huggingface.co/spaces/entropy25/mt_moe",
+      },
+    ],
   },
   {
     title:
