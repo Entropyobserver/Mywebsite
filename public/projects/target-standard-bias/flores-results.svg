@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 810" role="img" aria-labelledby="title desc">
+  <title id="title">FLORES out-of-domain results</title>
+  <desc id="desc">The zero-shot NLLB base model outperforms all petroleum-domain fine-tuned systems on FLORES Bokmål.</desc>
+  <rect width="1440" height="810" fill="#f8fafc"/>
+  <text x="720" y="70" text-anchor="middle" fill="#0f172a" font-family="Inter,Arial,sans-serif" font-size="39" font-weight="760">In-domain specialization does not transfer to FLORES</text>
+  <text x="720" y="110" text-anchor="middle" fill="#64748b" font-family="Inter,Arial,sans-serif" font-size="20">600M systems · FLORES NB · 1,012 general-domain examples</text>
+  <g font-family="Inter,Arial,sans-serif">
+    <rect x="95" y="165" width="600" height="500" rx="24" fill="white" stroke="#cbd5e1"/>
+    <text x="395" y="215" text-anchor="middle" fill="#0f172a" font-size="27" font-weight="800">BLEU</text>
+    <line x1="165" y1="570" x2="625" y2="570" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="205" y="280" width="100" height="290" rx="9" fill="#0f172a"/><rect x="345" y="432" width="100" height="138" rx="9" fill="#94a3b8"/><rect x="485" y="423" width="100" height="147" rx="9" fill="#4f46e5"/>
+    <g font-size="20" font-weight="800"><text x="255" y="265" text-anchor="middle" fill="#0f172a">0.3059</text><text x="395" y="417" text-anchor="middle" fill="#475569">0.2750</text><text x="535" y="408" text-anchor="middle" fill="#3730a3">0.2766</text></g>
+    <g fill="#334155" font-size="18" font-weight="700"><text x="255" y="608" text-anchor="middle">Base NLLB</text><text x="395" y="608" text-anchor="middle">Original-sub.</text><text x="535" y="608" text-anchor="middle">Bokmål</text></g>
+    <rect x="745" y="165" width="600" height="500" rx="24" fill="white" stroke="#cbd5e1"/>
+    <text x="1045" y="215" text-anchor="middle" fill="#0f172a" font-size="27" font-weight="800">chrF</text>
+    <line x1="815" y1="570" x2="1275" y2="570" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="855" y="280" width="100" height="290" rx="9" fill="#0f172a"/><rect x="995" y="435" width="100" height="135" rx="9" fill="#94a3b8"/><rect x="1135" y="431" width="100" height="139" rx="9" fill="#4f46e5"/>
+    <g font-size="20" font-weight="800"><text x="905" y="265" text-anchor="middle" fill="#0f172a">59.22</text><text x="1045" y="420" text-anchor="middle" fill="#475569">56.56</text><text x="1185" y="416" text-anchor="middle" fill="#3730a3">56.63</text></g>
+    <g fill="#334155" font-size="18" font-weight="700"><text x="905" y="608" text-anchor="middle">Base NLLB</text><text x="1045" y="608" text-anchor="middle">Original-sub.</text><text x="1185" y="608" text-anchor="middle">Bokmål</text></g>
+  </g>
+  <rect x="235" y="708" width="970" height="54" rx="27" fill="#0f172a"/>
+  <text x="720" y="743" text-anchor="middle" fill="#f8fafc" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="750">Supported claim: domain-bound specialization, not general MT improvement</text>
+</svg>

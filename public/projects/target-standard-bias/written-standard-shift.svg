@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 810" role="img" aria-labelledby="title desc">
+  <title id="title">Written-standard distributions on the original mixed-standard test set</title>
+  <desc id="desc">Bokmål-filtered training raises Bokmål-only output from 79.0 to 93.4 percent and lowers Nynorsk-only output from 14.2 to 0.7 percent.</desc>
+  <rect width="1440" height="810" fill="#f8fafc"/>
+  <text x="720" y="70" text-anchor="middle" fill="#0f172a" font-family="Inter,Arial,sans-serif" font-size="39" font-weight="760">Filtering changes which Norwegian standard is produced</text>
+  <text x="720" y="110" text-anchor="middle" fill="#64748b" font-family="Inter,Arial,sans-serif" font-size="20">SLIDE labels on the same original mixed-standard test set</text>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="210" y="210" fill="#0f172a" font-size="22" font-weight="750">Reference</text>
+    <rect x="360" y="170" width="732" height="70" rx="12" fill="#4f46e5"/><rect x="1092" y="170" width="165" height="70" fill="#14b8a6"/><rect x="1257" y="170" width="58" height="70" rx="0" fill="#94a3b8"/>
+    <text x="726" y="214" text-anchor="middle" fill="white" font-size="21" font-weight="800">76.2% Bokmål-only</text><text x="1174" y="214" text-anchor="middle" fill="white" font-size="18" font-weight="800">17.2%</text>
+    <text x="210" y="350" fill="#0f172a" font-size="22" font-weight="750">Original-subsampled</text>
+    <rect x="360" y="310" width="758" height="70" rx="12" fill="#4f46e5"/><rect x="1118" y="310" width="136" height="70" fill="#14b8a6"/><rect x="1254" y="310" width="55" height="70" fill="#94a3b8"/>
+    <text x="739" y="354" text-anchor="middle" fill="white" font-size="21" font-weight="800">79.0% Bokmål-only</text><text x="1186" y="354" text-anchor="middle" fill="white" font-size="18" font-weight="800">14.2%</text>
+    <text x="210" y="490" fill="#0f172a" font-size="22" font-weight="750">Bokmål-filtered</text>
+    <rect x="360" y="450" width="897" height="70" rx="12" fill="#4f46e5"/><rect x="1257" y="450" width="7" height="70" fill="#14b8a6"/><rect x="1264" y="450" width="46" height="70" fill="#94a3b8"/>
+    <text x="808" y="494" text-anchor="middle" fill="white" font-size="21" font-weight="800">93.4% Bokmål-only</text><text x="1215" y="553" text-anchor="middle" fill="#0f766e" font-size="18" font-weight="800">0.7% Nynorsk-only</text>
+    <path d="M1260 525v18h-44" fill="none" stroke="#0f766e" stroke-width="2"/>
+    <g font-size="19" font-weight="700">
+      <rect x="430" y="630" width="28" height="28" rx="5" fill="#4f46e5"/><text x="472" y="652" fill="#334155">Bokmål-only</text>
+      <rect x="675" y="630" width="28" height="28" rx="5" fill="#14b8a6"/><text x="717" y="652" fill="#334155">Nynorsk-only</text>
+      <rect x="920" y="630" width="28" height="28" rx="5" fill="#94a3b8"/><text x="962" y="652" fill="#334155">Mixed / other</text>
+    </g>
+  </g>
+  <rect x="300" y="708" width="840" height="54" rx="27" fill="#0f172a"/>
+  <text x="720" y="743" text-anchor="middle" fill="#f8fafc" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="750">McNemar tests: p &lt; 0.001 for every seed</text>
+</svg>

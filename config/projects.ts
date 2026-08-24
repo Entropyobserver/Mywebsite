@@ -344,9 +344,14 @@ export const Projects: ProjectInterface[] = [
     id: "target-standard-bias",
     companyName: "Target-Standard Bias from Data Filtering in Norwegian MT",
     type: "Research",
-    category: ["Research", "Responsible AI", "Machine Translation", "Evaluation"],
+    category: [
+      "Research",
+      "Responsible AI",
+      "Machine Translation",
+      "Evaluation",
+    ],
     shortDescription:
-      "A controlled responsible-AI study of how target-side filtering can specialize Norwegian MT toward Bokmål, shift reported scores, and complicate evaluation in a multi-standard language.",
+      "A controlled English-Norwegian MT study showing that Bokmål filtering improves scores against Bokmål references but lowers BLEU and chrF on mixed-standard data while nearly eliminating Nynorsk-only output.",
     techStack: [
       "Python",
       "PyTorch",
@@ -368,63 +373,69 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Research Questions",
         description:
-          "RQ1. Does target-side filtering toward Bokmål change translation quality or mainly change the written standard a model produces?\n\nRQ2. Are apparent gains caused by the linguistic identity of the retained examples, or simply by differences in training-set size?\n\nRQ3. Do filtering effects persist across NLLB-200 model scales and evaluation domains?\n\nRQ4. How should automatic scores be interpreted when the reference itself reflects one accepted written standard?",
+          "RQ1. Does Bokmål filtering improve performance on in-domain Bokmål test data?\n\nRQ2. Are the observed effects caused by filtering itself rather than the smaller size of the filtered dataset?\n\nRQ3. Does Bokmål filtering reduce robustness to the original mixed-standard distribution?\n\nRQ4. Does filtering change the written-standard distribution of generated outputs?\n\nRQ5. Do in-domain gains transfer to general-domain FLORES evaluation?\n\nRQ6. Does the size-controlled evaluation pattern persist across larger NLLB-200 model sizes?",
         imgArr: [],
       },
       {
-        title: "Controlled Experimental Framework",
+        title: "Data Filtering and Size-Controlled Design",
         description:
-          "We treat filtering as the experimental intervention. Models are trained under original mixed-standard, Bokmål-filtered, and size-controlled conditions while holding the adaptation recipe and evaluation protocol fixed. The comparison is repeated across NLLB-200 scales so that a preprocessing choice is not mistaken for a model-size effect.",
+          "The original petroleum-domain split contains 13,935 training pairs. SLIDE filtering retains targets with Bokmål score at least 0.80 and Nynorsk score below 0.30, producing 10,114 training pairs. A deterministic original-subsampled condition uses the same 10,114/1,305/1,313 train/validation/test sizes, isolating written-standard filtering from data-volume effects. Nearby thresholds retain 71.2-73.3% of the original training set, placing the selected threshold in a stable region of the score distribution.",
         imgArr: ["/projects/target-standard-bias/study-design.svg"],
       },
       {
-        title: "Filtering Is a Modeling Decision",
+        title: "LoRA Fine-Tuning and Evaluation Protocol",
         description:
-          "Target-side language identification is often introduced as corpus cleaning, but removing examples also changes which legitimate Norwegian forms the model sees. We therefore audit label distributions before and after filtering, retain the original condition as a reference point, and record what the filter removes rather than assuming that every excluded sentence is noise.",
+          "The main experiments fine-tune NLLB-200 distilled 600M with LoRA using rank 8, alpha 64, zero dropout, three epochs, learning rate 5e-4, beam size 5, and seeds 42, 123, and 456. The size-controlled in-domain comparison is replicated with 1.3B and 3.3B NLLB-200 models. Evaluation uses BLEU, chrF, Bokmål-oriented TermR/TermP/TermF1, SLIDE written-standard labels, 1,000-sample paired bootstrap tests, and exact McNemar tests. The paper deliberately does not use COMET because transparent form-sensitive metrics are central to the evaluation-bias analysis.",
         imgArr: [],
       },
       {
-        title: "Evaluation Across Quality, Terminology, and Standard Use",
+        title: "In-Domain Result: Reference Choice Reverses the Ranking",
         description:
-          "The evaluation separates several behaviors that a single score can collapse. BLEU and chrF track reference overlap; terminology F1 checks domain terms; written-standard identification measures high-Bokmål and Nynorsk-like output; and FLORES provides an out-of-domain robustness check. Paired comparisons and bootstrap uncertainty are used wherever the same test items are shared across systems.",
-        imgArr: ["/projects/target-standard-bias/evaluation-matrix.svg"],
+          "With the same 10,114 training examples, Bokmål filtering improves BLEU from 0.5937 to 0.6128 and chrF from 78.02 to 79.34 on the Bokmål test set. On the original mixed-standard test set, the same intervention lowers BLEU from 0.6177 to 0.5849 and chrF from 79.12 to 77.43. Bokmål-oriented TermF1 rises on both test sets, from 0.7702 to 0.7912 and from 0.7309 to 0.7908. The result is specialization, not a uniform quality gain.",
+        imgArr: ["/projects/target-standard-bias/in-domain-results.svg"],
       },
       {
-        title: "Size-Matched Baseline Diagnostic",
+        title: "Written-Standard Shift on the Same Test Set",
         description:
-          "A companion diagnostic compares the linguistically defined high-Bokmål group with random groups of the same size. The true group produces a much stronger and directionally coherent pattern across BLEU, chrF, terminology F1, high-Bokmål rate, and Nynorsk-like rate. This does not by itself establish causality, but it shows why group identity must be tested separately from sample count.",
-        imgArr: ["/projects/target-standard-bias/random-baseline-barchart.png"],
+          "The original mixed-standard references contain 76.2% Bokmål-only, 17.2% Nynorsk-only, and 6.0% mixed sentences. The size-matched original-subsampled model approximately preserves this distribution with 79.0% Bokmål-only and 14.2% Nynorsk-only output. In contrast, the filtered model produces 93.4% Bokmål-only and only 0.7% Nynorsk-only output. Across seeds, every paired McNemar comparison is significant at p < 0.001.",
+        imgArr: ["/projects/target-standard-bias/written-standard-shift.svg"],
       },
       {
-        title: "Cross-Scale and Out-of-Domain Robustness",
+        title: "The Pattern Persists from 600M to 3.3B",
         description:
-          "The same controlled conditions are evaluated across multiple NLLB-200 scales and on both the in-domain petroleum test set and an out-of-domain FLORES slice. This design asks whether written-standard specialization is stable, model-dependent, or tied to the domain and reference distribution used to measure it.",
-        imgArr: [],
+          "Larger backbones improve absolute translation scores but do not remove the evaluation reversal. Across 600M, 1.3B, and 3.3B models, Bokmål filtering consistently improves BLEU against Bokmål references while lowering it against the original mixed-standard references. On the original test set, filtered models produce 93.7-94.6% Bokmål-only output versus 79.1-79.8% for the size-controlled baseline, while Nynorsk-only output falls to 0.08-0.17%.",
+        imgArr: ["/projects/target-standard-bias/model-scale-results.svg"],
       },
       {
-        title: "Interpreting Metric Gains in a Multi-Standard Language",
+        title: "Out-of-Domain FLORES Check",
         description:
-          "A higher reference-based score can indicate better translation, closer alignment with the reference's written standard, or both. The analysis therefore reports translation quality and output-standard behavior side by side, and avoids treating a Bokmål shift as a universal quality improvement when Nynorsk is also a valid target standard.",
-        imgArr: ["/projects/target-standard-bias/interpretation-boundary.svg"],
+          "The zero-shot 600M NLLB model remains stronger on general-domain FLORES NB than every fine-tuned system: BLEU 0.3059 and chrF 59.22 versus 0.2726-0.2766 and 56.35-56.63. Filtering therefore does not improve English-Norwegian MT in general. FLORES NN is used only as an evaluation-mismatch test because every system decodes with the Bokmål-oriented nob_Latn code; it is not an evaluation of Nynorsk generation ability.",
+        imgArr: ["/projects/target-standard-bias/flores-results.svg"],
       },
       {
-        title: "Human Review and Responsible-Use Safeguards",
+        title: "Human Validation Separates Adequacy from Conformity",
         description:
-          "Diagnostic human review checks whether automatic standard labels match the actual output, whether terminology changes preserve meaning, and whether apparent metric improvements hide unwanted normalization. The practical safeguard is simple: document the filter, publish pre/post-filter distributions, evaluate each intended standard explicitly, and align deployment claims with the users and language varieties the system is meant to serve.",
+          "Two annotators blindly evaluated 50 shift-enriched and 50 control items. Filtering changes adequacy only slightly (+0.01 to +0.02 on a 0-2 scale) but increases Bokmål conformity by +0.79 to +0.98. Preference agreement on 99 shared valid items is 85.9% with Cohen's kappa 0.751. SLIDE's shift margin correlates strongly with human-rated Bokmål conformity gain (Spearman rho 0.762), supporting the interpretation that the detected shift is human-perceptible rather than only a classifier artifact.",
+        imgArr: ["/projects/target-standard-bias/human-evaluation.svg"],
+      },
+      {
+        title: "Interpretation, Scope, and Responsible Deployment",
+        description:
+          "Bokmål specialization is appropriate when the deployment target is explicitly Bokmål petroleum translation; the problem is silent specialization under a generic Norwegian label. The evidence is limited to one direction and domain, all systems decode with nob_Latn, terminology metrics use Bokmål forms, and human evaluation is diagnostic rather than population-representative. The practical recommendation is to document the intended standard, report output-standard distributions beside BLEU and chrF, and use standard-specific or dual-standard references and terminology resources where possible.",
         imgArr: [],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "Norwegian machine translation is evaluated in a setting where Bokmål and Nynorsk are both legitimate written standards. This project asks what happens when target-side filtering, presented as data cleaning, systematically favors Bokmål before LoRA adaptation of NLLB-200.",
-        "The study compares original mixed-standard data, Bokmål-filtered data, and size-controlled baselines across model scales. It evaluates reference-based translation quality, domain terminology, written-standard output behavior, out-of-domain robustness, and diagnostic human judgments instead of relying on one aggregate score.",
-        "As co-author and controlled-experiment analysis lead, I helped frame filtering as an auditable modeling intervention, designed the size-matched comparisons, analyzed output-standard shifts, and translated the evaluation findings into practical safeguards for multilingual MT development.",
+        "This research project, titled 'When Data Cleaning Becomes Bias: Target-Standard Specialization in Norwegian Machine Translation,' studies how filtering a mixed Bokmål/Nynorsk petroleum corpus toward Bokmål changes both model output and evaluation outcomes.",
+        "Using LoRA-adapted NLLB-200 models, the study compares full original data, a SLIDE-filtered Bokmål subset, and a random original subset of exactly the same size. Results are measured against Bokmål and mixed-standard references, replicated across 600M, 1.3B, and 3.3B backbones, checked on FLORES, and triangulated with blind human evaluation.",
+        "As co-author and controlled-experiment analysis lead, I contributed to the size-controlled design, model-scale replication, statistical analysis, written-standard diagnostics, and interpretation of reference and terminology bias.",
       ],
       bullets: [
-        "Designed controlled original, filtered, and size-matched training conditions for LoRA-based NLLB adaptation.",
-        "Evaluated BLEU, chrF, terminology F1, written-standard output rates, and out-of-domain robustness across model scales.",
-        "Separated linguistic group identity from sample-size effects using random size-matched diagnostics and paired statistical validation.",
-        "Developed an interpretation framework and human-review safeguards for reference-based evaluation in multi-standard languages.",
+        "Controlled for data size with matched 10,114-pair filtered and original-subsampled training conditions.",
+        "Demonstrated a reference-dependent metric reversal across three NLLB-200 model scales.",
+        "Measured the output shift from 79.0% to 93.4% Bokmål-only and from 14.2% to 0.7% Nynorsk-only on the same mixed-standard test set.",
+        "Validated the interpretation with paired bootstrap tests, McNemar tests, SLIDE-human comparison, and blind diagnostic human evaluation.",
       ],
     },
   },
