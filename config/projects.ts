@@ -73,7 +73,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Experiment 1: Data Scaling and Training Budget",
         description:
-          "The data-scaling experiment tested how much in-domain data was actually needed before running expensive hyperparameter search. It showed that an 8,000-sentence subset recovered most of the full-data BLEU performance, giving the later experiments a practical training budget.",
+          "Before hyperparameter optimization, I trained LoRA models on progressively larger in-domain subsets across multiple random seeds to determine an efficient training budget. The learning curve revealed three phases: rapid gains from 100 to 2,000 sentence pairs, diminishing returns from 2,000 to 8,000, and a low-return plateau beyond 8,000. Using about 57% of the full training data, the 8,000-pair subset retained approximately 96% of the maximum BLEU score and was therefore selected for the subsequent hyperparameter search.",
         imgArr: ["/projects/lora-nmt-petroleum/data_scaling_analysis.png"],
       },
       {
