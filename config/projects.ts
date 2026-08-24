@@ -121,15 +121,14 @@ export const Projects: ProjectInterface[] = [
     ],
     descriptionDetails: {
       paragraphs: [
-        "As first author and lead experimental contributor, I led the corpus diagnostics, LoRA hyperparameter optimization, evaluation analysis, and experimental design for this study.",
-        "The project investigated how parameter-efficient fine-tuning can adapt multilingual neural machine translation to a specialized low-resource domain. Using NLLB-200 with LoRA adapters, we studied English-to-Norwegian petroleum translation, where noisy parallel data, specialized terminology, and limited in-domain examples make direct adaptation difficult.",
-        "The work connects the full experimental pipeline: corpus quality analysis, data scaling, LoRA configuration search, final benchmarking, and human error analysis.",
+        "This project investigates low-resource machine translation for the petroleum industry. Using the multilingual NLLB-200 model with LoRA-based adaptation, we study how data quality, training-set size, and LoRA hyperparameters affect translation performance. We evaluate the models using automatic metrics and terminology-focused human evaluation.",
+        "As first author and lead experimental contributor, I led the experimental design, corpus diagnostics, LoRA optimization, and benchmarking, while jointly conducting the terminology-focused human evaluation.",
       ],
       bullets: [
-        "Designed a data-quality assessment and cleaning pipeline for noisy parallel corpora, evaluating alignment quality, completeness, duplicate removal, and domain-specific terminology coverage.",
+        "Designed a data-quality assessment and cleaning pipeline for noisy parallel corpora, assessing alignment quality, completeness, duplication, and domain-specific terminology coverage.",
         "Optimized LoRA configurations using grid search and Optuna/ASHA, with fANOVA identifying the LoRA scaling factor as a major contributor to adaptation performance.",
-        "Evaluated robustness across multiple model scales and benchmarked LoRA against full fine-tuning and commercial MT systems.",
-        "Jointly conducted terminology-focused review and a 50-sentence human evaluation with inter-annotator agreement analysis, alongside automatic evaluation using BLEU, chrF, and COMET.",
+        "Benchmarked the final LoRA model against full fine-tuning and commercial MT systems using automatic translation metrics.",
+        "Jointly conducted terminology-focused review and a 50-sentence human evaluation, including inter-annotator agreement analysis, alongside automatic evaluation using BLEU, chrF++, and COMET.",
       ],
     },
   },
