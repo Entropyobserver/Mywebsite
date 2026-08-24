@@ -103,7 +103,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Experiment 4: LoRA vs. Full Fine-Tuning",
         description:
-          "The final efficiency comparison tested whether LoRA could stay close to full fine-tuning across different training sizes. The largest observed gap stayed below one BLEU point, supporting LoRA as a strong adaptation strategy when compute and trainable parameters are constrained.",
+          "We then compared LoRA with full fine-tuning across different training sizes. The BLEU difference between the two methods remained below one point, showing that LoRA can achieve similar performance to full fine-tuning while using fewer trainable parameters and less computation.",
         imgArr: ["/projects/lora-nmt-petroleum/lora_vs_full_ft.png"],
       },
       {
