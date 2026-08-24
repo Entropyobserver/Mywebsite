@@ -23,7 +23,7 @@ export const pagesConfig: PagesConfig = {
   },
   skills: {
     title: "Skills",
-    description: "Methods, tools, and technical strengths supporting my research and applied AI work.",
+    description: "My technical background connects data analysis, machine learning, NLP research, rigorous evaluation, and research engineering for applied AI systems.",
     metadata: {
       title: "Skills",
       description:
