@@ -2,7 +2,7 @@ export type PublicationStatus =
   | "Published"
   | "Thesis"
   | "Under Review"
-  | "Planned Submission";
+  | "In Preparation";
 
 export interface PublicationLinkInterface {
   label: string;
@@ -93,7 +93,7 @@ export const publications: PublicationInterface[] = [
     title:
       "Group-level Training Data Attribution with Exact Shapley Analysis: A Controlled Machine Translation Case Study",
     authors: "Xiaojing Yang, Zhihan Li",
-    status: "Planned Submission",
+    status: "In Preparation",
     venue: "TBD",
     date: "December 2026",
     role: "First author; attribution framework and experiment lead",
@@ -104,7 +104,7 @@ export const publications: PublicationInterface[] = [
     title:
       "Target-Standard Bias from Data Filtering in Norwegian Machine Translation",
     authors: "Zhihan Li, Xiaojing Yang",
-    status: "Planned Submission",
+    status: "In Preparation",
     venue: "WMT",
     date: "December 2026",
     role: "Co-author; controlled experiment design and analysis lead",
@@ -115,7 +115,7 @@ export const publications: PublicationInterface[] = [
     title:
       "A Human-Validated Benchmark for Long-Form Financial Document Question Answering",
     authors: "Xiaojing Yang, Zhihan Li, Meriem Beloucif",
-    status: "Planned Submission",
+    status: "In Preparation",
     venue: "TBD",
     date: "December 2026",
     role: "First author; benchmark construction and retrieval evaluation lead",

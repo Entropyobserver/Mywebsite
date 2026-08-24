@@ -50,11 +50,11 @@ export const pagesConfig: PagesConfig = {
   },
   publications: {
     title: "Publications",
-    description: "Published, submitted, and planned research outputs in machine learning, NLP, retrieval, and model evaluation.",
+    description: "I currently have one peer-reviewed publication, with several additional manuscripts under review and in preparation. My research outputs span multilingual NLP, machine translation, model adaptation, information retrieval, and data-centric evaluation, reflecting my broader interest in developing and understanding reliable language technologies.",
     metadata: {
       title: "Publications",
       description:
-        "Xiaojing Yang's publications, submitted manuscripts, and planned research outputs.",
+        "Xiaojing Yang's peer-reviewed publication, manuscripts under review, and research outputs in NLP, machine translation, retrieval, and data-centric evaluation.",
     },
   },
   resume: {
