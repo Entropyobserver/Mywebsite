@@ -117,10 +117,18 @@ export const Projects: ProjectInterface[] = [
         imgArr: ["/projects/lora-nmt-petroleum/lora_vs_full_ft.png"],
       },
       {
-        title: "Human Error Analysis",
+        title: "Human Evaluation Protocol",
         description:
-          "To complement BLEU, chrF, and COMET, we conducted a structured human error analysis on 50 sentences sampled from low-, mid-, and high-BLEU groups within the 1,742-sentence held-out NPD test set. Two reviewers annotated errors across eight categories and three severity levels, with Cohen's kappa used to check agreement before aggregating results.",
+          "We also conducted a human error analysis to complement BLEU, chrF, and COMET. We sampled 50 sentences from low-, mid-, and high-BLEU groups in the 1,742-sentence held-out NPD test set. Two reviewers annotated errors using eight categories and three severity levels, and we used Cohen's kappa to measure their agreement before combining the results.",
         imgArr: ["/projects/lora-nmt-petroleum/human_eval_process_flow.png"],
+      },
+      {
+        title: "Human Error Analysis: Findings",
+        description:
+          "The analysis identified 62 error instances across 41 of the 50 reviewed sentences. Most errors were minor, but 12% were critical and altered factual or technical meaning. Word choice and Norwegian variant mixing were the most frequent error types. Several critical errors occurred even in high-BLEU translations, showing why automatic metrics need to be complemented by domain-aware human analysis.",
+        imgArr: [
+          "/projects/lora-nmt-petroleum/human-error-analysis-results.png",
+        ],
       },
     ],
     descriptionDetails: {
