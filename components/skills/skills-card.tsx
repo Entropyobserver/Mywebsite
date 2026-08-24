@@ -1,6 +1,3 @@
-import Link from "next/link";
-
-import { Icons } from "@/components/common/icons";
 import { SkillsInterface } from "@/config/skills";
 import { cn } from "@/lib/utils";
 
@@ -74,27 +71,6 @@ const accentStyles: Record<
 export default function SkillsCard({ skills }: SkillsCardProps) {
   return (
     <div className="space-y-6">
-      <div className="grid gap-4 sm:grid-cols-3">
-        <div className="rounded-lg border bg-background p-5">
-          <p className="text-3xl font-heading">{skills.length}</p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            capability areas across research, engineering, and applied AI
-          </p>
-        </div>
-        <div className="rounded-lg border bg-background p-5">
-          <p className="text-3xl font-heading">40+</p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            methods, tools, and evaluation practices used in real projects
-          </p>
-        </div>
-        <div className="rounded-lg border bg-background p-5">
-          <p className="text-3xl font-heading">Evidence</p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            each skill area links back to publications, projects, or experience
-          </p>
-        </div>
-      </div>
-
       <div className="grid gap-4 lg:grid-cols-2">
         {skills.map((skill) => {
           const Icon = skill.icon;
@@ -145,25 +121,6 @@ export default function SkillsCard({ skills }: SkillsCardProps) {
                     {item}
                   </span>
                 ))}
-              </div>
-
-              <div className="mt-5 border-t border-border/70 pt-4">
-                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  Evidence
-                </p>
-                <div className="mt-2 flex flex-wrap gap-3">
-                  {skill.evidence.map((item) => (
-                    <Link
-                      key={`${skill.name}-${item.label}`}
-                      href={item.href}
-                      className="inline-flex items-center text-sm font-medium text-foreground hover:text-primary"
-                      target={item.href.startsWith("http") ? "_blank" : undefined}
-                    >
-                      {item.label}
-                      <Icons.chevronRight className="ml-1 h-4 w-4" />
-                    </Link>
-                  ))}
-                </div>
               </div>
             </section>
           );

@@ -1,20 +1,31 @@
 import { Icons } from "@/components/common/icons";
 
-export interface SkillEvidenceLink {
-  label: string;
-  href: string;
-}
-
 export interface SkillsInterface {
   name: string;
   description: string;
   skills: string[];
-  evidence: SkillEvidenceLink[];
   icon: any;
   accent: "sky" | "emerald" | "violet" | "amber" | "rose" | "cyan" | "slate";
 }
 
 export const skillGroups: SkillsInterface[] = [
+  {
+    name: "Data Analysis & Visualization",
+    description:
+      "Statistical analysis, exploratory data work, and visualization for real-world datasets, experimental results, and decision support.",
+    skills: [
+      "Pandas",
+      "NumPy",
+      "scikit-learn",
+      "SQL",
+      "R",
+      "Statistical Analysis",
+      "Data Visualization",
+      "Reporting",
+    ],
+    icon: Icons.plotly,
+    accent: "slate",
+  },
   {
     name: "AI & Machine Learning",
     description:
@@ -26,11 +37,6 @@ export const skillGroups: SkillsInterface[] = [
       "Fine-tuning",
       "LoRA / PEFT",
       "Model Evaluation",
-    ],
-    evidence: [
-      { label: "LoRA NMT", href: "/projects/lora-nmt-petroleum" },
-      { label: "Modular Experts", href: "/projects/modular-lora-experts" },
-      { label: "SmartReview", href: "/projects/SmartReview" },
     ],
     icon: Icons.aurora,
     accent: "sky",
@@ -47,11 +53,6 @@ export const skillGroups: SkillsInterface[] = [
       "Multilingual NLP",
       "Terminology Analysis",
     ],
-    evidence: [
-      { label: "EAMT Publication", href: "/publications" },
-      { label: "FinRAG", href: "/projects/finrag-equinor" },
-      { label: "Graph Retrieval", href: "/projects/structure-aware-graph-rag" },
-    ],
     icon: Icons.gitRepoIcon,
     accent: "emerald",
   },
@@ -66,10 +67,6 @@ export const skillGroups: SkillsInterface[] = [
       "Error Analysis",
       "Cohen's Kappa",
       "VLM Framing",
-    ],
-    evidence: [
-      { label: "Bias Framework", href: "/projects/vlm-bias-evaluation" },
-      { label: "Target-Standard Bias", href: "/projects/target-standard-bias" },
     ],
     icon: Icons.check,
     accent: "violet",
@@ -86,11 +83,6 @@ export const skillGroups: SkillsInterface[] = [
       "Quality Control",
       "Data Auditing",
     ],
-    evidence: [
-      { label: "Shapley Attribution", href: "/projects/group-shapley-attribution" },
-      { label: "Target-Standard Bias", href: "/projects/target-standard-bias" },
-      { label: "LoRA NMT", href: "/projects/lora-nmt-petroleum" },
-    ],
     icon: Icons.gitBranch,
     accent: "amber",
   },
@@ -105,10 +97,6 @@ export const skillGroups: SkillsInterface[] = [
       "Docker",
       "Git",
       "Experiment Tracking",
-    ],
-    evidence: [
-      { label: "Projects", href: "/projects" },
-      { label: "GitHub", href: "https://github.com/Entropyobserver" },
     ],
     icon: Icons.laptop,
     accent: "rose",
@@ -125,31 +113,8 @@ export const skillGroups: SkillsInterface[] = [
       "SQLite",
       "User-facing AI Tools",
     ],
-    evidence: [
-      { label: "Sentiment Platform", href: "/projects/multilingual-sentiment" },
-      { label: "SmartReview", href: "/projects/SmartReview" },
-    ],
     icon: Icons.settings,
     accent: "cyan",
-  },
-  {
-    name: "Data Analysis & Visualization",
-    description:
-      "Statistical analysis, visualization, and exploratory data work for experiments, reports, and decision support.",
-    skills: [
-      "Pandas",
-      "NumPy",
-      "scikit-learn",
-      "Statistical Analysis",
-      "Data Visualization",
-      "Reporting",
-    ],
-    evidence: [
-      { label: "Experience", href: "/experience" },
-      { label: "Research Projects", href: "/projects" },
-    ],
-    icon: Icons.plotly,
-    accent: "slate",
   },
 ];
 
