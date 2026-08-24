@@ -73,7 +73,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Experiment 1: Data Scaling and Training Budget",
         description:
-          "Before hyperparameter optimization, I trained LoRA models on progressively larger in-domain subsets across multiple random seeds to determine an efficient training budget. The learning curve revealed three phases: rapid gains from 100 to 2,000 sentence pairs, diminishing returns from 2,000 to 8,000, and a low-return plateau beyond 8,000. Using about 57% of the full training data, the 8,000-pair subset retained approximately 96% of the maximum BLEU score and was therefore selected for the subsequent hyperparameter search.",
+          "This experiment examined how translation quality changed as the training corpus grew from 100 examples to the full 13,935 sentence pairs, using three random seeds for each subset. The learning curve revealed three stages: a high-efficiency phase from 100 to 2,000 pairs with rapid BLEU gains; diminishing returns from 2,000 to 8,000 as performance continued to improve more gradually; and a low-ROI phase beyond 8,000 with almost no additional gain. The results were stable across seeds, and 8,000 pairs - 57% of the full training data - achieved 96% of the maximum BLEU score, making it the practical budget for the subsequent hyperparameter search.",
         imgArr: ["/projects/lora-nmt-petroleum/data_scaling_analysis.png"],
       },
       {
