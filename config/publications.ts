@@ -105,7 +105,7 @@ export const publications: PublicationInterface[] = [
       "Target-Standard Bias from Data Filtering in Norwegian Machine Translation",
     authors: "Zhihan Li, Xiaojing Yang",
     status: "In Preparation",
-    venue: "WMT",
+    venue: "TBD",
     date: "December 2026",
     role: "Co-author; controlled experiment design and analysis lead",
     description:
