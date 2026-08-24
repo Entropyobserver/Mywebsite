@@ -125,7 +125,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Human Error Analysis: Findings",
         description:
-          "The analysis identified 62 error instances across 41 of the 50 reviewed sentences. Most errors were minor, but 12% were critical and altered factual or technical meaning. Word choice and Norwegian variant mixing were the most frequent error types. Several critical errors occurred even in high-BLEU translations, showing why automatic metrics need to be complemented by domain-aware human analysis.",
+          "We found 62 errors in 41 of the 50 sentences. Most errors were minor, but 12% were critical and changed the factual or technical meaning. The most common errors were word choice and mixing Norwegian variants. Importantly, some critical errors also appeared in high-BLEU translations, showing that automatic metrics alone may miss important domain-specific errors.",
         imgArr: [
           "/projects/lora-nmt-petroleum/human-error-analysis-results.png",
         ],
