@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690" role="img" aria-labelledby="title desc">
+  <title id="title">Bias evaluation case-study matrix</title>
+  <desc id="desc">A comparison of the input, controlled variable, analysis unit, and validation target for three studies.</desc>
+  <rect width="1200" height="690" rx="22" fill="#F8FAFC"/>
+  <text x="54" y="66" fill="#0F172A" font-family="Inter,Arial,sans-serif" font-size="31" font-weight="700">Case-study matrix</text>
+  <text x="54" y="99" fill="#64748B" font-family="Inter,Arial,sans-serif" font-size="17">The framework changes what is controlled—not the evaluation discipline.</text>
+  <g font-family="Inter,Arial,sans-serif">
+    <rect x="54" y="142" width="1092" height="62" rx="12" fill="#0F172A"/>
+    <g fill="#F8FAFC" font-size="15" font-weight="700"><text x="82" y="181">CASE</text><text x="348" y="181">CONTROLLED VARIABLE</text><text x="624" y="181">ANALYSIS UNIT</text><text x="888" y="181">VALIDATION TARGET</text></g>
+    <g transform="translate(54 224)">
+      <rect width="1092" height="116" rx="14" fill="#E0F2FE" stroke="#7DD3FC"/>
+      <circle cx="34" cy="38" r="18" fill="#0284C7"/><text x="34" y="44" text-anchor="middle" fill="white" font-size="13" font-weight="700">01</text>
+      <text x="68" y="42" fill="#0F172A" font-size="19" font-weight="700">Geographic framing</text><text x="68" y="73" fill="#475569" font-size="14">Text-only</text>
+      <text x="294" y="42" fill="#0F172A" font-size="16" font-weight="600">Location / region</text><text x="294" y="72" fill="#475569" font-size="14">same request template</text>
+      <text x="570" y="42" fill="#0F172A" font-size="16" font-weight="600">Generated response</text><text x="570" y="72" fill="#475569" font-size="14">descriptors + frames</text>
+      <text x="834" y="42" fill="#0F172A" font-size="16" font-weight="600">Framing interpretation</text><text x="834" y="72" fill="#475569" font-size="14">context + severity</text>
+    </g>
+    <g transform="translate(54 360)">
+      <rect width="1092" height="116" rx="14" fill="#EDE9FE" stroke="#C4B5FD"/>
+      <circle cx="34" cy="38" r="18" fill="#7C3AED"/><text x="34" y="44" text-anchor="middle" fill="white" font-size="13" font-weight="700">02</text>
+      <text x="68" y="42" fill="#0F172A" font-size="19" font-weight="700">Gender–occupation</text><text x="68" y="73" fill="#475569" font-size="14">Text-only</text>
+      <text x="294" y="42" fill="#0F172A" font-size="16" font-weight="600">Identity term</text><text x="294" y="72" fill="#475569" font-size="14">same occupation + prompt</text>
+      <text x="570" y="42" fill="#0F172A" font-size="16" font-weight="600">Generated response</text><text x="570" y="72" fill="#475569" font-size="14">traits + role language</text>
+      <text x="834" y="42" fill="#0F172A" font-size="16" font-weight="600">Stereotype relevance</text><text x="834" y="72" fill="#475569" font-size="14">direction + intensity</text>
+    </g>
+    <g transform="translate(54 496)">
+      <rect width="1092" height="116" rx="14" fill="#FEF3C7" stroke="#FCD34D"/>
+      <circle cx="34" cy="38" r="18" fill="#D97706"/><text x="34" y="44" text-anchor="middle" fill="white" font-size="13" font-weight="700">03</text>
+      <text x="68" y="42" fill="#0F172A" font-size="19" font-weight="700">Political / moral VLM</text><text x="68" y="73" fill="#475569" font-size="14">Image + instruction</text>
+      <text x="294" y="42" fill="#0F172A" font-size="16" font-weight="600">Reviewed image group</text><text x="294" y="72" fill="#475569" font-size="14">same caption instruction</text>
+      <text x="570" y="42" fill="#0F172A" font-size="16" font-weight="600">Model caption</text><text x="570" y="72" fill="#475569" font-size="14">agency + moral framing</text>
+      <text x="834" y="42" fill="#0F172A" font-size="16" font-weight="600">Visual-context fidelity</text><text x="834" y="72" fill="#475569" font-size="14">unsupported inference</text>
+    </g>
+    <text x="54" y="654" fill="#64748B" font-size="15">Matched designs reduce obvious confounds; they do not make automatic scores self-interpreting.</text>
+  </g>
+</svg>

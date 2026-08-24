@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Reusable bias evaluation framework overview</title>
+  <desc id="desc">A four-stage workflow from controlled inputs to human-validated claims.</desc>
+  <rect width="1200" height="675" rx="22" fill="#F8FAFC"/>
+  <path d="M0 22C0 9.85 9.85 0 22 0h1156c12.15 0 22 9.85 22 22v116H0V22Z" fill="#0F172A"/>
+  <text x="42" y="58" fill="#F8FAFC" font-family="Inter,Arial,sans-serif" font-size="28" font-weight="700">Reusable Bias Evaluation Framework</text>
+  <text x="42" y="92" fill="#94A3B8" font-family="Inter,Arial,sans-serif" font-size="17">Matched prompts · image-instruction studies · human validation</text>
+  <g font-family="Inter,Arial,sans-serif">
+    <g transform="translate(42 190)">
+      <rect width="250" height="360" rx="18" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
+      <circle cx="34" cy="38" r="18" fill="#0284C7"/><text x="34" y="44" text-anchor="middle" fill="white" font-size="13" font-weight="700">01</text>
+      <text x="26" y="102" fill="#0F172A" font-size="24" font-weight="700">Controlled</text><text x="26" y="132" fill="#0F172A" font-size="24" font-weight="700">Inputs</text>
+      <text x="26" y="185" fill="#475569" font-size="16">matched variables</text><text x="26" y="216" fill="#475569" font-size="16">reviewed images</text><text x="26" y="247" fill="#475569" font-size="16">fixed instructions</text>
+      <path d="M26 302h190" stroke="#7DD3FC"/><text x="26" y="333" fill="#0369A1" font-size="14" font-weight="700">DESIGN</text>
+    </g>
+    <path d="M305 370h45m-12-10 12 10-12 10" fill="none" stroke="#64748B" stroke-width="2"/>
+    <g transform="translate(363 190)">
+      <rect width="250" height="360" rx="18" fill="#EDE9FE" stroke="#7C3AED" stroke-width="2"/>
+      <circle cx="34" cy="38" r="18" fill="#7C3AED"/><text x="34" y="44" text-anchor="middle" fill="white" font-size="13" font-weight="700">02</text>
+      <text x="26" y="102" fill="#0F172A" font-size="24" font-weight="700">Model</text><text x="26" y="132" fill="#0F172A" font-size="24" font-weight="700">Runs</text>
+      <text x="26" y="185" fill="#475569" font-size="16">shared wrappers</text><text x="26" y="216" fill="#475569" font-size="16">logged metadata</text><text x="26" y="247" fill="#475569" font-size="16">reproducible batches</text>
+      <path d="M26 302h190" stroke="#C4B5FD"/><text x="26" y="333" fill="#6D28D9" font-size="14" font-weight="700">EXECUTE</text>
+    </g>
+    <path d="M626 370h45m-12-10 12 10-12 10" fill="none" stroke="#64748B" stroke-width="2"/>
+    <g transform="translate(684 190)">
+      <rect width="250" height="360" rx="18" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+      <circle cx="34" cy="38" r="18" fill="#D97706"/><text x="34" y="44" text-anchor="middle" fill="white" font-size="13" font-weight="700">03</text>
+      <text x="26" y="102" fill="#0F172A" font-size="24" font-weight="700">Metric</text><text x="26" y="132" fill="#0F172A" font-size="24" font-weight="700">Screening</text>
+      <text x="26" y="185" fill="#475569" font-size="16">group disparities</text><text x="26" y="216" fill="#475569" font-size="16">bootstrap intervals</text><text x="26" y="247" fill="#475569" font-size="16">error slices</text>
+      <path d="M26 302h190" stroke="#FCD34D"/><text x="26" y="333" fill="#B45309" font-size="14" font-weight="700">SCREEN</text>
+    </g>
+    <path d="M947 370h45m-12-10 12 10-12 10" fill="none" stroke="#64748B" stroke-width="2"/>
+    <g transform="translate(1005 190)">
+      <rect width="153" height="360" rx="18" fill="#DCFCE7" stroke="#16A34A" stroke-width="2"/>
+      <circle cx="34" cy="38" r="18" fill="#16A34A"/><text x="34" y="44" text-anchor="middle" fill="white" font-size="13" font-weight="700">04</text>
+      <text x="22" y="102" fill="#0F172A" font-size="21" font-weight="700">Human</text><text x="22" y="130" fill="#0F172A" font-size="21" font-weight="700">Validation</text>
+      <text x="22" y="185" fill="#475569" font-size="14">annotation</text><text x="22" y="214" fill="#475569" font-size="14">agreement</text><text x="22" y="243" fill="#475569" font-size="14">qualified claims</text>
+      <path d="M22 302h109" stroke="#86EFAC"/><text x="22" y="333" fill="#15803D" font-size="13" font-weight="700">VALIDATE</text>
+    </g>
+  </g>
+  <text x="42" y="622" fill="#64748B" font-family="Inter,Arial,sans-serif" font-size="16">Automatic metrics find candidates. Human review determines what the pattern means.</text>
+</svg>

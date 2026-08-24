@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Configuration-driven bias evaluation architecture</title>
+  <desc id="desc">Three case studies connect to one shared evaluation engine and a validation layer.</desc>
+  <rect width="1200" height="760" rx="22" fill="#F8FAFC"/>
+  <text x="54" y="66" fill="#0F172A" font-family="Inter,Arial,sans-serif" font-size="31" font-weight="700">One engine, multiple controlled case studies</text>
+  <text x="54" y="99" fill="#64748B" font-family="Inter,Arial,sans-serif" font-size="17">Case-specific configurations stay separate from reusable execution and validation code.</text>
+  <g font-family="Inter,Arial,sans-serif">
+    <g transform="translate(54 150)">
+      <rect width="330" height="152" rx="16" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
+      <text x="24" y="36" fill="#0369A1" font-size="13" font-weight="700">TEXT · GEOGRAPHY</text>
+      <text x="24" y="76" fill="#0F172A" font-size="23" font-weight="700">Geographic framing</text>
+      <text x="24" y="111" fill="#475569" font-size="15">Matched locations, fixed prompt template,</text><text x="24" y="134" fill="#475569" font-size="15">group-level framing comparison</text>
+    </g>
+    <g transform="translate(435 150)">
+      <rect width="330" height="152" rx="16" fill="#EDE9FE" stroke="#7C3AED" stroke-width="2"/>
+      <text x="24" y="36" fill="#6D28D9" font-size="13" font-weight="700">TEXT · OCCUPATION</text>
+      <text x="24" y="76" fill="#0F172A" font-size="23" font-weight="700">Gender–occupation</text>
+      <text x="24" y="111" fill="#475569" font-size="15">Matched identity terms, occupation sets,</text><text x="24" y="134" fill="#475569" font-size="15">descriptive language analysis</text>
+    </g>
+    <g transform="translate(816 150)">
+      <rect width="330" height="152" rx="16" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+      <text x="24" y="36" fill="#B45309" font-size="13" font-weight="700">VISION + LANGUAGE</text>
+      <text x="24" y="76" fill="#0F172A" font-size="23" font-weight="700">Political / moral framing</text>
+      <text x="24" y="111" fill="#475569" font-size="15">Reviewed images, fixed instructions,</text><text x="24" y="134" fill="#475569" font-size="15">caption-level framing analysis</text>
+    </g>
+    <path d="M219 302v54h381m381-54v54H600m0-54v54" fill="none" stroke="#94A3B8" stroke-width="2"/>
+    <path d="m591 344 9 12 9-12" fill="none" stroke="#94A3B8" stroke-width="2"/>
+    <g transform="translate(182 378)">
+      <rect width="836" height="174" rx="18" fill="#0F172A"/>
+      <text x="32" y="40" fill="#94A3B8" font-size="13" font-weight="700">SHARED EVALUATION ENGINE</text>
+      <g fill="#F8FAFC" font-size="17" font-weight="600">
+        <text x="32" y="87">01  Data loader</text><text x="222" y="87">02  Prompt builder</text><text x="432" y="87">03  Inference wrapper</text><text x="652" y="87">04  Metric registry</text>
+        <text x="32" y="133">05  Group summaries</text><text x="222" y="133">06  Bootstrap</text><text x="432" y="133">07  Error slices</text><text x="652" y="133">08  Export</text>
+      </g>
+    </g>
+    <path d="M600 552v46" stroke="#94A3B8" stroke-width="2"/><path d="m591 586 9 12 9-12" fill="none" stroke="#94A3B8" stroke-width="2"/>
+    <g transform="translate(260 620)">
+      <rect width="680" height="92" rx="16" fill="#DCFCE7" stroke="#16A34A" stroke-width="2"/>
+      <text x="28" y="38" fill="#15803D" font-size="13" font-weight="700">VALIDATION LAYER</text>
+      <text x="28" y="68" fill="#0F172A" font-size="18" font-weight="600">Annotation sheets  →  reviewer agreement  →  evidence-bounded reporting</text>
+    </g>
+  </g>
+</svg>

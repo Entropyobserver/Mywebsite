@@ -410,29 +410,54 @@ export const Projects: ProjectInterface[] = [
     startDate: new Date("2025-11-01"),
     endDate: new Date("2026-08-01"),
     companyLogoImg:
-      "/projects/vlm-bias-evaluation/vlm-image-review-contact-sheet.jpg",
+      "/projects/vlm-bias-evaluation/cover.svg",
     pagesInfoArr: [
       {
-        title: "Image Review and Validation Workflow",
+        title: "Evaluation Questions",
         description:
-          "The VLM case study uses reviewed image sets, metadata, captioning instructions, automatic framing metrics, and human validation sheets.",
+          "RQ1. Can matched prompts reveal systematic framing differences while keeping the task context fixed?\n\nRQ2. Can the same evaluation architecture support both language-only and vision-language studies?\n\nRQ3. Which automatic signals are useful for screening, and where is human judgment required?\n\nRQ4. How should uncertainty, reviewer agreement, and study limitations constrain the final claim?",
+        imgArr: [],
+      },
+      {
+        title: "Configuration-Driven Evaluation Framework",
+        description:
+          "The framework separates case-specific resources from shared evaluation code. Each study defines its controlled variable, prompt or image set, group labels, and metric configuration; the shared engine handles inference, disparity summaries, bootstrap uncertainty, error slices, and exports for human review.",
+        imgArr: ["/projects/vlm-bias-evaluation/framework.svg"],
+      },
+      {
+        title: "Three Case Studies, One Evaluation Discipline",
+        description:
+          "The current project spans geographic framing, gender–occupation associations, and political or moral framing in VLM descriptions. Their inputs differ, but each uses matched conditions, explicit analysis units, pre-defined comparison groups, and a human-validation target.",
+        imgArr: ["/projects/vlm-bias-evaluation/case-study-matrix.svg"],
+      },
+      {
+        title: "Reviewed VLM Image Set",
+        description:
+          "For the vision-language case study, images are organized and reviewed before inference so that file identity, group labels, and visible context can be audited. The contact sheet supports coverage checks and helps identify duplicates, ambiguous scenes, or category leakage before model outputs are compared.",
         imgArr: [
           "/projects/vlm-bias-evaluation/vlm-image-review-contact-sheet.jpg",
         ],
+        imageLayout: "portrait",
+      },
+      {
+        title: "Human Validation Boundary",
+        description:
+          "Automatic metrics are used to locate candidate disparities, not to make a final diagnosis. Selected outputs move through structured annotation, context and severity review, and inter-annotator agreement analysis. Claims are then limited to what the reviewed evidence can support.",
+        imgArr: ["/projects/vlm-bias-evaluation/validation-boundary.svg"],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "This technical research framework evaluates whether language and vision-language models introduce systematic framing differences across social, political, or cultural groups.",
-        "The framework supports both text-only matched prompts and image-instruction VLM tasks. It separates case-specific resources from shared code for data loading, prompt construction, model execution, metric scoring, group disparity analysis, bootstrap summaries, annotation sheet creation, and agreement analysis.",
-        "My contribution was to design the reusable framework, implement the shared evaluation modules, structure three case studies, and define a validation boundary: automatic metrics are screening signals, while strong bias claims require human annotation and agreement analysis.",
+        "This technical research project builds a reusable way to test whether language and vision-language models produce systematic framing differences across social, political, or cultural groups.",
+        "Instead of treating bias evaluation as a collection of ad hoc prompts, the framework makes the comparison design explicit: controlled inputs, reproducible model runs, group-level screening metrics, uncertainty estimates, and auditable human validation. It supports both text-only matched prompts and image-instruction VLM tasks.",
+        "My contribution was to design the framework, implement the shared evaluation modules, structure three case studies, and define the evidence boundary. Automatic scores are treated as screening signals; stronger interpretations require reviewed examples, annotation guidelines, and agreement analysis.",
       ],
       bullets: [
-        "Built a configuration-driven framework for geographic, gender-occupation, and VLM political/moral bias case studies.",
-        "Implemented matched-prompt generation, model inference wrappers, automatic framing metrics, and group disparity summaries.",
-        "Extended the framework from text-only variables to image-instruction VLM description tasks.",
-        "Added human annotation sheet generation and Cohen's kappa support for validation.",
-        "Positioned the project as a reusable research tool and case-study platform rather than a finished benchmark claim.",
+        "Built a configuration-driven framework for geographic, gender–occupation, and VLM political or moral framing studies.",
+        "Implemented matched-prompt construction, reusable inference wrappers, metric screening, group-disparity summaries, bootstrap intervals, and error-slice exports.",
+        "Extended the same controlled-comparison logic from text-only variables to reviewed image-instruction VLM tasks.",
+        "Added annotation-sheet generation and Cohen's kappa analysis so automatic patterns can be checked by human reviewers.",
+        "Documented the boundary between exploratory signals and evidence-backed claims, keeping the project useful without overstating unfinished case-study results.",
       ],
     },
   },
