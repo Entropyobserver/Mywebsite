@@ -137,6 +137,52 @@ export default function IndexPage() {
         </div>
       </section>
       <AnimatedSection
+        direction="up"
+        className="container py-10 my-14"
+        id="about"
+      >
+        <div className="mx-auto max-w-[52rem]">
+          <AnimatedText
+            as="h2"
+            className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-5xl"
+          >
+            About Me
+          </AnimatedText>
+          <div className="mt-6 space-y-5 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
+            <AnimatedText as="p" delay={0.1}>
+              I am Xiaojing Yang, a master&apos;s student in Language Technology
+              at Uppsala University with a background in Business Analytics and
+              professional experience as a data analyst.
+            </AnimatedText>
+            <AnimatedText as="p" delay={0.2}>
+              During my master&apos;s, I developed a strong background in NLP and
+              multilingual language technologies, particularly in large
+              language models, machine translation, information retrieval,
+              model adaptation, and reliable NLP system development.
+            </AnimatedText>
+            <AnimatedText as="p" delay={0.3}>
+              I started my research with multilingual domain adaptation,
+              particularly low-resource machine translation in the petroleum
+              domain. I explored parameter-efficient adaptation with LoRA and
+              later extended this work in my master&apos;s thesis to multilingual
+              adaptation using Mixture-of-Experts and language-specific
+              adapters.
+            </AnimatedText>
+            <AnimatedText as="p" delay={0.4}>
+              Through these projects, I became interested not only in how
+              models can be adapted and improved, but also in how training data
+              shape model behaviour. This led to my recent work on training-data
+              attribution using Shapley values. My research has since expanded
+              into related areas, including evidence-grounded information
+              retrieval, GraphRAG for long documents, and bias evaluation in
+              language and vision-language models. Across these directions, I
+              am particularly interested in developing language technologies
+              that are adaptable, interpretable, and reliable.
+            </AnimatedText>
+          </div>
+        </div>
+      </AnimatedSection>
+      <AnimatedSection
         className="container space-y-6 bg-muted py-10"
         id="publications"
       >
