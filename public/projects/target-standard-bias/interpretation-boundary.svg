@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 810" role="img" aria-labelledby="title desc">
+  <title id="title">Metric interpretation boundary</title>
+  <desc id="desc">A higher reference score may reflect translation improvement, target-standard alignment, or both, so written-standard behavior must be reported separately.</desc>
+  <rect width="1440" height="810" fill="#0f172a"/>
+  <text x="720" y="85" text-anchor="middle" fill="#f8fafc" font-family="Inter,Arial,sans-serif" font-size="40" font-weight="780">What can a higher score mean?</text>
+  <text x="720" y="126" text-anchor="middle" fill="#94a3b8" font-family="Inter,Arial,sans-serif" font-size="21">In a multi-standard language, reference overlap and language preference can move together.</text>
+  <g font-family="Inter,Arial,sans-serif">
+    <circle cx="570" cy="390" r="205" fill="#4f46e5" opacity=".82"/>
+    <circle cx="870" cy="390" r="205" fill="#14b8a6" opacity=".78"/>
+    <text x="500" y="330" text-anchor="middle" fill="white" font-size="29" font-weight="800">Translation</text>
+    <text x="500" y="368" text-anchor="middle" fill="white" font-size="29" font-weight="800">improvement</text>
+    <text x="940" y="330" text-anchor="middle" fill="white" font-size="29" font-weight="800">Closer target-</text>
+    <text x="940" y="368" text-anchor="middle" fill="white" font-size="29" font-weight="800">standard alignment</text>
+    <rect x="626" y="425" width="188" height="58" rx="29" fill="#f8fafc"/>
+    <text x="720" y="462" text-anchor="middle" fill="#0f172a" font-size="23" font-weight="850">OR BOTH</text>
+    <rect x="245" y="650" width="950" height="82" rx="22" fill="#172554" stroke="#5b7cfa" stroke-width="2"/>
+    <text x="720" y="684" text-anchor="middle" fill="#dbeafe" font-size="23" font-weight="750">Interpretation rule</text>
+    <text x="720" y="714" text-anchor="middle" fill="#bfdbfe" font-size="20">Report quality metrics beside Bokmål/Nynorsk behavior and the reference distribution.</text>
+  </g>
+</svg>

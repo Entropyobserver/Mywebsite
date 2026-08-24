@@ -346,7 +346,7 @@ export const Projects: ProjectInterface[] = [
     type: "Research",
     category: ["Research", "Responsible AI", "Machine Translation", "Evaluation"],
     shortDescription:
-      "A responsible AI project studying how target-side data filtering can silently specialize Norwegian MT systems toward one written standard and change metric interpretation.",
+      "A controlled responsible-AI study of how target-side filtering can specialize Norwegian MT toward Bokmål, shift reported scores, and complicate evaluation in a multi-standard language.",
     techStack: [
       "Python",
       "PyTorch",
@@ -363,28 +363,68 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2026-05-01"),
     endDate: new Date("2026-08-01"),
-    companyLogoImg:
-      "/projects/target-standard-bias/random-baseline-barchart.png",
+    companyLogoImg: "/projects/target-standard-bias/cover.svg",
     pagesInfoArr: [
       {
-        title: "Written-Standard Data Diagnostics",
+        title: "Research Questions",
         description:
-          "The project treats filtering as a modeling decision, not a neutral preprocessing step, and evaluates how written-standard distributions affect MT scores and output behavior.",
+          "RQ1. Does target-side filtering toward Bokmål change translation quality or mainly change the written standard a model produces?\n\nRQ2. Are apparent gains caused by the linguistic identity of the retained examples, or simply by differences in training-set size?\n\nRQ3. Do filtering effects persist across NLLB-200 model scales and evaluation domains?\n\nRQ4. How should automatic scores be interpreted when the reference itself reflects one accepted written standard?",
+        imgArr: [],
+      },
+      {
+        title: "Controlled Experimental Framework",
+        description:
+          "We treat filtering as the experimental intervention. Models are trained under original mixed-standard, Bokmål-filtered, and size-controlled conditions while holding the adaptation recipe and evaluation protocol fixed. The comparison is repeated across NLLB-200 scales so that a preprocessing choice is not mistaken for a model-size effect.",
+        imgArr: ["/projects/target-standard-bias/study-design.svg"],
+      },
+      {
+        title: "Filtering Is a Modeling Decision",
+        description:
+          "Target-side language identification is often introduced as corpus cleaning, but removing examples also changes which legitimate Norwegian forms the model sees. We therefore audit label distributions before and after filtering, retain the original condition as a reference point, and record what the filter removes rather than assuming that every excluded sentence is noise.",
+        imgArr: [],
+      },
+      {
+        title: "Evaluation Across Quality, Terminology, and Standard Use",
+        description:
+          "The evaluation separates several behaviors that a single score can collapse. BLEU and chrF track reference overlap; terminology F1 checks domain terms; written-standard identification measures high-Bokmål and Nynorsk-like output; and FLORES provides an out-of-domain robustness check. Paired comparisons and bootstrap uncertainty are used wherever the same test items are shared across systems.",
+        imgArr: ["/projects/target-standard-bias/evaluation-matrix.svg"],
+      },
+      {
+        title: "Size-Matched Baseline Diagnostic",
+        description:
+          "A companion diagnostic compares the linguistically defined high-Bokmål group with random groups of the same size. The true group produces a much stronger and directionally coherent pattern across BLEU, chrF, terminology F1, high-Bokmål rate, and Nynorsk-like rate. This does not by itself establish causality, but it shows why group identity must be tested separately from sample count.",
         imgArr: ["/projects/target-standard-bias/random-baseline-barchart.png"],
+      },
+      {
+        title: "Cross-Scale and Out-of-Domain Robustness",
+        description:
+          "The same controlled conditions are evaluated across multiple NLLB-200 scales and on both the in-domain petroleum test set and an out-of-domain FLORES slice. This design asks whether written-standard specialization is stable, model-dependent, or tied to the domain and reference distribution used to measure it.",
+        imgArr: [],
+      },
+      {
+        title: "Interpreting Metric Gains in a Multi-Standard Language",
+        description:
+          "A higher reference-based score can indicate better translation, closer alignment with the reference's written standard, or both. The analysis therefore reports translation quality and output-standard behavior side by side, and avoids treating a Bokmål shift as a universal quality improvement when Nynorsk is also a valid target standard.",
+        imgArr: ["/projects/target-standard-bias/interpretation-boundary.svg"],
+      },
+      {
+        title: "Human Review and Responsible-Use Safeguards",
+        description:
+          "Diagnostic human review checks whether automatic standard labels match the actual output, whether terminology changes preserve meaning, and whether apparent metric improvements hide unwanted normalization. The practical safeguard is simple: document the filter, publish pre/post-filter distributions, evaluate each intended standard explicitly, and align deployment claims with the users and language varieties the system is meant to serve.",
+        imgArr: [],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "This project studies target-standard bias in Norwegian machine translation. The core question is whether target-side filtering toward Bokmal changes both model behavior and the way automatic metrics reward that behavior.",
-        "The method compares original, filtered, and size-controlled training conditions across NLLB-200 model scales. It combines automatic MT metrics, terminology evaluation, written-standard identification, out-of-domain FLORES checks, and diagnostic human assessment.",
-        "My contribution was to connect data filtering with responsible evaluation: I helped frame filtering as an auditable source of target-standard specialization, designed the size-controlled comparison, analyzed written-standard output shifts, and translated the result into practical safeguards for MT evaluation.",
+        "Norwegian machine translation is evaluated in a setting where Bokmål and Nynorsk are both legitimate written standards. This project asks what happens when target-side filtering, presented as data cleaning, systematically favors Bokmål before LoRA adaptation of NLLB-200.",
+        "The study compares original mixed-standard data, Bokmål-filtered data, and size-controlled baselines across model scales. It evaluates reference-based translation quality, domain terminology, written-standard output behavior, out-of-domain robustness, and diagnostic human judgments instead of relying on one aggregate score.",
+        "As co-author and controlled-experiment analysis lead, I helped frame filtering as an auditable modeling intervention, designed the size-matched comparisons, analyzed output-standard shifts, and translated the evaluation findings into practical safeguards for multilingual MT development.",
       ],
       bullets: [
-        "Designed a size-controlled comparison between original mixed-standard data and Bokmal-filtered data.",
-        "Evaluated translation quality, terminology behavior, written-standard output rates, and robustness across model scales.",
-        "Showed why reference-based metrics can encode target-standard preferences in multi-standard languages.",
-        "Added human-evaluation and deployment-interpretation framing to avoid treating all specialization as either good or bad.",
-        "Kept the project summary high-level until the manuscript path is settled.",
+        "Designed controlled original, filtered, and size-matched training conditions for LoRA-based NLLB adaptation.",
+        "Evaluated BLEU, chrF, terminology F1, written-standard output rates, and out-of-domain robustness across model scales.",
+        "Separated linguistic group identity from sample-size effects using random size-matched diagnostics and paired statistical validation.",
+        "Developed an interpretation framework and human-review safeguards for reference-based evaluation in multi-standard languages.",
       ],
     },
   },
