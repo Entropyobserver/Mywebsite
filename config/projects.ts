@@ -59,9 +59,9 @@ export const Projects: ProjectInterface[] = [
     companyLogoImg: "/projects/lora-nmt-petroleum/cover.png",
     pagesInfoArr: [
       {
-        title: "Project Overview: Corpus to Evaluation",
+        title: "Research Questions",
         description:
-          "The study follows a complete adaptation pipeline for petroleum-domain English-Norwegian MT: diagnose the corpus, identify an efficient training budget, tune LoRA adapters, benchmark against strong baselines, and evaluate translation quality with both automatic metrics and domain-aware human analysis.",
+          "RQ1. Can we adapt a general-purpose model to this domain without a lot of data or heavy computation?\n\nRQ2. How much training data do we actually need?\n\nRQ3. Can we further improve results through hyperparameter optimization?\n\nRQ4. How can we rigorously evaluate the final model on the held-out test set?",
         imgArr: ["/projects/lora-nmt-petroleum/framework_horizontal.png"],
       },
       {

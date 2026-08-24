@@ -123,7 +123,7 @@ export default function Project({ params }: ProjectPageProps) {
               <Icons.star className="h-5 w-5 mr-2" /> {page.title}
             </h3>
             <div>
-              <p>{page.description}</p>
+              <p className="whitespace-pre-line">{page.description}</p>
               {page.imgArr.map((img, ind) => (
                 <Image
                   src={img}
