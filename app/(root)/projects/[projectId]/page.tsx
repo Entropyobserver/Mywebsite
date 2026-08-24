@@ -125,15 +125,30 @@ export default function Project({ params }: ProjectPageProps) {
             <div>
               <p className="whitespace-pre-line">{page.description}</p>
               {page.imgArr.map((img, ind) => (
-                <Image
-                  src={img}
+                <a
                   key={ind}
-                  alt={img}
-                  width={720}
-                  height={405}
-                  className="my-4 rounded-md border bg-muted transition-colors"
-                  priority
-                />
+                  href={img}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Open ${page.title} image at full size`}
+                  className={cn(
+                    "block",
+                    page.imageLayout === "portrait" && "mx-auto w-fit"
+                  )}
+                >
+                  <Image
+                    src={img}
+                    alt={`${page.title} figure`}
+                    width={page.imageLayout === "portrait" ? 435 : 720}
+                    height={page.imageLayout === "portrait" ? 749 : 405}
+                    className={cn(
+                      "my-4 rounded-md border bg-muted transition-colors",
+                      page.imageLayout === "portrait" &&
+                        "max-h-[650px] w-auto max-w-full object-contain"
+                    )}
+                    priority
+                  />
+                </a>
               ))}
             </div>
           </div>
