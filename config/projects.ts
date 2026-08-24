@@ -83,21 +83,15 @@ export const Projects: ProjectInterface[] = [
         imgArr: ["/projects/lora-nmt-petroleum/hyperparameter_heatmaps.png"],
       },
       {
-        title: "Experiment 2b: LoRA Hyperparameter Main Effects",
+        title: "Experiment 2b: Optuna with ASHA Pruning",
         description:
-          "The main-effects analysis separated the average impact of rank, alpha, and dropout on validation BLEU. Across the searched configurations, the LoRA scaling factor alpha emerged as the strongest driver of adaptation performance.",
-        imgArr: ["/projects/lora-nmt-petroleum/parameter_importance.png"],
-      },
-      {
-        title: "Experiment 2c: Optuna fANOVA Importance",
-        description:
-          "The Optuna study confirmed the grid-search pattern through fANOVA importance analysis. Alpha dominated relative hyperparameter importance, while rank and dropout contributed much less in this petroleum-domain setting.",
+          "We ran 50 Optuna trials on a 2,000-pair subset to explore a wider range of LoRA configurations. Optuna proposed new parameter combinations, while ASHA stopped poorly performing trials early. The most promising configurations were then selected for further evaluation on the 8,000-pair subset. An fANOVA analysis attributed 97.3% of the observed performance variation to alpha, compared with 1.9% for rank and 0.8% for dropout.",
         imgArr: ["/projects/lora-nmt-petroleum/optuna_importance.png"],
       },
       {
-        title: "Experiment 2d: Pareto Front for Final Configuration Selection",
+        title: "Experiment 2c: Multi-Objective Selection and Stability Validation",
         description:
-          "For final configuration selection, I compared candidate adapters on BLEU and chrF rather than optimizing a single score. The Pareto front highlights configurations that offered the best trade-offs, and the selected setup balanced lexical precision with character-level robustness.",
+          "The Optuna study jointly optimized BLEU and chrF rather than selecting configurations from a single metric. Pareto-optimal candidates were identified, and the top three were retrained on the 8,000-pair subset using three random seeds. The selected configuration, r = 8, alpha = 64, and dropout = 0, achieved validation BLEU scores of 60.33, 60.61, and 60.11 across the three runs, supporting stable convergence before final model training.",
         imgArr: ["/projects/lora-nmt-petroleum/pareto_front.png"],
       },
       {
