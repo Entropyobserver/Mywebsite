@@ -71,10 +71,10 @@ export const Projects: ProjectInterface[] = [
         imgArr: ["/projects/lora-nmt-petroleum/corpus-source-pipeline.png"],
       },
       {
-        title: "Experiment 1: Data Scaling and Training Budget",
+        title: "Experiment 1: How Much Training Data Do We Need?",
         description:
-          "This experiment examined how translation quality changed as the training corpus grew from 100 examples to the full 13,935 sentence pairs, using three random seeds for each subset. The learning curve revealed three stages: a high-efficiency phase from 100 to 2,000 pairs with rapid BLEU gains; diminishing returns from 2,000 to 8,000 as performance continued to improve more gradually; and a low-ROI phase beyond 8,000 with almost no additional gain. The results were stable across seeds, and 8,000 pairs - 57% of the full training data - achieved 96% of the maximum BLEU score, making it the practical budget for the subsequent hyperparameter search.",
-        imgArr: ["/projects/lora-nmt-petroleum/data_scaling_analysis.png"],
+          "We trained LoRA models with nine different subsets of training data, ranging from 100 to 13,935 sentence pairs, using three random seeds for each setting. The learning curve shows three stages: rapid gains up to 2,000 pairs, diminishing returns from 2,000 to 8,000, and little additional improvement beyond 8,000. The 8,000-pair subset used 57% of the full training data while retaining 96% of the maximum BLEU, so we selected it as the training budget for subsequent hyperparameter optimization.",
+        imgArr: ["/projects/lora-nmt-petroleum/experiment-1-data-scaling.png"],
       },
       {
         title: "Experiment 2a: Grid Search Hyperparameter Landscape",
