@@ -67,7 +67,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Corpus Source, Diagnostics, and Cleaning",
         description:
-          "The dataset comes from the Norwegian Petroleum Directorate translation memory released through ELRC. Before model training, I built a diagnostic and cleaning pipeline to make the raw professional EN-NO petroleum translations suitable for low-resource domain adaptation. The pipeline checked sentence-level alignment through length distributions and length correlation, assessed corpus quality across semantic alignment, completeness, uniqueness, and domain relevance, then normalized text, removed short fragments, de-duplicated source/target/pair entries, and created fixed train/dev/test splits.",
+          "The dataset comes from the Norwegian Petroleum Directorate translation memory released through ELRC. Before training, I built a diagnostic and cleaning pipeline to understand the quality of the raw EN-NO data and prepare it for domain adaptation. The pipeline checks alignment, completeness, duplicates, and domain relevance, then cleans the corpus and creates fixed train/dev/test splits.",
         imgArr: ["/projects/lora-nmt-petroleum/corpus-source-pipeline.png"],
       },
       {
