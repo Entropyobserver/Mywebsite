@@ -79,7 +79,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Experiment 2a: Grid Search Hyperparameter Landscape",
         description:
-          "I first used grid search to map how LoRA rank, scaling factor, and dropout affected validation quality. This gave a controlled view of the search space before moving to a more flexible Optuna/ASHA search.",
+          "We tested 27 combinations of LoRA rank, alpha, and dropout. Higher alpha generally improved validation BLEU, while increasing rank showed no consistent benefit. Models without dropout tended to perform slightly better. The best observed setting was r = 8, alpha = 64, and dropout = 0. Since grid search tests only fixed values, better settings may exist between or beyond them.",
         imgArr: ["/projects/lora-nmt-petroleum/hyperparameter_heatmaps.png"],
       },
       {
