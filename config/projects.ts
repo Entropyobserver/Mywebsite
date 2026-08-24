@@ -91,7 +91,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Experiment 2c: Multi-Objective Selection and Stability Validation",
         description:
-          "The Optuna study jointly optimized BLEU and chrF rather than selecting configurations from a single metric. Pareto-optimal candidates were identified, and the top three were retrained on the 8,000-pair subset using three random seeds. The selected configuration, r = 8, alpha = 64, and dropout = 0, achieved validation BLEU scores of 60.33, 60.61, and 60.11 across the three runs, supporting stable convergence before final model training.",
+          "We used Optuna to optimize both BLEU and chrF. We identified Pareto-optimal configurations, meaning configurations where improving one metric would require sacrificing the other. We then selected the top three candidates and retrained them on the 8,000-pair subset with three different random seeds. The selected configuration, r = 8, alpha = 64, and dropout = 0, achieved BLEU scores of 60.33, 60.61, and 60.11 across the three runs. The similar scores suggest that the configuration was stable.",
         imgArr: ["/projects/lora-nmt-petroleum/pareto_front.png"],
       },
       {
