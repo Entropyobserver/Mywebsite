@@ -37,7 +37,7 @@ export const Projects: ProjectInterface[] = [
     shortDescription:
       "Published EAMT research on parameter-efficient English-Norwegian petroleum-domain NMT, showing how LoRA can adapt NLLB-200 with strong quality gains while updating less than 0.4% of model parameters.",
     websiteLink: "https://huggingface.co/spaces/entropy25/mt",
-    githubLink: "https://github.com/Entropyobserver/mt",
+    githubLink: "https://github.com/Entropyobserver/lora-nmt-petroleum",
     techStack: [
       "Python",
       "PyTorch",
@@ -61,68 +61,69 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Project Overview: Corpus to Evaluation",
         description:
-          "The website overview summarizes the main experimental workflow: corpus diagnostics, data-scaling analysis, dual-track LoRA hyperparameter search, final benchmarking, and automatic evaluation with BLEU, chrF, COMET, and terminology review.",
+          "The study follows a complete adaptation pipeline for petroleum-domain English-Norwegian MT: diagnose the corpus, identify an efficient training budget, tune LoRA adapters, benchmark against strong baselines, and evaluate translation quality with both automatic metrics and domain-aware human analysis.",
         imgArr: ["/projects/lora-nmt-petroleum/framework_horizontal.png"],
       },
       {
         title: "Corpus Diagnostics",
         description:
-          "The raw EN-NO petroleum corpus was checked before modeling to understand alignment quality, completeness, duplication, length behavior, and domain coverage. This step motivates why data cleaning and diagnostics are part of the contribution, not just preprocessing.",
+          "Before model adaptation, I analyzed the raw EN-NO petroleum corpus for alignment quality, missing content, duplicates, sentence-length behavior, and terminology coverage. This made data quality a core part of the research contribution, not only a preprocessing step.",
         imgArr: ["/projects/lora-nmt-petroleum/sanity.png"],
       },
       {
         title: "Experiment 1: Data Scaling and Training Budget",
         description:
-          "The analysis identifies an efficient training subset before expensive hyperparameter search, showing that 8,000 samples recover most of the full-data performance in this domain.",
+          "The data-scaling experiment tested how much in-domain data was actually needed before running expensive hyperparameter search. It showed that an 8,000-sentence subset recovered most of the full-data BLEU performance, giving the later experiments a practical training budget.",
         imgArr: ["/projects/lora-nmt-petroleum/data_scaling_analysis.png"],
       },
       {
         title: "Experiment 2a: Grid Search Hyperparameter Landscape",
         description:
-          "The grid search maps how LoRA rank, scaling factor, and dropout interact, providing a systematic view of the hyperparameter landscape before selecting final candidates.",
+          "I first used grid search to map how LoRA rank, scaling factor, and dropout affected validation quality. This gave a controlled view of the search space before moving to a more flexible Optuna/ASHA search.",
         imgArr: ["/projects/lora-nmt-petroleum/hyperparameter_heatmaps.png"],
       },
       {
         title: "Experiment 2b: LoRA Hyperparameter Main Effects",
         description:
-          "This figure isolates the average effect of rank, alpha, and dropout on validation BLEU. It shows that the scaling factor alpha is the strongest driver of performance in the searched configuration space.",
+          "The main-effects analysis separated the average impact of rank, alpha, and dropout on validation BLEU. Across the searched configurations, the LoRA scaling factor alpha emerged as the strongest driver of adaptation performance.",
         imgArr: ["/projects/lora-nmt-petroleum/parameter_importance.png"],
       },
       {
         title: "Experiment 2c: Optuna fANOVA Importance",
         description:
-          "The Optuna study confirms the grid-search pattern with fANOVA: LoRA alpha dominates relative hyperparameter importance, while rank and dropout contribute much less.",
+          "The Optuna study confirmed the grid-search pattern through fANOVA importance analysis. Alpha dominated relative hyperparameter importance, while rank and dropout contributed much less in this petroleum-domain setting.",
         imgArr: ["/projects/lora-nmt-petroleum/optuna_importance.png"],
       },
       {
         title: "Experiment 2d: Pareto Front for Final Configuration Selection",
         description:
-          "The Pareto front compares BLEU and chrF from the Optuna study. Pareto-optimal candidates are highlighted, and the selected configuration balances both metrics rather than optimizing only one score.",
+          "For final configuration selection, I compared candidate adapters on BLEU and chrF rather than optimizing a single score. The Pareto front highlights configurations that offered the best trade-offs, and the selected setup balanced lexical precision with character-level robustness.",
         imgArr: ["/projects/lora-nmt-petroleum/pareto_front.png"],
       },
       {
         title: "Experiment 3: Final Model Performance",
         description:
-          "The optimized LoRA model is compared with the zero-shot NLLB baseline and commercial MT systems. It achieves 61.48 BLEU and 79.19 chrF++, outperforming evaluated commercial systems on lexical metrics while reaching comparable COMET semantic adequacy.",
+          "The optimized LoRA model was then benchmarked against the zero-shot NLLB baseline and commercial MT systems. It reached 61.48 BLEU and 79.19 chrF++, outperforming the evaluated commercial systems on lexical metrics while remaining comparable on COMET-based semantic adequacy.",
         imgArr: ["/projects/lora-nmt-petroleum/final_model_performance.png"],
       },
       {
         title: "Experiment 4: LoRA vs. Full Fine-Tuning",
         description:
-          "This comparison evaluates whether the parameter-efficient LoRA setup remains competitive against full fine-tuning across training sizes. The maximum observed gap stays below one BLEU point, supporting LoRA as an efficient alternative for this resource-constrained domain.",
+          "The final efficiency comparison tested whether LoRA could stay close to full fine-tuning across different training sizes. The largest observed gap stayed below one BLEU point, supporting LoRA as a strong adaptation strategy when compute and trainable parameters are constrained.",
         imgArr: ["/projects/lora-nmt-petroleum/lora_vs_full_ft.png"],
       },
       {
         title: "Human Error Analysis",
         description:
-          "The final analysis complements BLEU, chrF, and COMET with a structured human evaluation workflow. From 1,742 held-out NPD test sentences, 50 examples were stratified by low, mid, and high BLEU, then independently annotated by two reviewers across eight error types and three severity levels. Agreement was checked with Cohen's kappa before results were aggregated, showing why automatic metrics still need domain-aware human error analysis.",
+          "To complement BLEU, chrF, and COMET, we conducted a structured human error analysis on 50 sentences sampled from low-, mid-, and high-BLEU groups within the 1,742-sentence held-out NPD test set. Two reviewers annotated errors across eight categories and three severity levels, with Cohen's kappa used to check agreement before aggregating results.",
         imgArr: ["/projects/lora-nmt-petroleum/human_eval_process_flow.png"],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "This project investigated parameter-efficient fine-tuning for adapting multilingual neural machine translation to a specialized low-resource domain. Using NLLB-200 with LoRA adapters, the study examined how noisy parallel corpora, domain-specific petroleum terminology, and limited training data affect adaptation performance through corpus diagnostics, data scaling, hyperparameter optimization, benchmarking, and human evaluation.",
-        "As first author and lead experimental contributor, I led corpus diagnostics, LoRA hyperparameter optimization, evaluation analysis, and experimental design throughout the study.",
+        "As first author and lead experimental contributor, I led the corpus diagnostics, LoRA hyperparameter optimization, evaluation analysis, and experimental design for this study.",
+        "The project investigated how parameter-efficient fine-tuning can adapt multilingual neural machine translation to a specialized low-resource domain. Using NLLB-200 with LoRA adapters, we studied English-to-Norwegian petroleum translation, where noisy parallel data, specialized terminology, and limited in-domain examples make direct adaptation difficult.",
+        "The work connects the full experimental pipeline: corpus quality analysis, data scaling, LoRA configuration search, final benchmarking, and human error analysis.",
       ],
       bullets: [
         "Designed a data-quality assessment and cleaning pipeline for noisy parallel corpora, evaluating alignment quality, completeness, duplicate removal, and domain-specific terminology coverage.",
