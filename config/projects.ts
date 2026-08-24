@@ -31,7 +31,7 @@ export const Projects: ProjectInterface[] = [
   {
     id: "lora-nmt-petroleum",
     companyName:
-      "Low-Resource Petroleum-Domain Machine Translation with LoRA",
+      "LoRA Fine-Tuning of English-Norwegian NMT for the Oil & Gas Industry",
     type: "Research",
     category: ["Research", "Machine Translation", "NLP", "Evaluation"],
     shortDescription:
