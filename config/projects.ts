@@ -65,10 +65,10 @@ export const Projects: ProjectInterface[] = [
         imgArr: ["/projects/lora-nmt-petroleum/framework_horizontal.png"],
       },
       {
-        title: "Corpus Diagnostics",
+        title: "Corpus Source, Diagnostics, and Cleaning",
         description:
-          "Before model adaptation, I analyzed the raw EN-NO petroleum corpus for alignment quality, missing content, duplicates, sentence-length behavior, and terminology coverage. This made data quality a core part of the research contribution, not only a preprocessing step.",
-        imgArr: ["/projects/lora-nmt-petroleum/sanity.png"],
+          "The dataset comes from the Norwegian Petroleum Directorate translation memory released through ELRC. Before model training, I built a diagnostic and cleaning pipeline to make the raw professional EN-NO petroleum translations suitable for low-resource domain adaptation. The pipeline checked sentence-level alignment through length distributions and length correlation, assessed corpus quality across semantic alignment, completeness, uniqueness, and domain relevance, then normalized text, removed short fragments, de-duplicated source/target/pair entries, and created fixed train/dev/test splits.",
+        imgArr: ["/projects/lora-nmt-petroleum/corpus-source-pipeline.png"],
       },
       {
         title: "Experiment 1: Data Scaling and Training Budget",
