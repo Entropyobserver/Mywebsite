@@ -150,34 +150,33 @@ export default function IndexPage() {
           </AnimatedText>
           <div className="mt-6 space-y-5 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
             <AnimatedText as="p" delay={0.1}>
-              I am Xiaojing Yang, a master&apos;s student in Language Technology
-              at Uppsala University with a background in Business Analytics and
-              professional experience as a data analyst.
+              My name is Xiaojing Yang. I am a master&apos;s student in Language
+              Technology at Uppsala University with a background in Business
+              Analytics and four years of professional experience as a data
+              analyst. My previous work gave me a strong foundation in data
+              analysis, machine learning, statistical modelling, and
+              experimental design.
             </AnimatedText>
             <AnimatedText as="p" delay={0.2}>
-              During my master&apos;s, I developed a strong background in NLP and
-              multilingual language technologies, particularly in large
-              language models, machine translation, information retrieval,
-              model adaptation, and reliable NLP system development.
+              My research focuses on multilingual NLP, model adaptation, and
+              reliable language technology. It began with low-resource machine
+              translation in the petroleum domain, where I explored
+              parameter-efficient adaptation using LoRA. I later extended this
+              work in my master&apos;s thesis to multilingual adaptation using
+              Mixture-of-Experts and language-specific adapters. Through these
+              projects, I became increasingly interested not only in how models
+              can be adapted to improve their performance, but also in how
+              training data shape model behaviour.
             </AnimatedText>
             <AnimatedText as="p" delay={0.3}>
-              I started my research with multilingual domain adaptation,
-              particularly low-resource machine translation in the petroleum
-              domain. I explored parameter-efficient adaptation with LoRA and
-              later extended this work in my master&apos;s thesis to multilingual
-              adaptation using Mixture-of-Experts and language-specific
-              adapters.
-            </AnimatedText>
-            <AnimatedText as="p" delay={0.4}>
-              Through these projects, I became interested not only in how
-              models can be adapted and improved, but also in how training data
-              shape model behaviour. This led to my recent work on training-data
-              attribution using Shapley values. My research has since expanded
-              into related areas, including evidence-grounded information
-              retrieval, GraphRAG for long documents, and bias evaluation in
-              language and vision-language models. Across these directions, I
-              am particularly interested in developing language technologies
-              that are adaptable, interpretable, and reliable.
+              My recent work investigates this question through group-level
+              training-data attribution using Shapley values. I also work on
+              evidence-grounded retrieval, including GraphRAG for long
+              documents, and bias evaluation in language and vision-language
+              models. Across these areas, my broader goal is to develop NLP
+              systems that are adaptable, interpretable, and reliable,
+              together with methods for systematically auditing and
+              understanding model behaviour.
             </AnimatedText>
           </div>
         </div>
