@@ -97,7 +97,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Experiment 3: Final Model Performance",
         description:
-          "The optimized LoRA model was then benchmarked against the zero-shot NLLB baseline and commercial MT systems. It reached 61.48 BLEU and 79.19 chrF++, outperforming the evaluated commercial systems on lexical metrics while remaining comparable on COMET-based semantic adequacy.",
+          "We then compared the final LoRA model with the zero-shot NLLB baseline and commercial MT systems. In this petroleum-domain setting, it achieved comparable performance on BLEU, chrF++, and COMET. These sentence-level results should not be taken as representative of real-world petroleum-domain performance, given the limited data available in this study.",
         imgArr: ["/projects/lora-nmt-petroleum/final_model_performance.png"],
       },
       {
