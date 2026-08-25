@@ -162,6 +162,47 @@ export default function ModularLoraResearch() {
       </section>
 
       <section>
+        <SectionHeader title="System Overview" />
+        <div className="grid gap-6 rounded-2xl border bg-muted/20 p-5 sm:p-7 lg:grid-cols-[minmax(300px,0.9fr)_minmax(0,1.1fr)] lg:items-center">
+          <div>
+            <Image
+              src="/projects/modular-lora-experts/fig1_system_architecture.png"
+              alt="System architecture with four language-specific LoRA experts, a frozen NLLB backbone, gated router training, and top-1 expert inference"
+              width={919}
+              height={1001}
+              className="mx-auto h-auto w-full max-w-md rounded-xl bg-white object-contain"
+            />
+            <p className="mt-3 text-center text-xs text-muted-foreground">
+              Figure 1. Expert training, router training, and top-1 inference.
+            </p>
+          </div>
+          <div className="space-y-5 text-base leading-8 text-muted-foreground sm:text-lg">
+            <p>
+              The system adapts a frozen{" "}
+              <strong className="font-semibold text-foreground">
+                NLLB-200-distilled-600M
+              </strong>{" "}
+              backbone with four language-specific LoRA experts. The EN expert
+              is trained on authentic EN–NO data, while the DE, NL, and FR
+              experts are trained on synthetic source data paired with Norwegian
+              targets.
+            </p>
+            <p>
+              After expert training, a gated MLP router is trained on mixed
+              multilingual data while the backbone and experts remain frozen. At
+              inference, the router selects a{" "}
+              <strong className="font-semibold text-foreground">
+                top-1 expert
+              </strong>{" "}
+              to generate the Norwegian translation. Independent Experts use the
+              matching adapter directly, Multitask LoRA shares one adapter, and
+              the MoE performs automatic expert selection.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
         <SectionHeader title="Target-Anchored Synthesis" />
         <div className="grid gap-6 rounded-2xl border bg-muted/20 p-5 sm:p-7 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,480px)] lg:items-start">
           <div className="self-center">
