@@ -1,7 +1,7 @@
 const researchQuestions = [
-  "Can synthetic data support low-resource petroleum translation?",
-  "Do language-specific experts outperform a shared adapter?",
-  "Does more accurate routing improve translation?",
+  "Can synthetic data support low-resource petroleum translation from German, French, and Dutch into Norwegian?",
+  "How do language-specific experts compare with a shared multitask adapter in translation quality and terminology accuracy?",
+  "Does more accurate expert routing improve translation quality?",
 ];
 
 const syntheticBleu = [
@@ -201,42 +201,6 @@ export default function ModularLoraResearch() {
               </p>
             </div>
           ))}
-        </div>
-      </section>
-
-      <section>
-        <SectionHeader eyebrow="Approach" title="Target-Anchored Synthesis" />
-        <div className="grid gap-6 rounded-2xl border bg-muted/20 p-5 sm:p-7 lg:grid-cols-[minmax(0,1fr)_minmax(280px,420px)] lg:items-start">
-          <div className="self-center">
-            <p className="text-base leading-8 text-muted-foreground sm:text-lg">
-              We use authentic Norwegian NPD text as a semantic anchor and
-              generate German, Dutch, and French source sentences while keeping
-              the Norwegian targets unchanged. Validated terminology is injected
-              as generation constraints, and the resulting pairs are filtered
-              using LaBSE similarity and FTA-based quality checks. The final
-              dataset contains{" "}
-              <strong className="font-semibold text-foreground">
-                41,527 high-quality synthetic pairs
-              </strong>{" "}
-              from{" "}
-              <strong className="font-semibold text-foreground">
-                51,890 generated pairs
-              </strong>{" "}
-              across DE–NO, NL–NO, and FR–NO.
-            </p>
-          </div>
-          <div>
-            <Image
-              src="/projects/modular-lora-experts/fig4_synthesis_pipeline.png"
-              alt="Figure 4: Target-Anchored Synthesis pipeline from English source and Norwegian anchor through glossary-constrained generation and quality gates"
-              width={700}
-              height={969}
-              className="mx-auto h-auto w-full max-w-sm rounded-xl bg-white object-contain"
-            />
-            <p className="mt-3 text-center text-xs text-muted-foreground">
-              Figure 4. Target-Anchored Synthesis and filtering stages.
-            </p>
-          </div>
         </div>
       </section>
 
