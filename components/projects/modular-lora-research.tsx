@@ -37,15 +37,17 @@ function SectionHeader({
   title,
   description,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description?: string;
 }) {
   return (
     <div className="mb-6">
-      <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
-        {eyebrow}
-      </p>
+      {eyebrow && (
+        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
+          {eyebrow}
+        </p>
+      )}
       <h2 className="font-heading text-3xl leading-tight lg:text-4xl">
         {title}
       </h2>
@@ -184,40 +186,21 @@ export default function ModularLoraResearch() {
   return (
     <div className="space-y-16">
       <section>
-        <SectionHeader
-          eyebrow="Problem + Research Questions"
-          title="Petroleum translation fails at the terminology level"
-          description="The project connects each research question directly to the evidence used to answer it."
-        />
-        <div className="grid gap-5 lg:grid-cols-[0.85fr_1.15fr]">
-          <div className="rounded-2xl border bg-muted/30 p-6">
-            <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-              Why domain adaptation matters
-            </p>
-            <div className="mt-6 space-y-4 font-mono text-lg">
-              <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-red-800 dark:border-red-900/60 dark:bg-red-950/30 dark:text-red-300">
-                mud weight → slamvekt <span aria-label="incorrect">✗</span>
-              </div>
-              <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-emerald-800 dark:border-emerald-900/60 dark:bg-emerald-950/30 dark:text-emerald-300">
-                mud weight → muddervekt <span aria-label="correct">✓</span>
-              </div>
+        <SectionHeader title="Research Questions" />
+        <div className="space-y-3">
+          {researchQuestions.map((question, index) => (
+            <div
+              key={question}
+              className="flex gap-4 rounded-2xl border bg-background p-5"
+            >
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-600 font-heading text-sm text-white">
+                RQ{index + 1}
+              </span>
+              <p className="self-center font-medium leading-relaxed">
+                {question}
+              </p>
             </div>
-          </div>
-          <div className="space-y-3">
-            {researchQuestions.map((question, index) => (
-              <div
-                key={question}
-                className="flex gap-4 rounded-2xl border bg-background p-5"
-              >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-600 font-heading text-sm text-white">
-                  RQ{index + 1}
-                </span>
-                <p className="self-center font-medium leading-relaxed">
-                  {question}
-                </p>
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
       </section>
 
