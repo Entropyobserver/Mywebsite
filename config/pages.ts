@@ -32,7 +32,7 @@ export const pagesConfig: PagesConfig = {
   },
   projects: {
     title: "Projects",
-    description: "I have experience building and evaluating NLP and AI systems across machine translation, retrieval, RAG, and model evaluation, with projects ranging from research prototypes to applied AI applications.",
+    description: "I have hands-on experience taking projects from idea and experimentation to implementation and evaluation, covering both research projects and applied AI systems.",
     metadata: {
       title: "Projects",
       description: "Xiaojing Yang's research and technical projects.",
