@@ -23,9 +23,9 @@ export interface PublicationInterface {
 
 export const publications: PublicationInterface[] = [
   {
-    title: "LoRA Fine-Tuning of English-Norwegian NMT for the Oil & Gas Industry",
-    authors:
-      "Xiaojing Yang, Zhihan Li, Gege Sun, Mengyue Li, Meriem Beloucif",
+    title:
+      "LoRA Fine-Tuning of English-Norwegian NMT for the Oil & Gas Industry",
+    authors: "Xiaojing Yang, Zhihan Li, Gege Sun, Mengyue Li, Meriem Beloucif",
     status: "Published",
     venue: "EAMT 2026, Proceedings Volume 2",
     date: "June 2026",
@@ -76,7 +76,7 @@ export const publications: PublicationInterface[] = [
     date: "October 2026",
     role: "First author; framework design and experimental lead",
     description:
-      "Studies modular expert architectures for low-resource, domain-specific NMT, including language-specific LoRA adapters, learned routing, target-anchored synthetic data, terminology-aware evaluation, and routing analysis.",
+      "Studies modular LoRA experts for low-resource petroleum NMT, showing that shared adaptation leads on controlled synthetic sources while learned-routing MoE generalises better to authentic source text.",
   },
   {
     title:
@@ -124,5 +124,7 @@ export const publications: PublicationInterface[] = [
   },
 ];
 
-export const featuredPublications: PublicationInterface[] =
-  publications.slice(0, 3);
+export const featuredPublications: PublicationInterface[] = publications.slice(
+  0,
+  3
+);

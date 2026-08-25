@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { Icons } from "@/components/common/icons";
+import ModularLoraResearch from "@/components/projects/modular-lora-research";
 import ProjectDescription from "@/components/projects/project-description";
 import { buttonVariants } from "@/components/ui/button";
 import ChipContainer from "@/components/ui/chip-container";
@@ -25,7 +26,12 @@ export default function Project({ params }: ProjectPageProps) {
   }
 
   return (
-    <article className="container relative max-w-3xl py-6 lg:py-10">
+    <article
+      className={cn(
+        "container relative py-6 lg:py-10",
+        project.id === "modular-lora-experts" ? "max-w-5xl" : "max-w-3xl"
+      )}
+    >
       <Link
         href="/projects"
         className={cn(
@@ -113,47 +119,51 @@ export default function Project({ params }: ProjectPageProps) {
         />
       </div>
 
-      <div className="mb-7 ">
-        <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-5">
-          Project Highlights
-        </h2>
-        {project.pagesInfoArr.map((page, ind) => (
-          <div key={ind}>
-            <h3 className="flex items-center font-heading text-xl leading-tight lg:text-xl mt-3">
-              <Icons.star className="h-5 w-5 mr-2" /> {page.title}
-            </h3>
-            <div>
-              <p className="whitespace-pre-line">{page.description}</p>
-              {page.imgArr.map((img, ind) => (
-                <a
-                  key={ind}
-                  href={img}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`Open ${page.title} image at full size`}
-                  className={cn(
-                    "block",
-                    page.imageLayout === "portrait" && "mx-auto w-fit"
-                  )}
-                >
-                  <Image
-                    src={img}
-                    alt={`${page.title} figure`}
-                    width={page.imageLayout === "portrait" ? 435 : 720}
-                    height={page.imageLayout === "portrait" ? 749 : 405}
+      {project.id === "modular-lora-experts" ? (
+        <ModularLoraResearch />
+      ) : (
+        <div className="mb-7 ">
+          <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-5">
+            Project Highlights
+          </h2>
+          {project.pagesInfoArr.map((page, ind) => (
+            <div key={ind}>
+              <h3 className="flex items-center font-heading text-xl leading-tight lg:text-xl mt-3">
+                <Icons.star className="h-5 w-5 mr-2" /> {page.title}
+              </h3>
+              <div>
+                <p className="whitespace-pre-line">{page.description}</p>
+                {page.imgArr.map((img, ind) => (
+                  <a
+                    key={ind}
+                    href={img}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Open ${page.title} image at full size`}
                     className={cn(
-                      "my-4 rounded-md border bg-muted transition-colors",
-                      page.imageLayout === "portrait" &&
-                        "max-h-[650px] w-auto max-w-full object-contain"
+                      "block",
+                      page.imageLayout === "portrait" && "mx-auto w-fit"
                     )}
-                    priority
-                  />
-                </a>
-              ))}
+                  >
+                    <Image
+                      src={img}
+                      alt={`${page.title} figure`}
+                      width={page.imageLayout === "portrait" ? 435 : 720}
+                      height={page.imageLayout === "portrait" ? 749 : 405}
+                      className={cn(
+                        "my-4 rounded-md border bg-muted transition-colors",
+                        page.imageLayout === "portrait" &&
+                          "max-h-[650px] w-auto max-w-full object-contain"
+                      )}
+                      priority
+                    />
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       <hr className="mt-12" />
       <div className="flex justify-center py-6 lg:py-10">

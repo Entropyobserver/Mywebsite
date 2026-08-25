@@ -69,9 +69,7 @@ export const Projects: ProjectInterface[] = [
         title: "Experimental Framework",
         description:
           "To answer these research questions, we designed a three-stage framework covering data scaling, dual-track LoRA hyperparameter optimization, and final benchmarking.",
-        imgArr: [
-          "/projects/lora-nmt-petroleum/framework_vertical_paper.png",
-        ],
+        imgArr: ["/projects/lora-nmt-petroleum/framework_vertical_paper.png"],
         imageLayout: "portrait",
       },
       {
@@ -99,7 +97,8 @@ export const Projects: ProjectInterface[] = [
         imgArr: ["/projects/lora-nmt-petroleum/optuna_importance.png"],
       },
       {
-        title: "Experiment 2c: Multi-Objective Selection and Stability Validation",
+        title:
+          "Experiment 2c: Multi-Objective Selection and Stability Validation",
         description:
           "We used Optuna to optimize both BLEU and chrF. We identified Pareto-optimal configurations, meaning configurations where improving one metric would require sacrificing the other. We then selected the top three candidates and retrained them on the 8,000-pair subset with three different random seeds. The selected configuration, r = 8, alpha = 64, and dropout = 0, achieved BLEU scores of 60.33, 60.61, and 60.11 across the three runs. The similar scores suggest that the configuration was stable.",
         imgArr: ["/projects/lora-nmt-petroleum/pareto_front.png"],
@@ -147,11 +146,13 @@ export const Projects: ProjectInterface[] = [
   {
     id: "modular-lora-experts",
     companyName:
-      "Modular LoRA Experts for Multilingual Domain Translation",
+      "Beyond Routing: Diagnosing Modular LoRA Experts for Low-Resource Multilingual Petroleum-Domain Translation",
     type: "Research",
     category: ["Research", "Machine Translation", "NLP", "Evaluation"],
     shortDescription:
-      "Research-in-progress summary on modular parameter-efficient adaptation for multilingual petroleum-domain MT, focusing on expert specialization, routing behavior, and terminology-aware evaluation.",
+      "A multilingual petroleum-domain NMT study showing that routing accuracy alone does not determine MoE performance: shared LoRA leads on synthetic-source tests, while modular experts generalise better to authentic source text.",
+    websiteLink: "https://huggingface.co/spaces/entropy25/mt_moe",
+    githubLink: "https://github.com/Entropyobserver/lora-moe-petroleum",
     techStack: [
       "Python",
       "PyTorch",
@@ -163,6 +164,7 @@ export const Projects: ProjectInterface[] = [
       "SacreBLEU",
       "COMET",
       "chrF",
+      "LaTeX",
       "Data Curation",
       "Statistics",
     ],
@@ -171,29 +173,99 @@ export const Projects: ProjectInterface[] = [
     companyLogoImg: "/projects/modular-lora-experts/cover.png",
     pagesInfoArr: [
       {
-        title: "High-Level Modular Adaptation Framework",
+        title: "Research Questions",
         description:
-          "The public version presents the research design at a high level: domain data construction, language-specific LoRA experts, router diagnostics, and terminology-aware evaluation. Detailed paper-level results are intentionally limited while the manuscript is being revised.",
+          "RQ1. How effective is Target-Anchored Synthesis as a training signal for low-resource petroleum-domain translation in German–Norwegian, French–Norwegian, and Dutch–Norwegian?\n\nRQ2. How do independent language-specific LoRA experts compare with shared multitask LoRA in translation quality and terminology accuracy?\n\nRQ3. What do routing behavior and cross-expert transfer reveal about expert specialization and shared capacity in modular multilingual adaptation?",
+        imgArr: [],
+      },
+      {
+        title: "Modular Adaptation Framework",
+        description:
+          "The system uses a frozen NLLB-200-distilled-600M backbone with four source-language-specific LoRA experts for English, German, French, and Dutch into Norwegian. Each rank-16 expert adds about 4.7 million parameters, or 0.76% of the backbone. A lightweight two-layer router maps mean-pooled encoder states to expert weights, adding only about 263,000 trainable parameters.",
         imgArr: ["/projects/modular-lora-experts/cover.png"],
+      },
+      {
+        title: "Two-Phase Expert and Router Training",
+        description:
+          "In Phase 1, each LoRA expert is trained independently on its language–Norwegian corpus while the multilingual backbone remains frozen. In Phase 2, the experts and backbone are frozen and only the router is trained on balanced multilingual data with entropy regularization. Hard routing selects one expert at inference; oracle language selection provides the independent-expert upper bound.",
+        imgArr: [],
+      },
+      {
+        title: "Target-Anchored Synthesis",
+        description:
+          "Authentic petroleum-domain parallel data are available only for English–Norwegian. For German, French, and Dutch, GPT-4o-mini generates synthetic source sentences from authentic English–Norwegian pairs while validated Norwegian targets act as semantic anchors. LaBSE similarity and terminology accuracy provide dual quality checks. The pipeline produces 41,527 synthetic training pairs and 51,890 synthetic pairs across train, development, and test splits.",
+        imgArr: [],
+      },
+      {
+        title: "Human Validation of Synthetic Sources",
+        description:
+          "Two annotators reviewed 100 synthetic source sentences per language without seeing the automatic quality scores. Across 300 items, mean adequacy was 4.862/5, fluency was 4.703/5, and terminology accuracy was 94.4%. These results support sentence-level quality, but they do not establish equivalence with naturally occurring petroleum documents.",
+        imgArr: [
+          "/projects/modular-lora-experts/synthetic-data-validation.png",
+        ],
+      },
+      {
+        title: "Experimental Comparison",
+        description:
+          "We compare the zero-shot NLLB backbone, Google Translate, independent language experts, one shared multitask LoRA adapter, and the learned-router MoE. Evaluation combines BLEU, chrF, COMET, sentence-level Formal Terminology Accuracy, terminology precision, paired bootstrap tests, and controlled cross-expert diagnostics across four source languages.",
+        imgArr: [],
+      },
+      {
+        title: "Main Results: Fluency–Terminology Trade-Off",
+        description:
+          "All adapted systems substantially outperform the zero-shot backbone. Shared multitask LoRA achieves the strongest average BLEU at 61.0, while independent experts achieve the strongest average terminology recall at 0.726. The learned-router MoE reaches 58.4 BLEU and 0.711 terminology recall, so it is best understood as a diagnostic and deployment-oriented configuration rather than the strongest overall system.",
+        imgArr: ["/projects/modular-lora-experts/system-performance.png"],
+      },
+      {
+        title: "Synthetic-Source Translation Results",
+        description:
+          "The German, French, and Dutch experts reach 93–96% of the authentic English–Norwegian expert's BLEU. On the controlled synthetic-source tests, adapted models exceed Google Translate in BLEU across all four pairs, while independent experts improve terminology accuracy over Google Translate for German–Norwegian and Dutch–Norwegian. These comparisons are controlled synthetic-source evidence, not field-performance claims.",
+        imgArr: [],
+      },
+      {
+        title: "Hard-Routing Behavior",
+        description:
+          "The learned router reaches 64.8% top-1 accuracy overall. Dutch–Norwegian is routed most accurately at 86.8%, while German–Norwegian is lowest at 40.1%. Several errors select the Dutch expert: 49.4% of German, 39.5% of French, and 21.2% of English inputs are routed there. The pattern is broader language-dependent ambiguity rather than a single isolated failure mode.",
+        imgArr: ["/projects/modular-lora-experts/routing-diagnostics.png"],
+      },
+      {
+        title: "Why Better Routing Is Not Enough",
+        description:
+          "Adding explicit language identity raises routing accuracy from 64.8% to 77.6%, but average BLEU rises by only 0.5 and terminology recall by 0.009. Closing the remaining gap to oracle routing adds just 0.2 BLEU. Better routing helps individual terminology and named-entity cases, but it is not the sole aggregate bottleneck.",
+        imgArr: [],
       },
       {
         title: "Language Representation Diagnostics",
         description:
-          "Encoder representation analysis is used as one diagnostic lens for understanding whether multilingual source languages form separable routing signals before expert selection is evaluated.",
+          "A t-SNE projection of mean-pooled NLLB encoder representations shows partial overlap among the four source languages, including a visible German–Dutch overlap region. This is a qualitative diagnostic consistent with routing ambiguity; it is not treated as causal proof or a formal separability test.",
         imgArr: ["/projects/modular-lora-experts/tsne_encoder_features.png"],
+      },
+      {
+        title: "Cross-Expert Transfer and Shared Capacity",
+        description:
+          "The matching expert is strongest for every source language, confirming genuine specialization. Yet non-matching experts remain competitive: the Dutch expert reaches 53.9 BLEU on German inputs, and the German expert reaches 56.2 BLEU on Dutch inputs. This shared Norwegian petroleum target-side capacity explains why routing errors can be locally costly without producing a large aggregate performance gap.",
+        imgArr: [],
+      },
+      {
+        title: "Conclusion and Limitations",
+        description:
+          "The central finding is that routing precision is not the only bottleneck in modular low-resource adaptation. Shared multitask LoRA maximizes surface quality, while independent experts recover more expected terminology. Because German, French, and Dutch training and evaluation sources are synthetic, broader claims require authentic non-English petroleum documents, additional domains, more diverse languages, and larger backbones.",
+        imgArr: [],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "This project explores modular parameter-efficient adaptation for multilingual domain machine translation. It asks whether source-language-specific LoRA experts and routing mechanisms can support terminology-sensitive translation when direct parallel data is scarce.",
-        "The current public summary is intentionally high-level while the manuscript is being revised for a future review cycle. It emphasizes the research question, system design, diagnostic methods, and evaluation logic rather than exposing full experimental results or manuscript details.",
+        "This project studies modular parameter-efficient adaptation for multilingual petroleum-domain machine translation. It combines a frozen NLLB-200 backbone, four language-specific LoRA experts, a learned router, and Target-Anchored Synthesis for languages without authentic domain-parallel data.",
+        "The experiments challenge a simple routing-bottleneck account. Explicit language identity improves routing from 64.8% to 77.5%, yet average BLEU rises by only 0.5 on synthetic-source evaluation. On 180 naturally occurring German, French, and Dutch petroleum sentences, however, learned-routing MoE outperforms shared multitask LoRA by 2.59 BLEU and approaches oracle independent experts.",
+        "As first author and experimental lead, I designed the modular framework, synthetic-data pipeline, routing ablations, authentic-source evaluation, cross-expert diagnostics, and terminology-aware analysis used to separate routing accuracy from expert specialisation, functional overlap, and robustness under source-distribution shift.",
       ],
       bullets: [
-        "Designed a modular LoRA expert setup with source-language-specific adapters over a frozen multilingual backbone.",
-        "Developed a target-anchored synthetic data construction strategy for low-resource multilingual petroleum-domain training signals.",
-        "Implemented router and cross-expert diagnostics to analyze expert specialization, capacity sharing, and terminology-sensitive behavior.",
-        "Evaluated translation quality and terminology behavior using automatic metrics and controlled comparisons.",
-        "Kept the public website version conservative: full paper-level results and manuscript links can be added after the review process.",
+        "Built four source-language LoRA experts over a frozen NLLB-200-distilled-600M backbone, with a lightweight learned router.",
+        "Created 41,527 synthetic training pairs through Target-Anchored Synthesis and validated 300 synthetic sentences with two annotators.",
+        "Built an authentic-source evaluation with 180 naturally occurring DE/FR/NL petroleum sentences and manually reviewed Norwegian references.",
+        "Used BLEU, chrF, COMET, terminology recall and precision, paired bootstrap testing, and cross-expert evaluation.",
+        "Showed that shared LoRA leads on synthetic-source tests, while MoE significantly outperforms shared adaptation on authentic source text (+2.59 BLEU, p=.0002).",
+        "Demonstrated that routing accuracy matters, but expert specialisation, functional overlap, and source distribution also determine translation quality.",
       ],
     },
   },
@@ -291,9 +363,15 @@ export const Projects: ProjectInterface[] = [
   },
   {
     id: "group-shapley-attribution",
-    companyName: "Group-Level Training Data Attribution with Exact Shapley Analysis",
+    companyName:
+      "Group-Level Training Data Attribution with Exact Shapley Analysis",
     type: "Research",
-    category: ["Research", "Data-Centric ML", "Machine Translation", "Evaluation"],
+    category: [
+      "Research",
+      "Data-Centric ML",
+      "Machine Translation",
+      "Evaluation",
+    ],
     shortDescription:
       "A data-centric ML project using exact group-level Shapley values to study which training-data groups shape translation quality, terminology behavior, and written-standard output.",
     techStack: [
@@ -460,8 +538,7 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2025-11-01"),
     endDate: new Date("2026-08-01"),
-    companyLogoImg:
-      "/projects/vlm-bias-evaluation/cover.svg",
+    companyLogoImg: "/projects/vlm-bias-evaluation/cover.svg",
     pagesInfoArr: [
       {
         title: "Evaluation Questions",
