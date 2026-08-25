@@ -409,44 +409,6 @@ export default function ModularLoraResearch() {
           benefit.
         </EvidenceConclusion>
       </section>
-
-      <section>
-        <SectionHeader
-          eyebrow="Conclusions"
-          title="Three research questions, three evidence-backed answers"
-        />
-        <div className="space-y-3">
-          {[
-            [
-              "RQ1",
-              "Synthetic data provides an effective controlled training signal.",
-            ],
-            [
-              "RQ2",
-              "Shared and modular adaptation perform differently under synthetic and authentic source distributions.",
-            ],
-            [
-              "RQ3",
-              "Routing accuracy matters, but expert specialisation and overlap also determine translation quality.",
-            ],
-          ].map(([label, conclusion]) => (
-            <div
-              key={label}
-              className="flex gap-4 rounded-2xl border bg-background p-5"
-            >
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-600 font-heading text-xs text-white">
-                {label}
-              </span>
-              <p className="self-center leading-relaxed">{conclusion}</p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-6 rounded-2xl bg-slate-950 p-6 text-center text-lg font-medium leading-relaxed text-white dark:bg-blue-950">
-          Learned routing is useful when language-specific experts generalise
-          better than a shared adapter, not merely when the router is more
-          accurate.
-        </div>
-      </section>
     </div>
   );
 }
