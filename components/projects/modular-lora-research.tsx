@@ -246,53 +246,65 @@ export default function ModularLoraResearch() {
       <section id="rq1">
         <SectionHeader
           eyebrow="RQ1 · Evidence + Answer"
-          title="Is synthetic training useful?"
-          description="Human validation checks the generated source text; controlled translation results test whether it supplies a useful adaptation signal."
+          title={researchQuestions[0]}
         />
-        <div className="grid gap-5 lg:grid-cols-2">
-          <div className="rounded-2xl border bg-background p-6">
-            <p className="text-sm font-semibold">Human validation</p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              300 human-checked source sentences
-            </p>
-            <div className="mt-6 grid grid-cols-3 gap-3 text-center">
-              {[
-                ["4.86 / 5", "Adequacy"],
-                ["4.70 / 5", "Fluency"],
-                ["94.4%", "Terminology"],
-              ].map(([value, label]) => (
-                <div key={label} className="rounded-xl bg-muted/60 p-3">
-                  <p className="font-heading text-lg sm:text-xl">{value}</p>
-                  <p className="mt-1 text-[11px] uppercase tracking-wide text-muted-foreground">
-                    {label}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
-              Two annotators rated 100 DE, 100 FR, and 100 NL synthetic sources
-              without access to the automatic quality scores.
-            </p>
+        <div className="overflow-hidden rounded-2xl border bg-background">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[700px] text-left text-sm">
+              <thead className="bg-blue-700 text-white">
+                <tr>
+                  <th className="px-5 py-4 font-semibold">Language pair</th>
+                  <th className="px-5 py-4 text-right font-semibold">BLEU</th>
+                  <th className="px-5 py-4 text-right font-semibold">
+                    EN–NO BLEU retained
+                  </th>
+                  <th className="px-5 py-4 text-right font-semibold">
+                    FTA gain vs GT
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                {[
+                  ["EN–NO (real)", "61.7 ± 0.0", "100%", "−0.124"],
+                  ["DE–NO (synthetic)", "57.7 ± 0.8", "93.5%", "+0.013"],
+                  ["NL–NO (synthetic)", "59.3 ± 0.1", "96.1%", "+0.121*"],
+                  ["FR–NO (synthetic)", "57.8 ± 0.6", "93.7%", "+0.062*"],
+                ].map(([pair, bleu, retained, gain], index) => (
+                  <tr key={pair} className={index % 2 ? "bg-muted/35" : ""}>
+                    <td className="px-5 py-4 font-medium">{pair}</td>
+                    <td className="px-5 py-4 text-right tabular-nums">
+                      {bleu}
+                    </td>
+                    <td className="px-5 py-4 text-right tabular-nums">
+                      {retained}
+                    </td>
+                    <td
+                      className={
+                        gain.startsWith("+")
+                          ? "px-5 py-4 text-right font-medium tabular-nums text-emerald-600 dark:text-emerald-400"
+                          : "px-5 py-4 text-right font-medium tabular-nums text-red-600 dark:text-red-400"
+                      }
+                    >
+                      {gain}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-          <div className="rounded-2xl border bg-background p-6">
-            <div className="mb-5 flex items-end justify-between gap-4">
-              <div>
-                <p className="text-sm font-semibold">Adaptation gain</p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Four-language average
-                </p>
-              </div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                BLEU
-              </span>
-            </div>
-            <HorizontalBars data={syntheticBleu} max={65} />
-          </div>
+          <p className="border-t px-5 py-3 text-xs text-muted-foreground">
+            * Significant terminology gain over Google Translate.
+          </p>
         </div>
         <EvidenceConclusion>
-          Synthetic training provides a strong in-domain adaptation signal,
-          although synthetic-source evaluation does not establish real-world
-          generalisation.
+          Experts trained on synthetic DE–NO, NL–NO, and FR–NO data reach{" "}
+          <strong>93.5–96.1% of the BLEU</strong> of the authentic-data EN–NO
+          expert. NL–NO and FR–NO also achieve significant terminology gains
+          over Google Translate.{" "}
+          <strong>
+            So, the synthetic data works as a useful training signal—but we
+            still need to test how well it transfers to real-world source text.
+          </strong>
         </EvidenceConclusion>
       </section>
 
