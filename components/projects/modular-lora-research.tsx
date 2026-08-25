@@ -324,90 +324,135 @@ export default function ModularLoraResearch() {
       <section id="rq3">
         <SectionHeader
           eyebrow="RQ3 · Evidence + Answer"
-          title="Does better routing improve translation?"
-          description="Explicit language identity makes routing substantially more accurate, but downstream gains remain modest on the controlled benchmark."
+          title={researchQuestions[2]}
         />
-        <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="rounded-2xl border bg-background p-6">
-            <div className="space-y-4">
-              {[
-                ["Routing accuracy", "64.8%", "77.5%", "+12.7 pp"],
-                ["BLEU", "58.4", "58.9", "+0.5"],
-                ["FTA", ".711", ".720", "+.009"],
-              ].map(([label, before, after, delta], index) => (
-                <div key={label}>
-                  <div className="grid grid-cols-[1fr_auto_auto_auto] items-center gap-3 rounded-xl border bg-muted/30 p-4">
-                    <p className="font-medium">{label}</p>
-                    <span className="font-mono text-muted-foreground">
-                      {before}
-                    </span>
-                    <span className="text-muted-foreground">→</span>
-                    <span className="font-mono font-semibold text-blue-700 dark:text-blue-300">
-                      {after}
-                    </span>
-                  </div>
-                  <p className="mt-1 text-right text-xs font-semibold text-orange-600 dark:text-orange-400">
-                    {delta}
-                  </p>
-                  {index < 2 && <div className="mx-auto h-3 w-px bg-border" />}
-                </div>
-              ))}
+        <div className="space-y-6">
+          <div className="grid gap-6 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <p className="mb-4 text-sm font-semibold">
+                Hard-routing confusion matrix
+              </p>
+              <ConfusionMatrix />
             </div>
-          </div>
-          <div className="rounded-2xl border bg-background p-5">
-            <ConfusionMatrix />
-            <div className="mt-5 grid grid-cols-2 gap-3 text-center text-sm">
-              <div className="rounded-lg bg-orange-50 p-3 text-orange-950 dark:bg-orange-950/30 dark:text-orange-100">
-                <strong className="block text-lg">40.1%</strong>
-                DE routing accuracy
-              </div>
-              <div className="rounded-lg bg-red-50 p-3 text-red-950 dark:bg-red-950/30 dark:text-red-100">
-                <strong className="block text-lg">49.4%</strong>
-                DE → NL misrouting
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-5 rounded-2xl border bg-background p-5 sm:p-6">
-          <div className="mb-5">
-            <p className="text-sm font-semibold">Cross-expert BLEU</p>
-            <p className="mt-1 text-xs text-muted-foreground">
-              Rows are test languages; columns are the expert used for decoding.
+            <p className="text-base leading-8 text-muted-foreground">
+              The learned hard router achieves{" "}
+              <strong className="font-semibold text-foreground">
+                64.8% overall routing accuracy
+              </strong>
+              , but its errors are strongly language-dependent. DE–NO is routed
+              correctly only{" "}
+              <strong className="font-semibold text-foreground">40.1%</strong>{" "}
+              of the time, with{" "}
+              <strong className="font-semibold text-foreground">49.4%</strong>{" "}
+              of German inputs routed to the NL expert. Replacing the learned
+              router with a LangID router increases routing accuracy to{" "}
+              <strong className="font-semibold text-foreground">77.5%</strong>,
+              but produces only modest improvements in BLEU (
+              <strong className="font-semibold text-foreground">
+                58.4 → 58.9
+              </strong>
+              ) and FTA (
+              <strong className="font-semibold text-foreground">
+                .711 → .720
+              </strong>
+              ).{" "}
+              <strong className="font-semibold text-foreground">
+                A +12.7 percentage-point improvement in routing accuracy
+                therefore yields only +0.5 BLEU and +.009 FTA.
+              </strong>
             </p>
           </div>
-          <CrossExpertMatrix />
-          <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-            Matching experts are consistently strongest, but non-matching
-            experts remain competitive. Functional overlap reduces the aggregate
-            penalty of imperfect routing.
-          </p>
-          <a
-            href="/projects/modular-lora-experts/tsne_encoder_features.png"
-            target="_blank"
-            rel="noreferrer"
-            className="mt-6 block overflow-hidden rounded-xl border bg-white"
-            aria-label="Open the original t-SNE representation diagnostic at full size"
-          >
-            <Image
-              src="/projects/modular-lora-experts/tsne_encoder_features.png"
-              alt="Original paper t-SNE projection of NLLB encoder representations for English, German, French, and Dutch"
-              width={1917}
-              height={1604}
-              className="h-auto w-full"
-            />
-          </a>
-          <p className="mt-2 text-xs text-muted-foreground">
-            Original paper diagnostic: partial overlap in encoder space is
-            consistent with routing ambiguity, but is not treated as causal
-            proof.
-          </p>
-        </div>
 
-        <EvidenceConclusion>
-          Better routing helps, but functional overlap limits its aggregate
-          benefit.
-        </EvidenceConclusion>
+          <div className="grid gap-6 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <p className="mb-1 text-sm font-semibold">Cross-expert BLEU</p>
+              <p className="mb-5 text-xs text-muted-foreground">
+                Rows are test languages; columns are the expert used for
+                decoding.
+              </p>
+              <CrossExpertMatrix />
+            </div>
+            <p className="text-base leading-8 text-muted-foreground">
+              Matching experts achieve the highest BLEU for every language pair,
+              confirming that the adapters develop language-specific
+              capabilities. However, non-matching experts remain competitive:
+              the DE expert reaches{" "}
+              <strong className="font-semibold text-foreground">
+                56.2 BLEU on NL–NO
+              </strong>
+              , while the NL expert reaches{" "}
+              <strong className="font-semibold text-foreground">
+                53.9 BLEU on DE–NO
+              </strong>
+              .{" "}
+              <strong className="font-semibold text-foreground">
+                The experts are specialised, but their capabilities overlap, so
+                selecting the wrong expert is not always catastrophic.
+              </strong>
+            </p>
+          </div>
+
+          <div className="grid gap-6 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <p className="mb-5 text-sm font-semibold">
+                Authentic-source BLEU
+              </p>
+              <div className="space-y-5">
+                {[
+                  ["Multitask LoRA", 39.3, "bg-blue-600"],
+                  ["MoE", 41.89, "bg-violet-600"],
+                  ["Oracle Experts", 42.1, "bg-teal-500"],
+                ].map(([label, rawValue, color]) => {
+                  const value = Number(rawValue);
+                  return (
+                    <div key={String(label)}>
+                      <div className="mb-2 flex items-center justify-between gap-4 text-sm">
+                        <span className="font-medium">{label}</span>
+                        <span className="font-mono font-semibold tabular-nums">
+                          {value.toFixed(2)}
+                        </span>
+                      </div>
+                      <div className="h-3 overflow-hidden rounded-full bg-muted">
+                        <div
+                          className={"h-full rounded-full " + color}
+                          style={{ width: (value / 45) * 100 + "%" }}
+                          role="img"
+                          aria-label={
+                            String(label) + ": " + value.toFixed(2) + " BLEU"
+                          }
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <p className="text-base leading-8 text-muted-foreground">
+              On authentic petroleum-domain source text, the MoE reaches{" "}
+              <strong className="font-semibold text-foreground">
+                41.89 BLEU
+              </strong>
+              , outperforming Multitask LoRA by{" "}
+              <strong className="font-semibold text-foreground">
+                +2.59 BLEU
+              </strong>{" "}
+              and{" "}
+              <strong className="font-semibold text-foreground">
+                +2.00 chrF
+              </strong>{" "}
+              (<code className="text-sm text-foreground">p = .0002</code>),
+              while approaching the Oracle Experts result of{" "}
+              <strong className="font-semibold text-foreground">
+                42.10 BLEU
+              </strong>
+              .{" "}
+              <strong className="font-semibold text-foreground">
+                Learned routing therefore provides a clearer benefit under
+                authentic source distribution than on synthetic-source tests.
+              </strong>
+            </p>
+          </div>
+        </div>
       </section>
     </div>
   );
