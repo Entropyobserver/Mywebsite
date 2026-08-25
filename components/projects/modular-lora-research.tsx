@@ -207,57 +207,20 @@ export default function ModularLoraResearch() {
       <section>
         <SectionHeader
           eyebrow="Approach"
-          title="Target-anchored data meets modular adaptation"
-          description="A web-native synthesis of the paper's Figure 4 data pipeline and Figure 1 expert architecture."
+          title="Target-Anchored Synthesis"
+          description="The paper's original Figure 4: glossary-constrained generation followed by LaBSE, terminology, and diagnostic quality checks."
         />
-        <div className="overflow-hidden rounded-2xl border bg-muted/20 p-5 sm:p-7">
-          <div className="grid gap-8 lg:grid-cols-[1fr_auto_1fr] lg:items-stretch">
-            <div className="rounded-2xl border border-teal-200 bg-teal-50/70 p-5 dark:border-teal-900/70 dark:bg-teal-950/20">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700 dark:text-teal-300">
-                Target-Anchored Synthesis
-              </p>
-              <div className="mt-5 space-y-3 text-sm">
-                <div className="rounded-lg border bg-background p-3">
-                  English source + Norwegian anchor
-                </div>
-                <div className="mx-auto h-5 w-px bg-teal-400" />
-                <div className="rounded-lg border bg-background p-3">
-                  Glossary-constrained DE / FR / NL generation
-                </div>
-                <div className="mx-auto h-5 w-px bg-teal-400" />
-                <div className="rounded-lg border bg-background p-3">
-                  LaBSE + terminology quality gates
-                </div>
-              </div>
-            </div>
-            <div className="hidden items-center text-2xl text-muted-foreground lg:flex">
-              →
-            </div>
-            <div className="rounded-2xl border border-violet-200 bg-violet-50/70 p-5 dark:border-violet-900/70 dark:bg-violet-950/20">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-700 dark:text-violet-300">
-                Modular LoRA Experts
-              </p>
-              <div className="mt-5 space-y-3 text-sm">
-                <div className="rounded-lg border bg-background p-3 text-center">
-                  Frozen NLLB-200-distilled-600M
-                </div>
-                <div className="grid grid-cols-4 gap-2">
-                  {["EN", "DE", "FR", "NL"].map((language) => (
-                    <div
-                      key={language}
-                      className="rounded-lg bg-violet-600 px-2 py-3 text-center font-semibold text-white"
-                    >
-                      {language}
-                    </div>
-                  ))}
-                </div>
-                <div className="mx-auto h-5 w-px bg-violet-400" />
-                <div className="rounded-lg border border-orange-200 bg-orange-50 p-3 text-center text-orange-900 dark:border-orange-900/70 dark:bg-orange-950/30 dark:text-orange-200">
-                  Learned router → top-1 expert → Norwegian output
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="overflow-hidden rounded-2xl border bg-muted/20 p-3 sm:p-5">
+          <Image
+            src="/projects/modular-lora-experts/fig4_synthesis_pipeline.png"
+            alt="Figure 4: Target-Anchored Synthesis pipeline from English source and Norwegian anchor through glossary-constrained generation and quality gates"
+            width={1400}
+            height={1935}
+            className="mx-auto h-auto w-full max-w-4xl rounded-xl bg-white object-contain"
+          />
+          <p className="mt-3 text-center text-xs text-muted-foreground">
+            Figure 4. Target-Anchored Synthesis and its filtering stages.
+          </p>
           <div className="mt-7 grid gap-3 sm:grid-cols-3">
             {[
               ["4", "source languages"],
