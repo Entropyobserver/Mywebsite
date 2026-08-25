@@ -4,18 +4,6 @@ const researchQuestions = [
   "Does more accurate expert routing improve translation quality?",
 ];
 
-const syntheticBleu = [
-  { label: "Zero-shot NLLB", value: 33.8, color: "bg-slate-400" },
-  { label: "Independent", value: 59.1, color: "bg-teal-500" },
-  { label: "MT LoRA", value: 61.0, color: "bg-blue-600" },
-];
-
-const authenticBleu = [
-  { label: "Independent", value: 42.1, color: "bg-teal-500" },
-  { label: "MoE", value: 41.89, color: "bg-violet-600" },
-  { label: "MT LoRA", value: 39.3, color: "bg-blue-600" },
-];
-
 const confusionMatrix = [
   [77.6, 0.2, 1.0, 21.2],
   [6.8, 40.1, 3.6, 49.4],
@@ -62,37 +50,6 @@ function EvidenceConclusion({ children }: { children: React.ReactNode }) {
   return (
     <div className="mt-6 rounded-r-xl border-l-4 border-blue-600 bg-blue-50 px-5 py-4 font-medium leading-relaxed text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
       {children}
-    </div>
-  );
-}
-
-function HorizontalBars({
-  data,
-  max,
-}: {
-  data: { label: string; value: number; color: string }[];
-  max: number;
-}) {
-  return (
-    <div className="space-y-4">
-      {data.map((item) => (
-        <div key={item.label}>
-          <div className="mb-1.5 flex items-center justify-between gap-4 text-sm">
-            <span className="font-medium">{item.label}</span>
-            <span className="font-mono font-semibold">
-              {item.value.toFixed(item.value % 1 ? 2 : 1)}
-            </span>
-          </div>
-          <div className="h-3 overflow-hidden rounded-full bg-muted">
-            <div
-              className={`h-full rounded-full ${item.color}`}
-              style={{ width: `${(item.value / max) * 100}%` }}
-              role="img"
-              aria-label={`${item.label}: ${item.value} BLEU`}
-            />
-          </div>
-        </div>
-      ))}
     </div>
   );
 }
@@ -311,63 +268,56 @@ export default function ModularLoraResearch() {
       <section id="rq2">
         <SectionHeader
           eyebrow="RQ2 · Core Result"
-          title="Independent experts or shared LoRA?"
-          description="The system ranking changes when evaluation moves from controlled synthetic sources to naturally occurring petroleum text."
+          title={researchQuestions[1]}
         />
-        <div className="rounded-3xl border-2 border-blue-200 bg-blue-50/30 p-5 dark:border-blue-900/70 dark:bg-blue-950/10 sm:p-7">
-          <div className="grid gap-5 lg:grid-cols-2">
-            <div className="rounded-2xl border bg-background p-6">
-              <div className="mb-5">
-                <p className="text-sm font-semibold">
-                  Synthetic-source evaluation
-                </p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  Held-out synthetic DE / FR / NL sources plus authentic EN
-                </p>
-              </div>
-              <HorizontalBars
-                data={syntheticBleu.filter(
-                  (item) => item.label !== "Zero-shot NLLB"
-                )}
-                max={65}
-              />
-              <p className="mt-5 rounded-lg bg-blue-50 px-3 py-2 text-sm font-medium text-blue-900 dark:bg-blue-950/40 dark:text-blue-100">
-                Shared MT LoRA ranks first: 61.0 BLEU
-              </p>
-            </div>
-            <div className="rounded-2xl border bg-background p-6">
-              <div className="mb-5">
-                <p className="text-sm font-semibold">
-                  Authentic-source evaluation
-                </p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  180 natural DE / FR / NL petroleum sentences
-                </p>
-              </div>
-              <HorizontalBars data={authenticBleu} max={45} />
-              <p className="mt-5 rounded-lg bg-violet-50 px-3 py-2 text-sm font-semibold text-violet-900 dark:bg-violet-950/40 dark:text-violet-100">
-                MoE vs MT LoRA: +2.59 BLEU, p=.0002
-              </p>
-            </div>
-          </div>
-          <div className="mt-5 grid gap-3 text-sm sm:grid-cols-3">
-            <div className="rounded-xl border bg-background p-4">
-              <p className="font-heading text-xl">180</p>
-              <p className="mt-1 text-muted-foreground">authentic sources</p>
-            </div>
-            <div className="rounded-xl border bg-background p-4">
-              <p className="font-heading text-xl">60 × 3</p>
-              <p className="mt-1 text-muted-foreground">DE / FR / NL</p>
-            </div>
-            <div className="rounded-xl border bg-background p-4">
-              <p className="font-heading text-xl">10,000</p>
-              <p className="mt-1 text-muted-foreground">bootstrap samples</p>
-            </div>
+        <div className="overflow-hidden rounded-2xl border bg-background">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[560px] text-left text-sm">
+              <thead className="bg-blue-700 text-white">
+                <tr>
+                  <th className="px-5 py-4 font-semibold">System</th>
+                  <th className="px-5 py-4 text-right font-semibold">
+                    BLEU (avg)
+                  </th>
+                  <th className="px-5 py-4 text-right font-semibold">
+                    FTA (avg)
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                <tr>
+                  <td className="px-5 py-4 font-medium">Independent Experts</td>
+                  <td className="px-5 py-4 text-right tabular-nums">59.1</td>
+                  <td className="px-5 py-4 text-right font-semibold tabular-nums text-emerald-600 dark:text-emerald-400">
+                    .726
+                  </td>
+                </tr>
+                <tr className="bg-muted/35">
+                  <td className="px-5 py-4 font-medium">Multitask LoRA</td>
+                  <td className="px-5 py-4 text-right font-semibold tabular-nums text-blue-600 dark:text-blue-400">
+                    61.0
+                  </td>
+                  <td className="px-5 py-4 text-right tabular-nums">.713</td>
+                </tr>
+                <tr>
+                  <td className="px-5 py-4 font-medium">MoE hard routing</td>
+                  <td className="px-5 py-4 text-right tabular-nums">58.4</td>
+                  <td className="px-5 py-4 text-right tabular-nums">.711</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
         <EvidenceConclusion>
-          Shared adaptation performs best on synthetic-source tests, whereas
-          modular experts generalise better to authentic source text.
+          On the synthetic-source benchmark, Multitask LoRA gets the highest
+          average BLEU (<strong>61.0</strong>), while Independent Experts get
+          the highest terminology accuracy (<strong>FTA .726</strong>). MoE hard
+          routing is lower on both (<strong>58.4 BLEU, .711 FTA</strong>).{" "}
+          <strong>
+            Rather than being the best-performing model, we use the MoE as a
+            diagnostic tool to understand how routing and expert specialisation
+            affect translation quality.
+          </strong>
         </EvidenceConclusion>
       </section>
 
