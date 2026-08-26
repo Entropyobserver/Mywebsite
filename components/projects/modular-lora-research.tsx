@@ -204,7 +204,19 @@ export default function ModularLoraResearch() {
 
       <section>
         <SectionHeader title="Target-Anchored Synthesis" />
-        <div className="grid gap-6 rounded-2xl border bg-muted/20 p-5 sm:p-7 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,480px)] lg:items-start">
+        <div className="grid gap-6 rounded-2xl border bg-muted/20 p-5 sm:p-7 lg:grid-cols-[minmax(320px,480px)_minmax(0,1.1fr)] lg:items-center">
+          <div>
+            <Image
+              src="/projects/modular-lora-experts/fig4_synthesis_pipeline.png"
+              alt="Figure 4: Target-Anchored Synthesis pipeline from English source and Norwegian anchor through glossary-constrained generation and quality gates"
+              width={800}
+              height={1107}
+              className="mx-auto h-auto w-full max-w-md rounded-xl bg-white object-contain"
+            />
+            <p className="mt-3 text-center text-xs text-muted-foreground">
+              Figure 4. Target-Anchored Synthesis and filtering stages.
+            </p>
+          </div>
           <div className="self-center">
             <p className="text-base leading-8 text-muted-foreground sm:text-lg">
               We use authentic Norwegian NPD text as a semantic anchor and use{" "}
@@ -224,18 +236,6 @@ export default function ModularLoraResearch() {
                 51,890 generated pairs
               </strong>{" "}
               across DE–NO, NL–NO, and FR–NO.
-            </p>
-          </div>
-          <div>
-            <Image
-              src="/projects/modular-lora-experts/fig4_synthesis_pipeline.png"
-              alt="Figure 4: Target-Anchored Synthesis pipeline from English source and Norwegian anchor through glossary-constrained generation and quality gates"
-              width={800}
-              height={1107}
-              className="mx-auto h-auto w-full max-w-md rounded-xl bg-white object-contain"
-            />
-            <p className="mt-3 text-center text-xs text-muted-foreground">
-              Figure 4. Target-Anchored Synthesis and filtering stages.
             </p>
           </div>
         </div>
