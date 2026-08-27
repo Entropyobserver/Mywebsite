@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { Icons } from "@/components/common/icons";
+import GroupShapleyResearch from "@/components/projects/group-shapley-research";
 import ModularLoraResearch from "@/components/projects/modular-lora-research";
 import ProjectDescription from "@/components/projects/project-description";
 import { buttonVariants } from "@/components/ui/button";
@@ -29,7 +30,10 @@ export default function Project({ params }: ProjectPageProps) {
     <article
       className={cn(
         "container relative py-6 lg:py-10",
-        project.id === "modular-lora-experts" ? "max-w-5xl" : "max-w-3xl"
+        project.id === "modular-lora-experts" ||
+          project.id === "group-shapley-attribution"
+          ? "max-w-5xl"
+          : "max-w-3xl"
       )}
     >
       <Link
@@ -121,6 +125,8 @@ export default function Project({ params }: ProjectPageProps) {
 
       {project.id === "modular-lora-experts" ? (
         <ModularLoraResearch />
+      ) : project.id === "group-shapley-attribution" ? (
+        <GroupShapleyResearch />
       ) : (
         <div className="mb-7 ">
           <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-5">

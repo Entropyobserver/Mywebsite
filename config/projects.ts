@@ -405,14 +405,14 @@ export const Projects: ProjectInterface[] = [
       paragraphs: [
         "This project asks a data-centric question: which interpretable groups of training examples are responsible for different aspects of model behavior after fine-tuning?",
         "The method defines auditable training-data groups based on written-standard labels, enumerates all feasible data coalitions, trains models across the coalition space, and computes exact group-level Shapley values for multiple utility functions. The evaluation separates translation quality, terminology accuracy, and written-standard behavior instead of reducing data contribution to one scalar score.",
-        "My contribution was the research framing, coalition protocol, Shapley computation design, model training setup, metric design, random size-matched baselines, and cross-architecture validation plan. Because the work is still manuscript-stage, the site presents the method and contribution at a high level.",
+        "My contribution was the research framing, coalition protocol, Shapley computation design, model training setup, metric design, random size-matched baselines, test-distribution analysis, and cross-architecture validation.",
       ],
       bullets: [
         "Formulated group-level data attribution as an exact Shapley analysis over interpretable data groups.",
         "Enumerated all 16 coalitions for four written-standard groups and evaluated multiple behavior-specific utility functions.",
         "Compared true groups with repeated random size-matched groups to test whether attribution patterns are reducible to group size.",
         "Extended the protocol from encoder-decoder MT to decoder-only instruction-format LoRA validation.",
-        "Used bootstrap confidence intervals and manual audit planning to make the attribution analysis more robust.",
+        "Used bootstrap confidence intervals, training-schedule checks, and a two-annotator manual audit to validate the attribution analysis.",
       ],
     },
   },
