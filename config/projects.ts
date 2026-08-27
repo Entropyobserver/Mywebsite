@@ -34,9 +34,18 @@ export const Projects: ProjectInterface[] = [
     companyName:
       "LoRA Fine-Tuning of English-Norwegian NMT for the Oil & Gas Industry",
     type: "Research",
-    category: ["Research", "Machine Translation", "NLP", "Evaluation"],
+    category: [
+      "Research",
+      "Machine Translation",
+      "LoRA / PEFT",
+      "Low-Resource NLP",
+      "Domain Adaptation",
+      "Data Quality",
+      "Hyperparameter Optimization",
+      "Human Evaluation",
+    ],
     shortDescription:
-      "Published EAMT research on parameter-efficient English-Norwegian petroleum-domain NMT, showing how LoRA can adapt NLLB-200 with strong quality gains while updating less than 0.4% of model parameters.",
+      "EAMT 2026 study of LoRA-based adaptation for low-resource petroleum translation, covering systematic tuning, benchmarking, and human error analysis.",
     websiteLink: "https://huggingface.co/spaces/entropy25/mt",
     githubLink: "https://github.com/Entropyobserver/lora-nmt-petroleum",
     techStack: [
