@@ -507,29 +507,6 @@ export default function GroupShapleyResearch() {
 
       <section id="rq2">
         <SectionHeader title={"RQ2. " + researchQuestions[1]} />
-        <div className="mb-6 max-w-3xl space-y-4 leading-7 text-muted-foreground">
-          <p>
-            If group size alone drives the attribution, random groups with the
-            same size should produce similar Shapley values.
-          </p>
-          <p>
-            We compare the true High-Bokmål group with{" "}
-            <strong className="font-semibold text-foreground">
-              three random groups of the same size
-            </strong>
-            . The random groups contain the same number of training examples,
-            but different examples.
-          </p>
-          <p>
-            The true High-Bokmål group has substantially higher Shapley values
-            than the random groups across{" "}
-            <strong className="font-semibold text-foreground">
-              translation quality and terminology
-            </strong>
-            . Thus, simply having the same amount of training data does not
-            reproduce the contribution of the true group.
-          </p>
-        </div>
         <div className="space-y-6 rounded-2xl border bg-muted/20 p-5 sm:p-7">
           <div>
             <a
@@ -573,6 +550,29 @@ export default function GroupShapleyResearch() {
               </div>
             ))}
           </div>
+        </div>
+        <div className="mt-6 max-w-3xl space-y-4 leading-7 text-muted-foreground">
+          <p>
+            If group size alone drives the attribution, random groups with the
+            same size should produce similar Shapley values.
+          </p>
+          <p>
+            We compare the true High-Bokmål group with{" "}
+            <strong className="font-semibold text-foreground">
+              three random groups of the same size
+            </strong>
+            . The random groups contain the same number of training examples,
+            but different examples.
+          </p>
+          <p>
+            The true High-Bokmål group has substantially higher Shapley values
+            than the random groups across{" "}
+            <strong className="font-semibold text-foreground">
+              translation quality and terminology
+            </strong>
+            . Thus, simply having the same amount of training data does not
+            reproduce the contribution of the true group.
+          </p>
         </div>
         <EvidenceConclusion>
           <strong>
