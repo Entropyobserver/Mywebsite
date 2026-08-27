@@ -420,22 +420,34 @@ export default function GroupShapleyResearch() {
             <strong className="font-semibold text-foreground">
               +3.21 BLEU
             </strong>{" "}
-            contribution, but this average hides opposite effects across
-            reference written standards.
+            contribution. But where does this gain come from?
           </p>
+          <p>We break the test set down by two factors:</p>
+          <ul className="list-disc space-y-2 pl-6">
+            <li>
+              <strong className="font-semibold text-foreground">
+                Reference standard:
+              </strong>{" "}
+              whether the Norwegian reference is{" "}
+              <strong className="font-semibold text-foreground">
+                High-Bokmål
+              </strong>{" "}
+              or{" "}
+              <strong className="font-semibold text-foreground">
+                Nynorsk-like
+              </strong>
+            </li>
+            <li>
+              <strong className="font-semibold text-foreground">
+                Source overlap:
+              </strong>{" "}
+              how similar the English test sentence is to the English sentences
+              in the training data
+            </li>
+          </ul>
           <p>
-            <strong className="font-semibold text-foreground">
-              Each test example is grouped along two dimensions: source overlap
-              with the training data, and the written standard of its Norwegian
-              reference.
-            </strong>
-          </p>
-          <p>
-            <strong className="font-semibold text-foreground">
-              Source overlap
-            </strong>{" "}
-            measures how similar the English test sentence is to the English
-            sentences in the training data.
+            We then examine the Nynorsk-like group’s Shapley contribution within
+            each subset.
           </p>
         </div>
         <div className="grid gap-4 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-2">
@@ -476,15 +488,19 @@ export default function GroupShapleyResearch() {
           ))}
         </div>
         <EvidenceConclusion>
-          Nynorsk-like training data helps when the reference is Nynorsk-like,
-          but hurts when the reference is High-Bokmål. Within the Nynorsk-like
-          subsets, its positive contribution also increases with source overlap.
+          The pattern is clear:{" "}
+          <strong>
+            Nynorsk-like training data helps Nynorsk-like references but hurts
+            High-Bokmål references.
+          </strong>{" "}
+          Within the Nynorsk-like subsets, the positive contribution also
+          increases with source overlap.
           <br />
           <br />
           <strong>
-            The overall +3.21 BLEU contribution is therefore driven by the
-            Nynorsk-like reference group, with source overlap further modulating
-            the size of the gain.
+            The overall +3.21 BLEU contribution therefore comes from its strong
+            positive effect on Nynorsk-like test examples, while its effect on
+            High-Bokmål examples is negative.
           </strong>
         </EvidenceConclusion>
       </section>
