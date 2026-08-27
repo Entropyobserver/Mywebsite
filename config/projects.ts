@@ -45,7 +45,7 @@ export const Projects: ProjectInterface[] = [
       "Human Evaluation",
     ],
     shortDescription:
-      "EAMT 2026 study of LoRA-based adaptation for low-resource petroleum translation, covering systematic tuning, benchmarking, and human error analysis.",
+      "EAMT 2026 research on LoRA adaptation for low-resource petroleum-domain machine translation.",
     websiteLink: "https://huggingface.co/spaces/entropy25/mt",
     githubLink: "https://github.com/Entropyobserver/lora-nmt-petroleum",
     techStack: [
