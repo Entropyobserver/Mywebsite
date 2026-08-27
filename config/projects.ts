@@ -157,9 +157,17 @@ export const Projects: ProjectInterface[] = [
     companyName:
       "Beyond Routing: Diagnosing Modular LoRA Experts for Low-Resource Multilingual Petroleum-Domain Translation",
     type: "Research",
-    category: ["Research", "Machine Translation", "NLP", "Evaluation"],
+    category: [
+      "Research",
+      "Machine Translation",
+      "NLP",
+      "LoRA / PEFT",
+      "Low-Resource NLP",
+      "Domain Adaptation",
+      "Evaluation",
+    ],
     shortDescription:
-      "A multilingual petroleum-domain NMT study showing that routing accuracy alone does not determine MoE performance: shared LoRA leads on synthetic-source tests, while modular experts generalise better to authentic source text.",
+      "A diagnostic study of modular LoRA experts for low-resource petroleum translation.",
     websiteLink: "https://huggingface.co/spaces/entropy25/mt_moe",
     githubLink: "https://github.com/Entropyobserver/lora-moe-petroleum",
     techStack: [
@@ -398,8 +406,7 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2026-04-01"),
     endDate: new Date("2026-08-01"),
-    companyLogoImg:
-      "/projects/group-shapley-attribution/cover.png",
+    companyLogoImg: "/projects/group-shapley-attribution/cover.png",
     pagesInfoArr: [
       {
         title: "Size-Matched Baseline Diagnostic",
