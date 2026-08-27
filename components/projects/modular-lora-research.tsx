@@ -466,6 +466,12 @@ export default function ModularLoraResearch() {
                   );
                 })}
               </div>
+              <p className="mt-4 text-xs leading-5 text-muted-foreground">
+                These scores come from the{" "}
+                <strong>authentic-source evaluation</strong>, using naturally
+                occurring petroleum-domain sentences with the same Norwegian
+                references for all systems.
+              </p>
             </div>
             <p className="text-base leading-8 text-muted-foreground">
               On authentic petroleum-domain source text, the MoE reaches{" "}
