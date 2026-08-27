@@ -390,7 +390,7 @@ export const Projects: ProjectInterface[] = [
     startDate: new Date("2026-04-01"),
     endDate: new Date("2026-08-01"),
     companyLogoImg:
-      "/projects/group-shapley-attribution/random-baseline-barchart.png",
+      "/projects/group-shapley-attribution/cover.png",
     pagesInfoArr: [
       {
         title: "Size-Matched Baseline Diagnostic",
@@ -403,16 +403,16 @@ export const Projects: ProjectInterface[] = [
     ],
     descriptionDetails: {
       paragraphs: [
-        "This project asks a data-centric question: which interpretable groups of training examples are responsible for different aspects of model behavior after fine-tuning?",
-        "The method defines auditable training-data groups based on written-standard labels, enumerates all feasible data coalitions, trains models across the coalition space, and computes exact group-level Shapley values for multiple utility functions. The evaluation separates translation quality, terminology accuracy, and written-standard behavior instead of reducing data contribution to one scalar score.",
-        "My contribution was the research framing, coalition protocol, Shapley computation design, model training setup, metric design, random size-matched baselines, test-distribution analysis, and cross-architecture validation.",
+        "This project asks a data-centric question: Which types of training data contribute to shaping model behavior after fine-tuning?",
+        "We divide an English–Norwegian petroleum-domain corpus into four groups based on written-standard classifier scores and evaluate all 16 possible combinations using exact Shapley values.",
+        "Instead of using a single score for data value, we separately measure translation quality, terminology performance, and written-standard behavior.",
+        "As the first author, I led the research and experiments for this project. My contributions included:",
       ],
       bullets: [
-        "Formulated group-level data attribution as an exact Shapley analysis over interpretable data groups.",
-        "Enumerated all 16 coalitions for four written-standard groups and evaluated multiple behavior-specific utility functions.",
-        "Compared true groups with repeated random size-matched groups to test whether attribution patterns are reducible to group size.",
-        "Extended the protocol from encoder-decoder MT to decoder-only instruction-format LoRA validation.",
-        "Used bootstrap confidence intervals, training-schedule checks, and a two-annotator manual audit to validate the attribution analysis.",
+        "Designed the group-level Shapley attribution framework, including the coalition setup, evaluation metrics, and attribution procedure.",
+        "Led the experiments across NLLB and decoder-only models, including LoRA fine-tuning, coalition training, evaluation, and size-matched random baselines.",
+        "Evaluated the robustness of the attribution results using bootstrap confidence intervals and group-level statistical tests.",
+        "Analyzed how different training groups contribute to translation quality, terminology accuracy, and written-standard behavior.",
       ],
     },
   },
