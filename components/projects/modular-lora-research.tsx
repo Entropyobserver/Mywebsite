@@ -376,7 +376,10 @@ export default function ModularLoraResearch() {
               <ConfusionMatrix />
             </div>
             <p className="text-base leading-8 text-muted-foreground">
-              The learned hard router achieves{" "}
+              This confusion matrix compares the true source language (rows)
+              with the expert selected by the hard router (columns); diagonal
+              cells are correct routes and off-diagonal cells are misroutes. The
+              learned hard router achieves{" "}
               <strong className="font-semibold text-foreground">
                 64.8% overall routing accuracy
               </strong>
