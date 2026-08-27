@@ -34,21 +34,14 @@ const architectureRows = [
 ] as const;
 
 function SectionHeader({
-  eyebrow,
   title,
   description,
 }: {
-  eyebrow?: string;
   title: string;
   description?: React.ReactNode;
 }) {
   return (
     <div className="mb-6">
-      {eyebrow && (
-        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
-          {eyebrow}
-        </p>
-      )}
       <h2 className="font-heading text-3xl leading-tight lg:text-4xl">
         {title}
       </h2>
@@ -356,8 +349,7 @@ export default function GroupShapleyResearch() {
 
       <section id="rq1">
         <SectionHeader
-          eyebrow="RQ1 · Contribution depends on the measured behavior"
-          title={researchQuestions[0]}
+          title={"RQ1. " + researchQuestions[0]}
           description={
             <>
               Exact Shapley values from all 16 NLLB coalitions, averaged over
@@ -442,7 +434,6 @@ export default function GroupShapleyResearch() {
 
       <section>
         <SectionHeader
-          eyebrow="RQ1 · Distribution-sensitive follow-up"
           title="Where does the Nynorsk-like quality gain occur?"
           description="The aggregate +3.21 BLEU contribution hides opposite effects across reference written standards. Bars show the Nynorsk-like group’s BLEU Shapley value."
         />
@@ -497,8 +488,7 @@ export default function GroupShapleyResearch() {
 
       <section id="rq2">
         <SectionHeader
-          eyebrow="RQ2 · Identity matters beyond size"
-          title={researchQuestions[1]}
+          title={"RQ2. " + researchQuestions[1]}
           description="Three random partitions preserve the original group sizes while changing which examples belong to each group."
         />
         <div className="grid gap-6 rounded-2xl border bg-muted/20 p-5 sm:p-7 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
@@ -558,8 +548,7 @@ export default function GroupShapleyResearch() {
 
       <section id="rq3">
         <SectionHeader
-          eyebrow="RQ3 · Cross-architecture comparison"
-          title={researchQuestions[2]}
+          title={"RQ3. " + researchQuestions[2]}
           description="The strongest effects recur in NLLB-600M and NorMistral-7B-warm, while smaller groups show architecture-dependent behavior."
         />
         <div className="overflow-hidden rounded-2xl border bg-background">

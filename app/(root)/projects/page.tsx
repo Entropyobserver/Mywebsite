@@ -19,6 +19,15 @@ const renderContent = (tabVal: string) => {
     projectArr = projectArr.filter((val) => val.type === "Technical Project");
   }
 
+  const groupShapleyIndex = projectArr.findIndex(
+    (project) => project.id === "group-shapley-attribution"
+  );
+  if (groupShapleyIndex !== -1) {
+    projectArr = [...projectArr];
+    const [groupShapleyProject] = projectArr.splice(groupShapleyIndex, 1);
+    projectArr.splice(2, 0, groupShapleyProject);
+  }
+
   return (
     <div className="mx-auto my-4 grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3 static">
       {projectArr.map((project) => (
