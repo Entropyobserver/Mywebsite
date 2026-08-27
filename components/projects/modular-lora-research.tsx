@@ -405,9 +405,11 @@ export default function ModularLoraResearch() {
               <p className="mb-4 text-sm font-semibold">Cross-expert BLEU</p>
               <CrossExpertMatrix />
               <p className="mt-3 text-xs leading-5 text-muted-foreground">
-                Rows are the language of the test source; columns are the expert
-                used for decoding. Bold diagonal cells are the matching (oracle)
-                expert results. All values are BLEU, so higher is better.
+                Rows show the source language, and columns show which expert is
+                used for translation. Bold diagonal cells show the performance
+                when each language is translated by its matching expert. All
+                values are BLEU, with higher scores indicating better
+                translation.
               </p>
             </div>
             <p className="text-base leading-8 text-muted-foreground">
