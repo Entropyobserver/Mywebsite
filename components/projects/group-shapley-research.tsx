@@ -92,15 +92,6 @@ function HeatmapCell({
   );
 }
 
-function ProtocolStep({ label, detail }: { label: string; detail: string }) {
-  return (
-    <div className="min-w-0 flex-1 rounded-xl border bg-background px-4 py-4 text-center shadow-sm">
-      <p className="font-heading text-lg">{label}</p>
-      <p className="mt-1 text-xs leading-5 text-muted-foreground">{detail}</p>
-    </div>
-  );
-}
-
 export default function GroupShapleyResearch() {
   return (
     <div className="space-y-16">
@@ -232,118 +223,98 @@ export default function GroupShapleyResearch() {
       </section>
 
       <section>
-        <SectionHeader title="Exact Group-Level Attribution" />
-        <div className="rounded-2xl border bg-muted/20 p-5 sm:p-7">
-          <div className="flex flex-col items-stretch gap-3 lg:flex-row lg:items-center">
-            <ProtocolStep
-              label="13,935 training pairs"
-              detail="English–Norwegian petroleum corpus"
-            />
-            <span className="text-center text-xl text-muted-foreground lg:rotate-0">
-              →
-            </span>
-            <ProtocolStep
-              label="4 operational groups"
-              detail="Auditable written-standard partitions"
-            />
-            <span className="text-center text-xl text-muted-foreground">→</span>
-            <ProtocolStep
-              label="16 coalitions"
-              detail="Complete 2⁴ space, including the empty coalition"
-            />
-            <span className="text-center text-xl text-muted-foreground">→</span>
-            <ProtocolStep
-              label="2 architectures"
-              detail="NLLB-600M and NorMistral-7B-warm"
-            />
-            <span className="text-center text-xl text-muted-foreground">→</span>
-            <ProtocolStep
-              label="5 utility measures"
-              detail="BLEU, chrF, TermF1, and two standard rates"
-            />
+        <SectionHeader title="Exact Group-Level Attribution Overview" />
+        <div className="grid gap-7 rounded-2xl border bg-muted/20 p-5 sm:p-7 lg:grid-cols-[minmax(300px,0.9fr)_minmax(0,1.1fr)] lg:items-center">
+          <div>
+            <a
+              href="/projects/group-shapley-attribution/attribution-overview.png"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Open the full attribution protocol overview"
+              className="block"
+            >
+              <Image
+                src="/projects/group-shapley-attribution/attribution-overview.png"
+                alt="Full group-level attribution protocol from corpus grouping and coalition construction through model training, evaluation, exact Shapley attribution, cross-branch comparison, and robustness checks"
+                width={2720}
+                height={3200}
+                className="mx-auto h-auto max-h-[760px] w-auto max-w-full rounded-xl object-contain"
+              />
+            </a>
+            <p className="mt-3 text-center text-xs text-muted-foreground">
+              Complete group-level attribution protocol.
+            </p>
           </div>
-          <div className="mt-5 grid gap-3 text-center sm:grid-cols-3">
-            {[
-              ["3", "training seeds"],
-              ["3", "size-matched random partitions"],
-              ["200", "manually audited examples"],
-            ].map(([value, label]) => (
-              <div key={label} className="rounded-xl bg-background px-4 py-3">
-                <p className="font-heading text-2xl text-blue-600 dark:text-blue-400">
-                  {value}
-                </p>
-                <p className="text-xs text-muted-foreground">{label}</p>
-              </div>
-            ))}
+          <div className="space-y-4 leading-7 text-muted-foreground">
+            <p>
+              We start with{" "}
+              <strong className="font-semibold text-foreground">
+                13,935 English–Norwegian training pairs
+              </strong>{" "}
+              and divide them into four written-standard groups:{" "}
+              <strong className="font-semibold text-foreground">
+                High-Bokmål, Boundary, Nynorsk-like, and Uncertain-other
+              </strong>
+              .
+            </p>
+            <p>
+              We then construct all{" "}
+              <strong className="font-semibold text-foreground">
+                16 possible coalitions
+              </strong>{" "}
+              of these four groups. For each coalition, we fine-tune the model
+              using{" "}
+              <strong className="font-semibold text-foreground">
+                only the training data in that coalition
+              </strong>
+              . The empty coalition uses the original base model.
+            </p>
+            <p>
+              All 16 coalition models are evaluated on the{" "}
+              <strong className="font-semibold text-foreground">
+                same 1,742-sentence held-out test set
+              </strong>
+              . We measure five aspects of model behavior:
+            </p>
+            <ul className="list-disc space-y-1 pl-6">
+              <li>
+                <strong className="font-semibold text-foreground">BLEU</strong>
+              </li>
+              <li>
+                <strong className="font-semibold text-foreground">chrF</strong>
+              </li>
+              <li>
+                <strong className="font-semibold text-foreground">
+                  TermF1
+                </strong>
+              </li>
+              <li>
+                <strong className="font-semibold text-foreground">
+                  High-Bokmål output rate
+                </strong>{" "}
+                <span className="italic">
+                  (proportion of test outputs classified as High-Bokmål)
+                </span>
+              </li>
+              <li>
+                <strong className="font-semibold text-foreground">
+                  Nynorsk-like output rate
+                </strong>{" "}
+                <span className="italic">
+                  (proportion of test outputs classified as Nynorsk-like)
+                </span>
+              </li>
+            </ul>
+            <p>
+              The resulting 16 coalition scores for each metric are then used to
+              compute{" "}
+              <strong className="font-semibold text-foreground">
+                exact Shapley values
+              </strong>
+              , giving one contribution value for each of the four training
+              groups for each utility.
+            </p>
           </div>
-        </div>
-        <div className="mt-6 max-w-3xl space-y-4 leading-7 text-muted-foreground">
-          <p>
-            We start with{" "}
-            <strong className="font-semibold text-foreground">
-              13,935 English–Norwegian training pairs
-            </strong>{" "}
-            and divide them into four written-standard groups:{" "}
-            <strong className="font-semibold text-foreground">
-              High-Bokmål, Boundary, Nynorsk-like, and Uncertain-other
-            </strong>
-            .
-          </p>
-          <p>
-            We then construct all{" "}
-            <strong className="font-semibold text-foreground">
-              16 possible coalitions
-            </strong>{" "}
-            of these four groups. For each coalition, we fine-tune the model
-            using{" "}
-            <strong className="font-semibold text-foreground">
-              only the training data in that coalition
-            </strong>
-            . The empty coalition uses the original base model.
-          </p>
-          <p>
-            All 16 coalition models are evaluated on the{" "}
-            <strong className="font-semibold text-foreground">
-              same 1,742-sentence held-out test set
-            </strong>
-            . We measure five aspects of model behavior:
-          </p>
-          <ul className="list-disc space-y-1 pl-6">
-            <li>
-              <strong className="font-semibold text-foreground">BLEU</strong>
-            </li>
-            <li>
-              <strong className="font-semibold text-foreground">chrF</strong>
-            </li>
-            <li>
-              <strong className="font-semibold text-foreground">TermF1</strong>
-            </li>
-            <li>
-              <strong className="font-semibold text-foreground">
-                High-Bokmål output rate
-              </strong>{" "}
-              <span className="italic">
-                (proportion of test outputs classified as High-Bokmål)
-              </span>
-            </li>
-            <li>
-              <strong className="font-semibold text-foreground">
-                Nynorsk-like output rate
-              </strong>{" "}
-              <span className="italic">
-                (proportion of test outputs classified as Nynorsk-like)
-              </span>
-            </li>
-          </ul>
-          <p>
-            The resulting 16 coalition scores for each metric are then used to
-            compute{" "}
-            <strong className="font-semibold text-foreground">
-              exact Shapley values
-            </strong>
-            , giving one contribution value for each of the four training groups
-            for each utility.
-          </p>
         </div>
       </section>
 
