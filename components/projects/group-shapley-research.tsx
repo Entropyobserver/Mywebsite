@@ -247,72 +247,81 @@ export default function GroupShapleyResearch() {
           </div>
           <div className="space-y-4 leading-7 text-muted-foreground">
             <p>
-              We start with{" "}
+              We divide{" "}
               <strong className="font-semibold text-foreground">
-                13,935 English–Norwegian training pairs
+                13,935 English–Norwegian petroleum-domain training pairs
               </strong>{" "}
-              and divide them into four written-standard groups:{" "}
+              into four groups using SLIDE scores:{" "}
               <strong className="font-semibold text-foreground">
-                High-Bokmål, Boundary, Nynorsk-like, and Uncertain-other
+                high-Bokmål, boundary, Nynorsk-like, and uncertain-other
               </strong>
               .
             </p>
             <p>
-              We then construct all{" "}
+              We manually check{" "}
               <strong className="font-semibold text-foreground">
-                16 possible coalitions
+                200 examples
               </strong>{" "}
-              of these four groups. For each coalition, we fine-tune the model
+              , with 50 from each group. Two annotators label the written
+              standard without seeing the SLIDE labels. They agree on{" "}
+              <strong className="font-semibold text-foreground">
+                94.5% of the examples (Cohen’s κ = 0.918)
+              </strong>
+              . The check shows that the{" "}
+              <strong className="font-semibold text-foreground">
+                boundary group mainly reflects classifier uncertainty rather
+                than a clear linguistic category
+              </strong>
+              .
+            </p>
+            <p>
+              The four groups give{" "}
+              <strong className="font-semibold text-foreground">
+                16 possible combinations
+              </strong>
+              , including the empty one. We fine-tune every non-empty
+              combination with{" "}
+              <strong className="font-semibold text-foreground">
+                three seeds
+              </strong>
+              , using the original base model for the empty one. We run the
+              experiment with{" "}
+              <strong className="font-semibold text-foreground">
+                NLLB-600M
+              </strong>{" "}
+              and repeat it with{" "}
+              <strong className="font-semibold text-foreground">
+                NorMistral-7B-warm
+              </strong>
+              .
+            </p>
+            <p>
+              We evaluate all combinations on the same{" "}
+              <strong className="font-semibold text-foreground">
+                1,742-example test set
+              </strong>{" "}
               using{" "}
               <strong className="font-semibold text-foreground">
-                only the training data in that coalition
+                BLEU, chrF, terminology F1, high-Bokmål output rate (percentage
+                of outputs classified as high-Bokmål), and Nynorsk-like output
+                rate (percentage of outputs classified as Nynorsk-like)
               </strong>
-              . The empty coalition uses the original base model.
-            </p>
-            <p>
-              All 16 coalition models are evaluated on the{" "}
-              <strong className="font-semibold text-foreground">
-                same 1,742-sentence held-out test set
-              </strong>
-              . We measure five aspects of model behavior:
-            </p>
-            <ul className="list-disc space-y-1 pl-6">
-              <li>
-                <strong className="font-semibold text-foreground">BLEU</strong>
-              </li>
-              <li>
-                <strong className="font-semibold text-foreground">chrF</strong>
-              </li>
-              <li>
-                <strong className="font-semibold text-foreground">
-                  TermF1
-                </strong>
-              </li>
-              <li>
-                <strong className="font-semibold text-foreground">
-                  High-Bokmål output rate
-                </strong>{" "}
-                <span className="italic">
-                  (proportion of test outputs classified as High-Bokmål)
-                </span>
-              </li>
-              <li>
-                <strong className="font-semibold text-foreground">
-                  Nynorsk-like output rate
-                </strong>{" "}
-                <span className="italic">
-                  (proportion of test outputs classified as Nynorsk-like)
-                </span>
-              </li>
-            </ul>
-            <p>
-              The resulting 16 coalition scores for each metric are then used to
-              compute{" "}
+              . We then calculate{" "}
               <strong className="font-semibold text-foreground">
                 exact Shapley values
-              </strong>
-              , giving one contribution value for each of the four training
-              groups for each utility.
+              </strong>{" "}
+              to measure each group’s contribution to each metric.
+            </p>
+            <p>
+              We also compare the real groups with{" "}
+              <strong className="font-semibold text-foreground">
+                three random groupings of the same sizes
+              </strong>{" "}
+              and use{" "}
+              <strong className="font-semibold text-foreground">
+                test-subset, bootstrap, training-schedule, and threshold checks
+              </strong>{" "}
+              to assess the results.
             </p>
           </div>
         </div>
