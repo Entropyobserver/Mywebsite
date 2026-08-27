@@ -413,10 +413,31 @@ export default function GroupShapleyResearch() {
       </section>
 
       <section>
-        <SectionHeader
-          title="Where does the Nynorsk-like quality gain occur?"
-          description="The aggregate +3.21 BLEU contribution hides opposite effects across reference written standards. Bars show the Nynorsk-like group’s BLEU Shapley value."
-        />
+        <SectionHeader title="Why does Nynorsk-like data have positive value?" />
+        <div className="mb-6 max-w-3xl space-y-4 leading-7 text-muted-foreground">
+          <p>
+            The Nynorsk-like group has an overall{" "}
+            <strong className="font-semibold text-foreground">
+              +3.21 BLEU
+            </strong>{" "}
+            contribution, but this average hides opposite effects across
+            reference written standards.
+          </p>
+          <p>
+            <strong className="font-semibold text-foreground">
+              Each test example is grouped along two dimensions: source overlap
+              with the training data, and the written standard of its Norwegian
+              reference.
+            </strong>
+          </p>
+          <p>
+            <strong className="font-semibold text-foreground">
+              Source overlap
+            </strong>{" "}
+            measures how similar the English test sentence is to the English
+            sentences in the training data.
+          </p>
+        </div>
         <div className="grid gap-4 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-2">
           {["High-Bokmål", "Nynorsk-like"].map((reference) => (
             <div key={reference} className="rounded-xl bg-muted/25 p-4">
@@ -455,13 +476,15 @@ export default function GroupShapleyResearch() {
           ))}
         </div>
         <EvidenceConclusion>
-          Nynorsk-like data is positive on Nynorsk-like references at every
-          overlap level, reaching <strong>+41.97 BLEU</strong> in the
-          high-overlap subset. It is negative on High-Bokmål references at every
-          overlap level.{" "}
+          Nynorsk-like training data helps when the reference is Nynorsk-like,
+          but hurts when the reference is High-Bokmål. Within the Nynorsk-like
+          subsets, its positive contribution also increases with source overlap.
+          <br />
+          <br />
           <strong>
-            The group’s apparent value changes with the evaluation distribution;
-            high source overlap alone does not explain the gain.
+            The overall +3.21 BLEU contribution is therefore driven by the
+            Nynorsk-like reference group, with source overlap further modulating
+            the size of the gain.
           </strong>
         </EvidenceConclusion>
       </section>
