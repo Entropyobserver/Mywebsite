@@ -130,6 +130,114 @@ export default function GroupShapleyResearch() {
         </div>
       </section>
 
+      <section id="training-data-groups">
+        <SectionHeader title="Training-Data Groups" />
+        <div className="mb-6 max-w-3xl space-y-4 leading-7 text-muted-foreground">
+          <p>
+            We use{" "}
+            <strong className="font-semibold text-foreground">
+              SLIDE scores
+            </strong>{" "}
+            to divide the 13,935 training pairs into four mutually exclusive
+            groups. These groups are used as the{" "}
+            <strong className="font-semibold text-foreground">
+              units for Shapley attribution
+            </strong>
+            .
+          </p>
+        </div>
+        <div className="overflow-hidden rounded-2xl border bg-background">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[720px] text-left text-sm">
+              <thead className="bg-blue-700 text-white">
+                <tr>
+                  <th className="px-5 py-4 font-semibold">Group</th>
+                  <th className="px-5 py-4 font-semibold">Rule</th>
+                  <th className="px-5 py-4 text-right font-semibold">Pairs</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                <tr>
+                  <td className="px-5 py-4 font-semibold">High-Bokmål</td>
+                  <td className="px-5 py-4 text-muted-foreground">
+                    <span className="italic">
+                      s<sub>NB</sub>
+                    </span>{" "}
+                    ≥ 0.80 and{" "}
+                    <span className="italic">
+                      s<sub>NN</sub>
+                    </span>{" "}
+                    &lt; 0.30
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono font-semibold tabular-nums">
+                    10,113
+                  </td>
+                </tr>
+                <tr className="bg-muted/35">
+                  <td className="px-5 py-4 font-semibold">Boundary</td>
+                  <td className="px-5 py-4 text-muted-foreground">
+                    <span className="italic">
+                      s<sub>NB</sub>
+                    </span>{" "}
+                    ≥ 0.50 and{" "}
+                    <span className="italic">
+                      s<sub>NN</sub>
+                    </span>{" "}
+                    ≥ 0.50
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono font-semibold tabular-nums">
+                    880
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-5 py-4 font-semibold">Nynorsk-like</td>
+                  <td className="px-5 py-4 text-muted-foreground">
+                    <span className="italic">
+                      s<sub>NN</sub>
+                    </span>{" "}
+                    ≥ 0.50 and{" "}
+                    <span className="italic">
+                      s<sub>NB</sub>
+                    </span>{" "}
+                    &lt; 0.50
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono font-semibold tabular-nums">
+                    2,645
+                  </td>
+                </tr>
+                <tr className="bg-muted/35">
+                  <td className="px-5 py-4 font-semibold">Uncertain-other</td>
+                  <td className="px-5 py-4 text-muted-foreground">
+                    All remaining cases
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono font-semibold tabular-nums">
+                    297
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p className="mt-4 text-sm leading-6 text-muted-foreground">
+          Here,{" "}
+          <span className="italic">
+            s<sub>NB</sub>
+          </span>{" "}
+          and{" "}
+          <span className="italic">
+            s<sub>NN</sub>
+          </span>{" "}
+          are independent SLIDE scores ranging from 0 to 1.
+        </p>
+        <p className="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950 dark:border-amber-900 dark:bg-amber-950/30 dark:text-amber-100">
+          <strong>
+            These are attribution groups, not linguistic categories.
+          </strong>{" "}
+          The Boundary group mainly reflects classifier uncertainty rather than
+          a clear written-standard category.
+        </p>
+      </section>
+
       <section>
         <SectionHeader title="Exact Group-Level Attribution" />
         <div className="rounded-2xl border bg-muted/20 p-5 sm:p-7">
@@ -244,105 +352,6 @@ export default function GroupShapleyResearch() {
             for each utility.
           </p>
         </div>
-      </section>
-
-      <section>
-        <SectionHeader
-          title="Auditable Training-Data Groups"
-          description="SLIDE scores define four mutually exclusive operational groups. They are attribution units—not gold linguistic categories."
-        />
-        <div className="overflow-hidden rounded-2xl border bg-background">
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[720px] text-left text-sm">
-              <thead className="bg-blue-700 text-white">
-                <tr>
-                  <th className="px-5 py-4 font-semibold">Training group</th>
-                  <th className="px-5 py-4 font-semibold">
-                    Operational definition
-                  </th>
-                  <th className="px-5 py-4 text-right font-semibold">
-                    Training rows
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y">
-                <tr>
-                  <td className="px-5 py-4 font-semibold">High-Bokmål</td>
-                  <td className="px-5 py-4 text-muted-foreground">
-                    <span className="italic">
-                      s<sub>NB</sub>
-                    </span>{" "}
-                    ≥ 0.80 and{" "}
-                    <span className="italic">
-                      s<sub>NN</sub>
-                    </span>{" "}
-                    &lt; 0.30
-                  </td>
-                  <td className="px-5 py-4 text-right font-mono font-semibold tabular-nums">
-                    10,113
-                  </td>
-                </tr>
-                <tr className="bg-muted/35">
-                  <td className="px-5 py-4 font-semibold">Boundary</td>
-                  <td className="px-5 py-4 text-muted-foreground">
-                    <span className="italic">
-                      s<sub>NB</sub>
-                    </span>{" "}
-                    ≥ 0.50 and{" "}
-                    <span className="italic">
-                      s<sub>NN</sub>
-                    </span>{" "}
-                    ≥ 0.50
-                  </td>
-                  <td className="px-5 py-4 text-right font-mono font-semibold tabular-nums">
-                    880
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-5 py-4 font-semibold">Nynorsk-like</td>
-                  <td className="px-5 py-4 text-muted-foreground">
-                    <span className="italic">
-                      s<sub>NN</sub>
-                    </span>{" "}
-                    ≥ 0.50 and{" "}
-                    <span className="italic">
-                      s<sub>NB</sub>
-                    </span>{" "}
-                    &lt; 0.50
-                  </td>
-                  <td className="px-5 py-4 text-right font-mono font-semibold tabular-nums">
-                    2,645
-                  </td>
-                </tr>
-                <tr className="bg-muted/35">
-                  <td className="px-5 py-4 font-semibold">Uncertain-other</td>
-                  <td className="px-5 py-4 text-muted-foreground">
-                    All remaining score combinations
-                  </td>
-                  <td className="px-5 py-4 text-right font-mono font-semibold tabular-nums">
-                    297
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p className="border-t px-5 py-3 text-xs leading-5 text-muted-foreground">
-            <span className="italic">
-              s<sub>NB</sub>
-            </span>{" "}
-            and{" "}
-            <span className="italic">
-              s<sub>NN</sub>
-            </span>{" "}
-            are the independent Bokmål and Nynorsk scores produced by SLIDE.
-            Both range from 0 to 1 and do not need to sum to one.
-          </p>
-        </div>
-        <p className="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950 dark:border-amber-900 dark:bg-amber-950/30 dark:text-amber-100">
-          Manual validation found that the boundary group reflects classifier
-          uncertainty rather than a stable, human-interpretable mixed-standard
-          category. The cautious name is therefore intentional.
-        </p>
       </section>
 
       <section id="rq1">
