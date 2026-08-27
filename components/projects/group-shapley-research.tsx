@@ -6,33 +6,6 @@ const researchQuestions = [
   "How do these attribution patterns compare across encoder–decoder and decoder-only architectures?",
 ];
 
-const groups = [
-  {
-    name: "High-Bokmål",
-    size: "10,113",
-    rule: "Strong Bokmål signal and weak Nynorsk signal",
-    tone: "border-blue-200 bg-blue-50 dark:border-blue-900 dark:bg-blue-950/30",
-  },
-  {
-    name: "Boundary",
-    size: "880",
-    rule: "Both classifier scores cross the activation threshold",
-    tone: "border-amber-200 bg-amber-50 dark:border-amber-900 dark:bg-amber-950/30",
-  },
-  {
-    name: "Nynorsk-like",
-    size: "2,645",
-    rule: "Nynorsk signal crosses the threshold; Bokmål does not",
-    tone: "border-violet-200 bg-violet-50 dark:border-violet-900 dark:bg-violet-950/30",
-  },
-  {
-    name: "Uncertain-other",
-    size: "297",
-    rule: "All remaining classifier-score combinations",
-    tone: "border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-950/30",
-  },
-];
-
 const shapleyRows = [
   ["High-Bokmål", 19.83, 13.56, 0.273, 0.381, -0.338],
   ["Boundary", 2.04, 1.08, 0.038, -0.016, -0.008],
@@ -159,7 +132,51 @@ export default function GroupShapleyResearch() {
 
       <section>
         <SectionHeader title="Exact Group-Level Attribution" />
-        <div className="mb-6 max-w-3xl space-y-4 leading-7 text-muted-foreground">
+        <div className="rounded-2xl border bg-muted/20 p-5 sm:p-7">
+          <div className="flex flex-col items-stretch gap-3 lg:flex-row lg:items-center">
+            <ProtocolStep
+              label="13,935 training pairs"
+              detail="English–Norwegian petroleum corpus"
+            />
+            <span className="text-center text-xl text-muted-foreground lg:rotate-0">
+              →
+            </span>
+            <ProtocolStep
+              label="4 operational groups"
+              detail="Auditable written-standard partitions"
+            />
+            <span className="text-center text-xl text-muted-foreground">→</span>
+            <ProtocolStep
+              label="16 coalitions"
+              detail="Complete 2⁴ space, including the empty coalition"
+            />
+            <span className="text-center text-xl text-muted-foreground">→</span>
+            <ProtocolStep
+              label="2 architectures"
+              detail="NLLB-600M and NorMistral-7B-warm"
+            />
+            <span className="text-center text-xl text-muted-foreground">→</span>
+            <ProtocolStep
+              label="5 utility measures"
+              detail="BLEU, chrF, TermF1, and two standard rates"
+            />
+          </div>
+          <div className="mt-5 grid gap-3 text-center sm:grid-cols-3">
+            {[
+              ["3", "training seeds"],
+              ["3", "size-matched random partitions"],
+              ["200", "manually audited examples"],
+            ].map(([value, label]) => (
+              <div key={label} className="rounded-xl bg-background px-4 py-3">
+                <p className="font-heading text-2xl text-blue-600 dark:text-blue-400">
+                  {value}
+                </p>
+                <p className="text-xs text-muted-foreground">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="mt-6 max-w-3xl space-y-4 leading-7 text-muted-foreground">
           <p>
             We start with{" "}
             <strong className="font-semibold text-foreground">
@@ -227,50 +244,6 @@ export default function GroupShapleyResearch() {
             for each utility.
           </p>
         </div>
-        <div className="rounded-2xl border bg-muted/20 p-5 sm:p-7">
-          <div className="flex flex-col items-stretch gap-3 lg:flex-row lg:items-center">
-            <ProtocolStep
-              label="13,935 training pairs"
-              detail="English–Norwegian petroleum corpus"
-            />
-            <span className="text-center text-xl text-muted-foreground lg:rotate-0">
-              →
-            </span>
-            <ProtocolStep
-              label="4 operational groups"
-              detail="Auditable written-standard partitions"
-            />
-            <span className="text-center text-xl text-muted-foreground">→</span>
-            <ProtocolStep
-              label="16 coalitions"
-              detail="Complete 2⁴ space, including the empty coalition"
-            />
-            <span className="text-center text-xl text-muted-foreground">→</span>
-            <ProtocolStep
-              label="2 architectures"
-              detail="NLLB-600M and NorMistral-7B-warm"
-            />
-            <span className="text-center text-xl text-muted-foreground">→</span>
-            <ProtocolStep
-              label="5 utility measures"
-              detail="BLEU, chrF, TermF1, and two standard rates"
-            />
-          </div>
-          <div className="mt-5 grid gap-3 text-center sm:grid-cols-3">
-            {[
-              ["3", "training seeds"],
-              ["3", "size-matched random partitions"],
-              ["200", "manually audited examples"],
-            ].map(([value, label]) => (
-              <div key={label} className="rounded-xl bg-background px-4 py-3">
-                <p className="font-heading text-2xl text-blue-600 dark:text-blue-400">
-                  {value}
-                </p>
-                <p className="text-xs text-muted-foreground">{label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
       </section>
 
       <section>
@@ -278,21 +251,92 @@ export default function GroupShapleyResearch() {
           title="Auditable Training-Data Groups"
           description="SLIDE scores define four mutually exclusive operational groups. They are attribution units—not gold linguistic categories."
         />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {groups.map((group) => (
-            <div
-              key={group.name}
-              className={`rounded-2xl border p-5 ${group.tone}`}
-            >
-              <p className="font-heading text-xl">{group.name}</p>
-              <p className="mt-2 font-mono text-2xl font-semibold tabular-nums">
-                {group.size}
-              </p>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                {group.rule}
-              </p>
-            </div>
-          ))}
+        <div className="overflow-hidden rounded-2xl border bg-background">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[720px] text-left text-sm">
+              <thead className="bg-blue-700 text-white">
+                <tr>
+                  <th className="px-5 py-4 font-semibold">Training group</th>
+                  <th className="px-5 py-4 font-semibold">
+                    Operational definition
+                  </th>
+                  <th className="px-5 py-4 text-right font-semibold">
+                    Training rows
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                <tr>
+                  <td className="px-5 py-4 font-semibold">High-Bokmål</td>
+                  <td className="px-5 py-4 text-muted-foreground">
+                    <span className="italic">
+                      s<sub>NB</sub>
+                    </span>{" "}
+                    ≥ 0.80 and{" "}
+                    <span className="italic">
+                      s<sub>NN</sub>
+                    </span>{" "}
+                    &lt; 0.30
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono font-semibold tabular-nums">
+                    10,113
+                  </td>
+                </tr>
+                <tr className="bg-muted/35">
+                  <td className="px-5 py-4 font-semibold">Boundary</td>
+                  <td className="px-5 py-4 text-muted-foreground">
+                    <span className="italic">
+                      s<sub>NB</sub>
+                    </span>{" "}
+                    ≥ 0.50 and{" "}
+                    <span className="italic">
+                      s<sub>NN</sub>
+                    </span>{" "}
+                    ≥ 0.50
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono font-semibold tabular-nums">
+                    880
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-5 py-4 font-semibold">Nynorsk-like</td>
+                  <td className="px-5 py-4 text-muted-foreground">
+                    <span className="italic">
+                      s<sub>NN</sub>
+                    </span>{" "}
+                    ≥ 0.50 and{" "}
+                    <span className="italic">
+                      s<sub>NB</sub>
+                    </span>{" "}
+                    &lt; 0.50
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono font-semibold tabular-nums">
+                    2,645
+                  </td>
+                </tr>
+                <tr className="bg-muted/35">
+                  <td className="px-5 py-4 font-semibold">Uncertain-other</td>
+                  <td className="px-5 py-4 text-muted-foreground">
+                    All remaining score combinations
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono font-semibold tabular-nums">
+                    297
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="border-t px-5 py-3 text-xs leading-5 text-muted-foreground">
+            <span className="italic">
+              s<sub>NB</sub>
+            </span>{" "}
+            and{" "}
+            <span className="italic">
+              s<sub>NN</sub>
+            </span>{" "}
+            are the independent Bokmål and Nynorsk scores produced by SLIDE.
+            Both range from 0 to 1 and do not need to sum to one.
+          </p>
         </div>
         <p className="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950 dark:border-amber-900 dark:bg-amber-950/30 dark:text-amber-100">
           Manual validation found that the boundary group reflects classifier
