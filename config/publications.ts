@@ -49,15 +49,24 @@ export const publications: PublicationInterface[] = [
     ],
   },
   {
-    title: "Modular Expert Architectures for Multilingual Domain Adaptation",
+    title:
+      "Modular Expert Architectures for Multilingual Domain Adaptation: Parameter-Efficient Norwegian Petroleum Translation with LoRA and Gated Routing",
     authors: "Xiaojing Yang",
     status: "Thesis",
-    venue: "MSc Thesis, Uppsala University",
-    date: "May 2026",
+    venue: "MSc Thesis, Uppsala University, 46 pages",
+    date: "June 2026",
     role: "Thesis author; framework design and experimental lead",
     description:
-      "Master's thesis on modular LoRA expert architectures for low-resource multilingual petroleum-domain NMT. Publicly summarized at a high level because the work forms the basis of an ongoing manuscript revision.",
+      "Master's thesis presenting a parameter-efficient multilingual adaptation framework that combines language-specific LoRA experts, gated routing, and target-anchored synthetic data for Norwegian petroleum-domain translation.",
     links: [
+      {
+        label: "DiVA Record",
+        href: "https://urn.kb.se/resolve?urn=urn:nbn:se:uu:diva-592985",
+      },
+      {
+        label: "Thesis PDF",
+        href: "https://uu.diva-portal.org/smash/get/diva2:2081638/FULLTEXT01.pdf",
+      },
       {
         label: "Code",
         href: "https://github.com/Entropyobserver/lora-moe-petroleum",
