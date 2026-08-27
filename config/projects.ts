@@ -160,10 +160,11 @@ export const Projects: ProjectInterface[] = [
     category: [
       "Research",
       "Machine Translation",
-      "NLP",
+      "Petroleum-Domain MT",
+      "Mixture-of-Experts",
       "LoRA / PEFT",
+      "Routing Diagnostics",
       "Low-Resource NLP",
-      "Domain Adaptation",
       "Evaluation",
     ],
     shortDescription:

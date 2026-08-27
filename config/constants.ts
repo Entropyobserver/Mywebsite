@@ -126,7 +126,6 @@ export type ValidSkills =
   | "LaTeX"
   | "SLIDE";
 
-
 export type ValidCategory =
   | "Full Stack"
   | "Frontend"
@@ -135,10 +134,13 @@ export type ValidCategory =
   | "Web Dev"
   | "Mobile Dev"
   | "3D Modeling"
-  | "AI/ML"       
+  | "AI/ML"
   | "NLP"
   | "Research"
   | "Machine Translation"
+  | "Petroleum-Domain MT"
+  | "Mixture-of-Experts"
+  | "Routing Diagnostics"
   | "LoRA / PEFT"
   | "Low-Resource NLP"
   | "Domain Adaptation"
@@ -150,9 +152,13 @@ export type ValidCategory =
   | "Information Retrieval"
   | "Responsible AI"
   | "Data-Centric ML"
-  | "Technical Project";         
+  | "Technical Project";
 
-export type ValidExpType = "AI" | "Data Science" | "Research" | "Technical Project";
+export type ValidExpType =
+  | "AI"
+  | "Data Science"
+  | "Research"
+  | "Technical Project";
 
 export type ValidPages =
   | "home"
