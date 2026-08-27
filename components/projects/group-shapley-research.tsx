@@ -490,11 +490,31 @@ export default function GroupShapleyResearch() {
       </section>
 
       <section id="rq2">
-        <SectionHeader
-          title={"RQ2. " + researchQuestions[1]}
-          description="Three random partitions preserve the original group sizes while changing which examples belong to each group."
-        />
-        <div className="grid gap-6 rounded-2xl border bg-muted/20 p-5 sm:p-7 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <SectionHeader title={"RQ2. " + researchQuestions[1]} />
+        <div className="mb-6 max-w-3xl space-y-4 leading-7 text-muted-foreground">
+          <p>
+            If group size alone drives the attribution, random groups with the
+            same size should produce similar Shapley values.
+          </p>
+          <p>
+            We compare the true High-Bokmål group with{" "}
+            <strong className="font-semibold text-foreground">
+              three random groups of the same size
+            </strong>
+            . The random groups contain the same number of training examples,
+            but different examples.
+          </p>
+          <p>
+            The true High-Bokmål group has substantially higher Shapley values
+            than the random groups across{" "}
+            <strong className="font-semibold text-foreground">
+              translation quality and terminology
+            </strong>
+            . Thus, simply having the same amount of training data does not
+            reproduce the contribution of the true group.
+          </p>
+        </div>
+        <div className="space-y-6 rounded-2xl border bg-muted/20 p-5 sm:p-7">
           <div>
             <a
               href="/projects/group-shapley-attribution/random-baseline-barchart.png"
@@ -507,14 +527,14 @@ export default function GroupShapleyResearch() {
                 alt="True High-Bokmål group compared with random same-size groups across quality, terminology, and written-standard Shapley values"
                 width={1600}
                 height={900}
-                className="h-auto w-full rounded-xl border bg-white"
+                className="mx-auto h-auto w-full rounded-xl border bg-white"
               />
             </a>
             <p className="mt-2 text-center text-xs text-muted-foreground">
               True High-Bokmål group versus random same-size groups.
             </p>
           </div>
-          <div className="space-y-4">
+          <div className="grid gap-4 sm:grid-cols-3">
             {[
               ["BLEU", "19.83", "11.85"],
               ["chrF", "13.56", "7.88"],
@@ -539,12 +559,9 @@ export default function GroupShapleyResearch() {
           </div>
         </div>
         <EvidenceConclusion>
-          Size explains part of the aggregate benefit of seeing more training
-          data, but <strong>it does not explain the attribution profile</strong>
-          . Random same-size groups contribute less to quality and terminology,
-          and they fail to reproduce the true group’s written-standard effects.
           <strong>
-            More data helps; group identity determines which behaviors change.
+            Group size matters, but the identity of the training examples
+            matters more.
           </strong>
         </EvidenceConclusion>
       </section>
