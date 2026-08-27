@@ -40,6 +40,8 @@ const shapleyRows = [
   ["Uncertain-other", 0.61, 0.56, 0.028, 0.012, -0.007],
 ] as const;
 
+const metricMaxAbs = [19.83, 13.56, 0.273, 0.459, 0.469] as const;
+
 const subsetRows = [
   { reference: "High-Bokmål", overlap: "Low", n: 373, bleu: -5.17 },
   { reference: "High-Bokmål", overlap: "Mid", n: 678, bleu: -2.92 },
@@ -94,23 +96,33 @@ function EvidenceConclusion({ children }: { children: React.ReactNode }) {
   );
 }
 
-function MetricCell({ value }: { value: number }) {
+function HeatmapCell({
+  value,
+  maxAbs,
+  label,
+}: {
+  value: number;
+  maxAbs: number;
+  label: string;
+}) {
   const positive = value > 0;
-  const nearZero = Math.abs(value) < 0.02;
   const digits = Math.abs(value) < 1 ? 3 : 2;
+  const intensity = 0.12 + 0.68 * (Math.abs(value) / maxAbs);
+
   return (
-    <td
-      className={`px-3 py-4 text-right font-mono text-xs font-semibold tabular-nums sm:text-sm ${
-        nearZero
-          ? "bg-muted/50 text-muted-foreground"
-          : positive
-            ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/35 dark:text-emerald-300"
-            : "bg-rose-50 text-rose-700 dark:bg-rose-950/35 dark:text-rose-300"
-      }`}
+    <div
+      role="cell"
+      aria-label={`${label}: ${positive ? "positive" : "negative"} ${Math.abs(value).toFixed(digits)}`}
+      className="flex min-h-[72px] items-center justify-center rounded-xl px-3 py-4 text-center font-mono text-base font-semibold tabular-nums text-slate-950 dark:text-white"
+      style={{
+        backgroundColor: positive
+          ? `rgba(59, 130, 246, ${intensity})`
+          : `rgba(239, 68, 68, ${intensity})`,
+      }}
     >
       {positive ? "+" : ""}
       {value.toFixed(digits)}
-    </td>
+    </div>
   );
 }
 
@@ -153,37 +165,37 @@ export default function GroupShapleyResearch() {
         <div className="rounded-2xl border bg-muted/20 p-5 sm:p-7">
           <div className="flex flex-col items-stretch gap-3 lg:flex-row lg:items-center">
             <ProtocolStep
-              label="13,935 pairs"
+              label="13,935 training pairs"
               detail="English–Norwegian petroleum corpus"
             />
             <span className="text-center text-xl text-muted-foreground lg:rotate-0">
               →
             </span>
             <ProtocolStep
-              label="4 groups"
+              label="4 operational groups"
               detail="Auditable written-standard partitions"
             />
             <span className="text-center text-xl text-muted-foreground">→</span>
             <ProtocolStep
               label="16 coalitions"
-              detail="Complete 2⁴ combination space"
+              detail="Complete 2⁴ space, including the empty coalition"
             />
             <span className="text-center text-xl text-muted-foreground">→</span>
             <ProtocolStep
               label="2 architectures"
-              detail="NLLB-600M and NorMistral-7B"
+              detail="NLLB-600M and NorMistral-7B-warm"
             />
             <span className="text-center text-xl text-muted-foreground">→</span>
             <ProtocolStep
-              label="5 utilities"
-              detail="Quality, terminology, and standard rates"
+              label="5 utility measures"
+              detail="BLEU, chrF, TermF1, and two standard rates"
             />
           </div>
           <div className="mt-5 grid gap-3 text-center sm:grid-cols-3">
             {[
-              ["3", "training seeds per coalition"],
-              ["225", "non-empty adapter training runs"],
-              ["240", "coalition–seed evaluations"],
+              ["3", "training seeds"],
+              ["3", "size-matched random partitions"],
+              ["200", "manually audited examples"],
             ].map(([value, label]) => (
               <div key={label} className="rounded-xl bg-background px-4 py-3">
                 <p className="font-heading text-2xl text-blue-600 dark:text-blue-400">
@@ -228,46 +240,65 @@ export default function GroupShapleyResearch() {
         <SectionHeader
           eyebrow="RQ1 · Contribution depends on the measured behavior"
           title={researchQuestions[0]}
-          description="Exact Shapley values from all 16 NLLB coalitions, averaged over three seeds. Green cells are positive contributions; red cells are negative."
+          description="Exact Shapley values from all 16 NLLB coalitions, averaged over three seeds. Blue cells are positive contributions; red cells are negative."
         />
-        <div className="overflow-hidden rounded-2xl border bg-background">
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[820px] border-separate border-spacing-px bg-border text-left">
-              <thead>
-                <tr className="bg-blue-700 text-white">
-                  <th className="px-4 py-4 text-sm font-semibold">
-                    Training group
-                  </th>
-                  <th className="px-3 py-4 text-right text-sm font-semibold">
-                    BLEU
-                  </th>
-                  <th className="px-3 py-4 text-right text-sm font-semibold">
-                    chrF
-                  </th>
-                  <th className="px-3 py-4 text-right text-sm font-semibold">
-                    TermF1
-                  </th>
-                  <th className="px-3 py-4 text-right text-sm font-semibold">
-                    High-Bokmål rate
-                  </th>
-                  <th className="px-3 py-4 text-right text-sm font-semibold">
-                    Nynorsk-like rate
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {shapleyRows.map(([name, ...values]) => (
-                  <tr key={name}>
-                    <td className="bg-background px-4 py-4 text-sm font-semibold">
-                      {name}
-                    </td>
-                    {values.map((value, index) => (
-                      <MetricCell key={`${name}-${index}`} value={value} />
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        <div className="overflow-hidden rounded-2xl border bg-background p-3 sm:p-5">
+          <div className="overflow-x-auto pb-2">
+            <div
+              role="table"
+              aria-label="Exact Shapley contributions by training group and evaluation metric"
+              className="grid min-w-[920px] grid-cols-[190px_repeat(5,minmax(130px,1fr))] gap-2"
+            >
+              {[
+                "Training group",
+                "BLEU",
+                "chrF",
+                "TermF1",
+                "High-Bokmål rate",
+                "Nynorsk-like rate",
+              ].map((heading, index) => (
+                <div
+                  key={heading}
+                  role="columnheader"
+                  className={`flex min-h-[54px] items-center px-3 py-2 text-sm font-semibold text-muted-foreground ${index === 0 ? "justify-start" : "justify-center text-center"}`}
+                >
+                  {heading}
+                </div>
+              ))}
+
+              {shapleyRows.map(([name, ...values]) => (
+                <div className="contents" role="row" key={name}>
+                  <div
+                    role="rowheader"
+                    className="flex min-h-[72px] items-center px-3 py-4 text-sm font-semibold sm:text-base"
+                  >
+                    {name}
+                  </div>
+                  {values.map((value, index) => (
+                    <HeatmapCell
+                      key={`${name}-${index}`}
+                      value={value}
+                      maxAbs={metricMaxAbs[index]}
+                      label={`${name}, ${["BLEU", "chrF", "TermF1", "High-Bokmål rate", "Nynorsk-like rate"][index]}`}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-x-6 gap-y-2 border-t pt-4 text-sm text-muted-foreground">
+            <span className="flex items-center gap-2">
+              <span
+                className="h-4 w-7 rounded bg-blue-400"
+                aria-hidden="true"
+              />
+              Positive contribution
+            </span>
+            <span className="flex items-center gap-2">
+              <span className="h-4 w-7 rounded bg-red-400" aria-hidden="true" />
+              Negative contribution
+            </span>
+            <span>Color intensity is normalized within each metric.</span>
           </div>
         </div>
         <EvidenceConclusion>
