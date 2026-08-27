@@ -27,15 +27,16 @@ export const publications: PublicationInterface[] = [
       "LoRA Fine-Tuning of English-Norwegian NMT for the Oil & Gas Industry",
     authors: "Xiaojing Yang, Zhihan Li, Gege Sun, Mengyue Li, Meriem Beloucif",
     status: "Published",
-    venue: "EAMT 2026, Proceedings Volume 2",
+    venue:
+      "Proceedings of the 26th Annual Conference of the European Association for Machine Translation (Volume 1)",
     date: "June 2026",
     role: "First author; lead experimental contributor",
     description:
-      'Published in the official EAMT 2026 proceedings. The ACL Anthology entry is forthcoming; to locate the paper in the proceedings PDF, search for the title "LoRA Fine-Tuning of English-Norwegian NMT for the Oil & Gas Industry".',
+      "Pages 385-398. Tilburg, The Netherlands. European Association for Machine Translation. ISBN 9789403901411.",
     links: [
       {
-        label: "Official Proceedings PDF",
-        href: "https://eamt2026.org/assets/pdfs/EAMT2026_proceedings_Vol_2.pdf",
+        label: "ACL Anthology",
+        href: "https://aclanthology.org/2026.eamt-1.25/",
       },
       {
         label: "Code",
