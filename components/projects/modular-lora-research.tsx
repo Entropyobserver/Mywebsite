@@ -242,10 +242,7 @@ export default function ModularLoraResearch() {
       </section>
 
       <section id="rq1">
-        <SectionHeader
-          eyebrow="RQ1 · Evidence + Answer"
-          title={researchQuestions[0]}
-        />
+        <SectionHeader eyebrow="RQ1 · 问题" title={researchQuestions[0]} />
         <div className="overflow-hidden rounded-2xl border bg-background">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[700px] text-left text-sm">
@@ -307,10 +304,7 @@ export default function ModularLoraResearch() {
       </section>
 
       <section id="rq2">
-        <SectionHeader
-          eyebrow="RQ2 · Core Result"
-          title={researchQuestions[1]}
-        />
+        <SectionHeader eyebrow="RQ2 · 问题" title={researchQuestions[1]} />
         <div className="overflow-hidden rounded-2xl border bg-background">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[560px] text-left text-sm">
@@ -363,10 +357,7 @@ export default function ModularLoraResearch() {
       </section>
 
       <section id="rq3">
-        <SectionHeader
-          eyebrow="RQ3 · Evidence + Answer"
-          title={researchQuestions[2]}
-        />
+        <SectionHeader eyebrow="RQ3 · 问题" title={researchQuestions[2]} />
         <div className="space-y-6">
           <div className="grid gap-6 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
