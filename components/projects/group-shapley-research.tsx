@@ -158,10 +158,75 @@ export default function GroupShapleyResearch() {
       </section>
 
       <section>
-        <SectionHeader
-          title="Exact Group-Level Attribution"
-          description="Rather than removing one group from the full dataset, the protocol evaluates every possible group combination. A group’s Shapley value is its average marginal contribution across all coalition contexts."
-        />
+        <SectionHeader title="Exact Group-Level Attribution" />
+        <div className="mb-6 max-w-3xl space-y-4 leading-7 text-muted-foreground">
+          <p>
+            We start with{" "}
+            <strong className="font-semibold text-foreground">
+              13,935 English–Norwegian training pairs
+            </strong>{" "}
+            and divide them into four written-standard groups:{" "}
+            <strong className="font-semibold text-foreground">
+              High-Bokmål, Boundary, Nynorsk-like, and Uncertain-other
+            </strong>
+            .
+          </p>
+          <p>
+            We then construct all{" "}
+            <strong className="font-semibold text-foreground">
+              16 possible coalitions
+            </strong>{" "}
+            of these four groups. For each coalition, we fine-tune the model
+            using{" "}
+            <strong className="font-semibold text-foreground">
+              only the training data in that coalition
+            </strong>
+            . The empty coalition uses the original base model.
+          </p>
+          <p>
+            All 16 coalition models are evaluated on the{" "}
+            <strong className="font-semibold text-foreground">
+              same 1,742-sentence held-out test set
+            </strong>
+            . We measure five aspects of model behavior:
+          </p>
+          <ul className="list-disc space-y-1 pl-6">
+            <li>
+              <strong className="font-semibold text-foreground">BLEU</strong>
+            </li>
+            <li>
+              <strong className="font-semibold text-foreground">chrF</strong>
+            </li>
+            <li>
+              <strong className="font-semibold text-foreground">TermF1</strong>
+            </li>
+            <li>
+              <strong className="font-semibold text-foreground">
+                High-Bokmål output rate
+              </strong>{" "}
+              <span className="italic">
+                (proportion of test outputs classified as High-Bokmål)
+              </span>
+            </li>
+            <li>
+              <strong className="font-semibold text-foreground">
+                Nynorsk-like output rate
+              </strong>{" "}
+              <span className="italic">
+                (proportion of test outputs classified as Nynorsk-like)
+              </span>
+            </li>
+          </ul>
+          <p>
+            The resulting 16 coalition scores for each metric are then used to
+            compute{" "}
+            <strong className="font-semibold text-foreground">
+              exact Shapley values
+            </strong>
+            , giving one contribution value for each of the four training groups
+            for each utility.
+          </p>
+        </div>
         <div className="rounded-2xl border bg-muted/20 p-5 sm:p-7">
           <div className="flex flex-col items-stretch gap-3 lg:flex-row lg:items-center">
             <ProtocolStep
