@@ -402,18 +402,19 @@ export default function ModularLoraResearch() {
 
           <div className="grid gap-6 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
-              <p className="mb-1 text-sm font-semibold">Cross-expert BLEU</p>
-              <p className="mb-5 text-xs text-muted-foreground">
-                Rows are test languages; columns are the expert used for
-                decoding.
-              </p>
+              <p className="mb-4 text-sm font-semibold">Cross-expert BLEU</p>
               <CrossExpertMatrix />
+              <p className="mt-3 text-xs leading-5 text-muted-foreground">
+                Rows are the language of the test source; columns are the expert
+                used for decoding. Bold diagonal cells are the matching (oracle)
+                expert results. All values are BLEU, so higher is better.
+              </p>
             </div>
             <p className="text-base leading-8 text-muted-foreground">
               Matching experts achieve the highest BLEU for every language pair,
               confirming that the adapters develop language-specific
-              capabilities. However, non-matching experts remain competitive:
-              the DE expert reaches{" "}
+              capabilities. The off-diagonal cells show that non-matching
+              experts remain competitive: for example, the DE expert reaches{" "}
               <strong className="font-semibold text-foreground">
                 56.2 BLEU on NL–NO
               </strong>
