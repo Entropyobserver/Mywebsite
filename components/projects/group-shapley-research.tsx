@@ -67,7 +67,7 @@ function SectionHeader({
 }: {
   eyebrow?: string;
   title: string;
-  description?: string;
+  description?: React.ReactNode;
 }) {
   return (
     <div className="mb-6">
@@ -240,7 +240,16 @@ export default function GroupShapleyResearch() {
         <SectionHeader
           eyebrow="RQ1 · Contribution depends on the measured behavior"
           title={researchQuestions[0]}
-          description="Exact Shapley values from all 16 NLLB coalitions, averaged over three seeds. Blue cells are positive contributions; red cells are negative."
+          description={
+            <>
+              Exact Shapley values from all 16 NLLB coalitions, averaged over
+              three training seeds.{" "}
+              <strong className="font-semibold text-foreground">
+                Blue indicates positive contributions; red indicates negative
+                contributions.
+              </strong>
+            </>
+          }
         />
         <div className="overflow-hidden rounded-2xl border bg-background p-3 sm:p-5">
           <div className="overflow-x-auto pb-2">
@@ -302,12 +311,13 @@ export default function GroupShapleyResearch() {
           </div>
         </div>
         <EvidenceConclusion>
-          <strong>High-Bokmål data is the dominant contributor</strong> to
-          translation quality, terminology F1, and Bokmål output consistency.
-          Nynorsk-like data provides a smaller aggregate quality gain, but
-          decreases terminology F1 and strongly shifts outputs away from Bokmål.{" "}
+          High-Bokmål data is the main contributor to translation quality,
+          terminology accuracy, and Bokmål consistency. Nynorsk-like data has a
+          smaller positive effect on overall translation quality, but hurts
+          terminology accuracy and strongly increases Nynorsk-like outputs.{" "}
           <strong>
-            A data group can therefore help one behavior while harming another.
+            The key point: a training-data group can improve one aspect of model
+            behavior while harming another.
           </strong>
         </EvidenceConclusion>
       </section>
