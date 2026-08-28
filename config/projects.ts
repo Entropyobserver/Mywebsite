@@ -384,12 +384,12 @@ export const Projects: ProjectInterface[] = [
     type: "Research",
     category: [
       "Research",
-      "Data-Centric ML",
+      "Shapley Attribution",
+      "Training Data",
       "Machine Translation",
-      "Evaluation",
     ],
     shortDescription:
-      "A data-centric ML project using exact group-level Shapley values to study which training-data groups shape translation quality, terminology behavior, and written-standard output.",
+      "Exact Shapley analysis of how training groups shape machine-translation behavior.",
     techStack: [
       "Python",
       "PyTorch",

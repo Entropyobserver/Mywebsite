@@ -152,6 +152,8 @@ export type ValidCategory =
   | "Information Retrieval"
   | "Responsible AI"
   | "Data-Centric ML"
+  | "Shapley Attribution"
+  | "Training Data"
   | "Technical Project";
 
 export type ValidExpType =
