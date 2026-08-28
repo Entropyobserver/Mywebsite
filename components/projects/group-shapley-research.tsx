@@ -25,12 +25,14 @@ const subsetRows = [
 ];
 
 const architectureRows = [
-  ["High-Bokmål → BLEU", 19.83, 15.31],
-  ["High-Bokmål → High-Bokmål rate", 0.381, 0.391],
-  ["Nynorsk-like → BLEU", 3.21, 1.56],
-  ["Nynorsk-like → High-Bokmål rate", -0.459, -0.459],
-  ["Nynorsk-like → Nynorsk-like rate", 0.469, 0.478],
-  ["Uncertain-other → BLEU", 0.61, -1.3],
+  ["High-Bokmål → BLEU", "+19.83", "+15.31"],
+  ["High-Bokmål → TermF1", "+0.273", "+0.148"],
+  ["High-Bokmål → Bokmål output", "+38.1 pp", "+39.1 pp"],
+  ["Nynorsk-like → BLEU", "+3.21", "+1.56"],
+  ["Nynorsk-like → TermF1", "−0.028", "−0.092"],
+  ["Nynorsk-like → Bokmål output", "−45.9 pp", "−45.9 pp"],
+  ["Nynorsk-like → Nynorsk-like output", "+46.9 pp", "+47.8 pp"],
+  ["Uncertain-other → BLEU", "+0.61", "−1.30"],
 ] as const;
 
 function SectionHeader({
@@ -585,7 +587,23 @@ export default function GroupShapleyResearch() {
       <section id="rq3">
         <SectionHeader
           title={"RQ3. " + researchQuestions[2]}
-          description="The strongest effects recur in NLLB-600M and NorMistral-7B-warm, while smaller groups show architecture-dependent behavior."
+          description={
+            <>
+              We compare the group-level Shapley effects in{" "}
+              <strong className="font-semibold text-foreground">
+                NLLB-600M (encoder–decoder)
+              </strong>{" "}
+              and{" "}
+              <strong className="font-semibold text-foreground">
+                NorMistral-7B-warm (decoder-only)
+              </strong>
+              . The table shows representative results for{" "}
+              <strong className="font-semibold text-foreground">
+                translation quality, terminology, and written-standard behavior
+              </strong>
+              .
+            </>
+          }
         />
         <div className="overflow-hidden rounded-2xl border bg-background">
           <div className="overflow-x-auto">
@@ -608,12 +626,9 @@ export default function GroupShapleyResearch() {
                     {[nllb, mistral].map((value, valueIndex) => (
                       <td
                         key={valueIndex}
-                        className={`px-5 py-4 text-right font-mono font-semibold tabular-nums ${value > 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}
+                        className={`px-5 py-4 text-right font-mono font-semibold tabular-nums ${value.startsWith("+") ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}
                       >
-                        {value > 0 ? "+" : ""}
-                        {Math.abs(value) < 1
-                          ? value.toFixed(3)
-                          : value.toFixed(2)}
+                        {value}
                       </td>
                     ))}
                   </tr>
@@ -621,16 +636,34 @@ export default function GroupShapleyResearch() {
               </tbody>
             </table>
           </div>
+          <p className="border-t px-5 py-4 text-sm italic leading-6 text-muted-foreground">
+            Output-rate values are Shapley contributions to output proportions,
+            reported in percentage points (pp).
+          </p>
+        </div>
+        <div className="mt-6 max-w-3xl space-y-4 leading-7 text-muted-foreground">
+          <p>
+            The main effects are similar in both architectures.{" "}
+            <strong className="font-semibold text-foreground">
+              High-Bokmål data makes the largest positive contribution to BLEU
+              and also increases Bokmål output. Nynorsk-like data shows the
+              opposite written-standard effect: it reduces Bokmål output and
+              increases Nynorsk-like output in both models.
+            </strong>
+          </p>
+          <p>
+            Some smaller effects differ between the models. For example,{" "}
+            <strong className="font-semibold text-foreground">
+              Uncertain-other contributes +0.61 BLEU in NLLB but −1.30 BLEU in
+              NorMistral.
+            </strong>
+          </p>
         </div>
         <EvidenceConclusion>
           <strong>
-            The large effects generalize across both model families.
-          </strong>{" "}
-          High-Bokmål remains the dominant positive contributor, and
-          Nynorsk-like data produces an almost identical shift away from Bokmål
-          and toward Nynorsk-like output. Boundary and uncertain-other effects
-          are less stable, so the results support shared dominant patterns—not
-          complete architecture invariance.
+            Overall, both architectures show the same main attribution patterns,
+            but some smaller group effects differ.
+          </strong>
         </EvidenceConclusion>
       </section>
 
