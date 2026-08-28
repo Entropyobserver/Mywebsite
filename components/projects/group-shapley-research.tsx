@@ -668,17 +668,14 @@ export default function GroupShapleyResearch() {
       </section>
 
       <section>
-        <SectionHeader
-          title="Robustness and Data Audit"
-          description="The main interpretation is supported by uncertainty checks, a training-schedule rerun, and manual validation of the automatically created groups."
-        />
+        <SectionHeader title="Robustness and Data Audit" />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            ["1,000", "sentence-level bootstrap samples"],
-            ["3", "random seeds in both architecture branches"],
-            ["94.5%", "exact agreement between two annotators"],
-            ["κ = .918", "Cohen’s kappa for the manual audit"],
-          ].map(([value, label]) => (
+            ["1,000", "sentence-level bootstrap samples", ""],
+            ["3", "training seeds per architecture", ""],
+            ["200", "manually audited examples", ""],
+            ["94.5%", "annotator agreement", "Cohen’s κ = 0.918"],
+          ].map(([value, label, detail]) => (
             <div
               key={label}
               className="rounded-2xl border bg-background p-5 text-center"
@@ -689,15 +686,51 @@ export default function GroupShapleyResearch() {
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
                 {label}
               </p>
+              {detail && (
+                <p className="mt-1 text-xs text-muted-foreground">{detail}</p>
+              )}
             </div>
           ))}
         </div>
-        <div className="mt-4 rounded-2xl border bg-muted/20 p-5 leading-7 text-muted-foreground">
-          An alternative NLLB training schedule preserves every reported sign
-          and the complete BLEU/chrF group ranking. The largest selected
-          bootstrap intervals are also narrow: High-Bokmål BLEU is 19.83 with a
-          95% CI of [18.89, 20.76], while the Nynorsk-like shift in High-Bokmål
-          output rate is −0.459 with a 95% CI of [−0.471, −0.447].
+        <div className="mt-6 space-y-4 rounded-2xl border bg-muted/20 p-5 leading-7 text-muted-foreground sm:p-6">
+          <p>
+            We test the reliability of the attribution results using{" "}
+            <strong className="font-semibold text-foreground">
+              multiple training seeds, sentence-level bootstrap resampling, an
+              alternative training schedule, and manual group auditing
+            </strong>
+            .
+          </p>
+          <p>
+            The main effects remain stable under test-set resampling.
+            High-Bokmål has a BLEU Shapley value of{" "}
+            <strong className="font-semibold text-foreground">19.83</strong>{" "}
+            (95% bootstrap CI:{" "}
+            <strong className="font-semibold text-foreground">
+              [18.89, 20.76]
+            </strong>
+            ), while the Nynorsk-like contribution to High-Bokmål output is{" "}
+            <strong className="font-semibold text-foreground">−0.459</strong>{" "}
+            (95% bootstrap CI:{" "}
+            <strong className="font-semibold text-foreground">
+              [−0.471, −0.447]
+            </strong>
+            ).
+          </p>
+          <p>
+            A seed-42 NLLB rerun with{" "}
+            <strong className="font-semibold text-foreground">
+              proportional warmup and epoch-level evaluation
+            </strong>{" "}
+            preserves the BLEU and chrF contribution signs and group rankings.
+            Manual auditing shows high annotator agreement and indicates that
+            the{" "}
+            <strong className="font-semibold text-foreground">
+              boundary group should be treated as a classifier-boundary group
+              rather than a stable linguistic category
+            </strong>
+            .
+          </p>
         </div>
       </section>
 
@@ -706,9 +739,8 @@ export default function GroupShapleyResearch() {
           Final takeaway
         </p>
         <p className="mt-4 max-w-4xl font-heading text-2xl leading-snug sm:text-3xl">
-          Training-data value is not a single property of a group. It depends on
-          the measured behavior, the evaluation distribution, and—especially for
-          smaller effects—the model architecture.
+          Training-data value is not fixed. It depends on the behavior,
+          evaluation data, and model architecture.
         </p>
       </section>
     </div>
