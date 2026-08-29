@@ -154,6 +154,8 @@ export type ValidCategory =
   | "Data-Centric ML"
   | "Shapley Attribution"
   | "Training Data"
+  | "Data Auditing"
+  | "Robustness Analysis"
   | "Technical Project";
 
 export type ValidExpType =

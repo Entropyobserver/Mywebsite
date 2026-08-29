@@ -387,6 +387,9 @@ export const Projects: ProjectInterface[] = [
       "Shapley Attribution",
       "Training Data",
       "Machine Translation",
+      "Data Auditing",
+      "Robustness Analysis",
+      "LoRA / PEFT",
     ],
     shortDescription:
       "Exact Shapley analysis of how training groups shape machine-translation behavior.",
