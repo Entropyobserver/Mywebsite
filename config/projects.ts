@@ -477,7 +477,7 @@ export const Projects: ProjectInterface[] = [
         title: "Data Filtering and Size-Controlled Design",
         description:
           "The original petroleum-domain split contains 13,935 training pairs. SLIDE filtering retains targets with Bokmål score at least 0.80 and Nynorsk score below 0.30, producing 10,114 training pairs. A deterministic original-subsampled condition uses the same 10,114/1,305/1,313 train/validation/test sizes, isolating written-standard filtering from data-volume effects. Nearby thresholds retain 71.2-73.3% of the original training set, placing the selected threshold in a stable region of the score distribution.",
-        imgArr: ["/projects/target-standard-bias/study-design.svg"],
+        imgArr: [],
       },
       {
         title: "LoRA Fine-Tuning and Evaluation Protocol",
@@ -486,28 +486,35 @@ export const Projects: ProjectInterface[] = [
         imgArr: [],
       },
       {
-        title: "In-Domain Result: Reference Choice Reverses the Ranking",
+        title:
+          "RQ1 · How does Bokmål filtering affect in-domain MT performance under Bokmål references?",
         description:
-          "With the same 10,114 training examples, Bokmål filtering improves BLEU from 59.37 to 61.28 and chrF from 78.02 to 79.34 on the Bokmål test set. On the original mixed-standard test set, the same intervention lowers BLEU from 61.77 to 58.49 and chrF from 79.12 to 77.43. Bokmål-oriented TermF1 rises on both test sets, from 0.7702 to 0.7912 and from 0.7309 to 0.7908. The result is target-standard specialization, not a uniform quality gain.",
-        imgArr: ["/projects/target-standard-bias/in-domain-results.svg"],
-      },
-      {
-        title: "Written-Standard Shift on the Same Test Set",
-        description:
-          "The original mixed-standard references contain 76.2% Bokmål-only, 17.2% Nynorsk-only, and 6.0% mixed sentences. The size-matched original-subsampled model approximately preserves this distribution with 79.0% Bokmål-only and 14.2% Nynorsk-only output. In contrast, the filtered model produces 93.4% Bokmål-only and only 0.7% Nynorsk-only output. Across seeds, every paired McNemar comparison is significant at p < 0.001.",
-        imgArr: ["/projects/target-standard-bias/written-standard-shift.svg"],
-      },
-      {
-        title: "The Pattern Persists from 600M to 3.3B",
-        description:
-          "Larger backbones improve absolute translation scores but do not remove the evaluation reversal. Across 600M, 1.3B, and 3.3B models, Bokmål filtering consistently improves BLEU against Bokmål references while lowering it against the original mixed-standard references. On the original test set, filtered models produce 93.7-94.6% Bokmål-only output versus 79.1-79.8% for the size-controlled baseline, while Nynorsk-only output falls to 0.08-0.17%.",
+          "Experiment: compare the Bokmål-filtered model with the equally sized original-subsampled baseline on the in-domain Bokmål test set. Result: filtering raises BLEU from 59.37 to 61.28, chrF from 78.02 to 79.34, and Bokmål-oriented TermF1 from 0.7702 to 0.7912. Paired bootstrap testing gives a sentence-level chrF change of +1.0585 (95% CI +0.8561 to +1.2522, p < 0.001) and a TermF1 change of +0.0210 (95% CI +0.0147 to +0.0282, p < 0.001). The BLEU gain also appears at 1.3B (60.78 to 63.13) and 3.3B (62.71 to 64.47). Answer: under Bokmål references, filtering consistently improves in-domain Bokmål-conforming performance.",
         imgArr: ["/projects/target-standard-bias/model-scale-results.svg"],
       },
       {
-        title: "Out-of-Domain FLORES Check",
+        title:
+          "RQ2 · Are the effects separable from reduced training-data size?",
         description:
-          "The zero-shot 600M NLLB model remains stronger on general-domain FLORES NB than every fine-tuned system: BLEU 30.59 and chrF 59.22 versus BLEU 27.26-27.66 and chrF 56.35-56.63. Filtering therefore does not improve English-Norwegian MT in general. FLORES NN is used only as an evaluation-mismatch test because every system decodes with the Bokmål-oriented nob_Latn code; it is not an evaluation of Nynorsk generation ability.",
-        imgArr: ["/projects/target-standard-bias/flores-results.svg"],
+          "Experiment: hold data volume constant by comparing Bokmål-filtered and original-subsampled conditions with exactly 10,114/1,305/1,313 train/validation/test examples. Result: despite identical sizes, the filtered model improves Bokmål-test BLEU by 1.91 points and chrF by 1.32 points, while its output on the original test becomes 93.4% Bokmål-only versus 79.0% for the matched baseline; Nynorsk-only output falls from 14.2% to 0.7%. The direction persists across 600M, 1.3B, and 3.3B models. Answer: yes—the effect is associated with which examples are retained, not merely with having less training data.",
+        imgArr: ["/projects/target-standard-bias/study-design.svg"],
+      },
+      {
+        title:
+          "RQ3 · Does filtering change the written-standard distribution of model outputs?",
+        description:
+          "Experiment: apply SLIDE to references and paired model outputs on the same original mixed-standard test set, then test sentence-level label changes with exact McNemar tests. Result: references are 76.2% Bokmål-only, 17.2% Nynorsk-only, and 6.0% mixed. Original-subsampled outputs remain close at 79.0%, 14.2%, and 5.7%, whereas filtered outputs shift to 93.4% Bokmål-only, 0.7% Nynorsk-only, and 4.8% mixed. Across seeds, Bokmål-only rises by 13.8-15.2 points and Nynorsk-only falls by 13.1-14.2 points, with p < 0.001 in every comparison. A one-reviewer diagnostic sample finds +0.79 Bokmål conformity but only +0.01 adequacy. Answer: filtering produces a large, human-perceptible shift toward Bokmål.",
+        imgArr: ["/projects/target-standard-bias/written-standard-shift.svg"],
+      },
+      {
+        title:
+          "RQ4 · How does evaluation against different written standards affect automatic MT scores?",
+        description:
+          "Experiment: evaluate the same size-controlled systems against Bokmål and original mixed-standard references, then use FLORES NB/NN as an out-of-domain reference-mismatch check. Result: the filtered model wins on the Bokmål test (BLEU 61.28 vs. 59.37; chrF 79.34 vs. 78.02) but loses on the original mixed test (BLEU 58.49 vs. 61.77; chrF 77.43 vs. 79.12). The original-test sentence-level chrF change is -1.7956 (95% CI -2.0872 to -1.5148, p < 0.001), even though Bokmål-oriented TermF1 increases from 0.7309 to 0.7908. On FLORES, the filtered model scores BLEU 27.66 against NB references but 15.37 against NN references; all systems decode with nob_Latn, so the NN result measures reference-standard mismatch, not Nynorsk generation. Answer: reference choice can reverse the apparent system ranking and can reward conformity to the dominant standard rather than language-neutral quality.",
+        imgArr: [
+          "/projects/target-standard-bias/in-domain-results.svg",
+          "/projects/target-standard-bias/flores-results.svg",
+        ],
       },
       {
         title: "Human Review Separates Adequacy from Conformity",
