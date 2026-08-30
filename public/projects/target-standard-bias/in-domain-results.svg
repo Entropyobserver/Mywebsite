@@ -12,8 +12,8 @@
       <line x1="145" y1="560" x2="620" y2="560" stroke="#94a3b8" stroke-width="2"/>
       <rect x="195" y="405" width="115" height="155" rx="8" fill="#aebcfb"/>
       <rect x="330" y="345" width="115" height="215" rx="8" fill="#4f46e5"/>
-      <text x="252" y="390" text-anchor="middle" fill="#334155" font-size="22" font-weight="800">0.5937</text>
-      <text x="387" y="330" text-anchor="middle" fill="#3730a3" font-size="22" font-weight="800">0.6128</text>
+      <text x="252" y="390" text-anchor="middle" fill="#334155" font-size="22" font-weight="800">59.37</text>
+      <text x="387" y="330" text-anchor="middle" fill="#3730a3" font-size="22" font-weight="800">61.28</text>
       <text x="320" y="606" text-anchor="middle" fill="#0f172a" font-size="21" font-weight="750">BLEU</text>
       <rect x="485" y="402" width="60" height="158" rx="8" fill="#aebcfb"/>
       <rect x="555" y="350" width="60" height="210" rx="8" fill="#4f46e5"/>
@@ -28,8 +28,8 @@
       <line x1="820" y1="560" x2="1295" y2="560" stroke="#94a3b8" stroke-width="2"/>
       <rect x="870" y="342" width="115" height="218" rx="8" fill="#aebcfb"/>
       <rect x="1005" y="448" width="115" height="112" rx="8" fill="#f97316"/>
-      <text x="927" y="327" text-anchor="middle" fill="#334155" font-size="22" font-weight="800">0.6177</text>
-      <text x="1062" y="433" text-anchor="middle" fill="#9a3412" font-size="22" font-weight="800">0.5849</text>
+      <text x="927" y="327" text-anchor="middle" fill="#334155" font-size="22" font-weight="800">61.77</text>
+      <text x="1062" y="433" text-anchor="middle" fill="#9a3412" font-size="22" font-weight="800">58.49</text>
       <text x="995" y="606" text-anchor="middle" fill="#0f172a" font-size="21" font-weight="750">BLEU</text>
       <rect x="1160" y="350" width="60" height="210" rx="8" fill="#aebcfb"/>
       <rect x="1230" y="418" width="60" height="142" rx="8" fill="#f97316"/>

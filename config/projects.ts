@@ -438,7 +438,8 @@ export const Projects: ProjectInterface[] = [
   },
   {
     id: "target-standard-bias",
-    companyName: "Target-Standard Bias from Data Filtering in Norwegian MT",
+    companyName:
+      "When Data Cleaning Becomes Bias: Target-Standard Specialization in Norwegian MT",
     type: "Research",
     category: [
       "Research",
@@ -447,7 +448,7 @@ export const Projects: ProjectInterface[] = [
       "Evaluation",
     ],
     shortDescription:
-      "A controlled English-Norwegian MT study showing that Bokmål filtering improves scores against Bokmål references but lowers BLEU and chrF on mixed-standard data while nearly eliminating Nynorsk-only output.",
+      "A controlled English-Norwegian MT study showing how Bokmål filtering creates target-standard specialization—and how reference choice can turn that specialization into an evaluation-bias problem.",
     techStack: [
       "Python",
       "PyTorch",
@@ -469,7 +470,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Research Questions",
         description:
-          "RQ1. Does Bokmål filtering improve performance on in-domain Bokmål test data?\n\nRQ2. Are the observed effects caused by filtering itself rather than the smaller size of the filtered dataset?\n\nRQ3. Does Bokmål filtering reduce robustness to the original mixed-standard distribution?\n\nRQ4. Does filtering change the written-standard distribution of generated outputs?\n\nRQ5. Do in-domain gains transfer to general-domain FLORES evaluation?\n\nRQ6. Does the size-controlled evaluation pattern persist across larger NLLB-200 model sizes?",
+          "RQ1. How does Bokmål filtering affect in-domain MT performance under Bokmål references?\n\nRQ2. Are the effects separable from the reduced training-data size?\n\nRQ3. Does filtering change the written-standard distribution of model outputs?\n\nRQ4. How does evaluation against different written standards affect automatic MT scores?",
         imgArr: [],
       },
       {
@@ -487,7 +488,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "In-Domain Result: Reference Choice Reverses the Ranking",
         description:
-          "With the same 10,114 training examples, Bokmål filtering improves BLEU from 0.5937 to 0.6128 and chrF from 78.02 to 79.34 on the Bokmål test set. On the original mixed-standard test set, the same intervention lowers BLEU from 0.6177 to 0.5849 and chrF from 79.12 to 77.43. Bokmål-oriented TermF1 rises on both test sets, from 0.7702 to 0.7912 and from 0.7309 to 0.7908. The result is specialization, not a uniform quality gain.",
+          "With the same 10,114 training examples, Bokmål filtering improves BLEU from 59.37 to 61.28 and chrF from 78.02 to 79.34 on the Bokmål test set. On the original mixed-standard test set, the same intervention lowers BLEU from 61.77 to 58.49 and chrF from 79.12 to 77.43. Bokmål-oriented TermF1 rises on both test sets, from 0.7702 to 0.7912 and from 0.7309 to 0.7908. The result is target-standard specialization, not a uniform quality gain.",
         imgArr: ["/projects/target-standard-bias/in-domain-results.svg"],
       },
       {
@@ -505,33 +506,39 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Out-of-Domain FLORES Check",
         description:
-          "The zero-shot 600M NLLB model remains stronger on general-domain FLORES NB than every fine-tuned system: BLEU 0.3059 and chrF 59.22 versus 0.2726-0.2766 and 56.35-56.63. Filtering therefore does not improve English-Norwegian MT in general. FLORES NN is used only as an evaluation-mismatch test because every system decodes with the Bokmål-oriented nob_Latn code; it is not an evaluation of Nynorsk generation ability.",
+          "The zero-shot 600M NLLB model remains stronger on general-domain FLORES NB than every fine-tuned system: BLEU 30.59 and chrF 59.22 versus BLEU 27.26-27.66 and chrF 56.35-56.63. Filtering therefore does not improve English-Norwegian MT in general. FLORES NN is used only as an evaluation-mismatch test because every system decodes with the Bokmål-oriented nob_Latn code; it is not an evaluation of Nynorsk generation ability.",
         imgArr: ["/projects/target-standard-bias/flores-results.svg"],
       },
       {
-        title: "Human Validation Separates Adequacy from Conformity",
+        title: "Human Review Separates Adequacy from Conformity",
         description:
-          "Two annotators blindly evaluated 50 shift-enriched and 50 control items. Filtering changes adequacy only slightly (+0.01 to +0.02 on a 0-2 scale) but increases Bokmål conformity by +0.79 to +0.98. Preference agreement on 99 shared valid items is 85.9% with Cohen's kappa 0.751. SLIDE's shift margin correlates strongly with human-rated Bokmål conformity gain (Spearman rho 0.762), supporting the interpretation that the detected shift is human-perceptible rather than only a classifier artifact.",
+          "One human reviewer blindly evaluated 100 items: 50 shift-enriched cases and 50 controls. One item was invalid, leaving 99 valid comparisons. Filtering changes mean adequacy by only +0.01 on a 0-2 scale but increases mean Bokmål conformity by +0.79. The reviewer preferred the filtered output in 55 cases, the original-subsampled output in 11, and marked 33 ties. Because the sample is deliberately enriched for predicted shifts and uses one reviewer, these results are diagnostic rather than population-level estimates.",
         imgArr: ["/projects/target-standard-bias/human-evaluation.svg"],
+      },
+      {
+        title: "SLIDE Measurement Validation",
+        description:
+          "A separate stratified review of 120 outputs by one human reviewer finds 60.8% exact agreement with SLIDE, macro-F1 0.552, and Cohen's kappa 0.478. Bokmål precision is 0.900 and Nynorsk recall is 0.957. This supports SLIDE as a useful written-standard diagnostic while requiring caution for mixed or uncertain cases. AI-assisted annotation passes are excluded from the reported human evidence.",
+        imgArr: ["/projects/target-standard-bias/slide-validation.svg"],
       },
       {
         title: "Interpretation, Scope, and Responsible Deployment",
         description:
-          "Bokmål specialization is appropriate when the deployment target is explicitly Bokmål petroleum translation; the problem is silent specialization under a generic Norwegian label. The evidence is limited to one direction and domain, all systems decode with nob_Latn, terminology metrics use Bokmål forms, and human evaluation is diagnostic rather than population-representative. The practical recommendation is to document the intended standard, report output-standard distributions beside BLEU and chrF, and use standard-specific or dual-standard references and terminology resources where possible.",
+          "Target-standard specialization is not inherently harmful: Bokmål specialization is appropriate when the deployment target is explicitly Bokmål petroleum translation. The broader bias problem arises when that specialization is implicit, reinforced by a single-standard evaluation, or presented under a generic Norwegian label. Evidence is limited to one direction and domain; all systems decode with nob_Latn; terminology metrics use Bokmål forms; FLORES, significance tests, and human review are scoped mainly to 600M; and the one-reviewer diagnostic samples do not provide inter-annotator reliability or population estimates. Deployment should document the intended standard and report output-standard distributions beside BLEU and chrF.",
         imgArr: [],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "This research project, titled 'When Data Cleaning Becomes Bias: Target-Standard Specialization in Norwegian Machine Translation,' studies how filtering a mixed Bokmål/Nynorsk petroleum corpus toward Bokmål changes both model output and evaluation outcomes.",
-        "Using LoRA-adapted NLLB-200 models, the study compares full original data, a SLIDE-filtered Bokmål subset, and a random original subset of exactly the same size. Results are measured against Bokmål and mixed-standard references, replicated across 600M, 1.3B, and 3.3B backbones, checked on FLORES, and triangulated with blind human evaluation.",
+        "This research project, titled 'When Data Cleaning Becomes Bias: Target-Standard Specialization in Norwegian Machine Translation,' studies how filtering a mixed Bokmål/Nynorsk petroleum corpus toward Bokmål changes both model output and evaluation outcomes. It treats target-standard specialization as the observable shift and target-standard bias as the broader audit problem when that shift is hidden or rewarded by a narrow evaluation setup.",
+        "Using LoRA-adapted NLLB-200 models, the study compares full original data, a SLIDE-filtered Bokmål subset, and a random original subset of exactly the same size. Results are measured against Bokmål and mixed-standard references, replicated across 600M, 1.3B, and 3.3B backbones, checked on FLORES, and triangulated with two explicitly scoped one-reviewer studies: SLIDE measurement validation and blind diagnostic MT comparison.",
         "As co-author and controlled-experiment analysis lead, I contributed to the size-controlled design, model-scale replication, statistical analysis, written-standard diagnostics, and interpretation of reference and terminology bias.",
       ],
       bullets: [
         "Controlled for data size with matched 10,114-pair filtered and original-subsampled training conditions.",
         "Demonstrated a reference-dependent metric reversal across three NLLB-200 model scales.",
         "Measured the output shift from 79.0% to 93.4% Bokmål-only and from 14.2% to 0.7% Nynorsk-only on the same mixed-standard test set.",
-        "Validated the interpretation with paired bootstrap tests, McNemar tests, SLIDE-human comparison, and blind diagnostic human evaluation.",
+        "Validated the interpretation with paired bootstrap tests, exact McNemar tests, a 120-item one-reviewer SLIDE audit, and a separate 99-valid-item blind diagnostic MT comparison.",
       ],
     },
   },

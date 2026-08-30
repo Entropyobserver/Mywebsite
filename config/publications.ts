@@ -112,14 +112,14 @@ export const publications: PublicationInterface[] = [
   },
   {
     title:
-      "Target-Standard Bias from Data Filtering in Norwegian Machine Translation",
+      "When Data Cleaning Becomes Bias: Target-Standard Specialization in Norwegian Machine Translation",
     authors: "Zhihan Li, Xiaojing Yang",
     status: "In Preparation",
     venue: "TBD",
     date: "December 2026",
     role: "Co-author; controlled experiment design and analysis lead",
     description:
-      "Studies how target-side data filtering affects written-standard preferences in English-Norwegian machine translation using controlled LoRA-based NLLB experiments and paired statistical validation.",
+      "Uses size-controlled LoRA-based NLLB experiments to show how Bokmål filtering changes output standards and reverses BLEU and chrF rankings across reference standards, framing implicit specialization as an MT audit problem.",
   },
   {
     title:

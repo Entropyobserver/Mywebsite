@@ -8,11 +8,11 @@
     <rect x="75" y="155" width="625" height="500" rx="24" fill="white" stroke="#cbd5e1"/>
     <text x="387" y="202" text-anchor="middle" fill="#0f172a" font-size="25" font-weight="800">BLEU · Bokmål test</text>
     <line x1="150" y1="570" x2="625" y2="570" stroke="#94a3b8" stroke-width="2"/><line x1="150" y1="250" x2="150" y2="570" stroke="#94a3b8" stroke-width="2"/>
-    <g fill="#64748b" font-size="16"><text x="120" y="575">0.58</text><text x="120" y="415">0.62</text><text x="120" y="255">0.66</text><text x="215" y="608">600M</text><text x="370" y="608">1.3B</text><text x="535" y="608">3.3B</text></g>
+    <g fill="#64748b" font-size="16"><text x="120" y="575">58</text><text x="120" y="415">62</text><text x="120" y="255">66</text><text x="215" y="608">600M</text><text x="370" y="608">1.3B</text><text x="535" y="608">3.3B</text></g>
     <polyline points="230,439 390,365 550,311" fill="none" stroke="#4f46e5" stroke-width="7"/><polyline points="230,516 390,460 550,383" fill="none" stroke="#94a3b8" stroke-width="6" stroke-dasharray="12 10"/>
     <g fill="#4f46e5"><circle cx="230" cy="439" r="9"/><circle cx="390" cy="365" r="9"/><circle cx="550" cy="311" r="9"/></g><g fill="#64748b"><circle cx="230" cy="516" r="8"/><circle cx="390" cy="460" r="8"/><circle cx="550" cy="383" r="8"/></g>
-    <g fill="#3730a3" font-size="16" font-weight="800"><text x="196" y="422">0.6128</text><text x="356" y="348">0.6313</text><text x="516" y="294">0.6447</text></g>
-    <g fill="#475569" font-size="16" font-weight="800"><text x="196" y="540">0.5937</text><text x="356" y="484">0.6078</text><text x="516" y="407">0.6271</text></g>
+    <g fill="#3730a3" font-size="16" font-weight="800"><text x="196" y="422">61.28</text><text x="356" y="348">63.13</text><text x="516" y="294">64.47</text></g>
+    <g fill="#475569" font-size="16" font-weight="800"><text x="196" y="540">59.37</text><text x="356" y="484">60.78</text><text x="516" y="407">62.71</text></g>
     <rect x="740" y="155" width="625" height="500" rx="24" fill="white" stroke="#cbd5e1"/>
     <text x="1052" y="202" text-anchor="middle" fill="#0f172a" font-size="25" font-weight="800">Bokmål-only output · original test</text>
     <line x1="815" y1="570" x2="1290" y2="570" stroke="#94a3b8" stroke-width="2"/><line x1="815" y1="250" x2="815" y2="570" stroke="#94a3b8" stroke-width="2"/>

@@ -1,27 +1,34 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 810" role="img" aria-labelledby="title desc">
-  <title id="title">Blind diagnostic human evaluation results</title>
-  <desc id="desc">Bokmål filtering has a small adequacy effect but a large Bokmål conformity effect for both annotators.</desc>
+  <title id="title">Blind diagnostic human review results</title>
+  <desc id="desc">One human reviewer found almost no adequacy change, a large Bokmål conformity increase, and more preferences for filtered output in a shift-enriched diagnostic sample.</desc>
   <rect width="1440" height="810" fill="#f8fafc"/>
-  <text x="720" y="70" text-anchor="middle" fill="#0f172a" font-family="Inter,Arial,sans-serif" font-size="39" font-weight="760">Human judgments confirm a conformity shift</text>
-  <text x="720" y="110" text-anchor="middle" fill="#64748b" font-family="Inter,Arial,sans-serif" font-size="20">Blind comparison of Bokmål-filtered vs. size-controlled original-subsampled output</text>
+  <text x="720" y="70" text-anchor="middle" fill="#0f172a" font-family="Inter,Arial,sans-serif" font-size="39" font-weight="760">Human review confirms a conformity shift</text>
+  <text x="720" y="110" text-anchor="middle" fill="#64748b" font-family="Inter,Arial,sans-serif" font-size="20">One blind human reviewer · 99 valid comparisons · shift-enriched diagnostic sample</text>
   <g font-family="Inter,Arial,sans-serif">
-    <rect x="80" y="165" width="790" height="485" rx="24" fill="white" stroke="#cbd5e1"/>
-    <text x="475" y="215" text-anchor="middle" fill="#0f172a" font-size="26" font-weight="800">Mean score change on 0-2 scales</text>
-    <line x1="170" y1="560" x2="790" y2="560" stroke="#94a3b8" stroke-width="2"/>
-    <rect x="235" y="550" width="90" height="10" rx="5" fill="#4f46e5"/><rect x="345" y="548" width="90" height="12" rx="5" fill="#14b8a6"/>
-    <rect x="535" y="250" width="90" height="310" rx="9" fill="#4f46e5"/><rect x="645" y="310" width="90" height="250" rx="9" fill="#14b8a6"/>
-    <g font-size="21" font-weight="800"><text x="280" y="532" text-anchor="middle" fill="#475569">+0.02</text><text x="390" y="530" text-anchor="middle" fill="#475569">+0.01</text><text x="580" y="235" text-anchor="middle" fill="#3730a3">+0.98</text><text x="690" y="295" text-anchor="middle" fill="#3730a3">+0.79</text></g>
-    <text x="335" y="605" text-anchor="middle" fill="#0f172a" font-size="21" font-weight="750">Adequacy</text><text x="635" y="605" text-anchor="middle" fill="#0f172a" font-size="21" font-weight="750">Bokmål conformity</text>
-    <g font-size="17" font-weight="700"><rect x="268" y="683" width="25" height="25" rx="5" fill="#4f46e5"/><text x="305" y="703" fill="#334155">Annotator 1 (n=100)</text><rect x="510" y="683" width="25" height="25" rx="5" fill="#14b8a6"/><text x="547" y="703" fill="#334155">Annotator 2 (n=99)</text></g>
-    <rect x="925" y="165" width="435" height="485" rx="24" fill="#0f172a"/>
-    <text x="1142" y="218" text-anchor="middle" fill="#f8fafc" font-size="25" font-weight="800">Validation signals</text>
-    <g>
-      <text x="970" y="290" fill="#94a3b8" font-size="17" font-weight="700">PREFERENCE AGREEMENT</text><text x="970" y="335" fill="white" font-size="36" font-weight="850">85.9%</text><text x="1180" y="335" fill="#5eead4" font-size="25" font-weight="800">κ = 0.751</text>
-      <line x1="970" y1="370" x2="1315" y2="370" stroke="#334155"/>
-      <text x="970" y="420" fill="#94a3b8" font-size="17" font-weight="700">SLIDE ↔ HUMAN CONFORMITY</text><text x="970" y="466" fill="white" font-size="34" font-weight="850">ρ = 0.762</text>
-      <line x1="970" y1="500" x2="1315" y2="500" stroke="#334155"/>
-      <text x="970" y="550" fill="#94a3b8" font-size="17" font-weight="700">SLIDE ↔ DEPLOYMENT PREFERENCE</text><text x="970" y="596" fill="white" font-size="34" font-weight="850">ρ = 0.676</text>
+    <rect x="80" y="165" width="610" height="485" rx="24" fill="white" stroke="#cbd5e1"/>
+    <text x="385" y="218" text-anchor="middle" fill="#0f172a" font-size="26" font-weight="800">Mean score change</text>
+    <text x="385" y="250" text-anchor="middle" fill="#64748b" font-size="17">Filtered minus original-subsampled · 0-2 scales</text>
+    <line x1="165" y1="560" x2="605" y2="560" stroke="#94a3b8" stroke-width="2"/>
+    <rect x="220" y="550" width="120" height="10" rx="5" fill="#94a3b8"/>
+    <rect x="430" y="270" width="120" height="290" rx="10" fill="#4f46e5"/>
+    <text x="280" y="530" text-anchor="middle" fill="#475569" font-size="24" font-weight="850">+0.01</text>
+    <text x="490" y="252" text-anchor="middle" fill="#3730a3" font-size="24" font-weight="850">+0.79</text>
+    <text x="280" y="605" text-anchor="middle" fill="#0f172a" font-size="21" font-weight="750">Adequacy</text>
+    <text x="490" y="605" text-anchor="middle" fill="#0f172a" font-size="21" font-weight="750">Bokmål conformity</text>
+    <rect x="750" y="165" width="610" height="485" rx="24" fill="#0f172a"/>
+    <text x="1055" y="218" text-anchor="middle" fill="#f8fafc" font-size="26" font-weight="800">Deployment preference</text>
+    <text x="1055" y="250" text-anchor="middle" fill="#94a3b8" font-size="17">All 99 valid comparisons</text>
+    <rect x="835" y="300" width="360" height="58" rx="12" fill="#4f46e5"/>
+    <rect x="835" y="386" width="72" height="58" rx="12" fill="#f97316"/>
+    <rect x="835" y="472" width="216" height="58" rx="12" fill="#64748b"/>
+    <g font-size="20" font-weight="800">
+      <text x="1215" y="337" fill="#c7d2fe">Filtered 55</text>
+      <text x="927" y="423" fill="#fed7aa">Original-sub. 11</text>
+      <text x="1071" y="509" fill="#cbd5e1">Tie 33</text>
     </g>
+    <text x="1055" y="594" text-anchor="middle" fill="#94a3b8" font-size="17">45 of 50 shift-enriched cases favored filtered output</text>
   </g>
-  <text x="720" y="770" text-anchor="middle" fill="#0f172a" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="800">Filtering mainly changes written-standard conformity, not semantic adequacy</text>
+  <rect x="215" y="700" width="1010" height="48" rx="24" fill="#e2e8f0"/>
+  <text x="720" y="731" text-anchor="middle" fill="#334155" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="750">Diagnostic evidence only: one reviewer and an enriched sample do not support population-level estimates</text>
+  <text x="720" y="786" text-anchor="middle" fill="#0f172a" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800">Filtering mainly changes written-standard conformity, not semantic adequacy</text>
 </svg>
