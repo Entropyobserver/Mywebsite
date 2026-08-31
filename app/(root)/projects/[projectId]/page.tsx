@@ -7,6 +7,7 @@ import FinragEquinorResearch from "@/components/projects/finrag-equinor-research
 import GroupShapleyResearch from "@/components/projects/group-shapley-research";
 import ModularLoraResearch from "@/components/projects/modular-lora-research";
 import ProjectDescription from "@/components/projects/project-description";
+import StructureAwareGraphRagResearch from "@/components/projects/structure-aware-graph-rag-research";
 import { buttonVariants } from "@/components/ui/button";
 import ChipContainer from "@/components/ui/chip-container";
 import CustomTooltip from "@/components/ui/custom-tooltip";
@@ -33,7 +34,8 @@ export default function Project({ params }: ProjectPageProps) {
         "container relative py-6 lg:py-10",
         project.id === "modular-lora-experts" ||
           project.id === "finrag-equinor" ||
-          project.id === "group-shapley-attribution"
+          project.id === "group-shapley-attribution" ||
+          project.id === "structure-aware-graph-rag"
           ? "max-w-5xl"
           : "max-w-3xl"
       )}
@@ -149,6 +151,8 @@ export default function Project({ params }: ProjectPageProps) {
         <FinragEquinorResearch />
       ) : project.id === "group-shapley-attribution" ? (
         <GroupShapleyResearch />
+      ) : project.id === "structure-aware-graph-rag" ? (
+        <StructureAwareGraphRagResearch />
       ) : (
         <div className="mb-7 ">
           <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-5">

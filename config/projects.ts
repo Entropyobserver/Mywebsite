@@ -351,11 +351,12 @@ export const Projects: ProjectInterface[] = [
   },
   {
     id: "structure-aware-graph-rag",
-    companyName: "Structure-Aware Graph Retrieval for Long Annual Reports",
+    companyName:
+      "Structure-Aware Graph Retrieval for Evidence Grounding over Long Annual Reports",
     type: "Research",
     category: ["Research", "RAG", "Information Retrieval", "Evaluation"],
     shortDescription:
-      "Under-review research showing when typed document-structure graphs help evidence retrieval over long annual reports, and when naive structural proximity introduces noise.",
+      "Path-guided GraphRAG research showing how selected entity and metric links improve evidence localization over long annual reports while naive adjacent-page expansion introduces noise.",
     techStack: [
       "Python",
       "GraphRAG",
@@ -370,8 +371,13 @@ export const Projects: ProjectInterface[] = [
       "Statistics",
     ],
     startDate: new Date("2026-03-01"),
-    endDate: new Date("2026-08-01"),
+    endDate: new Date("2026-08-31"),
     companyLogoImg: "/projects/graph-rag-evidence/cover.png",
+    keyMetrics: [
+      { value: "87.4%", label: "Object Recall@10" },
+      { value: "93.3%", label: "Page Recall@10" },
+      { value: "52,278", label: "Graph nodes" },
+    ],
     pagesInfoArr: [
       {
         title: "Typed Evidence Graph",
@@ -382,16 +388,16 @@ export const Projects: ProjectInterface[] = [
     ],
     descriptionDetails: {
       paragraphs: [
-        "This project studies structure-aware retrieval for evidence grounding over long annual reports. The key question is not only whether retrieved text is semantically similar, but whether the system can navigate document structure to find the exact evidence supporting an answer.",
-        "The method builds a typed metadata evidence graph over reports, pages, retrieval objects, entities, and metric categories. Graph expansion is used as a candidate-generation step, followed by cross-encoder reranking. The analysis shows that structure helps selectively: same-page and entity links can bridge evidence, same-metric links help modestly, and adjacent-page links can introduce distracting neighbors.",
-        "My contribution was to design the GraphRAG retrieval experiments, implement the typed graph expansion and edge ablations, evaluate object Recall@10, page Recall@10, MRR, and validation splits, and interpret the trade-off between relaxed page localization and exact evidence-object grounding.",
+        "This project studies structure-aware retrieval for evidence grounding over long annual reports. The goal is not merely to retrieve topically similar text, but to locate the correct report, page, and exact evidence object in a repetitive multi-year archive.",
+        "The method builds a typed metadata graph over reports, years, pages, retrieval objects, entities, and financial metric categories. It combines strong hybrid retrieval with selected graph expansion, explicit graph-path candidates, and cross-encoder reranking. Path-guided fusion improves Object Recall@10 from 0.838 to 0.874 and Page Recall@10 from 0.908 to 0.933 over the strongest hybrid reranked baseline.",
+        "I designed the GraphRAG experiments, typed edge ablations, year-split validation, path-guided candidate fusion, and structure-aware routing analyses. The results show that graph structure is useful selectively: entity and metric links create valuable evidence bridges, while broad adjacent-page expansion adds plausible but distracting context.",
       ],
       bullets: [
-        "Constructed a typed evidence graph connecting reports, years, pages, objects, entities, and metric categories.",
-        "Tested graph expansion as retrieval candidate generation rather than as final ranking.",
-        "Ran edge-type ablations to separate useful structure from noisy proximity links.",
-        "Added a lightweight structure-aware routing and ordering layer for interpretable retrieval control.",
-        "Presented the work as under review, with enough method clarity for portfolio readers but without exposing the full manuscript.",
+        "Constructed a 52,278-node, 310,796-edge metadata graph over 41,736 retrieval objects from 15 annual reports.",
+        "Introduced path-guided fusion that combines hybrid, selected-graph, and typed-path candidates before reranking.",
+        "Used leave-one-edge-out ablations to show that entity and metric links help exact grounding, while adjacent-page links reduce retrieval quality.",
+        "Validated the edge-selection decision on held-out 2022–2024 reports, improving Object Recall@10 from 0.713 to 0.840 over the full graph.",
+        "Separated candidate recovery from question-aware ordering through an interpretable rule-based routing analysis.",
       ],
     },
   },
@@ -778,11 +784,11 @@ export const Projects: ProjectInterface[] = [
   },
   {
     id: "marketing-ab-testing",
-    companyName: "Marketing Conversion A/B Testing",
+    companyName: "Marketing Conversion A/B Testing: Does Advertising Increase Conversion?",
     type: "Data Science",
     category: ["Data Science", "Experimentation", "Business Analytics"],
     shortDescription:
-      "A 588K-observation experiment analysis testing advertising impact, conversion differences, and exposure timing.",
+      "A 588K-user experiment analysis asking whether ads improve conversion, how large the lift is, and whether the evidence is decision-ready.",
     techStack: [
       "Python",
       "Pandas",
@@ -797,38 +803,49 @@ export const Projects: ProjectInterface[] = [
     startDate: new Date("2025-07-01"),
     endDate: new Date("2025-07-18"),
     companyLogoImg: "/projects/marketing-ab-testing/cover.svg",
+    keyMetrics: [
+      { value: "588,101", label: "Users" },
+      { value: "+0.769 pp", label: "Absolute lift" },
+      { value: "1.71e-13", label: "p-value" },
+    ],
     pagesInfoArr: [
       {
-        title: "Experiment Question",
+        title: "Q1. Is the experiment data analysis-ready?",
         description:
-          "The primary comparison asks whether users exposed to advertising convert differently from users shown a public-service announcement. Secondary slices inspect whether conversion varies with the day, hour, and total number of ad exposures.",
-        imgArr: [],
+          "Question:\n\nCan the file support a trustworthy user-level comparison?\n\nAnalysis:\n\nI checked the analysis unit, missing values, duplicate users, duplicate rows, outcome validity, and observed group allocation.\n\nFinding:\n\nAll 588,101 users are unique and the analytical fields are complete. Allocation is highly uneven—96.0% ad and 4.0% PSA. Without the planned ratio, this is not enough to declare a sample-ratio mismatch, but assignment logs must be validated before rollout.",
+        imgArr: ["/projects/marketing-ab-testing/experiment-quality.svg"],
       },
       {
-        title: "Statistical Testing",
+        title: "Q2. Does advertising increase conversion?",
         description:
-          "After cleaning 588,101 observations, the notebook compares the ad and PSA groups and reports a highly significant difference (t = 7.37, p = 1.70e-13). ANOVA is also used for exploratory day, hour, and exposure-level comparisons.",
-        imgArr: [],
+          "Question:\n\nIs conversion higher for users assigned to advertising than for users shown a PSA?\n\nAnalysis:\n\nI estimated both group rates with Wilson confidence intervals, then measured absolute and relative lift.\n\nFinding:\n\nAdvertising converted at 2.555% versus 1.785% for PSA: an absolute lift of 0.769 percentage points and a relative lift of 43.1%. The 95% confidence interval for absolute lift is 0.595 to 0.943 percentage points.",
+        imgArr: ["/projects/marketing-ab-testing/conversion-lift.svg"],
       },
       {
-        title: "Interpretation Boundary",
+        title: "Q3. Is the result statistically and commercially meaningful?",
         description:
-          "Statistical significance is separated from business significance. A production decision would also report absolute lift, confidence intervals, sample-ratio checks, pre-defined guardrail metrics, and corrections for multiple exploratory comparisons.",
-        imgArr: [],
+          "Question:\n\nIs the observed difference reliable enough—and valuable enough—to support a business decision?\n\nAnalysis:\n\nA two-sided two-proportion z-test evaluates uncertainty, while Cohen's h and users per extra conversion translate the effect into practical scale.\n\nFinding:\n\nThe evidence is strong (z = 7.37, p = 1.71e-13), but the standardized effect is small (h = 0.053). At the observed lift, approximately 130 additional users correspond to one extra conversion. Positive ROI cannot be claimed without advertising cost and conversion-value data.",
+        imgArr: ["/projects/marketing-ab-testing/decision-value.svg"],
+      },
+      {
+        title: "Q4. Do results vary by weekday?",
+        description:
+          "Question:\n\nDo weekday slices reveal where a follow-up experiment may be most useful?\n\nAnalysis:\n\nI estimated ad-versus-PSA lift within each weekday and controlled the false-discovery rate with Benjamini–Hochberg correction.\n\nFinding:\n\nTuesday has the largest observed lift at 1.60 percentage points. Tuesday, Monday, Wednesday, Saturday, and Friday remain significant after correction; Sunday and Thursday do not. These are exploratory slices, so they guide a pre-registered timing experiment rather than immediate budget reallocation.",
+        imgArr: ["/projects/marketing-ab-testing/weekday-uplift.svg"],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "This case study demonstrates the experimentation and statistical-inference workflow highlighted in my resume: define a measurable outcome, validate groups and data quality, estimate the treatment difference, test uncertainty, and translate the result into a decision.",
-        "The notebook analyzes a large marketing experiment with an ad treatment and PSA control. It also explores temporal and exposure-frequency patterns to generate follow-up hypotheses for campaign optimization.",
-        "Because a small p-value does not establish practical value by itself, the portfolio presentation makes the next analytical checks explicit rather than treating significance as the final answer.",
+        "This project evaluates an anonymized marketing experiment in which the treatment group saw an advertisement and the control group saw a public-service announcement. The goal is to determine whether advertising increases conversion and whether the evidence is ready for a business decision.",
+        "The analysis is organized around four stakeholder questions: data readiness, conversion lift, statistical and commercial significance, and exploratory weekday variation. Each answer connects a reproducible statistical method to a concrete decision boundary.",
+        "The result supports a real conversion effect, but it does not claim ROI. A rollout decision still requires confirmation of the planned allocation and assignment logs, plus advertising cost, conversion value, and guardrail metrics.",
       ],
       bullets: [
-        "Analyzed 588,101 experiment observations across treatment, outcome, timing, and exposure variables.",
-        "Tested the primary ad-versus-PSA conversion hypothesis and documented the decision rule.",
-        "Explored day, hour, and exposure-level differences with clearly labeled secondary analyses.",
-        "Visualized conversion patterns for stakeholder review and campaign planning.",
-        "Documented production-grade additions such as effect size, confidence intervals, guardrails, and multiple-testing control.",
+        "Validated 588,101 user-level observations and surfaced the 96%/4% allocation risk.",
+        "Estimated a 0.769 percentage-point lift with a 95% confidence interval of 0.595 to 0.943 points.",
+        "Applied a two-proportion z-test, standardized effect size, and practical effect translation.",
+        "Controlled multiple exploratory weekday comparisons with Benjamini–Hochberg correction.",
+        "Separated statistical evidence from ROI and documented the additional data required for rollout.",
       ],
     },
   },
