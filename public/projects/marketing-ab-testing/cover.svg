@@ -26,7 +26,7 @@
   <text x="848" y="382" fill="#ffffff" font-family="Inter,Arial,sans-serif" font-size="38" font-weight="750">588,101</text>
   <line x1="848" y1="414" x2="1088" y2="414" stroke="#704069"/>
   <text x="848" y="459" fill="#f9a8d4" font-family="Inter,Arial,sans-serif" font-size="18">Primary test</text>
-  <text x="848" y="498" fill="#ffffff" font-family="Inter,Arial,sans-serif" font-size="28" font-weight="750">t = 7.37</text>
+  <text x="848" y="498" fill="#ffffff" font-family="Inter,Arial,sans-serif" font-size="28" font-weight="750">z = 7.37</text>
   <text x="848" y="538" fill="#fbcfe8" font-family="Inter,Arial,sans-serif" font-size="22">p = 1.70 × 10⁻¹³</text>
   <text x="72" y="633" fill="#b88eaf" font-family="Inter,Arial,sans-serif" font-size="16">Significance is a checkpoint—not the business decision</text>
 </svg>
