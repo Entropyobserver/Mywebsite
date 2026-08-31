@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
-  <title id="title">E-commerce business overview</title>
-  <desc id="desc">A data pipeline connecting six source tables to validated e-commerce business metrics.</desc>
+  <title id="title">E-commerce sales analytics</title>
+  <desc id="desc">Four business questions answered with reliable metrics from six relational e-commerce tables.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#071d2b"/>
@@ -14,8 +14,8 @@
   <rect width="1200" height="675" rx="32" fill="url(#bg)"/>
   <circle cx="1080" cy="70" r="190" fill="#38bdf8" opacity=".07"/>
   <text x="72" y="78" fill="#5eead4" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="700" letter-spacing="3">APPLIED AI &amp; DATA</text>
-  <text x="72" y="137" fill="#f0fdfa" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="750">E-commerce Business Overview</text>
-  <text x="72" y="177" fill="#a7c9ce" font-family="Inter,Arial,sans-serif" font-size="21">Relational data · governed metrics · reproducible SQL/Python pipeline</text>
+  <text x="72" y="137" fill="#f0fdfa" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="750">E-commerce Sales Analytics</text>
+  <text x="72" y="177" fill="#a7c9ce" font-family="Inter,Arial,sans-serif" font-size="21">From raw transactions to reliable business metrics</text>
 
   <g font-family="Inter,Arial,sans-serif">
     <rect x="72" y="218" width="280" height="128" rx="20" fill="#0d2b38" stroke="#276778"/>
@@ -50,5 +50,5 @@
     <path d="M581 497h35"/><path d="m607 488 10 9-10 9"/>
     <path d="M846 497h35"/><path d="m872 488 10 9-10 9"/>
   </g>
-  <text x="72" y="630" fill="#7fb0b8" font-family="Inter,Arial,sans-serif" font-size="16">Business overview · product performance · seller diagnostics</text>
+  <text x="72" y="630" fill="#7fb0b8" font-family="Inter,Arial,sans-serif" font-size="16">Sales trend · category concentration · seller contribution · payment consistency</text>
 </svg>

@@ -629,11 +629,12 @@ export const Projects: ProjectInterface[] = [
   },
   {
     id: "ecommerce-business-overview",
-    companyName: "E-commerce Business Overview & Product Performance",
+    companyName:
+      "E-commerce Sales Analytics: From Raw Transactions to Reliable Business Metrics",
     type: "Data Science",
     category: ["Data Science", "Business Analytics", "Data Quality"],
     shortDescription:
-      "A reproducible SQL/Python pipeline integrating six relational tables to analyze 99K+ orders, reconcile payments, and monitor product and seller performance.",
+      "An analysis of 99K+ orders answering how sales changed, which categories and sellers drive value, and whether recorded payments can be trusted.",
     techStack: [
       "Python",
       "SQL",
@@ -653,66 +654,56 @@ export const Projects: ProjectInterface[] = [
     ],
     pagesInfoArr: [
       {
-        title: "Business Question and Analytical Scope",
+        title: "Q1. How Did Sales Performance Change Over Time?",
         description:
-          "The project asks how raw order, item, payment, customer, product, and seller tables can be transformed into reliable business metrics without duplicating sales across one-to-many joins. The scope covers merchandise value, orders, AOV, order status, payment reconciliation, categories, products, and sellers.",
-        imgArr: [],
-      },
-      {
-        title: "Relational Data Pipeline",
-        description:
-          "Python validates the six input schemas and registers them in SQLite. Numbered SQL transformations aggregate payments to order level, build an order-item analytical mart, define valid sales, and export reusable KPI, trend, category, product, seller, status, and payment tables.",
-        imgArr: [],
-      },
-      {
-        title: "Data Quality and Payment Reconciliation",
-        description:
-          "Primary identifiers are unique and every order-item row matches an order, product, and seller. Among 98,665 reconcilable orders, 99.58% have an absolute difference of no more than BRL 0.01 between recorded payment and merchandise plus freight. Remaining exceptions are retained for investigation rather than forcibly adjusted.",
-        imgArr: [],
-      },
-      {
-        title: "Monthly Performance",
-        description:
-          "The primary trend window runs from January 2017 through August 2018 because the boundary months are sparse. A like-for-like January–August comparison shows merchandise value increasing from BRL 3.08 million in 2017 to BRL 7.34 million in 2018. This is a descriptive sample comparison, not a causal marketing claim.",
+          "Question: How did merchandise value and valid order volume change over time?\n\nAnalysis: I aggregated valid order items by purchase month. Because the boundary months are sparse, I used January–August for the like-for-like annual comparison.\n\nFinding: Merchandise value increased from BRL 3.08M in January–August 2017 to BRL 7.34M in the same period of 2018, an increase of 138.28%. Valid orders increased by 137.26%. This describes what happened in the dataset; it does not establish what caused the increase.",
         imgArr: [
           "/projects/ecommerce-business-overview/monthly-sales-orders.png",
         ],
       },
       {
-        title: "Category Contribution",
+        title: "Q2. Are Sales Concentrated in a Few Product Categories?",
         description:
-          "The largest category contributes 9.31% of merchandise value. The top five categories contribute 39.83%, and the top ten contribute 62.38%, indicating meaningful concentration without dependence on one category.",
+          "Question: Do a small number of product categories account for most merchandise value?\n\nAnalysis: I aggregated merchandise value by product category, ranked the categories, and calculated their individual and cumulative contribution shares.\n\nFinding: The largest category contributes 9.31% of merchandise value, the top five contribute 39.83%, and the top ten contribute 62.38%. The portfolio has meaningful category concentration but is not dependent on a single category.",
         imgArr: [
           "/projects/ecommerce-business-overview/category-contribution.png",
         ],
       },
       {
-        title: "Seller Scale Distribution",
+        title: "Q3. Is the Marketplace Dependent on a Few Sellers?",
         description:
-          "The top ten sellers contribute approximately 13.20% of merchandise value, while the largest seller contributes about 1.70%. Logarithmic axes make the long tail of small sellers visible alongside a smaller group of higher-volume sellers.",
+          "Question: Is merchandise value heavily concentrated among a small number of sellers?\n\nAnalysis: I aggregated merchandise value at seller level, ranked sellers by contribution, and plotted the distribution on logarithmic axes so that both high-volume sellers and the long tail remain visible.\n\nFinding: The top ten sellers contribute approximately 13.20% of merchandise value, while the largest seller contributes about 1.70%. This suggests a relatively distributed seller base rather than dependence on one or two sellers.",
         imgArr: [
           "/projects/ecommerce-business-overview/seller-scale-distribution.png",
         ],
       },
       {
-        title: "Claim Boundary",
+        title: "Q4. Can We Trust the Reported Transaction Totals?",
         description:
-          "The data do not contain product cost, marketplace fees, advertising spend, or enterprise fulfillment cost. The analysis therefore does not estimate gross margin or contribution profit. Recorded freight is treated as an order field, not assumed company cost, and the results describe the analytical dataset rather than a real company's current performance.",
+          "Question: Do recorded payments reconcile with merchandise value plus freight?\n\nAnalysis: An order can contain multiple item rows and multiple payment records. I first aggregated payments to order level, separately summed merchandise value and freight, and then compared the two order-level totals. This prevents one-to-many joins from inflating revenue.\n\nFinding: Among 98,665 reconcilable orders, 99.58% have an absolute difference of no more than BRL 0.01. Remaining exceptions are preserved for investigation rather than silently corrected.",
+        imgArr: [
+          "/projects/ecommerce-business-overview/payment-reconciliation.svg",
+        ],
+      },
+      {
+        title: "What Can This Dataset Not Tell Us?",
+        description:
+          "No product cost means no gross-margin or contribution-profit claim. No advertising spend means no marketing-ROI claim. No impression, click, or cart events means no complete conversion-funnel analysis. Because the data are observational, the trends support descriptive findings but not causal claims. Recorded freight is treated as an order field, not assumed company fulfillment cost.",
         imgArr: [],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "This project demonstrates the SQL and Python analytics foundation behind reliable e-commerce reporting. It turns six related transaction tables into governed business metrics, automated quality checks, and decision-ready analytical outputs.",
-        "The central technical challenge is grain management. Orders may contain multiple item rows and multiple payment records, so payments are aggregated before joining and each KPI is calculated at its documented analytical grain.",
-        "The result is a reproducible workflow rather than a static dashboard. Running the pipeline rebuilds nine result tables, a structured quality report, and four reusable figures from the source CSV files.",
+        "This project analyzes e-commerce transaction data to understand sales performance and verify that the reported metrics are reliable.",
+        "Starting from six relational tables containing orders, order items, payments, customers, products, and sellers, it answers four practical questions: How did sales change over time? Which categories drive merchandise value? How concentrated is seller contribution? Do recorded payments reconcile with order totals?",
+        "The final result is a reproducible SQL and Python analytics workflow rather than a static dashboard. The pipeline validates source relationships, controls the analytical grain, builds reusable tables, and produces business-ready metrics and visualizations.",
       ],
       bullets: [
-        "Integrated six relational e-commerce tables covering 99,441 orders and 112,650 order-item rows.",
-        "Built automated duplicate-key, orphan-relationship, missing-category, and payment-reconciliation checks.",
-        "Created documented definitions for valid orders, merchandise value, AOV, item-count proxy, and the primary trend period.",
-        "Produced monthly, category, product, seller, order-status, and payment-method analytical outputs with SQL and Python.",
-        "Separated measured findings from unsupported profit, funnel, and causal claims.",
+        "99,441 orders and 112,650 order-item rows across six related source tables.",
+        "Four decision-oriented analyses covering time, categories, sellers, and payment consistency.",
+        "Order-level payment aggregation prevents duplicate totals across one-to-many relationships.",
+        "Automated key, relationship, missing-category, and payment-reconciliation checks.",
+        "Explicit limitations separate measured findings from unsupported profit, funnel, and causal claims.",
       ],
     },
   },
