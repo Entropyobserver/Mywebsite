@@ -12,6 +12,11 @@ interface DescriptionDetailsInterface {
   bullets: string[];
 }
 
+interface KeyMetricInterface {
+  value: string;
+  label: string;
+}
+
 export interface ProjectInterface {
   id: string;
   type: ValidExpType;
@@ -24,6 +29,7 @@ export interface ProjectInterface {
   startDate: Date;
   endDate: Date;
   companyLogoImg: any;
+  keyMetrics?: KeyMetricInterface[];
   descriptionDetails: DescriptionDetailsInterface;
   pagesInfoArr: PagesInfoInterface[];
 }
@@ -618,6 +624,322 @@ export const Projects: ProjectInterface[] = [
         "Extended the same controlled-comparison logic from text-only variables to reviewed image-instruction VLM tasks.",
         "Added annotation-sheet generation and Cohen's kappa analysis so automatic patterns can be checked by human reviewers.",
         "Documented the boundary between exploratory signals and evidence-backed claims, keeping the project useful without overstating unfinished case-study results.",
+      ],
+    },
+  },
+  {
+    id: "ecommerce-business-overview",
+    companyName: "E-commerce Business Overview & Product Performance",
+    type: "Data Science",
+    category: ["Data Science", "Business Analytics", "Data Quality"],
+    shortDescription:
+      "A reproducible SQL/Python pipeline integrating six relational tables to analyze 99K+ orders, reconcile payments, and monitor product and seller performance.",
+    techStack: [
+      "Python",
+      "SQL",
+      "SQLite",
+      "Pandas",
+      "Matplotlib",
+      "Data Analysis",
+      "Data Visualization",
+    ],
+    startDate: new Date("2026-08-01"),
+    endDate: new Date("2026-08-31"),
+    companyLogoImg: "/projects/ecommerce-business-overview/cover.svg",
+    keyMetrics: [
+      { value: "99,441", label: "Orders" },
+      { value: "6", label: "Source tables" },
+      { value: "99.58%", label: "Payment match" },
+    ],
+    pagesInfoArr: [
+      {
+        title: "Business Question and Analytical Scope",
+        description:
+          "The project asks how raw order, item, payment, customer, product, and seller tables can be transformed into reliable business metrics without duplicating sales across one-to-many joins. The scope covers merchandise value, orders, AOV, order status, payment reconciliation, categories, products, and sellers.",
+        imgArr: [],
+      },
+      {
+        title: "Relational Data Pipeline",
+        description:
+          "Python validates the six input schemas and registers them in SQLite. Numbered SQL transformations aggregate payments to order level, build an order-item analytical mart, define valid sales, and export reusable KPI, trend, category, product, seller, status, and payment tables.",
+        imgArr: [],
+      },
+      {
+        title: "Data Quality and Payment Reconciliation",
+        description:
+          "Primary identifiers are unique and every order-item row matches an order, product, and seller. Among 98,665 reconcilable orders, 99.58% have an absolute difference of no more than BRL 0.01 between recorded payment and merchandise plus freight. Remaining exceptions are retained for investigation rather than forcibly adjusted.",
+        imgArr: [],
+      },
+      {
+        title: "Monthly Performance",
+        description:
+          "The primary trend window runs from January 2017 through August 2018 because the boundary months are sparse. A like-for-like January–August comparison shows merchandise value increasing from BRL 3.08 million in 2017 to BRL 7.34 million in 2018. This is a descriptive sample comparison, not a causal marketing claim.",
+        imgArr: [
+          "/projects/ecommerce-business-overview/monthly-sales-orders.png",
+        ],
+      },
+      {
+        title: "Category Contribution",
+        description:
+          "The largest category contributes 9.31% of merchandise value. The top five categories contribute 39.83%, and the top ten contribute 62.38%, indicating meaningful concentration without dependence on one category.",
+        imgArr: [
+          "/projects/ecommerce-business-overview/category-contribution.png",
+        ],
+      },
+      {
+        title: "Seller Scale Distribution",
+        description:
+          "The top ten sellers contribute approximately 13.20% of merchandise value, while the largest seller contributes about 1.70%. Logarithmic axes make the long tail of small sellers visible alongside a smaller group of higher-volume sellers.",
+        imgArr: [
+          "/projects/ecommerce-business-overview/seller-scale-distribution.png",
+        ],
+      },
+      {
+        title: "Claim Boundary",
+        description:
+          "The data do not contain product cost, marketplace fees, advertising spend, or enterprise fulfillment cost. The analysis therefore does not estimate gross margin or contribution profit. Recorded freight is treated as an order field, not assumed company cost, and the results describe the analytical dataset rather than a real company's current performance.",
+        imgArr: [],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "This project demonstrates the SQL and Python analytics foundation behind reliable e-commerce reporting. It turns six related transaction tables into governed business metrics, automated quality checks, and decision-ready analytical outputs.",
+        "The central technical challenge is grain management. Orders may contain multiple item rows and multiple payment records, so payments are aggregated before joining and each KPI is calculated at its documented analytical grain.",
+        "The result is a reproducible workflow rather than a static dashboard. Running the pipeline rebuilds nine result tables, a structured quality report, and four reusable figures from the source CSV files.",
+      ],
+      bullets: [
+        "Integrated six relational e-commerce tables covering 99,441 orders and 112,650 order-item rows.",
+        "Built automated duplicate-key, orphan-relationship, missing-category, and payment-reconciliation checks.",
+        "Created documented definitions for valid orders, merchandise value, AOV, item-count proxy, and the primary trend period.",
+        "Produced monthly, category, product, seller, order-status, and payment-method analytical outputs with SQL and Python.",
+        "Separated measured findings from unsupported profit, funnel, and causal claims.",
+      ],
+    },
+  },
+  {
+    id: "ecommerce-retention-segmentation",
+    companyName: "E-commerce Customer Retention & Segmentation",
+    type: "Data Science",
+    category: ["Data Science", "Customer Analytics", "Business Analytics"],
+    shortDescription:
+      "A 392K-transaction customer analytics case study combining cohort retention, RFM scoring, and KMeans segmentation.",
+    techStack: [
+      "Python",
+      "Pandas",
+      "NumPy",
+      "scikit-learn",
+      "Customer Segmentation",
+      "Statistics",
+      "Matplotlib",
+      "Seaborn",
+      "Data Analysis",
+      "Data Visualization",
+    ],
+    startDate: new Date("2025-07-01"),
+    endDate: new Date("2025-07-18"),
+    companyLogoImg: "/projects/ecommerce-retention-segmentation/cover.svg",
+    pagesInfoArr: [
+      {
+        title: "Transaction Data Preparation",
+        description:
+          "The workflow starts from 541,909 online-retail rows and applies customer-ID validation, cancellation removal, duplicate handling, date conversion, and positive quantity and price filters. The resulting analytical table contains 392,692 transactions.",
+        imgArr: [],
+      },
+      {
+        title: "RFM and Behavioral Segmentation",
+        description:
+          "Customer-level recency, frequency, monetary value, shopping cycle, and interpurchase time are derived from the transaction history. Rule-based RFM labels make the output interpretable for lifecycle campaigns, while standardized RFM features support KMeans exploration.",
+        imgArr: [],
+      },
+      {
+        title: "Cohort Retention Diagnostics",
+        description:
+          "Monthly acquisition cohorts are tracked across repeat-purchase periods. The notebook reports average retention of 20.6% at month 1, 23.2% at month 3, 24.4% at month 6, and 26.6% at month 12, providing a reproducible starting point for retention hypotheses.",
+        imgArr: [],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "This portfolio case study turns raw online-retail transactions into customer-level evidence for retention and lifecycle decisions. It directly demonstrates the customer segmentation, behavioral analysis, and reproducible Python workflow described in my data-science resume.",
+        "The analysis combines three complementary views: cohort retention shows when repeat behavior changes, RFM scoring creates business-readable lifecycle groups, and KMeans provides a data-driven segmentation check.",
+        "The results are framed as analytical signals rather than causal conclusions. Segment definitions, cohort windows, and clustering quality remain visible so that a stakeholder can understand how each recommendation was produced.",
+      ],
+      bullets: [
+        "Prepared 541,909 raw transaction rows into a 392,692-row analysis table with explicit quality checks.",
+        "Engineered recency, frequency, monetary value, shopping-cycle, and interpurchase-time features.",
+        "Created interpretable RFM lifecycle groups and evaluated KMeans solutions with silhouette analysis.",
+        "Built monthly cohort tables and retention heatmaps for repeat-purchase monitoring.",
+        "Connected analytical outputs to retention targeting, reactivation, and high-value customer strategies.",
+      ],
+    },
+  },
+  {
+    id: "marketing-ab-testing",
+    companyName: "Marketing Conversion A/B Testing",
+    type: "Data Science",
+    category: ["Data Science", "Experimentation", "Business Analytics"],
+    shortDescription:
+      "A 588K-observation experiment analysis testing advertising impact, conversion differences, and exposure timing.",
+    techStack: [
+      "Python",
+      "Pandas",
+      "NumPy",
+      "A/B Testing",
+      "Statistics",
+      "Data Analysis",
+      "Matplotlib",
+      "Seaborn",
+      "Data Visualization",
+    ],
+    startDate: new Date("2025-07-01"),
+    endDate: new Date("2025-07-18"),
+    companyLogoImg: "/projects/marketing-ab-testing/cover.svg",
+    pagesInfoArr: [
+      {
+        title: "Experiment Question",
+        description:
+          "The primary comparison asks whether users exposed to advertising convert differently from users shown a public-service announcement. Secondary slices inspect whether conversion varies with the day, hour, and total number of ad exposures.",
+        imgArr: [],
+      },
+      {
+        title: "Statistical Testing",
+        description:
+          "After cleaning 588,101 observations, the notebook compares the ad and PSA groups and reports a highly significant difference (t = 7.37, p = 1.70e-13). ANOVA is also used for exploratory day, hour, and exposure-level comparisons.",
+        imgArr: [],
+      },
+      {
+        title: "Interpretation Boundary",
+        description:
+          "Statistical significance is separated from business significance. A production decision would also report absolute lift, confidence intervals, sample-ratio checks, pre-defined guardrail metrics, and corrections for multiple exploratory comparisons.",
+        imgArr: [],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "This case study demonstrates the experimentation and statistical-inference workflow highlighted in my resume: define a measurable outcome, validate groups and data quality, estimate the treatment difference, test uncertainty, and translate the result into a decision.",
+        "The notebook analyzes a large marketing experiment with an ad treatment and PSA control. It also explores temporal and exposure-frequency patterns to generate follow-up hypotheses for campaign optimization.",
+        "Because a small p-value does not establish practical value by itself, the portfolio presentation makes the next analytical checks explicit rather than treating significance as the final answer.",
+      ],
+      bullets: [
+        "Analyzed 588,101 experiment observations across treatment, outcome, timing, and exposure variables.",
+        "Tested the primary ad-versus-PSA conversion hypothesis and documented the decision rule.",
+        "Explored day, hour, and exposure-level differences with clearly labeled secondary analyses.",
+        "Visualized conversion patterns for stakeholder review and campaign planning.",
+        "Documented production-grade additions such as effect size, confidence intervals, guardrails, and multiple-testing control.",
+      ],
+    },
+  },
+  {
+    id: "retail-sales-forecasting",
+    companyName: "Retail Sales Forecasting & Model Comparison",
+    type: "Data Science",
+    category: ["Data Science", "Forecasting", "Business Analytics"],
+    shortDescription:
+      "A retail time-series case study comparing Prophet and SARIMA with held-out error analysis and forecast intervals.",
+    techStack: [
+      "Python",
+      "Pandas",
+      "NumPy",
+      "Time Series",
+      "ARIMA",
+      "Prophet",
+      "Statistics",
+      "Matplotlib",
+      "Data Analysis",
+      "Data Visualization",
+    ],
+    startDate: new Date("2025-07-01"),
+    endDate: new Date("2025-07-06"),
+    companyLogoImg: "/projects/retail-sales-forecasting/cover.svg",
+    pagesInfoArr: [
+      {
+        title: "Time-Series Preparation",
+        description:
+          "The case study aggregates 9,994 Superstore order lines from 2014–2017 into monthly subcategory sales. Exploratory trend and seasonality views are paired with an Augmented Dickey–Fuller stationarity test before modeling.",
+        imgArr: [],
+      },
+      {
+        title: "Comparable Forecast Backtest",
+        description:
+          "Prophet and SARIMA are trained on the same chronological split and evaluated on the same held-out period using mean absolute error. SARIMA records the lower MAE in the notebook (2,953.75 versus 3,592.32 for Prophet).",
+        imgArr: [],
+      },
+      {
+        title: "Decision-Oriented Forecast Output",
+        description:
+          "The final forecast includes point estimates and uncertainty intervals for the next 12 months. The wide intervals in some months are treated as planning risk, not hidden behind a single forecast line.",
+        imgArr: [],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "This project demonstrates the forecasting work referenced in my data-science resume through a complete, reproducible retail time-series workflow.",
+        "The analysis moves from monthly aggregation and stationarity diagnostics to two distinct forecasting approaches: Prophet for decomposable trend and seasonality, and SARIMA for explicitly modeled autoregressive and seasonal structure.",
+        "Model selection is based on chronological holdout performance rather than in-sample fit. Forecast uncertainty is retained so the result can support inventory and sales planning without implying false precision.",
+      ],
+      bullets: [
+        "Prepared four years of retail order data into monthly subcategory time series.",
+        "Tested stationarity and inspected trend and seasonal structure before fitting models.",
+        "Compared Prophet and SARIMA on a shared chronological holdout using MAE.",
+        "Selected SARIMA in the recorded experiment with MAE 2,953.75 versus Prophet's 3,592.32.",
+        "Produced 12-month forecasts with lower and upper intervals for planning scenarios.",
+      ],
+    },
+  },
+  {
+    id: "ecommerce-churn-prediction",
+    companyName: "E-commerce Customer Churn Prediction",
+    type: "Data Science",
+    category: ["Data Science", "Customer Analytics", "AI/ML"],
+    shortDescription:
+      "An imbalanced-classification study comparing four models and sampling strategies with F1, ROC-AUC, and feature importance.",
+    techStack: [
+      "Python",
+      "Pandas",
+      "NumPy",
+      "scikit-learn",
+      "Machine Learning",
+      "SHAP",
+      "Statistics",
+      "Matplotlib",
+      "Seaborn",
+      "Data Analysis",
+    ],
+    startDate: new Date("2025-07-01"),
+    endDate: new Date("2025-07-31"),
+    companyLogoImg: "/projects/ecommerce-churn-prediction/cover.svg",
+    pagesInfoArr: [
+      {
+        title: "Imbalanced Classification Setup",
+        description:
+          "The source dataset contains 5,630 customers with a 16.84% churn rate and missing values across behavioral and service variables. The workflow performs preprocessing, stratified splitting, scaling where appropriate, and explicit imbalance handling.",
+        imgArr: [],
+      },
+      {
+        title: "Model and Sampling Comparison",
+        description:
+          "Logistic regression, KNN, SVM, and random forest models are compared under no sampling, oversampling, undersampling, and SMOTE. The recorded no-sampling random forest result reaches F1 = 0.8715 and ROC-AUC = 0.9905 on the held-out split.",
+        imgArr: [],
+      },
+      {
+        title: "Drivers and Actionability",
+        description:
+          "Feature-importance and SHAP-oriented analysis turns prediction into a diagnostic workflow. Satisfaction relative to tenure, tenure, order value, cashback amount, and warehouse distance emerge as leading candidate drivers for retention investigation.",
+        imgArr: [],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "This project connects business-facing customer retention questions with a careful machine-learning evaluation workflow. It complements the descriptive retention project by asking which customers are most likely to churn and which variables drive that risk signal.",
+        "The analysis compares multiple model families and multiple class-imbalance strategies rather than presenting a single favorable accuracy number. F1 and ROC-AUC are emphasized because the churn class represents only 16.84% of customers.",
+        "Feature importance and SHAP-compatible analysis support investigation and prioritization, while the page avoids treating predictive associations as causal explanations.",
+      ],
+      bullets: [
+        "Profiled 5,630 customers, a 16.84% churn rate, and 1,856 missing values before modeling.",
+        "Compared logistic regression, KNN, SVM, and random forest classifiers.",
+        "Evaluated no sampling, oversampling, undersampling, and SMOTE under consistent metrics.",
+        "Recorded F1 = 0.8715 and ROC-AUC = 0.9905 for the best documented held-out result.",
+        "Added feature-importance and SHAP-oriented interpretation for retention investigation.",
       ],
     },
   },

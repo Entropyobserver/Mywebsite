@@ -23,7 +23,8 @@ export const pagesConfig: PagesConfig = {
   },
   skills: {
     title: "Skills",
-    description: "My technical background connects data analysis, machine learning, NLP research, rigorous evaluation, and research engineering for applied AI systems.",
+    description:
+      "My technical background connects data analysis, machine learning, NLP research, rigorous evaluation, and research engineering for applied AI systems.",
     metadata: {
       title: "Skills",
       description:
@@ -32,10 +33,12 @@ export const pagesConfig: PagesConfig = {
   },
   projects: {
     title: "Projects",
-    description: "I have hands-on experience taking projects from idea and experimentation to implementation and evaluation, covering both research projects and applied AI systems.",
+    description:
+      "Selected work across data science, business analytics, NLP research, and applied AI—from exploratory analysis and experimentation to modeling, evaluation, and decision-ready reporting.",
     metadata: {
       title: "Projects",
-      description: "Xiaojing Yang's research and technical projects.",
+      description:
+        "Xiaojing Yang's data science, business analytics, NLP research, and applied AI projects.",
     },
   },
   contact: {
@@ -50,7 +53,8 @@ export const pagesConfig: PagesConfig = {
   },
   publications: {
     title: "Publications",
-    description: "I currently have one peer-reviewed publication, with several additional manuscripts under review and in preparation. My research outputs span multilingual NLP, machine translation, model adaptation, information retrieval, and data-centric evaluation, reflecting my broader interest in developing and understanding reliable language technologies.",
+    description:
+      "I currently have one peer-reviewed publication, with several additional manuscripts under review and in preparation. My research outputs span multilingual NLP, machine translation, model adaptation, information retrieval, and data-centric evaluation, reflecting my broader interest in developing and understanding reliable language technologies.",
     metadata: {
       title: "Publications",
       description:

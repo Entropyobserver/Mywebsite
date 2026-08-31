@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">E-commerce business overview</title>
+  <desc id="desc">A data pipeline connecting six source tables to validated e-commerce business metrics.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#071d2b"/>
+      <stop offset="1" stop-color="#123b45"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2dd4bf"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" rx="32" fill="url(#bg)"/>
+  <circle cx="1080" cy="70" r="190" fill="#38bdf8" opacity=".07"/>
+  <text x="72" y="78" fill="#5eead4" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="700" letter-spacing="3">APPLIED AI &amp; DATA</text>
+  <text x="72" y="137" fill="#f0fdfa" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="750">E-commerce Business Overview</text>
+  <text x="72" y="177" fill="#a7c9ce" font-family="Inter,Arial,sans-serif" font-size="21">Relational data · governed metrics · reproducible SQL/Python pipeline</text>
+
+  <g font-family="Inter,Arial,sans-serif">
+    <rect x="72" y="218" width="280" height="128" rx="20" fill="#0d2b38" stroke="#276778"/>
+    <text x="98" y="258" fill="#86e9dd" font-size="15" font-weight="700" letter-spacing="1">ORDERS</text>
+    <text x="98" y="307" fill="#ffffff" font-size="38" font-weight="750">99,441</text>
+    <rect x="372" y="218" width="280" height="128" rx="20" fill="#0d2b38" stroke="#276778"/>
+    <text x="398" y="258" fill="#86e9dd" font-size="15" font-weight="700" letter-spacing="1">SOURCE TABLES</text>
+    <text x="398" y="307" fill="#ffffff" font-size="38" font-weight="750">6</text>
+    <rect x="672" y="218" width="456" height="128" rx="20" fill="#0d2b38" stroke="#276778"/>
+    <text x="698" y="258" fill="#86e9dd" font-size="15" font-weight="700" letter-spacing="1">PAYMENT RECONCILIATION</text>
+    <text x="698" y="307" fill="#ffffff" font-size="38" font-weight="750">99.58%</text>
+  </g>
+
+  <rect x="72" y="386" width="1056" height="194" rx="24" fill="#0a2532" stroke="#276778"/>
+  <text x="100" y="425" fill="#c9f5ef" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700">ANALYTICAL FLOW</text>
+  <g font-family="Inter,Arial,sans-serif" text-anchor="middle">
+    <rect x="100" y="458" width="205" height="78" rx="16" fill="#113847" stroke="#2c7182"/>
+    <text x="202" y="489" fill="#ffffff" font-size="18" font-weight="700">6 source tables</text>
+    <text x="202" y="515" fill="#8fbfc6" font-size="14">orders · items · payments</text>
+    <rect x="365" y="458" width="205" height="78" rx="16" fill="#113847" stroke="#2c7182"/>
+    <text x="467" y="489" fill="#ffffff" font-size="18" font-weight="700">Quality checks</text>
+    <text x="467" y="515" fill="#8fbfc6" font-size="14">keys · joins · amounts</text>
+    <rect x="630" y="458" width="205" height="78" rx="16" fill="#113847" stroke="#2c7182"/>
+    <text x="732" y="489" fill="#ffffff" font-size="18" font-weight="700">Analytical mart</text>
+    <text x="732" y="515" fill="#8fbfc6" font-size="14">documented grain</text>
+    <rect x="895" y="458" width="205" height="78" rx="16" fill="#123f4c" stroke="url(#accent)"/>
+    <text x="997" y="489" fill="#ffffff" font-size="18" font-weight="700">Business outputs</text>
+    <text x="997" y="515" fill="#99f6e4" font-size="14">KPI · trend · drill-down</text>
+  </g>
+  <g stroke="#5eead4" stroke-width="3" stroke-linecap="round" fill="none">
+    <path d="M316 497h35"/><path d="m342 488 10 9-10 9"/>
+    <path d="M581 497h35"/><path d="m607 488 10 9-10 9"/>
+    <path d="M846 497h35"/><path d="m872 488 10 9-10 9"/>
+  </g>
+  <text x="72" y="630" fill="#7fb0b8" font-family="Inter,Arial,sans-serif" font-size="16">Business overview · product performance · seller diagnostics</text>
+</svg>

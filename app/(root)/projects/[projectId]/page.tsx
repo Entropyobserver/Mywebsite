@@ -105,6 +105,24 @@ export default function Project({ params }: ProjectPageProps) {
         priority
       />
 
+      {project.keyMetrics && (
+        <div className="mb-8 grid grid-cols-3 gap-3">
+          {project.keyMetrics.map((metric) => (
+            <div
+              key={metric.label}
+              className="rounded-lg border border-border bg-muted/30 px-3 py-4 text-center"
+            >
+              <p className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                {metric.value}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground sm:text-sm">
+                {metric.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className="mb-7 ">
         <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-2">
           Tech Stack

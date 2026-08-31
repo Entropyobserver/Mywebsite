@@ -28,6 +28,20 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <p className="line-clamp-3 font-normal text-muted-foreground">
           {project.shortDescription}
         </p>
+        {project.keyMetrics && (
+          <div className="grid grid-cols-3 gap-2 border-y border-border py-3">
+            {project.keyMetrics.map((metric) => (
+              <div key={metric.label} className="min-w-0 text-center">
+                <p className="text-sm font-bold text-foreground sm:text-base">
+                  {metric.value}
+                </p>
+                <p className="text-[10px] leading-tight text-muted-foreground sm:text-xs">
+                  {metric.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
         <div className="flex gap-2 flex-wrap">
           <ChipContainer textArr={project.category} />
         </div>

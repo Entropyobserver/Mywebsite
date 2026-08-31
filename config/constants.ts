@@ -156,6 +156,11 @@ export type ValidCategory =
   | "Training Data"
   | "Data Auditing"
   | "Robustness Analysis"
+  | "Data Science"
+  | "Business Analytics"
+  | "Customer Analytics"
+  | "Experimentation"
+  | "Forecasting"
   | "Technical Project";
 
 export type ValidExpType =

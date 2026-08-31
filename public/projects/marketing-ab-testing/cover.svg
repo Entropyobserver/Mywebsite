@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Marketing conversion A/B testing</title>
+  <desc id="desc">An experiment dashboard contrasting an advertising treatment with a PSA control and showing a significant test result.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#21102e"/><stop offset="1" stop-color="#4c1d4f"/></linearGradient></defs>
+  <rect width="1200" height="675" rx="32" fill="url(#bg)"/>
+  <circle cx="1090" cy="85" r="170" fill="#f472b6" opacity=".09"/>
+  <text x="72" y="86" fill="#f9a8d4" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="3">EXPERIMENTATION</text>
+  <text x="72" y="145" fill="#fff7fb" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="750">Marketing Conversion A/B Test</text>
+  <text x="72" y="184" fill="#d9b8d5" font-family="Inter,Arial,sans-serif" font-size="22">Treatment effect · timing slices · decision checks</text>
+  <rect x="72" y="226" width="700" height="360" rx="24" fill="#2b1638" stroke="#704069"/>
+  <text x="112" y="273" fill="#fce7f3" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="700">PRIMARY COMPARISON</text>
+  <g font-family="Inter,Arial,sans-serif">
+    <rect x="112" y="318" width="270" height="190" rx="22" fill="#3b1c48" stroke="#a855a0"/>
+    <text x="247" y="363" fill="#d8b4fe" font-size="17" text-anchor="middle">CONTROL</text>
+    <text x="247" y="412" fill="#ffffff" font-size="34" font-weight="750" text-anchor="middle">PSA</text>
+    <text x="247" y="455" fill="#c6a7c7" font-size="18" text-anchor="middle">baseline exposure</text>
+    <rect x="462" y="318" width="270" height="190" rx="22" fill="#62204f" stroke="#f472b6"/>
+    <text x="597" y="363" fill="#fbcfe8" font-size="17" text-anchor="middle">TREATMENT</text>
+    <text x="597" y="412" fill="#ffffff" font-size="34" font-weight="750" text-anchor="middle">AD</text>
+    <text x="597" y="455" fill="#f0bfd8" font-size="18" text-anchor="middle">paid campaign</text>
+  </g>
+  <path d="M395 411h54" stroke="#f9a8d4" stroke-width="4" stroke-linecap="round"/><path d="m439 399 13 12-13 12" fill="none" stroke="#f9a8d4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="808" y="226" width="320" height="360" rx="24" fill="#2b1638" stroke="#704069"/>
+  <text x="848" y="273" fill="#fce7f3" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="700">RECORDED RESULT</text>
+  <text x="848" y="342" fill="#f9a8d4" font-family="Inter,Arial,sans-serif" font-size="18">Observations</text>
+  <text x="848" y="382" fill="#ffffff" font-family="Inter,Arial,sans-serif" font-size="38" font-weight="750">588,101</text>
+  <line x1="848" y1="414" x2="1088" y2="414" stroke="#704069"/>
+  <text x="848" y="459" fill="#f9a8d4" font-family="Inter,Arial,sans-serif" font-size="18">Primary test</text>
+  <text x="848" y="498" fill="#ffffff" font-family="Inter,Arial,sans-serif" font-size="28" font-weight="750">t = 7.37</text>
+  <text x="848" y="538" fill="#fbcfe8" font-family="Inter,Arial,sans-serif" font-size="22">p = 1.70 × 10⁻¹³</text>
+  <text x="72" y="633" fill="#b88eaf" font-family="Inter,Arial,sans-serif" font-size="16">Significance is a checkpoint—not the business decision</text>
+</svg>

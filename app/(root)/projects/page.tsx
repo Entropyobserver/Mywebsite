@@ -15,8 +15,13 @@ const renderContent = (tabVal: string) => {
   let projectArr = Projects;
   if (tabVal === "research") {
     projectArr = projectArr.filter((val) => val.type === "Research");
-  } else if (tabVal === "technical") {
-    projectArr = projectArr.filter((val) => val.type === "Technical Project");
+  } else if (tabVal === "applied") {
+    projectArr = projectArr.filter(
+      (val) =>
+        val.type === "Data Science" ||
+        val.type === "Technical Project" ||
+        val.type === "AI"
+    );
   }
 
   const groupShapleyIndex = projectArr.findIndex(
@@ -50,9 +55,9 @@ export default function ProjectsPage() {
       content: renderContent("research"),
     },
     {
-      value: "technical",
-      label: "Technical Projects",
-      content: renderContent("technical"),
+      value: "applied",
+      label: "Applied AI & Data",
+      content: renderContent("applied"),
     },
   ];
 
