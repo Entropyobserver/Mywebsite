@@ -215,9 +215,43 @@ export default function GroupShapleyResearch() {
           </span>{" "}
           are independent SLIDE scores ranging from 0 to 1.
         </p>
+        <div className="mt-6">
+          <h3 className="font-heading text-2xl">What is in each group?</h3>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <div className="rounded-2xl border bg-background p-5">
+              <p className="font-semibold">High-Bokmål</p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                Mostly complete Bokmål sentences about petroleum production,
+                drilling, licences, fields, and geology.
+              </p>
+            </div>
+            <div className="rounded-2xl border bg-background p-5">
+              <p className="font-semibold">Nynorsk-like</p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                Mostly complete petroleum-domain sentences containing
+                recognizable Nynorsk words and grammatical forms.
+              </p>
+            </div>
+            <div className="rounded-2xl border bg-background p-5">
+              <p className="font-semibold">Boundary</p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                A mixture of ordinary Bokmål sentences and short items such as
+                contact lines, captions, dates, measurements, and headings.
+              </p>
+            </div>
+            <div className="rounded-2xl border bg-background p-5">
+              <p className="font-semibold">Uncertain-other</p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                Mostly short metadata-like items: dates, coordinates, company
+                names, headings, links, labels, and text fragments.
+              </p>
+            </div>
+          </div>
+        </div>
         <p className="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950 dark:border-amber-900 dark:bg-amber-950/30 dark:text-amber-100">
           <strong>
-            These are attribution groups, not linguistic categories.
+            These are operational units for Shapley attribution, not gold
+            linguistic categories.
           </strong>{" "}
           The Boundary group mainly reflects classifier uncertainty rather than
           a clear written-standard category.
