@@ -698,9 +698,9 @@ export const Projects: ProjectInterface[] = [
         ],
       },
       {
-        title: "What Can This Dataset Not Tell Us?",
+        title: "Business Value",
         description:
-          "No product cost means no gross-margin or contribution-profit claim. No advertising spend means no marketing-ROI claim. No impression, click, or cart events means no complete conversion-funnel analysis. Because the data are observational, the trends support descriptive findings but not causal claims. Recorded freight is treated as an order field, not assumed company fulfillment cost.",
+          "The analysis turns raw e-commerce transactions into reliable metrics that can be used to monitor sales performance and investigate business patterns.\n\nIt helps decision-makers answer four practical questions:\n\n• Where is merchandise value growing? — through monthly performance analysis.\n• Which categories contribute most to sales? — through category and product analysis.\n• How dependent is the marketplace on a small number of sellers? — through seller concentration analysis.\n• Which transactions may require investigation? — through payment reconciliation and data-quality checks.\n\nThe current dataset does not contain product costs, advertising spend, or behavioral-event data. Therefore, the project does not estimate profitability, marketing ROI, or conversion rates. These would be natural extensions of the same analytical pipeline if the required data were available.",
         imgArr: [],
       },
     ],
