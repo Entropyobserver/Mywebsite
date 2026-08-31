@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { Icons } from "@/components/common/icons";
+import FinragEquinorResearch from "@/components/projects/finrag-equinor-research";
 import GroupShapleyResearch from "@/components/projects/group-shapley-research";
 import ModularLoraResearch from "@/components/projects/modular-lora-research";
 import ProjectDescription from "@/components/projects/project-description";
@@ -31,6 +32,7 @@ export default function Project({ params }: ProjectPageProps) {
       className={cn(
         "container relative py-6 lg:py-10",
         project.id === "modular-lora-experts" ||
+          project.id === "finrag-equinor" ||
           project.id === "group-shapley-attribution"
           ? "max-w-5xl"
           : "max-w-3xl"
@@ -143,6 +145,8 @@ export default function Project({ params }: ProjectPageProps) {
 
       {project.id === "modular-lora-experts" ? (
         <ModularLoraResearch />
+      ) : project.id === "finrag-equinor" ? (
+        <FinragEquinorResearch />
       ) : project.id === "group-shapley-attribution" ? (
         <GroupShapleyResearch />
       ) : (

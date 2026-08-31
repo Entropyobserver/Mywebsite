@@ -293,11 +293,19 @@ export const Projects: ProjectInterface[] = [
   },
   {
     id: "finrag-equinor",
-    companyName: "FinRAG-Equinor: Evidence-Grounded RAG Benchmark",
+    companyName:
+      "FinRAG-Equinor: From Annual Report PDFs to a Reliability-Audited Benchmark for Evidence-Grounded RAG",
     type: "Research",
-    category: ["Research", "RAG", "Information Retrieval", "Evaluation"],
+    category: [
+      "Research",
+      "RAG",
+      "Information Retrieval",
+      "Evaluation",
+      "Data Quality",
+      "Human Evaluation",
+    ],
     shortDescription:
-      "A reliability-audited benchmark candidate for evidence-grounded RAG over 15 Equinor/Statoil annual reports, focusing on traceable report, page, and object-level evidence.",
+      "A 720-item, reliability-audited benchmark for evidence-grounded RAG over 15 Equinor/Statoil annual reports, with traceable report-, page-, and object-level evidence.",
     techStack: [
       "Python",
       "RAG",
@@ -314,26 +322,30 @@ export const Projects: ProjectInterface[] = [
     startDate: new Date("2026-02-01"),
     endDate: new Date("2026-08-01"),
     companyLogoImg: "/projects/finrag-equinor/cover.png",
+    keyMetrics: [
+      { value: "720", label: "QA items" },
+      { value: "15", label: "Annual reports" },
+      { value: "41,736", label: "Retrieval units" },
+    ],
     pagesInfoArr: [
       {
         title: "PDF-to-Benchmark Pipeline",
         description:
-          "The benchmark turns annual-report PDFs into traceable retrieval units, candidate questions, answers, evidence metadata, audit labels, and evaluation scripts.",
+          "The pipeline converts 4,369 annual-report pages into 41,736 traceable retrieval units and a 720-item benchmark with report-, page-, and object-level evidence identifiers.",
         imgArr: ["/projects/finrag-equinor/cover.png"],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "This project builds a benchmark candidate for evidence-grounded RAG over long financial and annual-report PDFs. Instead of treating retrieval as generic passage search, it asks whether a system can reach the correct report year, localize the relevant page, and identify the exact supporting evidence object.",
-        "The benchmark covers 15 Equinor/Statoil annual reports from 2010 to 2024 and contains 720 questions across numerical extraction, table lookup, temporal comparison, multi-hop reasoning, visual/layout questions, and unanswerable cases. Retrieval experiments compare sparse, dense, hybrid, hierarchical, and reranked settings.",
-        "My contribution was the benchmark design and retrieval evaluation pipeline: parsing report structure into retrieval units, designing evidence metadata, building QA and hard-negative diagnostics, running retrieval baselines, and analyzing failure modes across report selection, page localization, and object grounding.",
+        "FinRAG-Equinor is a PDF-to-benchmark pipeline and 720-item benchmark for evidence-grounded RAG over long, structured annual reports. It treats retrieval as a hierarchical localization problem: first selecting the correct report, then locating the right page, and finally identifying the exact supporting evidence object.",
+        "The benchmark covers 15 Equinor/Statoil annual reports from 2010 to 2024, including 660 answerable and 60 unanswerable questions across nine evidence types. Every answerable item is linked to traceable report-, page-, and object-level evidence, and all 720 items underwent human screening.",
+        "I designed the benchmark and retrieval evaluation pipeline, including PDF structure parsing, evidence metadata, QA construction and audit, hard-negative mining, sparse/dense/hybrid baselines, reranking, end-to-end QA evaluation, and failure-aware retrieval recovery.",
       ],
       bullets: [
-        "Built a controlled annual-report QA benchmark with page- and object-level evidence metadata.",
-        "Evaluated BM25, dense retrieval, hybrid fusion, hierarchical page-to-object retrieval, and cross-encoder reranking.",
-        "Analyzed retrieval failures by report/year mismatch, same-page wrong-object errors, same-report wrong-page errors, and adjacent-page confusions.",
-        "Framed evidence-grounded RAG as a hierarchical localization problem rather than a single retrieval score.",
-        "Kept the public portfolio description high-level while the manuscript remains under review or preparation.",
+        "Built a traceable corpus from 4,369 PDF pages, retaining 41,736 paragraph, heading, and table retrieval units from 100,150 layout objects.",
+        "Designed and reliability-audited a 720-question benchmark spanning factual, numerical, policy, causal, temporal, table, multi-hop, visual/layout, and unanswerable cases.",
+        "Evaluated BM25, three dense retrievers, reciprocal-rank fusion, hierarchical page-to-object retrieval, and cross-encoder reranking with paired significance tests.",
+        "Connected retrieval quality to end-to-end answer accuracy and tested selective recovery for wrong-report, wrong-page, wrong-object, and missing-hop failures.",
       ],
     },
   },
