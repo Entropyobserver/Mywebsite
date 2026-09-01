@@ -47,6 +47,7 @@ The decline from validation PR-AUC to the final-month result is retained and rep
 ## Files
 
 - `notebooks/01_ecommerce_inactivity_prediction_cn.ipynb`: fully executed Chinese analysis with an explanation after every result
+- `notebooks/02_ecommerce_inactivity_prediction_en.ipynb`: fully executed English analysis with English outputs
 - `outputs/rolling_time_validation.csv`: fold-level model metrics
 - `outputs/model_comparison_summary.csv`: cross-validation summary
 - `outputs/final_holdout_metrics.csv`: untouched final-month metrics

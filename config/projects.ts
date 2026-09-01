@@ -339,7 +339,7 @@ export const Projects: ProjectInterface[] = [
       paragraphs: [
         "FinRAG-Equinor is a reliability-audited benchmark for evidence-grounded RAG on long annual reports. It is built from 15 Equinor/Statoil annual reports (2010–2024) and includes 720 QA items with traceable report-, page-, and object-level evidence.",
         "The benchmark evaluates whether RAG systems can identify the right report, locate the relevant page, and find the exact evidence needed to answer each question.",
-        "As the first author and experimental lead in the lab, I led the design and implementation of the benchmark and retrieval evaluation pipeline, from evidence construction and QA development to systematic evaluation of sparse, dense, hybrid, hierarchical, and reranked retrieval methods.",
+        "As the first author and experimental lead, I led the design and implementation of the benchmark and retrieval evaluation pipeline, from evidence construction and QA development to systematic evaluation of sparse, dense, hybrid, hierarchical, and reranked retrieval methods.",
       ],
       bullets: [
         "Built a traceable evidence corpus from long annual-report PDFs, preserving report-, page-, and object-level provenance.",
@@ -952,58 +952,86 @@ export const Projects: ProjectInterface[] = [
   },
   {
     id: "ecommerce-churn-prediction",
-    companyName: "E-commerce Customer Churn Prediction",
+    companyName: "90-Day Purchase Inactivity: Who Should Retention Prioritize?",
     type: "Data Science",
     category: ["Data Science", "Customer Analytics", "AI/ML"],
     shortDescription:
-      "An imbalanced-classification study comparing four models and sampling strategies with F1, ROC-AUC, and feature importance.",
+      "A temporal customer-risk study using 48K monthly snapshots, purge-gap validation, four classifiers, and capacity-based targeting metrics.",
     techStack: [
       "Python",
       "Pandas",
       "NumPy",
       "scikit-learn",
       "Machine Learning",
-      "SHAP",
       "Statistics",
       "Matplotlib",
       "Seaborn",
       "Data Analysis",
     ],
-    startDate: new Date("2025-07-01"),
-    endDate: new Date("2025-07-31"),
+    startDate: new Date("2026-09-01"),
+    endDate: new Date("2026-09-01"),
     companyLogoImg: "/projects/ecommerce-churn-prediction/cover.svg",
+    githubLink:
+      "https://github.com/Entropyobserver/Mywebsite/tree/master/project_materials/ecommerce_analytics_portfolio/projects/15_ecommerce_churn_prediction",
+    keyMetrics: [
+      { value: "48,079", label: "Customer-months" },
+      { value: "0.628", label: "Final PR-AUC" },
+      { value: "1.90×", label: "Top-10% lift" },
+    ],
     pagesInfoArr: [
       {
-        title: "Imbalanced Classification Setup",
+        title: "Q1. What exactly is the model predicting?",
         description:
-          "The source dataset contains 5,630 customers with a 16.84% churn rate and missing values across behavioral and service variables. The workflow performs preprocessing, stratified splitting, scaling where appropriate, and explicit imbalance handling.",
-        imgArr: [],
+          "Question:\n\nCan transaction history define a reproducible customer-risk target without pretending to observe permanent churn?\n\nAnalysis:\n\nAt the start of each month, I identify customers who purchased during the previous 180 days. Features use only that historical window. The target is one when the customer makes no successful purchase during the following 90 days. Customer ID never enters the model.\n\nFinding:\n\nSixteen monthly snapshots produce 48,079 customer-month observations with an overall inactivity rate of 50.9%. The target is explicitly named 90-day purchase inactivity—not permanent churn—because the data contain no account closure or customer-departure field.",
+        imgArr: [
+          "/projects/ecommerce-churn-prediction/target-design.svg",
+        ],
       },
       {
-        title: "Model and Sampling Comparison",
+        title: "Q2. How does the validation prevent future leakage?",
         description:
-          "Logistic regression, KNN, SVM, and random forest models are compared under no sampling, oversampling, undersampling, and SMOTE. The recorded no-sampling random forest result reaches F1 = 0.8715 and ROC-AUC = 0.9905 on the held-out split.",
-        imgArr: [],
+          "Question:\n\nCan a model be evaluated at a future scoring date without allowing training labels to overlap that date?\n\nAnalysis:\n\nThe workflow uses three expanding-window validation folds. Every training snapshot is separated from its validation month by at least 90 days, so the full inactivity label is already known before the prediction point. September 2011 remains untouched until after model selection.\n\nFinding:\n\nThe rolling folds validate March, May, and July 2011; the final test scores September 2011 using training snapshots only through June. This purge gap is stricter than a random or ordinary chronological split and avoids label-window leakage.",
+        imgArr: [
+          "/projects/ecommerce-churn-prediction/temporal-validation.svg",
+        ],
       },
       {
-        title: "Drivers and Actionability",
+        title: "Q3. Which classifier is most reliable over time?",
         description:
-          "Feature-importance and SHAP-oriented analysis turns prediction into a diagnostic workflow. Satisfaction relative to tenure, tenure, order value, cashback amount, and warehouse distance emerge as leading candidate drivers for retention investigation.",
-        imgArr: [],
+          "Question:\n\nWhich model ranks future inactivity most consistently across the three rolling validation months?\n\nAnalysis:\n\nLogistic Regression, Random Forest, HistGradientBoosting, and XGBoost use the same 23 behavioral features and temporal folds. Model selection uses mean PR-AUC, with ROC-AUC, F1, and Brier score retained as diagnostics.\n\nFinding:\n\nLogistic Regression ranks first with mean PR-AUC 0.744, narrowly ahead of HistGradientBoosting at 0.742 and XGBoost at 0.741. The result supports a simpler champion rather than assuming the most complex model must win.",
+        imgArr: [
+          "/projects/ecommerce-churn-prediction/model-comparison.svg",
+        ],
+      },
+      {
+        title: "Q4. Does the selected model generalize to the untouched final month?",
+        description:
+          "Question:\n\nDoes the rolling-validation winner maintain its performance on a completely unseen September 2011 customer snapshot?\n\nAnalysis:\n\nAfter model selection, Logistic Regression is refit on eligible snapshots through June 2011 and evaluated once on 2,772 September customers. The positive-class baseline is the observed 39.3% inactivity rate.\n\nFinding:\n\nFinal PR-AUC is 0.628 versus a 0.393 no-model baseline; ROC-AUC is 0.740 and F1 is 0.622. The decline from 0.744 rolling-validation PR-AUC is retained as evidence of temporal distribution change—not hidden by reporting only the best cross-validation result.",
+        imgArr: [
+          "/projects/ecommerce-churn-prediction/final-holdout.svg",
+        ],
+      },
+      {
+        title: "Q5. What does the model change under limited retention capacity?",
+        description:
+          "Question:\n\nIf the business can contact only 10% of recent customers, how concentrated is inactivity in the highest-risk group?\n\nAnalysis:\n\nI rank final-test customers by predicted risk and evaluate the highest-risk 10% using precision, recall, and lift. Risk deciles and calibration compare predicted probabilities with observed inactivity. Only aggregate outputs are retained; no public customer-level list is exported.\n\nFinding:\n\nThe top-risk 278 customers have a 74.8% observed inactivity rate, capture 19.1% of all inactive customers, and provide 1.90× lift over untargeted selection. This supports prioritization, not a claim that outreach will cause retention; incremental impact and ROI require a randomized experiment with margin and treatment-cost data.",
+        imgArr: [
+          "/projects/ecommerce-churn-prediction/targeting-value.svg",
+        ],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "This project connects business-facing customer retention questions with a careful machine-learning evaluation workflow. It complements the descriptive retention project by asking which customers are most likely to churn and which variables drive that risk signal.",
-        "The analysis compares multiple model families and multiple class-imbalance strategies rather than presenting a single favorable accuracy number. F1 and ROC-AUC are emphasized because the churn class represents only 16.84% of customers.",
-        "Feature importance and SHAP-compatible analysis support investigation and prioritization, while the page avoids treating predictive associations as causal explanations.",
+        "This project asks a precise retention question: among customers who purchased during the previous 180 days, who is most likely to make no successful purchase during the next 90 days? It turns real public retail transactions into a monthly scoring workflow rather than relying on a pre-labelled practice churn file.",
+        "The evaluation is deliberately temporal. Training labels mature before each validation point through a 90-day purge gap, and the newest month is held out until the model family is selected. The gap between rolling validation and the final month remains visible as evidence of distribution change.",
+        "Risk scores support a capacity-constrained candidate list, not a causal retention claim. The public data do not contain campaign cost, margin, randomized outreach, or permanent customer-departure status, so intervention lift and ROI remain outside the evidence boundary.",
       ],
       bullets: [
-        "Profiled 5,630 customers, a 16.84% churn rate, and 1,856 missing values before modeling.",
-        "Compared logistic regression, KNN, SVM, and random forest classifiers.",
-        "Evaluated no sampling, oversampling, undersampling, and SMOTE under consistent metrics.",
-        "Recorded F1 = 0.8715 and ROC-AUC = 0.9905 for the best documented held-out result.",
-        "Added feature-importance and SHAP-oriented interpretation for retention investigation.",
+        "Constructed 48,079 customer-month observations across 16 snapshots from 1,067,371 real transaction lines.",
+        "Engineered 23 recency, frequency, value, cadence, trend, product-breadth, country, and cancellation features.",
+        "Compared four classifiers across three purge-gap rolling validation folds using PR-AUC as the primary metric.",
+        "Preserved the drop from 0.744 validation PR-AUC to 0.628 on the untouched final month.",
+        "Translated scores into a Top-10% operating decision: 74.8% precision, 19.1% recall, and 1.90× lift.",
       ],
     },
   },
