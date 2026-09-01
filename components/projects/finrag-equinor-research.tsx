@@ -1,7 +1,7 @@
 const researchQuestions = [
-  "How do report selection and retrieval-unit granularity affect evidence localization?",
-  "Which failures remain across standard sparse, dense, hybrid, hierarchical, and reranked baselines?",
-  "Do retrieval differences affect final answers, especially when complete multi-hop evidence is required?",
+  "Does retrieving the correct report and page make it easier to retrieve the exact supporting evidence?",
+  "What kinds of retrieval errors do different retrieval methods make?",
+  "Does retrieving better evidence lead to more accurate answers?",
 ];
 
 function SectionHeader({
