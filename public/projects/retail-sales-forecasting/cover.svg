@@ -1,25 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
-  <title id="title">Retail sales forecasting and model comparison</title>
-  <desc id="desc">A green forecasting dashboard with a rising time-series line, uncertainty band, and MAE comparison between Prophet and SARIMA.</desc>
-  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#06251f"/><stop offset="1" stop-color="#174b3a"/></linearGradient><linearGradient id="band" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#6ee7b7" stop-opacity=".34"/><stop offset="1" stop-color="#6ee7b7" stop-opacity="0"/></linearGradient></defs>
-  <rect width="1200" height="675" rx="32" fill="url(#bg)"/>
-  <circle cx="1090" cy="85" r="170" fill="#34d399" opacity=".09"/>
-  <text x="72" y="86" fill="#6ee7b7" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="3">TIME SERIES</text>
-  <text x="72" y="145" fill="#f0fdf4" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="750">Retail Sales Forecasting</text>
-  <text x="72" y="184" fill="#a7d7c1" font-family="Inter,Arial,sans-serif" font-size="22">Prophet vs SARIMA · chronological holdout</text>
-  <rect x="72" y="226" width="700" height="360" rx="24" fill="#0a3329" stroke="#2c6b55"/>
-  <text x="112" y="273" fill="#d1fae5" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="700">12-MONTH OUTLOOK</text>
-  <g stroke="#285847" stroke-width="1"><line x1="112" y1="329" x2="730" y2="329"/><line x1="112" y1="408" x2="730" y2="408"/><line x1="112" y1="487" x2="730" y2="487"/></g>
-  <path d="M112 497 C165 475 194 488 245 438 S326 462 375 402 S456 430 503 363 S585 401 631 321 S692 355 730 287 L730 489 C683 502 651 454 605 487 S531 452 486 500 S403 475 354 520 S272 488 220 529 S145 515 112 545Z" fill="url(#band)"/>
-  <path d="M112 519 C165 493 195 507 245 465 S326 486 375 431 S456 458 503 398 S585 429 631 356 S692 389 730 324" fill="none" stroke="#6ee7b7" stroke-width="6" stroke-linecap="round"/>
-  <line x1="512" y1="302" x2="512" y2="540" stroke="#fbbf24" stroke-width="2" stroke-dasharray="7 8"/><text x="524" y="320" fill="#fcd34d" font-family="Inter,Arial,sans-serif" font-size="15">FORECAST</text>
-  <rect x="808" y="226" width="320" height="360" rx="24" fill="#0a3329" stroke="#2c6b55"/>
-  <text x="848" y="273" fill="#d1fae5" font-family="Inter,Arial,sans-serif" font-size="19" font-weight="700">HOLDOUT MAE</text>
-  <text x="848" y="337" fill="#a7d7c1" font-family="Inter,Arial,sans-serif" font-size="18">Prophet</text>
-  <rect x="848" y="355" width="224" height="26" rx="8" fill="#245846"/><rect x="848" y="355" width="207" height="26" rx="8" fill="#a7f3d0"/>
-  <text x="848" y="414" fill="#ffffff" font-family="Inter,Arial,sans-serif" font-size="27" font-weight="750">3,592.32</text>
-  <text x="848" y="468" fill="#a7d7c1" font-family="Inter,Arial,sans-serif" font-size="18">SARIMA</text>
-  <rect x="848" y="486" width="224" height="26" rx="8" fill="#245846"/><rect x="848" y="486" width="170" height="26" rx="8" fill="#34d399"/>
-  <text x="848" y="548" fill="#ffffff" font-family="Inter,Arial,sans-serif" font-size="27" font-weight="750">2,953.75</text>
-  <text x="72" y="633" fill="#78ab94" font-family="Inter,Arial,sans-serif" font-size="16">Lower MAE selected on the same chronological test window</text>
+  <title id="title">Retail demand forecasting with classical, machine-learning, and foundation models</title><desc id="desc">A green forecasting dashboard comparing Meta Prophet, Google TimesFM, and Gradient Boosting on Walmart M5 sales.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071d1a"/><stop offset="1" stop-color="#123f32"/></linearGradient><linearGradient id="line" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#6ee7b7"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+  <rect width="1200" height="675" rx="32" fill="url(#bg)"/><circle cx="1090" cy="65" r="190" fill="#34d399" opacity=".08"/>
+  <g font-family="Inter,Arial,sans-serif"><text x="70" y="78" fill="#6ee7b7" font-size="19" font-weight="700" letter-spacing="3">RETAIL DEMAND FORECASTING</text><text x="70" y="137" fill="#f0fdf4" font-size="42" font-weight="750">Which Model Generalizes Best?</text><text x="70" y="180" fill="#a7d7c1" font-size="21">Classical models · Gradient Boosting · Meta Prophet · Google TimesFM 3.0</text>
+  <rect x="70" y="225" width="710" height="345" rx="24" fill="#0a3028" stroke="#28624f"/><text x="108" y="272" fill="#d1fae5" font-size="18" font-weight="700">28-DAY ROLLING VALIDATION</text>
+  <g stroke="#285847"><line x1="108" y1="338" x2="740" y2="338"/><line x1="108" y1="418" x2="740" y2="418"/><line x1="108" y1="498" x2="740" y2="498"/></g><path d="M108 470 C158 450 196 478 242 420 S329 452 375 394 S456 431 506 365 S591 406 640 334 S699 365 740 310" fill="none" stroke="url(#line)" stroke-width="7" stroke-linecap="round"/><path d="M108 500 C158 474 196 505 242 451 S329 478 375 425 S456 461 506 399 S591 438 640 369 S699 397 740 345" fill="none" stroke="#6ee7b7" stroke-opacity=".18" stroke-width="26" stroke-linecap="round"/><line x1="545" y1="302" x2="545" y2="520" stroke="#fbbf24" stroke-width="2" stroke-dasharray="7 8"/><text x="558" y="320" fill="#fcd34d" font-size="15">FORECAST</text>
+  <rect x="815" y="225" width="315" height="345" rx="24" fill="#0a3028" stroke="#28624f"/><text x="850" y="271" fill="#d1fae5" font-size="18" font-weight="700">KEY RESULTS</text><text x="850" y="326" fill="#94a3b8" font-size="16">Rolling-validation winner</text><text x="850" y="361" fill="#fff" font-size="27" font-weight="750">Meta Prophet</text><text x="850" y="405" fill="#6ee7b7" font-size="30" font-weight="750">5.89% WAPE</text><line x1="850" y1="435" x2="1095" y2="435" stroke="#28624f"/><text x="850" y="475" fill="#94a3b8" font-size="16">Final-month winner</text><text x="850" y="510" fill="#fff" font-size="25" font-weight="750">Google TimesFM</text><text x="850" y="548" fill="#22d3ee" font-size="28" font-weight="750">5.75% WAPE</text><text x="70" y="628" fill="#7fb6a0" font-size="16">3,049 items · 1,941 days · seven models · four rolling windows · untouched 28-day test</text></g>
 </svg>

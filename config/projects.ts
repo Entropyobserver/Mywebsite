@@ -851,18 +851,21 @@ export const Projects: ProjectInterface[] = [
   },
   {
     id: "retail-sales-forecasting",
-    companyName: "Retail Sales Forecasting & Model Comparison",
+    companyName: "Retail Demand Forecasting: Which Model Generalizes Best?",
     type: "Data Science",
-    category: ["Data Science", "Forecasting", "Business Analytics"],
+    category: ["Data Science", "Forecasting", "AI/ML", "Business Analytics"],
     shortDescription:
-      "A retail time-series case study comparing Prophet and SARIMA with held-out error analysis and forecast intervals.",
+      "A seven-model retail forecast comparing classical statistics, Gradient Boosting, Meta Prophet, and Google TimesFM through rolling validation.",
     techStack: [
       "Python",
       "Pandas",
       "NumPy",
       "Time Series",
-      "ARIMA",
       "Prophet",
+      "Machine Learning",
+      "Transformers",
+      "PyTorch",
+      "ARIMA",
       "Statistics",
       "Matplotlib",
       "Data Analysis",
@@ -871,38 +874,49 @@ export const Projects: ProjectInterface[] = [
     startDate: new Date("2025-07-01"),
     endDate: new Date("2025-07-06"),
     companyLogoImg: "/projects/retail-sales-forecasting/cover.svg",
+    keyMetrics: [
+      { value: "3,049", label: "Items in scope" },
+      { value: "5.89%", label: "Rolling WAPE" },
+      { value: "5.75%", label: "Final-test WAPE" },
+    ],
     pagesInfoArr: [
       {
-        title: "Time-Series Preparation",
+        title: "Q1. Is the data suitable for demand forecasting?",
         description:
-          "The case study aggregates 9,994 Superstore order lines from 2014–2017 into monthly subcategory sales. Exploratory trend and seasonality views are paired with an Augmented Dickey–Fuller stationarity test before modeling.",
-        imgArr: [],
+          "Question:\n\nCan the source tables support a reliable store-level 28-day forecast?\n\nAnalysis:\n\nI reconciled daily unit sales, weekly prices, calendar events, benefit-program dates, and the store-category hierarchy. The selected store contains 3,049 items across three categories and 1,941 continuous historical days.\n\nFinding:\n\nThe series has no missing sales dates or negative values, and it shows both changing sales levels and strong weekly seasonality. The target is observed store sales—not unconstrained demand—because inventory-on-hand and lost-sales fields are unavailable.",
+        imgArr: ["/projects/retail-sales-forecasting/data-readiness.svg"],
       },
       {
-        title: "Comparable Forecast Backtest",
+        title: "Q2. Which model is most stable across historical windows?",
         description:
-          "Prophet and SARIMA are trained on the same chronological split and evaluated on the same held-out period using mean absolute error. SARIMA records the lower MAE in the notebook (2,953.75 versus 3,592.32 for Prophet).",
-        imgArr: [],
+          "Question:\n\nWhich method performs most reliably when the forecast origin moves through time?\n\nAnalysis:\n\nSeven models face the same four rolling 28-day validation windows: two seasonal baselines, Exponential Smoothing, SARIMA, Gradient Boosting, Meta Prophet, and Google TimesFM 3.0. Selection is based on mean WAPE before viewing the final test month.\n\nFinding:\n\nMeta Prophet ranks first at 5.89% mean WAPE, closely followed by zero-shot TimesFM at 5.98% and Gradient Boosting at 6.56%. Prophet is selected as the historical champion under the pre-defined rule.",
+        imgArr: ["/projects/retail-sales-forecasting/rolling-validation.svg"],
       },
       {
-        title: "Decision-Oriented Forecast Output",
+        title: "Q3. Which model generalizes best to the unseen final month?",
         description:
-          "The final forecast includes point estimates and uncertainty intervals for the next 12 months. The wide intervals in some months are treated as planning risk, not hidden behind a single forecast line.",
-        imgArr: [],
+          "Question:\n\nDoes the rolling-validation winner remain best on a completely untouched 28-day period?\n\nAnalysis:\n\nAfter model selection, I evaluate every candidate once on the reserved final month using MAE, RMSE, WAPE, and signed bias.\n\nFinding:\n\nGoogle TimesFM 3.0 ranks first at 5.75% WAPE, almost tied with Gradient Boosting at 5.77%; Prophet records 6.77%. The ranking shift supports champion–challenger monitoring rather than a claim that one model always wins. TimesFM is presented only as a non-commercial research benchmark under its current weight license.",
+        imgArr: ["/projects/retail-sales-forecasting/final-holdout.svg"],
+      },
+      {
+        title: "Q4. What volume should the store plan for?",
+        description:
+          "Question:\n\nHow should the selected forecast be translated into a usable 28-day planning range?\n\nAnalysis:\n\nFollowing the pre-defined rolling-validation decision, Prophet is refit on all 1,941 historical days. Horizon-specific errors from the four backtests form an empirical 80% interval.\n\nFinding:\n\nThe forecast is 132,211 units over 28 days, averaging 4,722 per day, with summed daily bounds of 128,002 to 142,035 units. This is a capacity and purchasing-budget input—not a final order quantity—until inventory, inbound supply, lead time, and service level are added.",
+        imgArr: ["/projects/retail-sales-forecasting/forecast-plan.svg"],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "This project demonstrates the forecasting work referenced in my data-science resume through a complete, reproducible retail time-series workflow.",
-        "The analysis moves from monthly aggregation and stationarity diagnostics to two distinct forecasting approaches: Prophet for decomposable trend and seasonality, and SARIMA for explicitly modeled autoregressive and seasonal structure.",
-        "Model selection is based on chronological holdout performance rather than in-sample fit. Forecast uncertainty is retained so the result can support inventory and sales planning without implying false precision.",
+        "This project demonstrates the time-series forecasting and systematic cross-validation work highlighted in my resume through a reproducible retail demand-planning workflow.",
+        "The central comparison spans simple seasonal baselines, classical statistical models, feature-driven machine learning, Meta Prophet, and Google TimesFM 3.0. Every model uses the same rolling forecast origins, 28-day horizon, and error definitions.",
+        "The project separates model selection from final testing. Prophet is the historical rolling-validation champion, while zero-shot TimesFM performs best on the newest untouched month. The difference becomes a monitoring decision rather than a misleading winner-takes-all claim.",
       ],
       bullets: [
-        "Prepared four years of retail order data into monthly subcategory time series.",
-        "Tested stationarity and inspected trend and seasonal structure before fitting models.",
-        "Compared Prophet and SARIMA on a shared chronological holdout using MAE.",
-        "Selected SARIMA in the recorded experiment with MAE 2,953.75 versus Prophet's 3,592.32.",
-        "Produced 12-month forecasts with lower and upper intervals for planning scenarios.",
+        "Built a continuous 1,941-day store series across 3,049 items with calendar and price signals.",
+        "Engineered leakage-safe lags and rolling features for a direct 28-day machine-learning forecast.",
+        "Compared seven models across four rolling windows with MAE, RMSE, WAPE, and signed bias.",
+        "Benchmarked Google TimesFM 3.0 zero-shot against Meta Prophet, Gradient Boosting, and statistical baselines.",
+        "Translated the selected forecast into a 132,211-unit planning baseline with explicit uncertainty and inventory limitations.",
       ],
     },
   },
