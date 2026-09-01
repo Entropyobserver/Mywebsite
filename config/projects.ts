@@ -294,7 +294,7 @@ export const Projects: ProjectInterface[] = [
   {
     id: "finrag-equinor",
     companyName:
-      "FinRAG-Equinor: From Annual Report PDFs to a Reliability-Audited Benchmark for Evidence-Grounded RAG",
+      "FinRAG-Equinor | Reliability-Audited Financial RAG Benchmark",
     type: "Research",
     category: [
       "Research",
@@ -305,7 +305,7 @@ export const Projects: ProjectInterface[] = [
       "Human Evaluation",
     ],
     shortDescription:
-      "A 720-item, reliability-audited benchmark for evidence-grounded RAG over 15 Equinor/Statoil annual reports, with traceable report-, page-, and object-level evidence.",
+      "A reliability-audited benchmark for evidence-grounded RAG over 15 long, structured Equinor/Statoil annual reports, with 720 QA items and traceable report-, page-, and object-level evidence.",
     techStack: [
       "Python",
       "RAG",
@@ -321,7 +321,7 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2026-02-01"),
     endDate: new Date("2026-08-01"),
-    companyLogoImg: "/projects/finrag-equinor/cover.png",
+    companyLogoImg: "/projects/finrag-equinor/cover-v2.svg",
     keyMetrics: [
       { value: "720", label: "QA items" },
       { value: "15", label: "Annual reports" },
@@ -337,15 +337,15 @@ export const Projects: ProjectInterface[] = [
     ],
     descriptionDetails: {
       paragraphs: [
-        "FinRAG-Equinor is a PDF-to-benchmark pipeline and 720-item benchmark for evidence-grounded RAG over long, structured annual reports. It treats retrieval as a hierarchical localization problem: first selecting the correct report, then locating the right page, and finally identifying the exact supporting evidence object.",
-        "The benchmark covers 15 Equinor/Statoil annual reports from 2010 to 2024, including 660 answerable and 60 unanswerable questions across nine evidence types. Every answerable item is linked to traceable report-, page-, and object-level evidence, and all 720 items underwent human screening.",
-        "I designed the benchmark and retrieval evaluation pipeline, including PDF structure parsing, evidence metadata, QA construction and audit, hard-negative mining, sparse/dense/hybrid baselines, reranking, end-to-end QA evaluation, and failure-aware retrieval recovery.",
+        "FinRAG-Equinor is a reliability-audited benchmark for evidence-grounded RAG over long, structured annual reports. Built from 15 Equinor/Statoil annual reports published from 2010 to 2024, it contains 720 QA items, including answerable and unanswerable questions, with traceable evidence at the report, page, and object levels.",
+        "The benchmark treats retrieval as a hierarchical localization problem: first finding the right report, then the relevant page, and finally the exact evidence needed to answer the question. This makes it possible to evaluate not only whether a retriever finds relevant information, but also where evidence localization breaks down.",
+        "I designed the benchmark and retrieval evaluation pipeline, covering PDF structure parsing, evidence construction and auditing, QA construction, hard-negative mining, and retrieval evaluation across sparse, dense, hybrid, hierarchical, and reranked approaches.",
       ],
       bullets: [
-        "Built a traceable corpus from 4,369 PDF pages, retaining 41,736 paragraph, heading, and table retrieval units from 100,150 layout objects.",
-        "Designed and reliability-audited a 720-question benchmark spanning factual, numerical, policy, causal, temporal, table, multi-hop, visual/layout, and unanswerable cases.",
-        "Evaluated BM25, three dense retrievers, reciprocal-rank fusion, hierarchical page-to-object retrieval, and cross-encoder reranking with paired significance tests.",
-        "Connected retrieval quality to end-to-end answer accuracy and tested selective recovery for wrong-report, wrong-page, wrong-object, and missing-hop failures.",
+        "Built a traceable evidence corpus from long annual-report PDFs, preserving report-, page-, and object-level provenance.",
+        "Constructed and audited the benchmark across factual, numerical, table-grounded, temporal, multi-hop, visual/layout, policy, causal, and unanswerable cases.",
+        "Evaluated evidence localization and end-to-end QA, connecting retrieval quality to answer reliability and identifying the gap between partial and complete evidence retrieval.",
+        "Investigated RAG failure and recovery, including missing evidence, wrong citations, conflicting-year evidence, unsupported claims, under-answering, and cases where abstention is safer than unsupported answering.",
       ],
     },
   },

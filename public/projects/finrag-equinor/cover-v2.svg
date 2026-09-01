@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">FinRAG-Equinor benchmark pipeline</title>
+  <desc id="desc">A reliability-audited pipeline from annual report PDFs to structured evidence, a retrieval corpus, and a 720-item benchmark.</desc>
+
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F8FAFF"/>
+      <stop offset="1" stop-color="#EEF1FF"/>
+    </linearGradient>
+    <linearGradient id="header" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#10192C"/>
+      <stop offset="1" stop-color="#203B72"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#17213A" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#53627B"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="675" rx="24" fill="url(#background)"/>
+  <path d="M24 0h1152a24 24 0 0 1 24 24v142H0V24A24 24 0 0 1 24 0z" fill="url(#header)"/>
+
+  <text x="58" y="67" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="700">FinRAG-Equinor</text>
+  <text x="58" y="112" fill="#DCE7FF" font-family="Inter, Arial, sans-serif" font-size="23">Reliability-audited financial RAG benchmark</text>
+  <rect x="996" y="48" width="148" height="48" rx="24" fill="#FFFFFF" fill-opacity="0.12" stroke="#FFFFFF" stroke-opacity="0.30"/>
+  <text x="1070" y="79" text-anchor="middle" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600">2010–2024</text>
+
+  <text x="58" y="210" fill="#53627B" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="2">TRACEABLE PDF-TO-BENCHMARK PIPELINE</text>
+
+  <g filter="url(#shadow)">
+    <rect x="58" y="246" width="232" height="174" rx="20" fill="#FFFFFF" stroke="#8EA3D6" stroke-width="2"/>
+    <rect x="58" y="246" width="232" height="10" rx="5" fill="#345FA8"/>
+    <circle cx="94" cy="292" r="18" fill="#E5ECFF"/>
+    <text x="94" y="299" text-anchor="middle" fill="#345FA8" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">1</text>
+    <text x="174" y="348" text-anchor="middle" fill="#15213A" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Annual Report PDFs</text>
+    <text x="174" y="388" text-anchor="middle" fill="#53627B" font-family="Inter, Arial, sans-serif" font-size="18">15 reports · 4,369 pages</text>
+
+    <rect x="342" y="246" width="232" height="174" rx="20" fill="#FFFFFF" stroke="#9B9ADD" stroke-width="2"/>
+    <rect x="342" y="246" width="232" height="10" rx="5" fill="#6967C7"/>
+    <circle cx="378" cy="292" r="18" fill="#ECEBFF"/>
+    <text x="378" y="299" text-anchor="middle" fill="#605DBF" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">2</text>
+    <text x="458" y="348" text-anchor="middle" fill="#15213A" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Structured Evidence</text>
+    <text x="458" y="388" text-anchor="middle" fill="#53627B" font-family="Inter, Arial, sans-serif" font-size="17">report · page · object IDs</text>
+
+    <rect x="626" y="246" width="232" height="174" rx="20" fill="#FFFFFF" stroke="#9D9BE6" stroke-width="2"/>
+    <rect x="626" y="246" width="232" height="10" rx="5" fill="#7774D8"/>
+    <circle cx="662" cy="292" r="18" fill="#EFEEFF"/>
+    <text x="662" y="299" text-anchor="middle" fill="#6663C8" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">3</text>
+    <text x="742" y="348" text-anchor="middle" fill="#15213A" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Retrieval Corpus</text>
+    <text x="742" y="388" text-anchor="middle" fill="#53627B" font-family="Inter, Arial, sans-serif" font-size="18">41,736 evidence units</text>
+
+    <rect x="910" y="246" width="232" height="174" rx="20" fill="#FFFFFF" stroke="#8F8CE7" stroke-width="2"/>
+    <rect x="910" y="246" width="232" height="10" rx="5" fill="#5F5BD4"/>
+    <circle cx="946" cy="292" r="18" fill="#ECEBFF"/>
+    <text x="946" y="299" text-anchor="middle" fill="#5652C8" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">4</text>
+    <text x="1026" y="348" text-anchor="middle" fill="#15213A" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Benchmark</text>
+    <text x="1026" y="388" text-anchor="middle" fill="#53627B" font-family="Inter, Arial, sans-serif" font-size="18">720 QA items</text>
+  </g>
+
+  <line x1="300" y1="333" x2="330" y2="333" stroke="#53627B" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="584" y1="333" x2="614" y2="333" stroke="#53627B" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="868" y1="333" x2="898" y2="333" stroke="#53627B" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="58" y="474" width="1084" height="126" rx="20" fill="#FFF9F0" stroke="#D87908" stroke-width="2" stroke-dasharray="9 7"/>
+  <circle cx="101" cy="537" r="28" fill="#FFE6C2"/>
+  <path d="M91 537l7 7 14-17" fill="none" stroke="#B95F00" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="145" y="526" fill="#15213A" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Human Quality Audits</text>
+  <text x="145" y="561" fill="#53627B" font-family="Inter, Arial, sans-serif" font-size="18">PDF extraction: 100 pages</text>
+  <circle cx="414" cy="554" r="3" fill="#A4ADBC"/>
+  <text x="435" y="561" fill="#53627B" font-family="Inter, Arial, sans-serif" font-size="18">QA reliability: 100 items</text>
+  <rect x="890" y="513" width="214" height="48" rx="24" fill="#E7EDFF"/>
+  <text x="997" y="544" text-anchor="middle" fill="#345FA8" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700">Evidence-grounded RAG</text>
+
+  <text x="600" y="640" text-anchor="middle" fill="#7C879A" font-family="Inter, Arial, sans-serif" font-size="15">Report-level routing · page localization · exact evidence grounding</text>
+</svg>
