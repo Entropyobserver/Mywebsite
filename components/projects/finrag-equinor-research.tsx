@@ -1,10 +1,7 @@
 const researchQuestions = [
-  "How does retrieval-unit granularity affect evidence coverage and localization precision?",
-  "How much does knowing the reference report year improve evidence localization?",
-  "How do sparse, dense, and hybrid retrieval strategies affect evidence coverage?",
-  "What does hierarchical page-to-object retrieval reveal about fine-grained localization?",
-  "Where do reranking and multi-hop retrieval expose remaining grounding failures?",
-  "How do retrieval failures affect final answers, and can observable retrieval signals support selective recovery?",
+  "How do report selection and retrieval-unit granularity affect evidence localization?",
+  "Which failures remain across standard sparse, dense, hybrid, hierarchical, and reranked baselines?",
+  "Do retrieval differences affect final answers, especially when complete multi-hop evidence is required?",
 ];
 
 function SectionHeader({
@@ -102,10 +99,10 @@ function GroundingFunnel({
 
 export default function FinragEquinorResearch() {
   return (
-    <div className="space-y-16">
+    <div className="space-y-20">
       <section>
         <SectionHeader title="Research Questions" />
-        <div className="grid gap-3 md:grid-cols-2">
+        <div className="space-y-3">
           {researchQuestions.map((question, index) => (
             <div
               key={question}
@@ -124,9 +121,9 @@ export default function FinragEquinorResearch() {
 
       <section>
         <SectionHeader
-          eyebrow="Traceable by design"
-          title="From PDFs to an Auditable Benchmark"
-          description="Every retained unit preserves its source report, page, and layout-object identity, so errors can be traced through the full evidence pipeline."
+          eyebrow="Auditable resource"
+          title="From Annual-Report PDFs to Traceable Evidence"
+          description="Every retained retrieval unit preserves its source report, page, and layout-object identity, making extraction, segmentation, retrieval, and grounding failures inspectable."
         />
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[
@@ -155,7 +152,7 @@ export default function FinragEquinorResearch() {
       <section>
         <SectionHeader
           title="Benchmark Composition and Reliability"
-          description="The evidence-first benchmark covers nine question types. All items underwent human screening, with separate audits for extraction quality and QA reliability."
+          description="The benchmark covers nine evidence requirements. All 720 items underwent human screening, with separate two-annotator audits of PDF extraction and QA reliability."
         />
         <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
           <div className="overflow-hidden rounded-2xl border bg-background">
@@ -207,33 +204,57 @@ export default function FinragEquinorResearch() {
 
       <section id="rq1">
         <SectionHeader
-          eyebrow="RQ1 · Retrieval granularity"
-          title="More Context Improves Coverage"
-          description="Using the same reference-year-filtered BM25 retriever, page-sized units recover more evidence than exact layout objects at rank 10."
+          eyebrow="RQ1 · Report selection and retrieval granularity"
+          title="Context Helps, and the Correct Report Matters"
+          description="RQ1 separates two sources of difficulty: how much context a retrieval unit carries and whether the system searches within the correct annual report."
         />
-        <div className="space-y-5 rounded-2xl border bg-background p-5 sm:p-7">
-          <MetricBar label="Object BM25-year · Chunk R@10" value={0.756} />
-          <MetricBar
-            label="Page BM25-year · Chunk R@10"
-            value={0.905}
-            color="bg-emerald-600"
-          />
-          <MetricBar label="Page-window · Chunk R@10" value={0.876} />
-          <MetricBar label="Object-window · Chunk R@10" value={0.883} />
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="rounded-2xl border bg-background p-5 sm:p-6">
+            <h3 className="font-heading text-2xl">Chunk Recall@10</h3>
+            <div className="mt-6 space-y-5">
+              <MetricBar label="Object BM25-year" value={0.756} />
+              <MetricBar
+                label="Page BM25-year"
+                value={0.905}
+                color="bg-emerald-600"
+              />
+              <MetricBar label="Page-window" value={0.876} />
+              <MetricBar label="Object-window" value={0.883} />
+            </div>
+          </div>
+          <div className="rounded-2xl border bg-background p-5 sm:p-6">
+            <h3 className="font-heading text-2xl">BM25 Object Recall@10</h3>
+            <div className="mt-6 space-y-5">
+              <MetricBar
+                label="Unrestricted search"
+                value={0.515}
+                color="bg-amber-500"
+              />
+              <MetricBar
+                label="Oracle reference-year filter"
+                value={0.756}
+                color="bg-emerald-600"
+              />
+            </div>
+            <p className="mt-6 text-sm leading-6 text-muted-foreground">
+              Oracle year filtering removes report-level routing errors and
+              isolates evidence localization within the correct report.
+            </p>
+          </div>
         </div>
         <EvidenceConclusion>
-          Page-level context raises Chunk Recall@10 from <strong>75.6%</strong>{" "}
-          to <strong>90.5%</strong>. Coverage improves with context, but strict
-          page- and object-level metrics are still needed to measure precise
-          evidence localization.
+          Page units achieve <strong>90.5% Chunk Recall@10</strong>, while
+          reference-year filtering raises BM25 exact-object Recall@10 from{" "}
+          <strong>51.5% to 75.6%</strong>. More context and correct report
+          selection both help, but neither guarantees exact localization.
         </EvidenceConclusion>
       </section>
 
-      <section id="rq2-rq4">
+      <section id="rq2">
         <SectionHeader
-          eyebrow="RQ2–RQ4 · Report routing and retrieval"
-          title="The Correct Year Helps—But Does Not Solve Localization"
-          description="Oracle year filtering removes cross-report competition. Dense and hybrid methods then improve exact-object coverage within the correct report."
+          eyebrow="RQ2 · Baselines and remaining failures"
+          title="Stronger Retrieval Narrows—but Does Not Close—the Localization Gap"
+          description="Sparse, dense, hybrid, hierarchical, and reranked baselines are evaluated at both page and exact-object levels."
         />
         <div className="overflow-hidden rounded-2xl border bg-background">
           <div className="overflow-x-auto">
@@ -290,17 +311,7 @@ export default function FinragEquinorResearch() {
             </table>
           </div>
         </div>
-        <EvidenceConclusion>
-          Year filtering lifts BM25 object Recall@10 from <strong>51.5%</strong>{" "}
-          to <strong>75.6%</strong>. The strongest filtered hybrid reaches{" "}
-          <strong>83.8%</strong>, showing that report routing is a major hurdle
-          while fine-grained localization remains unresolved.
-        </EvidenceConclusion>
-      </section>
-
-      <section>
-        <SectionHeader title="The Three-Level Grounding Funnel" />
-        <div className="grid gap-8 rounded-2xl border bg-muted/20 p-5 sm:p-7 md:grid-cols-2">
+        <div className="mt-6 grid gap-6 rounded-2xl border bg-muted/20 p-5 sm:p-7 md:grid-cols-2">
           <GroundingFunnel
             title="BM25 · unrestricted"
             values={[91.2, 60.3, 51.5]}
@@ -310,39 +321,41 @@ export default function FinragEquinorResearch() {
             values={[100, 85.0, 75.6]}
           />
         </div>
-        <p className="mt-4 text-sm leading-6 text-muted-foreground">
-          Reference-year filtering closes the document-level gap by design, but
-          the narrowing funnel shows continued losses from report to page and
-          from page to exact evidence object.
-        </p>
+        <div className="mt-6 grid gap-5 md:grid-cols-3">
+          {[
+            ["40.2% → 63.6%", "BM25 object R@1 after reranking"],
+            ["67.4%", "Best reranked hybrid object R@1"],
+            ["73.1%", "Best reranked hybrid MRR"],
+          ].map(([value, label]) => (
+            <div
+              key={label}
+              className="rounded-2xl border bg-background p-5 text-center"
+            >
+              <p className="font-heading text-2xl text-blue-700 dark:text-blue-300">
+                {value}
+              </p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                {label}
+              </p>
+            </div>
+          ))}
+        </div>
+        <EvidenceConclusion>
+          The strongest filtered hybrid reaches{" "}
+          <strong>83.8% object Recall@10</strong>. Reranking promotes evidence
+          already present in the top-10, but it cannot recover missing
+          candidates. Page and exact-object localization remain the main failure
+          points after the correct report is reached.
+        </EvidenceConclusion>
       </section>
 
-      <section id="rq5">
+      <section id="rq3">
         <SectionHeader
-          eyebrow="RQ5 · Ranking and multi-hop grounding"
-          title="Reranking Promotes Evidence; Missing Hops Remain"
+          eyebrow="RQ3 · Multi-hop completeness and final answers"
+          title="Partial Evidence Is Not Enough"
+          description="RQ3 connects complete multi-hop evidence retrieval to the quality of generated answers."
         />
         <div className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border bg-background p-5 sm:p-6">
-            <h3 className="font-heading text-2xl">BM25-year reranking</h3>
-            <div className="mt-6 space-y-5">
-              <MetricBar label="Before · Object R@1" value={0.402} />
-              <MetricBar
-                label="After · Object R@1"
-                value={0.636}
-                color="bg-emerald-600"
-              />
-              <MetricBar
-                label="After · Object R@10"
-                value={0.756}
-                color="bg-violet-600"
-              />
-            </div>
-            <p className="mt-5 text-sm leading-6 text-muted-foreground">
-              Reranking improves ordering when evidence is already in the
-              candidate set; fixed-candidate Recall@10 cannot increase.
-            </p>
-          </div>
           <div className="rounded-2xl border bg-background p-5 sm:p-6">
             <h3 className="font-heading text-2xl">90 multi-hop questions</h3>
             <div className="mt-6 space-y-5">
@@ -362,47 +375,45 @@ export default function FinragEquinorResearch() {
                 color="bg-violet-600"
               />
             </div>
-            <p className="mt-5 text-sm leading-6 text-muted-foreground">
-              Finding one relevant item can substantially overstate whether the
-              complete evidence set needed for an answer was retrieved.
-            </p>
+          </div>
+          <div className="rounded-2xl border bg-background p-5 sm:p-6">
+            <h3 className="font-heading text-2xl">
+              Answerable-question accuracy
+            </h3>
+            <div className="mt-6 space-y-5">
+              <MetricBar
+                label="Closed-book"
+                value={0.029}
+                color="bg-slate-500"
+              />
+              <MetricBar label="BM25-year RAG" value={0.585} />
+              <MetricBar
+                label="Hybrid + rerank RAG"
+                value={0.709}
+                color="bg-emerald-600"
+              />
+              <MetricBar
+                label="Oracle evidence"
+                value={0.82}
+                color="bg-violet-600"
+              />
+            </div>
           </div>
         </div>
-      </section>
-
-      <section id="rq6">
-        <SectionHeader
-          eyebrow="RQ6 · End-to-end impact"
-          title="Better Retrieval Produces Better Answers"
-          description="A fixed generator was evaluated under four evidence conditions on all 660 answerable questions."
-        />
-        <div className="space-y-5 rounded-2xl border bg-background p-5 sm:p-7">
-          <MetricBar label="Closed-book" value={0.029} color="bg-slate-500" />
-          <MetricBar label="BM25-year RAG" value={0.585} />
-          <MetricBar
-            label="Hybrid + rerank RAG"
-            value={0.709}
-            color="bg-emerald-600"
-          />
-          <MetricBar
-            label="Oracle evidence"
-            value={0.82}
-            color="bg-violet-600"
-          />
-        </div>
         <EvidenceConclusion>
-          Hybrid reranking improves answer accuracy by{" "}
-          <strong>12.4 points</strong> over BM25-year evidence, but remains{" "}
-          <strong>11.1 points</strong> below oracle evidence. Retrieval quality
-          has a clear downstream effect, and generation still accounts for part
-          of the remaining error.
+          BM25-year finds at least one required object for{" "}
+          <strong>91.1%</strong> of multi-hop questions but finds the complete
+          evidence set for only <strong>53.3%</strong>. Hybrid reranking raises
+          answer accuracy from <strong>58.5% to 70.9%</strong>, while oracle
+          evidence reaches <strong>82.0%</strong>.
         </EvidenceConclusion>
       </section>
 
       <section>
         <SectionHeader
+          eyebrow="Exploratory analysis"
           title="Failure-Aware Retrieval Recovery"
-          description="An interpretable detector uses observable retrieval signals to trigger targeted actions for likely wrong-report, wrong-page, wrong-object, and missing-hop failures."
+          description="A threshold-based detector uses observable retrieval signals to trigger targeted actions for likely wrong-report, wrong-page, wrong-object, and missing-hop failures."
         />
         <div className="overflow-hidden rounded-2xl border bg-background">
           <div className="overflow-x-auto">
@@ -447,33 +458,35 @@ export default function FinragEquinorResearch() {
           </div>
         </div>
         <EvidenceConclusion>
-          Selective recovery matches always-on object Recall@10 while using only
-          <strong> 35% of the triggers</strong>. The gain is small and the
-          held-out detector remains imperfect (macro-F1 <strong>0.349</strong>),
-          so this is feasibility evidence rather than a production-ready
-          recovery policy.
+          Selective recovery matches always-on object Recall@10 with 250 rather
+          than 720 triggers. The improvement is small and the held-out detector
+          remains weak (macro-F1 <strong>0.349</strong>), so the paper presents
+          this as feasibility evidence—not a new retrieval method or a
+          production-ready verifier.
         </EvidenceConclusion>
       </section>
 
       <section>
-        <SectionHeader title="Conclusion and Scope" />
+        <SectionHeader title="Scope and Limitations" />
         <div className="grid gap-5 md:grid-cols-2">
           <div className="rounded-2xl border bg-blue-50 p-6 text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
-            <h3 className="font-heading text-2xl">Main finding</h3>
+            <h3 className="font-heading text-2xl">
+              What the benchmark establishes
+            </h3>
             <p className="mt-3 leading-7">
-              Annual-report RAG is a hierarchical evidence-localization problem.
-              Correct report selection is necessary, but page, object, and
-              complete multi-hop grounding determine whether the final answer is
-              adequately supported.
+              Annual-report RAG is a hierarchical localization problem spanning
+              report selection, page localization, exact evidence objects, and
+              complete multi-hop grounding. These retrieval differences have a
+              measurable effect on answer correctness.
             </p>
           </div>
           <div className="rounded-2xl border bg-muted/20 p-6">
-            <h3 className="font-heading text-2xl">Current scope</h3>
+            <h3 className="font-heading text-2xl">What remains open</h3>
             <p className="mt-3 leading-7 text-muted-foreground">
-              The study is a controlled English-language case study of one
+              The resource is a controlled English-language case study of one
               company and 15 consecutive reports. Cross-company, multilingual,
-              multimodal, and broader generator/evaluator validation remain
-              future work.
+              multimodal, broader generator/evaluator, and independent
+              third-party validation remain future work.
             </p>
           </div>
         </div>
