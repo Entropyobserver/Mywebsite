@@ -305,7 +305,7 @@ export const Projects: ProjectInterface[] = [
       "Human Evaluation",
     ],
     shortDescription:
-      "A reliability-audited benchmark for evidence-grounded RAG over 15 long, structured Equinor/Statoil annual reports, with 720 QA items and traceable report-, page-, and object-level evidence.",
+      "A reliability-audited benchmark for evidence-grounded RAG on 15 long annual reports, with 720 QA items and traceable report-, page-, and object-level evidence.",
     techStack: [
       "Python",
       "RAG",
@@ -337,15 +337,15 @@ export const Projects: ProjectInterface[] = [
     ],
     descriptionDetails: {
       paragraphs: [
-        "FinRAG-Equinor is a reliability-audited benchmark for evidence-grounded RAG over long, structured annual reports. Built from 15 Equinor/Statoil annual reports published from 2010 to 2024, it contains 720 QA items, including answerable and unanswerable questions, with traceable evidence at the report, page, and object levels.",
-        "The benchmark treats retrieval as a hierarchical localization problem: first finding the right report, then the relevant page, and finally the exact evidence needed to answer the question. This makes it possible to evaluate not only whether a retriever finds relevant information, but also where evidence localization breaks down.",
-        "I designed the benchmark and retrieval evaluation pipeline, covering PDF structure parsing, evidence construction and auditing, QA construction, hard-negative mining, and retrieval evaluation across sparse, dense, hybrid, hierarchical, and reranked approaches.",
+        "FinRAG-Equinor is a reliability-audited benchmark for evidence-grounded RAG on long annual reports. It is built from 15 Equinor/Statoil annual reports (2010–2024) and includes 720 QA items with traceable report-, page-, and object-level evidence.",
+        "The benchmark evaluates whether RAG systems can identify the right report, locate the relevant page, and find the exact evidence needed to answer each question.",
+        "As the first author and experimental lead in the lab, I led the design and implementation of the benchmark and retrieval evaluation pipeline, from evidence construction and QA development to systematic evaluation of sparse, dense, hybrid, hierarchical, and reranked retrieval methods.",
       ],
       bullets: [
         "Built a traceable evidence corpus from long annual-report PDFs, preserving report-, page-, and object-level provenance.",
         "Constructed and audited the benchmark across factual, numerical, table-grounded, temporal, multi-hop, visual/layout, policy, causal, and unanswerable cases.",
-        "Evaluated evidence localization and end-to-end QA, connecting retrieval quality to answer reliability and identifying the gap between partial and complete evidence retrieval.",
-        "Investigated RAG failure and recovery, including missing evidence, wrong citations, conflicting-year evidence, unsupported claims, under-answering, and cases where abstention is safer than unsupported answering.",
+        "Evaluated retrieval and end-to-end QA across sparse, dense, hybrid, hierarchical, and reranked approaches, examining how evidence localization affects answer quality.",
+        "Investigated RAG reliability and failure recovery, including missing evidence, wrong citations, conflicting-year evidence, unsupported claims, under-answering, and cases where abstention is safer than unsupported answering.",
       ],
     },
   },
