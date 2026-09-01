@@ -1,5 +1,5 @@
 const researchQuestions = [
-  "Does retrieving the correct report and page make it easier to retrieve the exact supporting evidence?",
+  "Does finding the right report and the right page make it easier to find the exact evidence?",
   "What kinds of retrieval errors do different retrieval methods make?",
   "Does retrieving better evidence lead to more accurate answers?",
 ];
@@ -204,47 +204,180 @@ export default function FinragEquinorResearch() {
       <section id="rq1">
         <SectionHeader
           title={`RQ1. ${researchQuestions[0]}`}
-          description="RQ1 separates two sources of difficulty: how much context a retrieval unit carries and whether the system searches within the correct annual report."
+          description="RQ1 is evaluated through two controlled comparisons. First, we compare searching all 15 reports with searching only the reference-year report. Second, while keeping BM25 and the reference-year filter fixed, we compare objects, pages, and context windows as retrieval units."
         />
-        <div className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border bg-background p-5 sm:p-6">
-            <h3 className="font-heading text-2xl">Chunk Recall@10</h3>
-            <div className="mt-6 space-y-5">
-              <MetricBar label="Object BM25-year" value={0.756} />
-              <MetricBar
-                label="Page BM25-year"
-                value={0.905}
-                color="bg-emerald-600"
-              />
-              <MetricBar label="Page-window" value={0.876} />
-              <MetricBar label="Object-window" value={0.883} />
+        <div className="space-y-8">
+          <div className="overflow-hidden rounded-2xl border bg-background">
+            <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
+              <p className="mb-1 font-mono text-sm font-bold text-blue-600 dark:text-blue-400">
+                EXPERIMENT 1
+              </p>
+              <h3 className="font-heading text-2xl">
+                Does searching the correct report help?
+              </h3>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[520px] text-left text-sm">
+                <thead className="bg-blue-700 text-white">
+                  <tr>
+                    <th className="px-5 py-3 font-semibold sm:px-6">
+                      BM25 setting
+                    </th>
+                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                      Object R@10
+                    </th>
+                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                      Page R@10
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y">
+                  <tr>
+                    <td className="px-5 py-4 font-medium sm:px-6">
+                      Unrestricted
+                    </td>
+                    <td className="px-5 py-4 text-right font-mono sm:px-6">
+                      51.5%
+                    </td>
+                    <td className="px-5 py-4 text-right font-mono sm:px-6">
+                      60.3%
+                    </td>
+                  </tr>
+                  <tr className="bg-blue-50/70 dark:bg-blue-950/20">
+                    <td className="px-5 py-4 font-semibold sm:px-6">
+                      Reference-year filtered
+                    </td>
+                    <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
+                      75.6%
+                    </td>
+                    <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
+                      85.0%
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
+              <p className="text-muted-foreground">
+                <strong className="text-foreground">Object Recall@10</strong>{" "}
+                requires the exact reference evidence object to appear in the
+                top 10.{" "}
+                <strong className="text-foreground">Page Recall@10</strong>{" "}
+                requires a result from the same report and page. Reference-year
+                filtering uses the benchmark&apos;s known report year, so it is
+                a controlled oracle setting rather than a learned report router.
+              </p>
+              <p className="border-l-4 border-blue-600 pl-4 font-medium">
+                When BM25 searches all 15 reports, it finds the exact evidence
+                in the top 10 for 51.5% of questions. When we give the system
+                the correct report year, this rises to 75.6%. This shows that
+                knowing the correct year makes it much easier to find the right
+                evidence.
+              </p>
             </div>
           </div>
-          <div className="rounded-2xl border bg-background p-5 sm:p-6">
-            <h3 className="font-heading text-2xl">BM25 Object Recall@10</h3>
-            <div className="mt-6 space-y-5">
-              <MetricBar
-                label="Unrestricted search"
-                value={0.515}
-                color="bg-amber-500"
-              />
-              <MetricBar
-                label="Oracle reference-year filter"
-                value={0.756}
-                color="bg-emerald-600"
-              />
+
+          <div className="overflow-hidden rounded-2xl border bg-background">
+            <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
+              <p className="mb-1 font-mono text-sm font-bold text-blue-600 dark:text-blue-400">
+                EXPERIMENT 2
+              </p>
+              <h3 className="font-heading text-2xl">
+                Does retrieving more context help?
+              </h3>
             </div>
-            <p className="mt-6 text-sm leading-6 text-muted-foreground">
-              Oracle year filtering removes report-level routing errors and
-              isolates evidence localization within the correct report.
-            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[520px] text-left text-sm">
+                <thead className="bg-blue-700 text-white">
+                  <tr>
+                    <th className="px-5 py-3 font-semibold sm:px-6">
+                      Retrieval unit
+                    </th>
+                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                      Chunk R@10
+                    </th>
+                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                      Page R@10
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y">
+                  {[
+                    ["Object BM25-year", "75.6%", "85.0%"],
+                    ["Page BM25-year", "90.5%", "90.5%"],
+                    ["Page-window", "87.6%", "87.6%"],
+                    ["Object-window", "88.3%", "91.7%"],
+                  ].map(([unit, chunkRecall, pageRecall], index) => (
+                    <tr key={unit} className={index % 2 ? "bg-muted/35" : ""}>
+                      <td className="px-5 py-4 font-medium sm:px-6">{unit}</td>
+                      <td
+                        className={`px-5 py-4 text-right font-mono sm:px-6 ${index === 1 ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}
+                      >
+                        {chunkRecall}
+                      </td>
+                      <td
+                        className={`px-5 py-4 text-right font-mono sm:px-6 ${index === 3 ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}
+                      >
+                        {pageRecall}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
+              <p className="text-muted-foreground">
+                <strong className="text-foreground">Chunk Recall@10</strong>{" "}
+                measures whether the top 10 results contain the evidence needed
+                to answer the question. We test different ways of grouping the
+                content: individual objects, whole pages, and larger windows of
+                nearby content.
+              </p>
+              <dl className="grid gap-2 text-muted-foreground sm:grid-cols-2">
+                <div>
+                  <dt className="inline font-semibold text-foreground">
+                    Object:{" "}
+                  </dt>
+                  <dd className="inline">one paragraph, heading, or table.</dd>
+                </div>
+                <div>
+                  <dt className="inline font-semibold text-foreground">
+                    Page:{" "}
+                  </dt>
+                  <dd className="inline">
+                    all retrieval objects on one PDF page.
+                  </dd>
+                </div>
+                <div>
+                  <dt className="inline font-semibold text-foreground">
+                    Page-window:{" "}
+                  </dt>
+                  <dd className="inline">
+                    the previous, current, and next pages.
+                  </dd>
+                </div>
+                <div>
+                  <dt className="inline font-semibold text-foreground">
+                    Object-window:{" "}
+                  </dt>
+                  <dd className="inline">
+                    eight neighboring objects with a two-object overlap.
+                  </dd>
+                </div>
+              </dl>
+              <p className="border-l-4 border-blue-600 pl-4 font-medium">
+                Whole pages work best for evidence retrieval. Adding more pages
+                around the retrieved content does not necessarily make retrieval
+                better.
+              </p>
+            </div>
           </div>
         </div>
         <EvidenceConclusion>
-          Page units achieve <strong>90.5% Chunk Recall@10</strong>, while
-          reference-year filtering raises BM25 exact-object Recall@10 from{" "}
-          <strong>51.5% to 75.6%</strong>. More context and correct report
-          selection both help, but neither guarantees exact localization.
+          Finding the correct report produces the largest improvement in exact
+          evidence retrieval. Larger retrieval units improve evidence coverage,
+          but finding a page that contains the evidence is not the same as
+          retrieving the exact supporting object.
         </EvidenceConclusion>
       </section>
 
