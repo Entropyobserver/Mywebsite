@@ -108,10 +108,10 @@ export default function FinragEquinorResearch() {
               key={question}
               className="flex gap-4 rounded-2xl border bg-background p-5"
             >
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-600 font-heading text-sm text-white">
-                RQ{index + 1}
-              </span>
               <p className="self-center font-medium leading-relaxed">
+                <span className="mr-2 font-heading text-blue-600 dark:text-blue-400">
+                  RQ{index + 1}.
+                </span>
                 {question}
               </p>
             </div>
@@ -121,9 +121,8 @@ export default function FinragEquinorResearch() {
 
       <section>
         <SectionHeader
-          eyebrow="Auditable resource"
           title="From Annual-Report PDFs to Traceable Evidence"
-          description="Every retained retrieval unit preserves its source report, page, and layout-object identity, making extraction, segmentation, retrieval, and grounding failures inspectable."
+          description="We turn long annual reports into a structured, searchable evidence corpus. Each piece of evidence stays linked to its original report, page, and location, so we can trace where retrieval and grounding go wrong."
         />
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[
@@ -204,8 +203,7 @@ export default function FinragEquinorResearch() {
 
       <section id="rq1">
         <SectionHeader
-          eyebrow="RQ1 · Report selection and retrieval granularity"
-          title="Context Helps, and the Correct Report Matters"
+          title={`RQ1. ${researchQuestions[0]}`}
           description="RQ1 separates two sources of difficulty: how much context a retrieval unit carries and whether the system searches within the correct annual report."
         />
         <div className="grid gap-6 lg:grid-cols-2">
@@ -252,8 +250,7 @@ export default function FinragEquinorResearch() {
 
       <section id="rq2">
         <SectionHeader
-          eyebrow="RQ2 · Baselines and remaining failures"
-          title="Stronger Retrieval Narrows—but Does Not Close—the Localization Gap"
+          title={`RQ2. ${researchQuestions[1]}`}
           description="Sparse, dense, hybrid, hierarchical, and reranked baselines are evaluated at both page and exact-object levels."
         />
         <div className="overflow-hidden rounded-2xl border bg-background">
@@ -351,8 +348,7 @@ export default function FinragEquinorResearch() {
 
       <section id="rq3">
         <SectionHeader
-          eyebrow="RQ3 · Multi-hop completeness and final answers"
-          title="Partial Evidence Is Not Enough"
+          title={`RQ3. ${researchQuestions[2]}`}
           description="RQ3 connects complete multi-hop evidence retrieval to the quality of generated answers."
         />
         <div className="grid gap-6 lg:grid-cols-2">
