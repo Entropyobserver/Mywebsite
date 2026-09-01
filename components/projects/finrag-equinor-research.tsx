@@ -122,7 +122,7 @@ export default function FinragEquinorResearch() {
       <section>
         <SectionHeader
           title="From Annual-Report PDFs to Traceable Evidence"
-          description="We turn long annual reports into a structured, searchable evidence corpus. Each piece of evidence stays linked to its original report, page, and location, so we can trace where retrieval and grounding go wrong."
+          description="We start with 15 Equinor/Statoil annual reports covering 4,369 pages and turn them into a structured, traceable evidence corpus. The PDFs are first split into 100,150 layout objects, which are then filtered into 41,736 retrieval units, including paragraphs, headings, and tables. Each unit stays linked to its original report, page, and location. We then build a 720-item QA benchmark, with 660 answerable questions linked to reference evidence and 60 unanswerable questions."
         />
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[
@@ -136,7 +136,7 @@ export default function FinragEquinorResearch() {
             ["04", "Benchmark", "720 QA items · 660 answerable"],
           ].map(([step, label, detail]) => (
             <div key={step} className="rounded-2xl border bg-muted/20 p-5">
-              <p className="font-mono text-xs font-semibold text-blue-600 dark:text-blue-400">
+              <p className="font-mono text-2xl font-bold leading-none text-blue-600 dark:text-blue-400">
                 {step}
               </p>
               <h3 className="mt-3 font-heading text-xl">{label}</h3>
@@ -151,7 +151,7 @@ export default function FinragEquinorResearch() {
       <section>
         <SectionHeader
           title="Benchmark Composition and Reliability"
-          description="The benchmark covers nine evidence requirements. All 720 items underwent human screening, with separate two-annotator audits of PDF extraction and QA reliability."
+          description="The benchmark covers nine question types, from direct factual and numerical questions to table-based, temporal, multi-hop, visual/layout, and unanswerable cases. We checked all 720 questions by hand and ran separate audits for PDF extraction and QA quality. The audits found that most extracted pages were suitable for RAG, and the QA items showed high agreement on overall quality, answer correctness, and evidence support."
         />
         <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
           <div className="overflow-hidden rounded-2xl border bg-background">
