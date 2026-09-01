@@ -43,7 +43,11 @@ The first resume-aligned featured project uses 2,500,939 real public Amazon Fash
 
 See the [project case study](projects/11_customer_service_reviews/README.md) and the executed [Chinese notebook](projects/11_customer_service_reviews/notebooks/01_amazon_review_intelligence_cn.ipynb).
 
-## Current predictive project
+## Current customer analytics projects
+
+### 04 — Customer Segmentation & Lifecycle Analysis
+
+This project uses K-Means and Ward hierarchical clustering on 4,335 customers derived from Online Retail II. It evaluates cluster count, perturbation stability, alternative algorithms, aggregate customer profiles, and future 90-day purchasing behavior. See the [project case study](projects/04_customer_analytics/README.md) and the executed [Chinese notebook](projects/04_customer_analytics/notebooks/01_customer_segmentation_cn.ipynb).
 
 ### Customer inactivity risk — Online Retail II
 

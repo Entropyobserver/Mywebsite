@@ -727,58 +727,88 @@ export const Projects: ProjectInterface[] = [
   },
   {
     id: "ecommerce-retention-segmentation",
-    companyName: "E-commerce Customer Retention & Segmentation",
+    companyName: "Customer Segmentation: Which Groups Behave Differently?",
     type: "Data Science",
-    category: ["Data Science", "Customer Analytics", "Business Analytics"],
+    category: ["Data Science", "Customer Analytics", "AI/ML"],
     shortDescription:
-      "A 392K-transaction customer analytics case study combining cohort retention, RFM scoring, and KMeans segmentation.",
+      "A five-segment customer analysis comparing K-Means, hierarchical clustering, Gaussian Mixture, and HDBSCAN with future-behavior validation.",
     techStack: [
       "Python",
       "Pandas",
       "NumPy",
       "scikit-learn",
       "Customer Segmentation",
+      "Machine Learning",
       "Statistics",
       "Matplotlib",
       "Seaborn",
       "Data Analysis",
       "Data Visualization",
     ],
-    startDate: new Date("2025-07-01"),
-    endDate: new Date("2025-07-18"),
+    startDate: new Date("2026-09-01"),
+    endDate: new Date("2026-09-01"),
     companyLogoImg: "/projects/ecommerce-retention-segmentation/cover.svg",
+    githubLink:
+      "https://github.com/Entropyobserver/Mywebsite/tree/master/project_materials/ecommerce_analytics_portfolio/projects/04_customer_analytics",
+    keyMetrics: [
+      { value: "4,335", label: "Customers" },
+      { value: "0.974", label: "Stability ARI" },
+      { value: "87.1%", label: "Top repurchase" },
+    ],
     pagesInfoArr: [
       {
-        title: "Transaction Data Preparation",
+        title: "Q1. Can the transactions support reliable customer segmentation?",
         description:
-          "The workflow starts from 541,909 online-retail rows and applies customer-ID validation, cancellation removal, duplicate handling, date conversion, and positive quantity and price filters. The resulting analytical table contains 392,692 transactions.",
-        imgArr: [],
+          "Question:\n\nCan two years of transaction history be converted into a trustworthy customer-level analysis table?\n\nAnalysis:\n\nI audited 1,067,371 transaction lines, separated successful purchases from cancellations, and used a fixed 365-day observation window ending on 1 September 2011. Customers needed at least one successful purchase during that window. Fifteen features capture value, frequency, lifecycle, purchase cadence, product breadth, recent trend, and cancellation behavior.\n\nFinding:\n\nThe final clustering population contains 4,335 customers. Missing purchase intervals are treated as expected single-order behavior, while extreme values are clipped rather than deleting customers. The following 90 days remain completely outside the clustering features.",
+        imgArr: [
+          "/projects/ecommerce-retention-segmentation/data-to-features.svg",
+        ],
       },
       {
-        title: "RFM and Behavioral Segmentation",
+        title: "Q2. How many customer segments are useful?",
         description:
-          "Customer-level recency, frequency, monetary value, shopping cycle, and interpurchase time are derived from the transaction history. Rule-based RFM labels make the output interpretable for lifecycle campaigns, while standardized RFM features support KMeans exploration.",
-        imgArr: [],
+          "Question:\n\nWhich cluster count balances statistical quality, stability, and operational usability?\n\nAnalysis:\n\nI evaluated K-Means solutions from two to eight clusters using silhouette, Davies–Bouldin, Calinski–Harabasz, perturbation stability, and minimum segment share. The operational choice was restricted to four to six clusters with no segment smaller than 3%.\n\nFinding:\n\nThe five-cluster solution provides the best combined rank within the operational range. Its perturbation stability ARI is 0.974 and its smallest segment contains 9.5% of customers. The silhouette score is only 0.225, so the segments are presented as a stable operational simplification—not five strongly separated natural customer types.",
+        imgArr: [
+          "/projects/ecommerce-retention-segmentation/k-selection.svg",
+        ],
       },
       {
-        title: "Cohort Retention Diagnostics",
+        title: "Q3. Does another clustering method produce a better operational solution?",
         description:
-          "Monthly acquisition cohorts are tracked across repeat-purchase periods. The notebook reports average retention of 20.6% at month 1, 23.2% at month 3, 24.4% at month 6, and 26.6% at month 12, providing a reproducible starting point for retention hypotheses.",
-        imgArr: [],
+          "Question:\n\nHow do K-Means, Ward hierarchical clustering, Gaussian Mixture, and HDBSCAN compare on the same features?\n\nAnalysis:\n\nEvery algorithm uses the same clipped, transformed, imputed, and standardized feature matrix. I compare separation, cluster balance, and noise share, then use adjusted Rand index to measure agreement between K-Means and Ward labels.\n\nFinding:\n\nK-Means retains five operationally sized segments. Ward creates a 1.6% micro-segment, while HDBSCAN labels 68.3% of customers as noise. K-Means and Ward have moderate agreement (ARI 0.532). K-Means is selected because it is stable, reproducible, and can assign future customers to the nearest center; hierarchical clustering remains a structural cross-check.",
+        imgArr: [
+          "/projects/ecommerce-retention-segmentation/algorithm-comparison.svg",
+        ],
+      },
+      {
+        title: "Q4. Who are the five customer groups?",
+        description:
+          "Question:\n\nDo the cluster profiles translate into distinct, auditable customer strategies?\n\nAnalysis:\n\nI profile each cluster in original business units and assign names through reproducible relative rules. Names summarize value, recency, tenure, recent activity, and cancellation behavior; they are operational labels rather than model-discovered personalities.\n\nFinding:\n\nThe five groups are high-value loyal, stable repeat, new / high-potential, high-cancellation / low-engagement, and dormant risk. High-value loyal customers have median 365-day spend of GBP 3,828 and nine orders. Dormant-risk customers represent the largest group at 36.7%, while the high-cancellation group has a 50% median cancellation-invoice rate and should be investigated before promotional outreach.",
+        imgArr: [
+          "/projects/ecommerce-retention-segmentation/segment-profiles.svg",
+        ],
+      },
+      {
+        title: "Q5. Do the segments predict different future behavior?",
+        description:
+          "Question:\n\nDo customers in different historical clusters behave differently during the following 90 days?\n\nAnalysis:\n\nFuture purchases were excluded from clustering and used only for external validation. I compare 90-day repurchase rates, order counts, spend, and Wilson confidence intervals across the five segments.\n\nFinding:\n\nHigh-value loyal customers repurchase at 87.1%, compared with 60.4% for stable repeat, 48.6% for new / high-potential, 35.3% for high-cancellation / low-engagement, and 27.9% for dormant-risk customers. This supports prioritization, but it does not prove that coupons or outreach will cause retention; that requires a randomized experiment with margin and treatment-cost data.",
+        imgArr: [
+          "/projects/ecommerce-retention-segmentation/future-validation.svg",
+        ],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "This portfolio case study turns raw online-retail transactions into customer-level evidence for retention and lifecycle decisions. It directly demonstrates the customer segmentation, behavioral analysis, and reproducible Python workflow described in my data-science resume.",
-        "The analysis combines three complementary views: cohort retention shows when repeat behavior changes, RFM scoring creates business-readable lifecycle groups, and KMeans provides a data-driven segmentation check.",
-        "The results are framed as analytical signals rather than causal conclusions. Segment definitions, cohort windows, and clustering quality remain visible so that a stakeholder can understand how each recommendation was produced.",
+        "This project turns real public retail transactions into an operational customer segmentation workflow. It directly demonstrates the K-Means and hierarchical-clustering methodology highlighted in my data-analyst experience.",
+        "The analysis goes beyond a static RFM table. It defines a point-in-time feature window, compares four clustering families, tests sensitivity to small feature perturbations, and reserves the following 90 days for external business validation.",
+        "The public dataset has 4,335 eligible customers at the selected cutoff. It demonstrates the same methodology as my professional work, but it is not presented as the 150,000+ sample dataset described in my resume. Segment membership is predictive and descriptive—not evidence that a marketing intervention will cause retention.",
       ],
       bullets: [
-        "Prepared 541,909 raw transaction rows into a 392,692-row analysis table with explicit quality checks.",
-        "Engineered recency, frequency, monetary value, shopping-cycle, and interpurchase-time features.",
-        "Created interpretable RFM lifecycle groups and evaluated KMeans solutions with silhouette analysis.",
-        "Built monthly cohort tables and retention heatmaps for repeat-purchase monitoring.",
-        "Connected analytical outputs to retention targeting, reactivation, and high-value customer strategies.",
+        "Audited 1,067,371 transaction lines and constructed 15 leakage-safe customer features.",
+        "Selected five K-Means segments with 0.974 perturbation-stability ARI and a 9.5% minimum segment share.",
+        "Compared K-Means, Ward hierarchical clustering, Gaussian Mixture, and HDBSCAN on identical inputs.",
+        "Reported the modest 0.225 silhouette score instead of overstating natural cluster separation.",
+        "Validated segment usefulness with untouched future behavior: 87.1% versus 27.9% repurchase at the two extremes.",
       ],
     },
   },
