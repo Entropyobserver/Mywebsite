@@ -605,60 +605,112 @@ export default function FinragEquinorResearch() {
       </section>
 
       <section>
-        <SectionHeader
-          eyebrow="Exploratory analysis"
-          title="Failure-Aware Retrieval Recovery"
-          description="A threshold-based detector uses observable retrieval signals to trigger targeted actions for likely wrong-report, wrong-page, wrong-object, and missing-hop failures."
-        />
-        <div className="overflow-hidden rounded-2xl border bg-background">
+        <SectionHeader title="Exploratory Recovery" />
+        <h3 className="font-heading text-2xl">
+          Can the system recover when retrieval goes wrong?
+        </h3>
+        <p className="mt-3 max-w-4xl leading-7 text-muted-foreground">
+          All 720 questions are retrieved once. The system then checks which
+          results look unreliable. If a likely problem is detected, it tries a
+          more targeted search; otherwise, it keeps the original result.
+        </p>
+        <div className="mt-6 rounded-2xl border border-blue-200 bg-blue-50 px-5 py-4 text-center font-semibold text-blue-950 dark:border-blue-900 dark:bg-blue-950/30 dark:text-blue-100">
+          Retrieve → Check → Recover if needed → Keep the improved result
+        </div>
+
+        <div className="mt-8 overflow-hidden rounded-2xl border bg-background">
+          <div className="border-b bg-muted/30 px-5 py-4 sm:px-6">
+            <h4 className="font-heading text-xl">
+              Different problems trigger different recovery actions
+            </h4>
+          </div>
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[650px] text-left text-sm">
+            <table className="w-full min-w-[560px] text-left text-sm">
               <thead className="bg-blue-700 text-white">
                 <tr>
-                  <th className="px-5 py-4 font-semibold">Policy</th>
-                  <th className="px-5 py-4 text-right font-semibold">
-                    Object R@10
-                  </th>
-                  <th className="px-5 py-4 text-right font-semibold">
-                    Complete R@10
-                  </th>
-                  <th className="px-5 py-4 text-right font-semibold">
-                    Multi-hop all R@10
-                  </th>
-                  <th className="px-5 py-4 text-right font-semibold">
-                    Triggers
+                  <th className="px-5 py-3 font-semibold sm:px-6">Problem</th>
+                  <th className="px-5 py-3 font-semibold sm:px-6">
+                    What the system does
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y">
                 {[
-                  ["Initial", ".702", ".644", ".478", "0"],
-                  ["Selective recovery", ".717", ".661", ".500", "250"],
-                  ["Always-on recovery", ".717", ".665", ".522", "720"],
+                  ["Wrong report", "Search the year or most likely reports"],
+                  ["Wrong page", "Search likely pages and nearby pages"],
+                  ["Wrong object", "Search again within the likely pages"],
+                  ["Missing hop", "Split the question and search each part"],
                 ].map((row, index) => (
                   <tr key={row[0]} className={index % 2 ? "bg-muted/35" : ""}>
-                    <td className="px-5 py-4 font-medium">{row[0]}</td>
-                    {row.slice(1).map((value) => (
-                      <td
-                        key={value + row[0]}
-                        className="px-5 py-4 text-right font-mono tabular-nums"
-                      >
-                        {value}
-                      </td>
-                    ))}
+                    <td className="px-5 py-4 font-medium sm:px-6">{row[0]}</td>
+                    <td className="px-5 py-4 sm:px-6">{row[1]}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         </div>
-        <EvidenceConclusion>
-          Selective recovery matches always-on object Recall@10 with 250 rather
-          than 720 triggers. The improvement is small and the held-out detector
-          remains weak (macro-F1 <strong>0.349</strong>), so the paper presents
-          this as feasibility evidence—not a new retrieval method or a
-          production-ready verifier.
-        </EvidenceConclusion>
+
+        <p className="mt-8 max-w-4xl leading-7 text-muted-foreground">
+          The detector flags{" "}
+          <strong className="text-foreground">250 of 720 questions</strong> for
+          recovery. We compare this selective strategy with no recovery and with
+          applying recovery to every question.
+        </p>
+        <div className="mt-5 overflow-hidden rounded-2xl border bg-background">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[560px] text-left text-sm">
+              <thead className="bg-blue-700 text-white">
+                <tr>
+                  <th className="px-5 py-3 font-semibold sm:px-6">Policy</th>
+                  <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                    Object Recall@10
+                  </th>
+                  <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                    Recovery triggered
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                <tr>
+                  <td className="px-5 py-4 font-medium sm:px-6">No recovery</td>
+                  <td className="px-5 py-4 text-right font-mono tabular-nums sm:px-6">
+                    70.2%
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono tabular-nums sm:px-6">
+                    0
+                  </td>
+                </tr>
+                <tr className="bg-muted/35">
+                  <td className="px-5 py-4 font-medium sm:px-6">
+                    Selective recovery
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono font-bold tabular-nums text-blue-700 sm:px-6 dark:text-blue-300">
+                    71.7%
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono font-bold tabular-nums text-blue-700 sm:px-6 dark:text-blue-300">
+                    250
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-5 py-4 font-medium sm:px-6">
+                    Always-on recovery
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono font-bold tabular-nums text-blue-700 sm:px-6 dark:text-blue-300">
+                    71.7%
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono tabular-nums sm:px-6">
+                    720
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="border-t bg-muted/20 px-5 py-4 text-sm leading-6 text-muted-foreground sm:px-6">
+            All 720 questions are retrieved initially. Object Recall@10 is
+            measured on the 660 answerable questions.
+          </p>
+        </div>
       </section>
     </div>
   );
