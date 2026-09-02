@@ -284,6 +284,13 @@ export default function FinragEquinorResearch() {
               <h3 className="font-heading text-2xl">
                 Does retrieving more context help?
               </h3>
+              <p className="mt-3 max-w-4xl text-sm leading-6 text-muted-foreground">
+                In this experiment, retrieval is restricted to the{" "}
+                <strong className="text-foreground">correct report year</strong>
+                , as in Experiment 1. We compare four retrieval units to see
+                whether adding more context helps retrieve the reference
+                evidence.
+              </p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[520px] text-left text-sm">
@@ -293,10 +300,10 @@ export default function FinragEquinorResearch() {
                       Retrieval unit
                     </th>
                     <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Chunk R@10
+                      Chunk Recall@10
                     </th>
                     <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Page R@10
+                      Page Recall@10
                     </th>
                   </tr>
                 </thead>
@@ -324,50 +331,40 @@ export default function FinragEquinorResearch() {
                 </tbody>
               </table>
             </div>
-            <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
-              <p className="text-muted-foreground">
-                <strong className="text-foreground">Chunk Recall@10</strong>{" "}
-                measures whether the top 10 results contain the evidence needed
-                to answer the question. We test different ways of grouping the
-                content: individual objects, whole pages, and larger windows of
-                nearby content.
+            <div className="space-y-2 border-t bg-muted/20 px-5 py-4 text-xs leading-5 text-muted-foreground sm:px-6 sm:text-sm sm:leading-6">
+              <p>
+                An <strong className="text-foreground">object</strong> is one
+                paragraph, heading, or table. A{" "}
+                <strong className="text-foreground">page</strong> contains all
+                retrieval objects on one PDF page. A{" "}
+                <strong className="text-foreground">page-window</strong>{" "}
+                combines up to three consecutive pages: the previous, current,
+                and next pages. An{" "}
+                <strong className="text-foreground">object-window</strong>{" "}
+                combines eight neighboring objects within the same report, with
+                a two-object overlap.
               </p>
-              <dl className="grid gap-2 text-muted-foreground sm:grid-cols-2">
-                <div>
-                  <dt className="inline font-semibold text-foreground">
-                    Object:{" "}
-                  </dt>
-                  <dd className="inline">one paragraph, heading, or table.</dd>
-                </div>
-                <div>
-                  <dt className="inline font-semibold text-foreground">
-                    Page:{" "}
-                  </dt>
-                  <dd className="inline">
-                    all retrieval objects on one PDF page.
-                  </dd>
-                </div>
-                <div>
-                  <dt className="inline font-semibold text-foreground">
-                    Page-window:{" "}
-                  </dt>
-                  <dd className="inline">
-                    the previous, current, and next pages.
-                  </dd>
-                </div>
-                <div>
-                  <dt className="inline font-semibold text-foreground">
-                    Object-window:{" "}
-                  </dt>
-                  <dd className="inline">
-                    eight neighboring objects with a two-object overlap.
-                  </dd>
-                </div>
-              </dl>
+              <p>
+                <strong className="text-foreground">Chunk Recall@10</strong>{" "}
+                measures whether at least one of the top 10 retrieved chunks
+                contains an annotated reference evidence object.{" "}
+                <strong className="text-foreground">Page Recall@10</strong>{" "}
+                measures whether at least one of the top 10 chunks covers the
+                same report and page as a reference evidence object.
+              </p>
+            </div>
+            <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
+              <p>
+                Whole-page retrieval gets the highest Chunk Recall@10, giving
+                the best observed evidence coverage. Expanding the unit to a
+                three-page window does not improve this further. Object windows
+                get the highest observed Page Recall@10.
+              </p>
               <p className="border-l-4 border-blue-600 pl-4 font-medium">
-                Whole pages work best for evidence retrieval. Adding more pages
-                around the retrieved content does not necessarily make retrieval
-                better.
+                <strong>Conclusion:</strong> More context helps to a point, but
+                bigger retrieval units are not always better—and finding the
+                evidence in a chunk does not mean finding the exact supporting
+                object.
               </p>
             </div>
           </div>

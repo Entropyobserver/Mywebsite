@@ -322,11 +322,6 @@ export const Projects: ProjectInterface[] = [
     startDate: new Date("2026-02-01"),
     endDate: new Date("2026-08-01"),
     companyLogoImg: "/projects/finrag-equinor/cover-v2.svg",
-    keyMetrics: [
-      { value: "720", label: "QA items" },
-      { value: "15", label: "Annual reports" },
-      { value: "41,736", label: "Retrieval units" },
-    ],
     pagesInfoArr: [
       {
         title: "PDF-to-Benchmark Pipeline",
