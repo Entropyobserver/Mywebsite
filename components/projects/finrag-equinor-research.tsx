@@ -360,12 +360,6 @@ export default function FinragEquinorResearch() {
               <h3 className="font-heading text-2xl">
                 1. Does it find the right evidence?
               </h3>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                We restrict each method to the question&apos;s reference-year
-                report and examine its top-10 results. We check whether it finds
-                the exact paragraph or table, reaches the right page but selects
-                the wrong object, or retrieves evidence from the wrong page.
-              </p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[680px] text-left text-sm">
@@ -411,6 +405,12 @@ export default function FinragEquinorResearch() {
               </table>
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
+              <p className="text-muted-foreground">
+                We restrict each method to the question&apos;s reference-year
+                report and examine its top-10 results. We check whether it finds
+                the exact paragraph or table, reaches the right page but selects
+                the wrong object, or retrieves evidence from the wrong page.
+              </p>
               <p>
                 BM25 + E5 finds the exact evidence more often and makes fewer
                 wrong-page and wrong-object errors. Still, even within the
