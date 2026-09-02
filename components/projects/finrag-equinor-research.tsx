@@ -352,20 +352,32 @@ export default function FinragEquinorResearch() {
       <section id="rq2">
         <SectionHeader
           title={`RQ2. ${researchQuestions[1]}`}
-          description="Finding the correct report is only the first step. Even within the right report, retrieval can still fail in different ways."
+          description="Finding the correct report is only the first step. Even when retrieval is restricted to the correct report, the evidence can still be missed, ranked too low, or only partly retrieved."
         />
         <div className="space-y-8">
           <div className="overflow-hidden rounded-2xl border bg-background">
             <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
+              <p className="mb-1 font-mono text-sm font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">
+                01 — Find
+              </p>
               <h3 className="font-heading text-2xl">
-                1. Does it find the right evidence?
+                Does it find the right evidence?
               </h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                We restrict each retrieval method to the question&apos;s
+                reference-year report and examine its top-10 results. The
+                results show whether retrieval finds the exact supporting
+                evidence, stays on the right page but selects the wrong object,
+                or moves to the wrong page within the correct report.
+              </p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[680px] text-left text-sm">
                 <thead className="bg-blue-700 text-white">
                   <tr>
-                    <th className="px-5 py-3 font-semibold sm:px-6">Method</th>
+                    <th className="px-5 py-3 font-semibold sm:px-6">
+                      Retrieval method
+                    </th>
                     <th className="px-5 py-3 text-right font-semibold sm:px-6">
                       Exact evidence found
                     </th>
@@ -380,12 +392,14 @@ export default function FinragEquinorResearch() {
                 <tbody className="divide-y">
                   {[
                     ["BM25", "75.6%", "9.4%", "9.7%"],
+                    ["BGE-M3", "82.1%", "6.8%", "8.2%"],
+                    ["BM25 + BGE-M3", "83.3%", "7.4%", "6.4%"],
                     ["BM25 + E5", "83.8%", "7.0%", "5.9%"],
                   ].map(([method, exact, wrongObject, wrongPage], index) => (
                     <tr
                       key={method}
                       className={
-                        index === 1 ? "bg-blue-50/70 dark:bg-blue-950/20" : ""
+                        index === 3 ? "bg-blue-50/70 dark:bg-blue-950/20" : ""
                       }
                     >
                       <td className="px-5 py-4 font-semibold sm:px-6">
@@ -394,7 +408,7 @@ export default function FinragEquinorResearch() {
                       {[exact, wrongObject, wrongPage].map((value) => (
                         <td
                           key={value}
-                          className={`px-5 py-4 text-right font-mono sm:px-6 ${index === 1 ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}
+                          className={`px-5 py-4 text-right font-mono sm:px-6 ${index === 3 ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}
                         >
                           {value}
                         </td>
@@ -406,53 +420,51 @@ export default function FinragEquinorResearch() {
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p>
-                We restrict each method to the question&apos;s reference-year
-                report and examine its top-10 results. We check whether it finds
-                the exact paragraph or table, reaches the right page but selects
-                the wrong object, or retrieves evidence from the wrong page.
-              </p>
-              <p>
-                BM25 + E5 finds the exact evidence more often and makes fewer
-                wrong-page and wrong-object errors. Still, even within the
-                correct report, the exact evidence can be missed.
+                <strong>Key result:</strong> BM25 + E5 finds the exact
+                supporting evidence most often and makes fewer wrong-page
+                errors.
               </p>
               <p className="text-xs italic text-muted-foreground">
-                Rates use all 660 answerable questions. Only the three main
-                outcomes are shown, so rows do not sum to 100%.
+                Note: Rates are calculated over all 660 answerable questions.
+                Adjacent-page cases are not shown.
               </p>
             </div>
           </div>
 
           <div className="overflow-hidden rounded-2xl border bg-background">
             <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
+              <p className="mb-1 font-mono text-sm font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">
+                02 — Rank
+              </p>
               <h3 className="font-heading text-2xl">
-                2. Did it find the evidence but rank it too low?
+                Is the right evidence ranked first?
               </h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                Sometimes the correct evidence is already retrieved but appears
+                lower in the ranking. We therefore compare the position of the
+                exact evidence before and after reranking.
+              </p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[460px] text-left text-sm">
                 <thead className="bg-blue-700 text-white">
                   <tr>
-                    <th className="px-5 py-3 font-semibold sm:px-6">
-                      BM25-year
+                    <th className="px-5 py-3 font-semibold sm:px-6">Measure</th>
+                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                      Before reranking
                     </th>
                     <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Exact evidence ranked first
+                      After reranking
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
                   <tr>
                     <td className="px-5 py-4 font-medium sm:px-6">
-                      Before reranking
+                      Exact evidence ranked first
                     </td>
                     <td className="px-5 py-4 text-right font-mono sm:px-6">
                       40.2%
-                    </td>
-                  </tr>
-                  <tr className="bg-blue-50/70 dark:bg-blue-950/20">
-                    <td className="px-5 py-4 font-semibold sm:px-6">
-                      After reranking
                     </td>
                     <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
                       63.6%
@@ -463,29 +475,37 @@ export default function FinragEquinorResearch() {
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p>
-                Sometimes the right evidence is already in the top 10 but is not
-                ranked first. Reranking changes the order of these results.
+                <strong>Key result:</strong> Reranking substantially improves
+                the position of evidence that has already been retrieved.
               </p>
-              <p>
-                Reranking helps move the right evidence to the top. However, it
-                cannot recover evidence that BM25 did not retrieve in the first
-                place.
+              <p className="text-xs italic text-muted-foreground">
+                Note: Reranking reorders the existing candidate set; it cannot
+                recover evidence that was not retrieved in the first place.
               </p>
             </div>
           </div>
 
           <div className="overflow-hidden rounded-2xl border bg-background">
             <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
+              <p className="mb-1 font-mono text-sm font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">
+                03 — Complete
+              </p>
               <h3 className="font-heading text-2xl">
-                3. Can it find all the evidence?
+                Can it find all the evidence?
               </h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                Some questions require multiple pieces of evidence. For 90
+                multi-hop questions, we therefore distinguish between finding at
+                least one required evidence item and finding all required
+                evidence items.
+              </p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[460px] text-left text-sm">
                 <thead className="bg-blue-700 text-white">
                   <tr>
                     <th className="px-5 py-3 font-semibold sm:px-6">
-                      Multi-hop outcome
+                      Multi-hop retrieval
                     </th>
                     <th className="px-5 py-3 text-right font-semibold sm:px-6">
                       Recall@10
@@ -503,9 +523,9 @@ export default function FinragEquinorResearch() {
                   </tr>
                   <tr className="bg-muted/35">
                     <td className="px-5 py-4 font-medium sm:px-6">
-                      All required evidence found
+                      All required evidence items found
                     </td>
-                    <td className="px-5 py-4 text-right font-mono sm:px-6">
+                    <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
                       53.3%
                     </td>
                   </tr>
@@ -514,23 +534,22 @@ export default function FinragEquinorResearch() {
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p>
-                Multi-hop questions require several pieces of evidence. Finding
-                one is not enough. Among the 90 multi-hop questions:
+                <strong>Key result:</strong> Finding some relevant evidence is
+                much easier than retrieving the complete evidence needed to
+                answer a multi-hop question.
               </p>
-              <p>
-                Retrieval often finds some of the required evidence, but finding
-                the complete set is much harder.
+              <p className="text-xs italic text-muted-foreground">
+                Note: Multi-hop evaluation covers 90 questions and requires all
+                annotated evidence items for the “all evidence” measure.
               </p>
             </div>
           </div>
         </div>
-        <h3 className="mt-8 font-heading text-2xl">Takeaway</h3>
+        <h3 className="mt-8 font-heading text-2xl">Find → Rank → Complete</h3>
         <EvidenceConclusion>
-          Retrieval can fail by <strong>missing the right location</strong>,{" "}
-          <strong>ranking the right evidence too low</strong>, or{" "}
-          <strong>missing part of the evidence</strong>. Hybrid retrieval helps
-          with localization, reranking helps with ordering, while complete
-          evidence retrieval remains difficult for multi-hop questions.
+          Retrieval can therefore fail at three different stages: finding the
+          right evidence, ranking it high enough, or retrieving the complete set
+          of evidence needed for the answer.
         </EvidenceConclusion>
       </section>
 
