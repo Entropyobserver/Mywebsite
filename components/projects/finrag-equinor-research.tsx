@@ -368,37 +368,45 @@ export default function FinragEquinorResearch() {
               </p>
             </div>
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[520px] text-left text-sm">
+              <table className="w-full min-w-[680px] text-left text-sm">
                 <thead className="bg-blue-700 text-white">
                   <tr>
-                    <th className="px-5 py-3 font-semibold sm:px-6">Outcome</th>
+                    <th className="px-5 py-3 font-semibold sm:px-6">Method</th>
                     <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      BM25
+                      Exact evidence found
                     </th>
                     <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      BM25 + E5
+                      Right page, wrong object
+                    </th>
+                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                      Right report, wrong page
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
                   {[
-                    ["Exact evidence found", "75.6%", "83.8%"],
-                    ["Right page, wrong object", "9.4%", "7.0%"],
-                    ["Right report, wrong page", "9.7%", "5.9%"],
-                  ].map(([outcome, bm25, hybrid], index) => (
+                    ["BM25", "75.6%", "9.4%", "9.7%"],
+                    ["BM25 + E5", "83.8%", "7.0%", "5.9%"],
+                  ].map(([method, exact, wrongObject, wrongPage], index) => (
                     <tr
-                      key={outcome}
-                      className={index % 2 ? "bg-muted/35" : ""}
+                      key={method}
+                      className={
+                        index === 1 ? "bg-blue-50/70 dark:bg-blue-950/20" : ""
+                      }
                     >
-                      <td className="px-5 py-4 font-medium sm:px-6">
-                        {outcome}
+                      <td
+                        className={`px-5 py-4 sm:px-6 ${index === 1 ? "font-semibold" : "font-medium"}`}
+                      >
+                        {method}
                       </td>
-                      <td className="px-5 py-4 text-right font-mono sm:px-6">
-                        {bm25}
-                      </td>
-                      <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
-                        {hybrid}
-                      </td>
+                      {[exact, wrongObject, wrongPage].map((value) => (
+                        <td
+                          key={value}
+                          className={`px-5 py-4 text-right font-mono sm:px-6 ${index === 1 ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}
+                        >
+                          {value}
+                        </td>
+                      ))}
                     </tr>
                   ))}
                 </tbody>
