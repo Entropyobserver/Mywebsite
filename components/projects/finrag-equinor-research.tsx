@@ -366,6 +366,11 @@ export default function FinragEquinorResearch() {
                 or retrieves evidence from the right page or report but misses
                 the correct object.
               </p>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                BM25 represents sparse keyword retrieval, BGE-M3 represents
+                dense semantic retrieval, and BM25 + E5 represents hybrid
+                retrieval.
+              </p>
             </div>
             <div className="flex min-w-0 flex-col">
               <div className="overflow-x-auto">
@@ -388,34 +393,51 @@ export default function FinragEquinorResearch() {
                   </thead>
                   <tbody className="divide-y">
                     {[
-                      ["BM25", "75.6%", "9.4%", "9.7%"],
-                      ["BM25 + E5", "83.8%", "7.0%", "5.9%"],
-                    ].map(([method, exact, wrongObject, wrongPage], index) => (
+                      { method: "BM25", values: ["75.6%", "9.4%", "9.7%"] },
+                      {
+                        method: "BGE-M3",
+                        values: ["82.1%", "6.8%", "8.2%"],
+                      },
+                      {
+                        method: "BM25 + E5",
+                        values: ["83.8%", "7.0%", "5.9%"],
+                      },
+                    ].map(({ method, values }, rowIndex) => (
                       <tr
                         key={method}
                         className={
-                          index === 1 ? "bg-blue-50/70 dark:bg-blue-950/20" : ""
+                          rowIndex === 2
+                            ? "bg-blue-50/70 dark:bg-blue-950/20"
+                            : ""
                         }
                       >
                         <td className="px-5 py-4 font-semibold sm:px-6">
                           {method}
                         </td>
-                        {[exact, wrongObject, wrongPage].map((value) => (
-                          <td
-                            key={value}
-                            className={`px-5 py-4 text-right font-mono sm:px-6 ${index === 1 ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}
-                          >
-                            {value}
-                          </td>
-                        ))}
+                        {values.map((value, columnIndex) => {
+                          const isBest =
+                            (rowIndex === 1 && columnIndex === 1) ||
+                            (rowIndex === 2 &&
+                              (columnIndex === 0 || columnIndex === 2));
+                          return (
+                            <td
+                              key={`${method}-${columnIndex}`}
+                              className={`px-5 py-4 text-right font-mono sm:px-6 ${isBest ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}
+                            >
+                              {value}
+                            </td>
+                          );
+                        })}
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
               <p className="mx-5 mt-5 rounded-xl bg-blue-50 px-4 py-3 text-sm font-semibold leading-6 text-blue-950 dark:bg-blue-950/30 dark:text-blue-100 sm:mx-6">
-                BM25 + E5 finds the exact evidence more often and makes fewer
-                retrieval errors.
+                Dense and hybrid retrieval find the exact evidence more often
+                than BM25. BM25 + E5 achieves the highest exact-evidence rate
+                and the lowest wrong-page rate, while BGE-M3 has the lowest
+                same-page wrong-object rate.
               </p>
               <p className="mx-5 mb-5 mt-3 text-xs italic leading-5 text-muted-foreground sm:mx-6">
                 Note: Rates use all 660 answerable questions. Adjacent-page
