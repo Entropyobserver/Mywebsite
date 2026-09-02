@@ -40,35 +40,6 @@ function EvidenceConclusion({ children }: { children: React.ReactNode }) {
   );
 }
 
-function MetricBar({
-  label,
-  value,
-  color = "bg-blue-600",
-}: {
-  label: string;
-  value: number;
-  color?: string;
-}) {
-  return (
-    <div>
-      <div className="mb-2 flex items-center justify-between gap-4 text-sm">
-        <span className="font-medium">{label}</span>
-        <span className="font-mono font-semibold tabular-nums">
-          {(value * 100).toFixed(1)}%
-        </span>
-      </div>
-      <div className="h-3 overflow-hidden rounded-full bg-muted">
-        <div
-          className={`h-full rounded-full ${color}`}
-          style={{ width: `${value * 100}%` }}
-          role="img"
-          aria-label={`${label}: ${(value * 100).toFixed(1)}%`}
-        />
-      </div>
-    </div>
-  );
-}
-
 export default function FinragEquinorResearch() {
   return (
     <div className="space-y-20">
@@ -561,60 +532,82 @@ export default function FinragEquinorResearch() {
       <section id="rq3">
         <SectionHeader
           title={`RQ3. ${researchQuestions[2]}`}
-          description="RQ3 connects complete multi-hop evidence retrieval to the quality of generated answers."
+          description="To answer RQ3, we use an end-to-end experiment: the same answer generator is given different evidence, and we compare the resulting answer accuracy."
         />
-        <div className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border bg-background p-5 sm:p-6">
-            <h3 className="font-heading text-2xl">90 multi-hop questions</h3>
-            <div className="mt-6 space-y-5">
-              <MetricBar
-                label="BM25-year · Any hop R@10"
-                value={0.911}
-                color="bg-emerald-600"
-              />
-              <MetricBar
-                label="BM25-year · All hops R@10"
-                value={0.533}
-                color="bg-amber-500"
-              />
-              <MetricBar
-                label="Best tested · All hops R@10"
-                value={0.744}
-                color="bg-violet-600"
-              />
-            </div>
-          </div>
-          <div className="rounded-2xl border bg-background p-5 sm:p-6">
+        <div className="overflow-hidden rounded-2xl border bg-background">
+          <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
             <h3 className="font-heading text-2xl">
-              Answerable-question accuracy
+              Answer accuracy on 660 questions
             </h3>
-            <div className="mt-6 space-y-5">
-              <MetricBar
-                label="Closed-book"
-                value={0.029}
-                color="bg-slate-500"
-              />
-              <MetricBar label="BM25-year RAG" value={0.585} />
-              <MetricBar
-                label="Hybrid + rerank RAG"
-                value={0.709}
-                color="bg-emerald-600"
-              />
-              <MetricBar
-                label="Oracle evidence"
-                value={0.82}
-                color="bg-violet-600"
-              />
-            </div>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[520px] text-left text-sm">
+              <thead className="bg-blue-700 text-white">
+                <tr>
+                  <th className="px-5 py-3 font-semibold sm:px-6">
+                    Evidence given to the generator
+                  </th>
+                  <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                    Answer accuracy
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                {[
+                  ["Question only (closed-book)", "2.9%"],
+                  ["BM25-year evidence", "58.5%"],
+                  ["Hybrid + reranked evidence", "70.9%"],
+                  ["Annotated reference evidence", "82.0%"],
+                ].map(([evidence, accuracy], index) => (
+                  <tr key={evidence} className={index % 2 ? "bg-muted/35" : ""}>
+                    <td className="px-5 py-4 font-medium sm:px-6">
+                      {evidence}
+                    </td>
+                    <td
+                      className={`px-5 py-4 text-right font-mono sm:px-6 ${index >= 2 ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}
+                    >
+                      {accuracy}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
+            <p className="text-muted-foreground">
+              <strong className="text-foreground">
+                Question only (closed-book)
+              </strong>{" "}
+              means that the model receives no retrieved evidence.{" "}
+              <strong className="text-foreground">BM25-year</strong> and{" "}
+              <strong className="text-foreground">Hybrid + reranked</strong> use
+              automatically retrieved evidence.{" "}
+              <strong className="text-foreground">
+                Annotated reference evidence
+              </strong>{" "}
+              gives the model the evidence linked to each question in the
+              benchmark.
+            </p>
+            <p>
+              Hybrid + reranked evidence improves answer accuracy by{" "}
+              <strong>12.4 percentage points</strong> over BM25-year. However,
+              it remains <strong>11.1 points</strong> below the result obtained
+              with annotated reference evidence.
+            </p>
           </div>
         </div>
+        <h3 className="mt-8 font-heading text-2xl">Takeaway</h3>
         <EvidenceConclusion>
-          BM25-year finds at least one required object for{" "}
-          <strong>91.1%</strong> of multi-hop questions but finds the complete
-          evidence set for only <strong>53.3%</strong>. Hybrid reranking raises
-          answer accuracy from <strong>58.5% to 70.9%</strong>, while oracle
-          evidence reaches <strong>82.0%</strong>.
+          Better evidence leads to more accurate answers. The gap between hybrid
+          retrieval and annotated evidence shows that retrieval can still
+          improve, while the 82.0% result with annotated evidence shows that the
+          generator also remains imperfect.
         </EvidenceConclusion>
+        <p className="mt-5 text-sm leading-6 text-muted-foreground">
+          The multi-hop results in RQ2 help explain part of this gap: retrieval
+          may find some relevant evidence while still missing information needed
+          for a complete answer.
+        </p>
       </section>
 
       <section>
