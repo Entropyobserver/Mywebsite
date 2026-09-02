@@ -352,194 +352,187 @@ export default function FinragEquinorResearch() {
       <section id="rq2">
         <SectionHeader
           title={`RQ2. ${researchQuestions[1]}`}
-          description="Finding the correct report is only the first step. Even when retrieval is restricted to the correct report, the evidence can still be missed, ranked too low, or only partly retrieved."
+          description="Finding the correct report is only the first step. Even within the correct report, retrieval can still fail in different ways."
         />
         <div className="space-y-8">
-          <div className="overflow-hidden rounded-2xl border bg-background">
-            <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
+          <div className="overflow-hidden rounded-2xl border bg-background lg:grid lg:grid-cols-[minmax(240px,0.7fr)_minmax(0,1.3fr)]">
+            <div className="border-b bg-muted/30 px-5 py-5 sm:px-6 lg:border-b-0 lg:border-r">
               <h3 className="font-heading text-2xl">
                 Does it find the right evidence?
               </h3>
               <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                We restrict each retrieval method to the question&apos;s
-                reference-year report and examine its top-10 results. The
-                results show whether retrieval finds the exact supporting
-                evidence, stays on the right page but selects the wrong object,
-                or moves to the wrong page within the correct report.
+                We give each retrieval method the correct report and examine its
+                top-10 results. This shows whether it finds the exact evidence
+                or retrieves evidence from the right page or report but misses
+                the correct object.
               </p>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[680px] text-left text-sm">
-                <thead className="bg-blue-700 text-white">
-                  <tr>
-                    <th className="px-5 py-3 font-semibold sm:px-6">
-                      Retrieval method
-                    </th>
-                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Exact evidence found
-                    </th>
-                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Right page, wrong object
-                    </th>
-                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Right report, wrong page
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y">
-                  {[
-                    ["BM25", "75.6%", "9.4%", "9.7%"],
-                    ["BGE-M3", "82.1%", "6.8%", "8.2%"],
-                    ["BM25 + BGE-M3", "83.3%", "7.4%", "6.4%"],
-                    ["BM25 + E5", "83.8%", "7.0%", "5.9%"],
-                  ].map(([method, exact, wrongObject, wrongPage], index) => (
-                    <tr
-                      key={method}
-                      className={
-                        index === 3 ? "bg-blue-50/70 dark:bg-blue-950/20" : ""
-                      }
-                    >
-                      <td className="px-5 py-4 font-semibold sm:px-6">
-                        {method}
-                      </td>
-                      {[exact, wrongObject, wrongPage].map((value) => (
-                        <td
-                          key={value}
-                          className={`px-5 py-4 text-right font-mono sm:px-6 ${index === 3 ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}
-                        >
-                          {value}
-                        </td>
-                      ))}
+            <div className="flex min-w-0 flex-col">
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[680px] text-left text-sm">
+                  <thead className="bg-blue-700 text-white">
+                    <tr>
+                      <th className="px-5 py-3 font-semibold sm:px-6">
+                        Retrieval method
+                      </th>
+                      <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                        Exact evidence found
+                      </th>
+                      <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                        Right page, wrong object
+                      </th>
+                      <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                        Right report, wrong page
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
-              <p>
-                <strong>Key result:</strong> BM25 + E5 finds the exact
-                supporting evidence most often and makes fewer wrong-page
-                errors.
+                  </thead>
+                  <tbody className="divide-y">
+                    {[
+                      ["BM25", "75.6%", "9.4%", "9.7%"],
+                      ["BM25 + E5", "83.8%", "7.0%", "5.9%"],
+                    ].map(([method, exact, wrongObject, wrongPage], index) => (
+                      <tr
+                        key={method}
+                        className={
+                          index === 1 ? "bg-blue-50/70 dark:bg-blue-950/20" : ""
+                        }
+                      >
+                        <td className="px-5 py-4 font-semibold sm:px-6">
+                          {method}
+                        </td>
+                        {[exact, wrongObject, wrongPage].map((value) => (
+                          <td
+                            key={value}
+                            className={`px-5 py-4 text-right font-mono sm:px-6 ${index === 1 ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}
+                          >
+                            {value}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="mx-5 mt-5 rounded-xl bg-blue-50 px-4 py-3 text-sm font-semibold leading-6 text-blue-950 dark:bg-blue-950/30 dark:text-blue-100 sm:mx-6">
+                BM25 + E5 finds the exact evidence more often and makes fewer
+                retrieval errors.
               </p>
-              <p className="text-xs italic text-muted-foreground">
-                Note: Rates are calculated over all 660 answerable questions.
-                Adjacent-page cases are not shown.
+              <p className="mx-5 mb-5 mt-3 text-xs italic leading-5 text-muted-foreground sm:mx-6">
+                Note: Rates use all 660 answerable questions. Adjacent-page
+                cases are not shown.
               </p>
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-2xl border bg-background">
-            <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
+          <div className="overflow-hidden rounded-2xl border bg-background lg:grid lg:grid-cols-[minmax(240px,0.7fr)_minmax(0,1.3fr)]">
+            <div className="border-b bg-muted/30 px-5 py-5 sm:px-6 lg:border-b-0 lg:border-r">
               <h3 className="font-heading text-2xl">
                 Is the right evidence ranked first?
               </h3>
               <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                Sometimes the correct evidence is already retrieved but appears
-                lower in the ranking. We therefore compare the position of the
-                exact evidence before and after reranking.
+                Even when the correct evidence is retrieved, it may not appear
+                at the top. We therefore compare how often the exact evidence is
+                ranked first before and after reranking.
               </p>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[460px] text-left text-sm">
-                <thead className="bg-blue-700 text-white">
-                  <tr>
-                    <th className="px-5 py-3 font-semibold sm:px-6">Measure</th>
-                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Before reranking
-                    </th>
-                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      After reranking
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y">
-                  <tr>
-                    <td className="px-5 py-4 font-medium sm:px-6">
-                      Exact evidence ranked first
-                    </td>
-                    <td className="px-5 py-4 text-right font-mono sm:px-6">
-                      40.2%
-                    </td>
-                    <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
-                      63.6%
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
-              <p>
-                <strong>Key result:</strong> Reranking substantially improves
-                the position of evidence that has already been retrieved.
-              </p>
-              <p className="text-xs italic text-muted-foreground">
-                Note: Reranking reorders the existing candidate set; it cannot
-                recover evidence that was not retrieved in the first place.
+            <div className="flex min-w-0 flex-col">
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[460px] text-left text-sm">
+                  <thead className="bg-blue-700 text-white">
+                    <tr>
+                      <th className="px-5 py-3 font-semibold sm:px-6">
+                        Measure
+                      </th>
+                      <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                        Before reranking
+                      </th>
+                      <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                        After reranking
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    <tr>
+                      <td className="px-5 py-4 font-medium sm:px-6">
+                        Exact evidence ranked first
+                      </td>
+                      <td className="px-5 py-4 text-right font-mono sm:px-6">
+                        40.2%
+                      </td>
+                      <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
+                        63.6%
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="m-5 rounded-xl bg-blue-50 px-4 py-3 text-sm font-semibold leading-6 text-blue-950 dark:bg-blue-950/30 dark:text-blue-100 sm:m-6">
+                Reranking moves the correct evidence higher, but cannot recover
+                evidence that was not retrieved.
               </p>
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-2xl border bg-background">
-            <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
+          <div className="overflow-hidden rounded-2xl border bg-background lg:grid lg:grid-cols-[minmax(240px,0.7fr)_minmax(0,1.3fr)]">
+            <div className="border-b bg-muted/30 px-5 py-5 sm:px-6 lg:border-b-0 lg:border-r">
               <h3 className="font-heading text-2xl">
                 Can it find all the evidence?
               </h3>
               <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                Some questions require multiple pieces of evidence. For 90
-                multi-hop questions, we therefore distinguish between finding at
-                least one required evidence item and finding all required
-                evidence items.
+                Some questions require multiple pieces of evidence. For these
+                multi-hop questions, finding one relevant piece is not enough;
+                the retrieval method needs to find all the evidence required to
+                answer the question.
               </p>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[460px] text-left text-sm">
-                <thead className="bg-blue-700 text-white">
-                  <tr>
-                    <th className="px-5 py-3 font-semibold sm:px-6">
-                      Multi-hop retrieval
-                    </th>
-                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Recall@10
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y">
-                  <tr>
-                    <td className="px-5 py-4 font-medium sm:px-6">
-                      At least one required evidence item found
-                    </td>
-                    <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
-                      91.1%
-                    </td>
-                  </tr>
-                  <tr className="bg-muted/35">
-                    <td className="px-5 py-4 font-medium sm:px-6">
-                      All required evidence items found
-                    </td>
-                    <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
-                      53.3%
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
-              <p>
-                <strong>Key result:</strong> Finding some relevant evidence is
-                much easier than retrieving the complete evidence needed to
-                answer a multi-hop question.
+            <div className="flex min-w-0 flex-col">
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[460px] text-left text-sm">
+                  <thead className="bg-blue-700 text-white">
+                    <tr>
+                      <th className="px-5 py-3 font-semibold sm:px-6">
+                        Multi-hop outcome
+                      </th>
+                      <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                        Recall@10
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    <tr>
+                      <td className="px-5 py-4 font-medium sm:px-6">
+                        At least one required evidence item
+                      </td>
+                      <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
+                        91.1%
+                      </td>
+                    </tr>
+                    <tr className="bg-muted/35">
+                      <td className="px-5 py-4 font-medium sm:px-6">
+                        All required evidence
+                      </td>
+                      <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
+                        53.3%
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="mx-5 mt-5 rounded-xl bg-blue-50 px-4 py-3 text-sm font-semibold leading-6 text-blue-950 dark:bg-blue-950/30 dark:text-blue-100 sm:mx-6">
+                Finding some evidence is much easier than finding all the
+                evidence needed.
               </p>
-              <p className="text-xs italic text-muted-foreground">
-                Note: Multi-hop evaluation covers 90 questions and requires all
-                annotated evidence items for the “all evidence” measure.
+              <p className="mx-5 mb-5 mt-3 text-xs italic leading-5 text-muted-foreground sm:mx-6">
+                Note: Multi-hop evaluation covers 90 questions.
               </p>
             </div>
           </div>
         </div>
         <EvidenceConclusion>
-          Retrieval can therefore fail at three different stages: finding the
-          right evidence, ranking it high enough, or retrieving the complete set
-          of evidence needed for the answer.
+          Retrieval can fail at three stages:{" "}
+          <strong>finding the right evidence</strong>,{" "}
+          <strong>ranking it high enough</strong>, and{" "}
+          <strong>retrieving the complete evidence set</strong>.
         </EvidenceConclusion>
       </section>
 
