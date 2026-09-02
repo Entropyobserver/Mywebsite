@@ -405,7 +405,7 @@ export default function FinragEquinorResearch() {
               </table>
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
-              <p className="text-muted-foreground">
+              <p>
                 We restrict each method to the question&apos;s reference-year
                 report and examine its top-10 results. We check whether it finds
                 the exact paragraph or table, reaches the right page but selects
@@ -428,10 +428,6 @@ export default function FinragEquinorResearch() {
               <h3 className="font-heading text-2xl">
                 2. Did it find the evidence but rank it too low?
               </h3>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                Sometimes the right evidence is already in the top 10 but is not
-                ranked first. Reranking changes the order of these results.
-              </p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[460px] text-left text-sm">
@@ -467,6 +463,10 @@ export default function FinragEquinorResearch() {
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p>
+                Sometimes the right evidence is already in the top 10 but is not
+                ranked first. Reranking changes the order of these results.
+              </p>
+              <p>
                 Reranking helps move the right evidence to the top. However, it
                 cannot recover evidence that BM25 did not retrieve in the first
                 place.
@@ -479,13 +479,6 @@ export default function FinragEquinorResearch() {
               <h3 className="font-heading text-2xl">
                 3. Can it find all the evidence?
               </h3>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                Multi-hop questions require several pieces of evidence. Finding
-                one is not enough.
-              </p>
-              <p className="mt-3 text-sm font-medium">
-                Among the 90 multi-hop questions:
-              </p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[460px] text-left text-sm">
@@ -520,6 +513,10 @@ export default function FinragEquinorResearch() {
               </table>
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
+              <p>
+                Multi-hop questions require several pieces of evidence. Finding
+                one is not enough. Among the 90 multi-hop questions:
+              </p>
               <p>
                 Retrieval often finds some of the required evidence, but finding
                 the complete set is much harder.
