@@ -357,9 +357,6 @@ export default function FinragEquinorResearch() {
         <div className="space-y-8">
           <div className="overflow-hidden rounded-2xl border bg-background">
             <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
-              <p className="mb-1 font-mono text-sm font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">
-                01 — Find
-              </p>
               <h3 className="font-heading text-2xl">
                 Does it find the right evidence?
               </h3>
@@ -433,9 +430,6 @@ export default function FinragEquinorResearch() {
 
           <div className="overflow-hidden rounded-2xl border bg-background">
             <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
-              <p className="mb-1 font-mono text-sm font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">
-                02 — Rank
-              </p>
               <h3 className="font-heading text-2xl">
                 Is the right evidence ranked first?
               </h3>
@@ -487,9 +481,6 @@ export default function FinragEquinorResearch() {
 
           <div className="overflow-hidden rounded-2xl border bg-background">
             <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
-              <p className="mb-1 font-mono text-sm font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">
-                03 — Complete
-              </p>
               <h3 className="font-heading text-2xl">
                 Can it find all the evidence?
               </h3>
@@ -545,7 +536,6 @@ export default function FinragEquinorResearch() {
             </div>
           </div>
         </div>
-        <h3 className="mt-8 font-heading text-2xl">Find → Rank → Complete</h3>
         <EvidenceConclusion>
           Retrieval can therefore fail at three different stages: finding the
           right evidence, ranking it high enough, or retrieving the complete set
