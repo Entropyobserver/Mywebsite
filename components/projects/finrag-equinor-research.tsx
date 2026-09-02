@@ -352,19 +352,19 @@ export default function FinragEquinorResearch() {
       <section id="rq2">
         <SectionHeader
           title={`RQ2. ${researchQuestions[1]}`}
-          description="Finding the correct report is only the first step. We next examine what can still go wrong when retrieving evidence from that report."
+          description="Finding the correct report is only the first step. Even within the right report, retrieval can still fail in different ways."
         />
         <div className="space-y-8">
           <div className="overflow-hidden rounded-2xl border bg-background">
             <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
-              <p className="mb-1 font-mono text-sm font-bold text-blue-600 dark:text-blue-400">
-                FAILURE MODE 1
-              </p>
               <h3 className="font-heading text-2xl">
-                The system may find the wrong page or object
+                1. Does it find the right evidence?
               </h3>
               <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                Here, both methods search only within the correct report year.
+                We restrict each method to the question&apos;s reference-year
+                report and examine its top-10 results. We check whether it finds
+                the exact paragraph or table, reaches the right page but selects
+                the wrong object, or retrieves evidence from the wrong page.
               </p>
             </div>
             <div className="overflow-x-auto">
@@ -394,9 +394,7 @@ export default function FinragEquinorResearch() {
                         index === 1 ? "bg-blue-50/70 dark:bg-blue-950/20" : ""
                       }
                     >
-                      <td
-                        className={`px-5 py-4 sm:px-6 ${index === 1 ? "font-semibold" : "font-medium"}`}
-                      >
+                      <td className="px-5 py-4 font-semibold sm:px-6">
                         {method}
                       </td>
                       {[exact, wrongObject, wrongPage].map((value) => (
@@ -414,33 +412,25 @@ export default function FinragEquinorResearch() {
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p>
-                BM25 retrieves the exact reference object for 75.6% of
-                questions. Hybrid retrieval increases this to 83.8% and reduces
-                both wrong-page and wrong-object errors.
+                BM25 + E5 finds the exact evidence more often and makes fewer
+                wrong-page and wrong-object errors. Still, even within the
+                correct report, the exact evidence can be missed.
               </p>
-              <p className="border-l-4 border-blue-600 pl-4 font-medium">
-                <strong>Takeaway:</strong> Hybrid retrieval improves evidence
-                localization, but it does not eliminate errors within the
-                correct report.
-              </p>
-              <p className="text-xs text-muted-foreground">
-                Rates use all 660 answerable questions. Adjacent-page cases are
-                not shown.
+              <p className="text-xs italic text-muted-foreground">
+                Rates use all 660 answerable questions. Only the three main
+                outcomes are shown, so rows do not sum to 100%.
               </p>
             </div>
           </div>
 
           <div className="overflow-hidden rounded-2xl border bg-background">
             <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
-              <p className="mb-1 font-mono text-sm font-bold text-blue-600 dark:text-blue-400">
-                FAILURE MODE 2
-              </p>
               <h3 className="font-heading text-2xl">
-                Sometimes the evidence is there, but not at the top
+                2. Did it find the evidence but rank it too low?
               </h3>
               <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                The correct evidence may already appear in the top 10 but be
-                ranked too low. Reranking tries to move it closer to the top.
+                Sometimes the right evidence is already in the top 10 but is not
+                ranked first. Reranking changes the order of these results.
               </p>
             </div>
             <div className="overflow-x-auto">
@@ -477,29 +467,24 @@ export default function FinragEquinorResearch() {
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p>
-                Reranking substantially improves the first result. However, BM25
-                Recall@10 remains 75.6% because reranking only changes the order
-                of the existing candidates.
-              </p>
-              <p className="border-l-4 border-blue-600 pl-4 font-medium">
-                <strong>Takeaway:</strong> Reranking fixes ordering errors, but
-                it cannot recover evidence missing from the top 10.
+                Reranking helps move the right evidence to the top. However, it
+                cannot recover evidence that BM25 did not retrieve in the first
+                place.
               </p>
             </div>
           </div>
 
           <div className="overflow-hidden rounded-2xl border bg-background">
             <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
-              <p className="mb-1 font-mono text-sm font-bold text-blue-600 dark:text-blue-400">
-                FAILURE MODE 3
-              </p>
               <h3 className="font-heading text-2xl">
-                Multi-hop questions may still be incomplete
+                3. Can it find all the evidence?
               </h3>
               <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                Some questions require more than one piece of evidence. On the
-                90 multi-hop questions, BM25-year often retrieves part of the
-                required evidence but fails to retrieve the complete set.
+                Multi-hop questions require several pieces of evidence. Finding
+                one is not enough.
+              </p>
+              <p className="mt-3 text-sm font-medium">
+                Among the 90 multi-hop questions:
               </p>
             </div>
             <div className="overflow-x-auto">
@@ -517,7 +502,7 @@ export default function FinragEquinorResearch() {
                 <tbody className="divide-y">
                   <tr>
                     <td className="px-5 py-4 font-medium sm:px-6">
-                      At least one evidence item found
+                      At least one required evidence item found
                     </td>
                     <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
                       91.1%
@@ -536,22 +521,19 @@ export default function FinragEquinorResearch() {
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p>
-                Finding one relevant item can make retrieval look successful
-                even when evidence needed for a complete answer is still
-                missing.
-              </p>
-              <p className="border-l-4 border-blue-600 pl-4 font-medium">
-                <strong>Takeaway:</strong> Finding some evidence is much easier
-                than finding all the evidence required for a multi-hop answer.
+                Retrieval often finds some of the required evidence, but finding
+                the complete set is much harder.
               </p>
             </div>
           </div>
         </div>
+        <h3 className="mt-8 font-heading text-2xl">Takeaway</h3>
         <EvidenceConclusion>
-          Retrieval fails in different ways. Hybrid retrieval reduces wrong-page
-          and wrong-object errors, reranking improves the order of evidence
-          already found, but retrieving complete evidence for multi-hop
-          questions remains difficult.
+          Retrieval can fail by <strong>missing the right location</strong>,{" "}
+          <strong>ranking the right evidence too low</strong>, or{" "}
+          <strong>missing part of the evidence</strong>. Hybrid retrieval helps
+          with localization, reranking helps with ordering, while complete
+          evidence retrieval remains difficult for multi-hop questions.
         </EvidenceConclusion>
       </section>
 
