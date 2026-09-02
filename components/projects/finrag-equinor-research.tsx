@@ -1,6 +1,6 @@
 const researchQuestions = [
   "Does finding the right report and the right page make it easier to find the exact evidence?",
-  "What kinds of retrieval errors do different retrieval methods make?",
+  "Where does retrieval fail?",
   "Does retrieving better evidence lead to more accurate answers?",
 ];
 
@@ -64,34 +64,6 @@ function MetricBar({
           role="img"
           aria-label={`${label}: ${(value * 100).toFixed(1)}%`}
         />
-      </div>
-    </div>
-  );
-}
-
-function GroundingFunnel({
-  title,
-  values,
-}: {
-  title: string;
-  values: [number, number, number];
-}) {
-  const labels = ["Document / year", "Page", "Exact object"];
-  const tones = ["bg-blue-800", "bg-blue-600", "bg-blue-300 text-blue-950"];
-  return (
-    <div>
-      <p className="mb-4 text-center text-sm font-semibold">{title}</p>
-      <div className="space-y-2">
-        {values.map((value, index) => (
-          <div
-            key={labels[index]}
-            className={`mx-auto flex h-12 items-center justify-between rounded-md px-4 text-sm font-semibold text-white ${tones[index]}`}
-            style={{ width: `${Math.max(value, 52)}%` }}
-          >
-            <span>{labels[index]}</span>
-            <span className="font-mono">{value.toFixed(1)}%</span>
-          </div>
-        ))}
       </div>
     </div>
   );
@@ -380,98 +352,198 @@ export default function FinragEquinorResearch() {
       <section id="rq2">
         <SectionHeader
           title={`RQ2. ${researchQuestions[1]}`}
-          description="Sparse, dense, hybrid, hierarchical, and reranked baselines are evaluated at both page and exact-object levels."
+          description="Finding the correct report is only the first step. We next examine what can still go wrong when retrieving evidence from that report."
         />
-        <div className="overflow-hidden rounded-2xl border bg-background">
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[680px] text-left text-sm">
-              <thead className="bg-blue-700 text-white">
-                <tr>
-                  <th className="px-5 py-4 font-semibold">Method</th>
-                  <th className="px-5 py-4 text-right font-semibold">
-                    Object R@1
-                  </th>
-                  <th className="px-5 py-4 text-right font-semibold">
-                    Object R@10
-                  </th>
-                  <th className="px-5 py-4 text-right font-semibold">
-                    Page R@10
-                  </th>
-                  <th className="px-5 py-4 text-right font-semibold">MRR</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y">
-                {[
-                  ["BM25 · unrestricted", ".214", ".515", ".603", ".297"],
-                  ["BM25 · reference year", ".402", ".756", ".850", ".514"],
-                  ["BGE-M3 · reference year", ".517", ".821", ".889", ".619"],
-                  [
-                    "BM25 + BGE · reference year",
-                    ".489",
-                    ".833",
-                    ".908",
-                    ".607",
-                  ],
-                  [
-                    "BM25 + E5 · reference year",
-                    ".459",
-                    ".838",
-                    ".908",
-                    ".586",
-                  ],
-                  ["Page → object RRF", ".474", ".791", ".858", ".577"],
-                ].map((row, index) => (
-                  <tr key={row[0]} className={index % 2 ? "bg-muted/35" : ""}>
-                    <td className="px-5 py-4 font-medium">{row[0]}</td>
-                    {row.slice(1).map((value) => (
-                      <td
-                        key={value + row[0]}
-                        className="px-5 py-4 text-right font-mono tabular-nums"
-                      >
-                        {value}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div className="mt-6 grid gap-6 rounded-2xl border bg-muted/20 p-5 sm:p-7 md:grid-cols-2">
-          <GroundingFunnel
-            title="BM25 · unrestricted"
-            values={[91.2, 60.3, 51.5]}
-          />
-          <GroundingFunnel
-            title="BM25 · reference year"
-            values={[100, 85.0, 75.6]}
-          />
-        </div>
-        <div className="mt-6 grid gap-5 md:grid-cols-3">
-          {[
-            ["40.2% → 63.6%", "BM25 object R@1 after reranking"],
-            ["67.4%", "Best reranked hybrid object R@1"],
-            ["73.1%", "Best reranked hybrid MRR"],
-          ].map(([value, label]) => (
-            <div
-              key={label}
-              className="rounded-2xl border bg-background p-5 text-center"
-            >
-              <p className="font-heading text-2xl text-blue-700 dark:text-blue-300">
-                {value}
+        <div className="space-y-8">
+          <div className="overflow-hidden rounded-2xl border bg-background">
+            <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
+              <p className="mb-1 font-mono text-sm font-bold text-blue-600 dark:text-blue-400">
+                FAILURE MODE 1
               </p>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                {label}
+              <h3 className="font-heading text-2xl">
+                The system may find the wrong page or object
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                Here, both methods search only within the correct report year.
               </p>
             </div>
-          ))}
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[520px] text-left text-sm">
+                <thead className="bg-blue-700 text-white">
+                  <tr>
+                    <th className="px-5 py-3 font-semibold sm:px-6">Outcome</th>
+                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                      BM25
+                    </th>
+                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                      BM25 + E5
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y">
+                  {[
+                    ["Exact evidence found", "75.6%", "83.8%"],
+                    ["Right page, wrong object", "9.4%", "7.0%"],
+                    ["Right report, wrong page", "9.7%", "5.9%"],
+                  ].map(([outcome, bm25, hybrid], index) => (
+                    <tr
+                      key={outcome}
+                      className={index % 2 ? "bg-muted/35" : ""}
+                    >
+                      <td className="px-5 py-4 font-medium sm:px-6">
+                        {outcome}
+                      </td>
+                      <td className="px-5 py-4 text-right font-mono sm:px-6">
+                        {bm25}
+                      </td>
+                      <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
+                        {hybrid}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
+              <p>
+                BM25 retrieves the exact reference object for 75.6% of
+                questions. Hybrid retrieval increases this to 83.8% and reduces
+                both wrong-page and wrong-object errors.
+              </p>
+              <p className="border-l-4 border-blue-600 pl-4 font-medium">
+                <strong>Takeaway:</strong> Hybrid retrieval improves evidence
+                localization, but it does not eliminate errors within the
+                correct report.
+              </p>
+              <p className="text-xs text-muted-foreground">
+                Rates use all 660 answerable questions. Adjacent-page cases are
+                not shown.
+              </p>
+            </div>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border bg-background">
+            <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
+              <p className="mb-1 font-mono text-sm font-bold text-blue-600 dark:text-blue-400">
+                FAILURE MODE 2
+              </p>
+              <h3 className="font-heading text-2xl">
+                Sometimes the evidence is there, but not at the top
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                The correct evidence may already appear in the top 10 but be
+                ranked too low. Reranking tries to move it closer to the top.
+              </p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[460px] text-left text-sm">
+                <thead className="bg-blue-700 text-white">
+                  <tr>
+                    <th className="px-5 py-3 font-semibold sm:px-6">
+                      BM25-year
+                    </th>
+                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                      Exact evidence ranked first
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y">
+                  <tr>
+                    <td className="px-5 py-4 font-medium sm:px-6">
+                      Before reranking
+                    </td>
+                    <td className="px-5 py-4 text-right font-mono sm:px-6">
+                      40.2%
+                    </td>
+                  </tr>
+                  <tr className="bg-blue-50/70 dark:bg-blue-950/20">
+                    <td className="px-5 py-4 font-semibold sm:px-6">
+                      After reranking
+                    </td>
+                    <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
+                      63.6%
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
+              <p>
+                Reranking substantially improves the first result. However, BM25
+                Recall@10 remains 75.6% because reranking only changes the order
+                of the existing candidates.
+              </p>
+              <p className="border-l-4 border-blue-600 pl-4 font-medium">
+                <strong>Takeaway:</strong> Reranking fixes ordering errors, but
+                it cannot recover evidence missing from the top 10.
+              </p>
+            </div>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border bg-background">
+            <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
+              <p className="mb-1 font-mono text-sm font-bold text-blue-600 dark:text-blue-400">
+                FAILURE MODE 3
+              </p>
+              <h3 className="font-heading text-2xl">
+                Multi-hop questions may still be incomplete
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                Some questions require more than one piece of evidence. On the
+                90 multi-hop questions, BM25-year often retrieves part of the
+                required evidence but fails to retrieve the complete set.
+              </p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[460px] text-left text-sm">
+                <thead className="bg-blue-700 text-white">
+                  <tr>
+                    <th className="px-5 py-3 font-semibold sm:px-6">
+                      Multi-hop outcome
+                    </th>
+                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                      Recall@10
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y">
+                  <tr>
+                    <td className="px-5 py-4 font-medium sm:px-6">
+                      At least one evidence item found
+                    </td>
+                    <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
+                      91.1%
+                    </td>
+                  </tr>
+                  <tr className="bg-muted/35">
+                    <td className="px-5 py-4 font-medium sm:px-6">
+                      All required evidence found
+                    </td>
+                    <td className="px-5 py-4 text-right font-mono sm:px-6">
+                      53.3%
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
+              <p>
+                Finding one relevant item can make retrieval look successful
+                even when evidence needed for a complete answer is still
+                missing.
+              </p>
+              <p className="border-l-4 border-blue-600 pl-4 font-medium">
+                <strong>Takeaway:</strong> Finding some evidence is much easier
+                than finding all the evidence required for a multi-hop answer.
+              </p>
+            </div>
+          </div>
         </div>
         <EvidenceConclusion>
-          The strongest filtered hybrid reaches{" "}
-          <strong>83.8% object Recall@10</strong>. Reranking promotes evidence
-          already present in the top-10, but it cannot recover missing
-          candidates. Page and exact-object localization remain the main failure
-          points after the correct report is reached.
+          Retrieval fails in different ways. Hybrid retrieval reduces wrong-page
+          and wrong-object errors, reranking improves the order of evidence
+          already found, but retrieving complete evidence for multi-hop
+          questions remains difficult.
         </EvidenceConclusion>
       </section>
 
