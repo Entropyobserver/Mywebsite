@@ -573,7 +573,7 @@ export default function FinragEquinorResearch() {
               </tbody>
             </table>
           </div>
-          <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
+          <div className="border-t bg-muted/20 px-5 py-4 text-sm leading-6 sm:px-6">
             <p className="text-muted-foreground">
               <strong className="text-foreground">
                 Question only (closed-book)
@@ -588,25 +588,19 @@ export default function FinragEquinorResearch() {
               gives the model the evidence linked to each question in the
               benchmark.
             </p>
-            <p>
-              Hybrid + reranked evidence improves answer accuracy by{" "}
-              <strong>12.4 percentage points</strong> over BM25-year. However,
-              it remains <strong>11.1 points</strong> below the result obtained
-              with annotated reference evidence.
-            </p>
           </div>
         </div>
-        <h3 className="mt-8 font-heading text-2xl">Takeaway</h3>
         <EvidenceConclusion>
-          Better evidence leads to more accurate answers. The gap between hybrid
-          retrieval and annotated evidence shows that retrieval can still
-          improve, while the 82.0% result with annotated evidence shows that the
-          generator also remains imperfect.
+          Hybrid + reranked evidence improves answer accuracy by{" "}
+          <strong>12.4 percentage points</strong> over BM25-year, but remains{" "}
+          <strong>11.1 points</strong> below annotated reference evidence.
+          Better evidence leads to more accurate answers; the remaining gap
+          shows that both retrieval and generation can still improve.
         </EvidenceConclusion>
-        <p className="mt-5 text-sm leading-6 text-muted-foreground">
-          The multi-hop results in RQ2 help explain part of this gap: retrieval
-          may find some relevant evidence while still missing information needed
-          for a complete answer.
+        <p className="mt-3 text-sm leading-6 text-muted-foreground">
+          RQ2&apos;s multi-hop results explain part of this gap: retrieval may
+          find relevant evidence while still missing information required for a
+          complete answer.
         </p>
       </section>
 
@@ -665,32 +659,6 @@ export default function FinragEquinorResearch() {
           this as feasibility evidence—not a new retrieval method or a
           production-ready verifier.
         </EvidenceConclusion>
-      </section>
-
-      <section>
-        <SectionHeader title="Scope and Limitations" />
-        <div className="grid gap-5 md:grid-cols-2">
-          <div className="rounded-2xl border bg-blue-50 p-6 text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
-            <h3 className="font-heading text-2xl">
-              What the benchmark establishes
-            </h3>
-            <p className="mt-3 leading-7">
-              Annual-report RAG is a hierarchical localization problem spanning
-              report selection, page localization, exact evidence objects, and
-              complete multi-hop grounding. These retrieval differences have a
-              measurable effect on answer correctness.
-            </p>
-          </div>
-          <div className="rounded-2xl border bg-muted/20 p-6">
-            <h3 className="font-heading text-2xl">What remains open</h3>
-            <p className="mt-3 leading-7 text-muted-foreground">
-              The resource is a controlled English-language case study of one
-              company and 15 consecutive reports. Cross-company, multilingual,
-              multimodal, broader generator/evaluator, and independent
-              third-party validation remain future work.
-            </p>
-          </div>
-        </div>
       </section>
     </div>
   );
