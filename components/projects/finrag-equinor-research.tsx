@@ -271,8 +271,7 @@ export default function FinragEquinorResearch() {
                 When BM25 searches all 15 reports, it finds the exact evidence
                 in the top 10 for 51.5% of questions. When we give the system
                 the correct report year, this rises to 75.6%. This shows that
-                knowing the correct year makes it much easier to find the right
-                evidence.
+                report-year information can substantially improve retrieval.
               </p>
             </div>
           </div>
