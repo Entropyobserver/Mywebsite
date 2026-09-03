@@ -351,7 +351,7 @@ export const Projects: ProjectInterface[] = [
     type: "Research",
     category: ["Research", "RAG", "Information Retrieval", "Evaluation"],
     shortDescription:
-      "Path-guided GraphRAG research showing how selected entity and metric links improve evidence localization over long annual reports while naive adjacent-page expansion introduces noise.",
+      "Controlled GraphRAG research showing that selected graph expansion improves exact evidence recovery, while graph paths add complementary page coverage over long annual reports.",
     techStack: [
       "Python",
       "GraphRAG",
@@ -369,30 +369,32 @@ export const Projects: ProjectInterface[] = [
     endDate: new Date("2026-08-31"),
     companyLogoImg: "/projects/graph-rag-evidence/cover.png",
     keyMetrics: [
-      { value: "87.4%", label: "Object Recall@10" },
-      { value: "93.3%", label: "Page Recall@10" },
+      { value: "85.9%", label: "Object Recall@10" },
+      { value: "91.7%", label: "Page Recall@10" },
       { value: "52,278", label: "Graph nodes" },
     ],
     pagesInfoArr: [
       {
         title: "Typed Evidence Graph",
         description:
-          "A high-level view of the retrieval design: annual reports are parsed into pages and evidence objects, linked through typed relations, expanded through graph neighborhoods, and reranked for object-level grounding.",
-        imgArr: ["/projects/graph-rag-evidence/cover.png"],
+          "The controlled fusion design retains the same E5 hybrid retrieval output and adds selected graph expansion, graph-path candidates, or both before cross-encoder reranking.",
+        imgArr: [
+          "/projects/graph-rag-evidence/paper-controlled-fusion.png",
+        ],
       },
     ],
     descriptionDetails: {
       paragraphs: [
         "This project studies structure-aware retrieval for evidence grounding over long annual reports. The goal is not merely to retrieve topically similar text, but to locate the correct report, page, and exact evidence object in a repetitive multi-year archive.",
-        "The method builds a typed metadata graph over reports, years, pages, retrieval objects, entities, and financial metric categories. It combines strong hybrid retrieval with selected graph expansion, explicit graph-path candidates, and cross-encoder reranking. Path-guided fusion improves Object Recall@10 from 0.838 to 0.874 and Page Recall@10 from 0.908 to 0.933 over the strongest hybrid reranked baseline.",
-        "I designed the GraphRAG experiments, typed edge ablations, year-split validation, path-guided candidate fusion, and structure-aware routing analyses. The results show that graph structure is useful selectively: entity and metric links create valuable evidence bridges, while broad adjacent-page expansion adds plausible but distracting context.",
+        "The method builds a typed metadata graph over reports, years, pages, retrieval objects, entities, and financial metric categories. In a controlled E5-only fusion experiment, selected-graph candidates improve Object Recall@10 from 0.838 to 0.858, while adding graph paths raises Page Recall@10 from 0.905 to 0.917 with little additional object-recall gain.",
+        "I designed the GraphRAG experiments, typed edge ablations, temporal validation, controlled candidate fusion, and question-type analyses. The results show that graph structure is useful selectively: entity and metric links create evidence bridges, while broad adjacent-page expansion adds plausible but distracting context.",
       ],
       bullets: [
         "Constructed a 52,278-node, 310,796-edge metadata graph over 41,736 retrieval objects from 15 annual reports.",
-        "Introduced path-guided fusion that combines hybrid, selected-graph, and typed-path candidates before reranking.",
+        "Designed a controlled fusion study that holds the E5 retriever, reranker, and candidate ceiling fixed while varying graph candidate sources.",
         "Used leave-one-edge-out ablations to show that entity and metric links help exact grounding, while adjacent-page links reduce retrieval quality.",
         "Validated the edge-selection decision on held-out 2022–2024 reports, improving Object Recall@10 from 0.713 to 0.840 over the full graph.",
-        "Separated candidate recovery from question-aware ordering through an interpretable rule-based routing analysis.",
+        "Separated exact-object recovery, page coverage, and question-aware ordering across multi-hop and visual/layout analyses.",
       ],
     },
   },
