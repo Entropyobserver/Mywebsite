@@ -89,20 +89,8 @@ export default function StructureAwareGraphRagResearch() {
         </div>
       </section>
 
-      <section>
-        <SectionHeader title="Benchmark and Graph at a Glance" description={<p>Experiments use the 660 answerable questions in FinRAG-Equinor. Evidence is evaluated separately at report, page, and exact-object level rather than treating all topically related passages as correct.</p>} />
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {[["15", "annual reports · 2010–2024"], ["41,736", "retrieval objects"], ["52,278", "graph nodes"], ["310,796", "typed graph edges"]].map(([value, label]) => (
-            <div key={label} className="rounded-2xl border bg-muted/20 p-5">
-              <p className="font-heading text-3xl text-blue-700 dark:text-blue-300">{value}</p>
-              <p className="mt-1 text-sm leading-6 text-muted-foreground">{label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       <section id="rq1">
-        <SectionHeader eyebrow="RQ1 · Structural relations" title="Which Graph Links Help Evidence Retrieval?" description={<p>The graph preserves report → year → page → object containment and adds same-page, same-entity, same-metric, and adjacent-page relations. A leave-one-edge-out experiment isolates their observed effects.</p>} />
+        <SectionHeader title="RQ1. Which Graph Links Help Evidence Retrieval?" description={<p>The graph preserves report → year → page → object containment and adds same-page, same-entity, same-metric, and adjacent-page relations. A leave-one-edge-out experiment isolates their observed effects.</p>} />
         <PaperFigure src="/projects/graph-rag-evidence/paper-graph-schema.png" alt="Typed metadata evidence graph schema" height={1050} caption="Web rendering of paper Figure 2. Containment edges preserve provenance; typed relations connect evidence through page-local and cross-page structure." />
         <div className="mt-8">
           <PaperFigure src="/projects/graph-rag-evidence/paper-edge-ablation.png" alt="Edge-type ablation for Object Recall at 10" height={900} caption="Web rendering of paper Figure 3. Positive values mean retrieval improves when that relation is removed." />
@@ -126,7 +114,7 @@ export default function StructureAwareGraphRagResearch() {
       </section>
 
       <section id="rq2">
-        <SectionHeader eyebrow="RQ2 · Controlled fusion" title="Selected Graph Expansion Drives Object Recovery" description={<p>Every fusion row retains the same reranked E5 output and uses the same cross-encoder with a maximum 80-candidate budget. Only the added graph candidate source changes.</p>} />
+        <SectionHeader title="RQ2. Selected Graph Expansion Drives Object Recovery" description={<p>Every fusion row retains the same reranked E5 output and uses the same cross-encoder with a maximum 80-candidate budget. Only the added graph candidate source changes.</p>} />
         <PaperFigure src="/projects/graph-rag-evidence/paper-controlled-fusion-results.png" alt="Controlled GraphRAG fusion results" height={950} caption="Visualization of paper Table 4. Selected-graph candidates provide most of the exact-object gain; paths mainly add complementary page coverage." />
         <div className="mt-8 overflow-hidden rounded-2xl border bg-background">
           <div className="overflow-x-auto">
@@ -147,7 +135,7 @@ export default function StructureAwareGraphRagResearch() {
       </section>
 
       <section id="rq3">
-        <SectionHeader eyebrow="RQ3 · Question-type analysis" title="Coverage and Precise Grounding Remain Different Problems" description={<p>Multi-hop questions require every supporting item, while visual questions may require page context that text-only object retrieval cannot fully represent.</p>} />
+        <SectionHeader title="RQ3. Coverage and Precise Grounding Remain Different Problems" description={<p>Multi-hop questions require every supporting item, while visual questions may require page context that text-only object retrieval cannot fully represent.</p>} />
         <div className="grid gap-6 lg:grid-cols-2">
           <div className="rounded-2xl border bg-background p-5 sm:p-6">
             <h3 className="font-heading text-2xl">90 multi-hop questions</h3>
