@@ -610,19 +610,19 @@ export default function FinragEquinorResearch() {
           Can the system recover when retrieval goes wrong?
         </h3>
         <p className="mt-3 max-w-4xl leading-7 text-muted-foreground">
-          All 720 questions are retrieved once. The system then checks which
-          results look unreliable. If a likely problem is detected, it tries a
-          more targeted search; otherwise, it keeps the original result.
+          All 720 questions are first retrieved using{" "}
+          <strong className="text-foreground">BM25 + BGE-M3 fusion</strong>. A
+          rule-based detector checks the initial top-10 results for likely
+          retrieval failures. If a problem is detected, the system changes its
+          search strategy and retrieves again.
         </p>
         <div className="mt-6 rounded-2xl border border-blue-200 bg-blue-50 px-5 py-4 text-center font-semibold text-blue-950 dark:border-blue-900 dark:bg-blue-950/30 dark:text-blue-100">
-          Retrieve → Check → Recover if needed → Keep the improved result
+          Retrieve → Detect the problem → Change the strategy → Retrieve again
         </div>
 
         <div className="mt-8 overflow-hidden rounded-2xl border bg-background">
           <div className="border-b bg-muted/30 px-5 py-4 sm:px-6">
-            <h4 className="font-heading text-xl">
-              Different problems trigger different recovery actions
-            </h4>
+            <h4 className="font-heading text-xl">How does recovery work?</h4>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[560px] text-left text-sm">
@@ -636,9 +636,12 @@ export default function FinragEquinorResearch() {
               </thead>
               <tbody className="divide-y">
                 {[
-                  ["Wrong report", "Search the year or most likely reports"],
+                  [
+                    "Wrong report",
+                    "Search the year in the question or the three most likely reports",
+                  ],
                   ["Wrong page", "Search likely pages and nearby pages"],
-                  ["Wrong object", "Search again within the likely pages"],
+                  ["Wrong object", "Reorder objects within likely pages"],
                   ["Missing hop", "Split the question and search each part"],
                 ].map((row, index) => (
                   <tr key={row[0]} className={index % 2 ? "bg-muted/35" : ""}>
@@ -652,22 +655,42 @@ export default function FinragEquinorResearch() {
         </div>
 
         <p className="mt-8 max-w-4xl leading-7 text-muted-foreground">
-          The detector flags{" "}
+          Using thresholds tuned on separate training years, the detector flags{" "}
           <strong className="text-foreground">250 of 720 questions</strong> for
-          recovery. We compare this selective strategy with no recovery and with
-          applying recovery to every question.
+          recovery. New results are kept only when evidence coverage improves.
+        </p>
+
+        <h4 className="mt-10 font-heading text-xl">
+          Does selective recovery help?
+        </h4>
+        <p className="mt-3 max-w-4xl leading-7 text-muted-foreground">
+          We compare no recovery, recovery only for the{" "}
+          <strong className="text-foreground">250 flagged questions</strong>,
+          and recovery for{" "}
+          <strong className="text-foreground">all 720 questions</strong>.
+        </p>
+        <p className="mt-3 max-w-4xl leading-7 text-muted-foreground">
+          Selective recovery reaches the same Object Recall@10 as always-on
+          recovery with far fewer recovery attempts. Always-on recovery performs
+          slightly better on the stricter completeness measures.
         </p>
         <div className="mt-5 overflow-hidden rounded-2xl border bg-background">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[560px] text-left text-sm">
+            <table className="w-full min-w-[820px] text-left text-sm">
               <thead className="bg-blue-700 text-white">
                 <tr>
                   <th className="px-5 py-3 font-semibold sm:px-6">Policy</th>
                   <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                    Object Recall@10
+                    Questions recovered
                   </th>
                   <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                    Recovery triggered
+                    Object R@10
+                  </th>
+                  <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                    Complete R@10
+                  </th>
+                  <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                    Multi-hop All R@10
                   </th>
                 </tr>
               </thead>
@@ -675,10 +698,16 @@ export default function FinragEquinorResearch() {
                 <tr>
                   <td className="px-5 py-4 font-medium sm:px-6">No recovery</td>
                   <td className="px-5 py-4 text-right font-mono tabular-nums sm:px-6">
+                    0 / 720
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono tabular-nums sm:px-6">
                     70.2%
                   </td>
                   <td className="px-5 py-4 text-right font-mono tabular-nums sm:px-6">
-                    0
+                    64.4%
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono tabular-nums sm:px-6">
+                    47.8%
                   </td>
                 </tr>
                 <tr className="bg-muted/35">
@@ -686,29 +715,41 @@ export default function FinragEquinorResearch() {
                     Selective recovery
                   </td>
                   <td className="px-5 py-4 text-right font-mono font-bold tabular-nums text-blue-700 sm:px-6 dark:text-blue-300">
-                    71.7%
+                    250 / 720
                   </td>
                   <td className="px-5 py-4 text-right font-mono font-bold tabular-nums text-blue-700 sm:px-6 dark:text-blue-300">
-                    250
+                    71.7%
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono tabular-nums sm:px-6">
+                    66.1%
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono tabular-nums sm:px-6">
+                    50.0%
                   </td>
                 </tr>
                 <tr>
                   <td className="px-5 py-4 font-medium sm:px-6">
                     Always-on recovery
                   </td>
+                  <td className="px-5 py-4 text-right font-mono tabular-nums sm:px-6">
+                    720 / 720
+                  </td>
                   <td className="px-5 py-4 text-right font-mono font-bold tabular-nums text-blue-700 sm:px-6 dark:text-blue-300">
                     71.7%
                   </td>
-                  <td className="px-5 py-4 text-right font-mono tabular-nums sm:px-6">
-                    720
+                  <td className="px-5 py-4 text-right font-mono font-bold tabular-nums text-blue-700 sm:px-6 dark:text-blue-300">
+                    66.5%
+                  </td>
+                  <td className="px-5 py-4 text-right font-mono font-bold tabular-nums text-blue-700 sm:px-6 dark:text-blue-300">
+                    52.2%
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
           <p className="border-t bg-muted/20 px-5 py-4 text-sm leading-6 text-muted-foreground sm:px-6">
-            All 720 questions are retrieved initially. Object Recall@10 is
-            measured on the 660 answerable questions.
+            All 720 questions are retrieved once initially. Recall is evaluated
+            on the 660 answerable questions.
           </p>
         </div>
       </section>
