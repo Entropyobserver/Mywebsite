@@ -81,21 +81,11 @@ export default function StructureAwareGraphRagResearch() {
       </section>
 
       <section>
-        <SectionHeader eyebrow="Method overview" title="GraphRAG as Controlled Evidence Navigation" description={<p>The study holds the E5 hybrid retriever, cross-encoder reranker, and candidate ceiling fixed. Only the added graph candidate source changes, making the contribution of document structure directly measurable.</p>} />
-        <PaperFigure src="/projects/graph-rag-evidence/paper-controlled-fusion.png" alt="Controlled GraphRAG fusion pipeline" height={1150} caption="Web rendering of paper Figure 1. Solid arrows preserve the E5 route; dashed arrows add selected-graph and graph-path candidates before a shared reranker." />
-        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            ["01", "Retrieve", "Year-filtered BM25 + E5 hybrid search"],
-            ["02", "Retain", "Keep the reranked E5 top-10"],
-            ["03", "Augment", "Add selected graph and/or path candidates"],
-            ["04", "Rerank", "Deduplicate, cap at 80, and rerank once"],
-          ].map(([step, label, detail]) => (
-            <div key={step} className="rounded-2xl border bg-muted/20 p-5">
-              <p className="font-mono text-xs font-semibold text-blue-600 dark:text-blue-400">{step}</p>
-              <h3 className="mt-3 font-heading text-xl">{label}</h3>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">{detail}</p>
-            </div>
-          ))}
+        <SectionHeader eyebrow="Method overview" title="GraphRAG as Controlled Evidence Navigation" description={<p>We first retrieve evidence using the same hybrid search for every question. The original retrieval results are kept, while graph connections and paths add additional evidence candidates. This makes it possible to measure what the graph contributes beyond standard retrieval.</p>} />
+        <PaperFigure src="/projects/graph-rag-evidence/paper-controlled-fusion.png" alt="Controlled GraphRAG fusion pipeline" height={1150} caption="Controlled GraphRAG fusion. The original retrieval results are preserved, while graph expansion and graph paths add complementary evidence before final reranking." />
+        <div className="mt-6">
+          <h3 className="font-heading text-2xl">Why this design?</h3>
+          <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">GraphRAG does not replace the original retrieval results. Instead, it adds evidence that standard retrieval may have missed. This allows a direct comparison between standard retrieval and retrieval with graph-based evidence.</p>
         </div>
       </section>
 
