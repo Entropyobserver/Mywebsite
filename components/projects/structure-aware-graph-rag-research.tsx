@@ -90,12 +90,13 @@ export default function StructureAwareGraphRagResearch() {
       </section>
 
       <section id="rq1">
-        <SectionHeader title="RQ1. Which Graph Links Help Evidence Retrieval?" description={<p>The graph preserves report → year → page → object containment and adds same-page, same-entity, same-metric, and adjacent-page relations. A leave-one-edge-out experiment isolates their observed effects.</p>} />
-        <PaperFigure src="/projects/graph-rag-evidence/paper-graph-schema.png" alt="Typed metadata evidence graph schema" height={1050} caption="Web rendering of paper Figure 2. Containment edges preserve provenance; typed relations connect evidence through page-local and cross-page structure." />
+        <SectionHeader title="RQ1. Which Graph Connections Help?" description={<><p>The graph keeps the original document structure from <strong>report → year → page → evidence object</strong>. It then connects evidence in four ways: by <strong>same page</strong>, <strong>same entity</strong>, <strong>same financial metric</strong>, and <strong>adjacent pages</strong>.</p><p className="mt-4">To understand which connections are useful, we remove one type at a time and measure how retrieval changes.</p></>} />
+        <PaperFigure src="/projects/graph-rag-evidence/paper-graph-schema.png" alt="Typed metadata evidence graph schema" height={1050} caption="The graph keeps track of where each piece of evidence comes from and how it is connected to related evidence." />
         <div className="mt-8">
           <PaperFigure src="/projects/graph-rag-evidence/paper-edge-ablation.png" alt="Edge-type ablation for Object Recall at 10" height={900} caption="Web rendering of paper Figure 3. Positive values mean retrieval improves when that relation is removed." />
         </div>
-        <EvidenceConclusion>Removing adjacent-page links raises Object Recall@10 from <strong>77.0%</strong> to <strong>82.6%</strong>. Removing same-entity links lowers it to <strong>75.0%</strong>, while removing same-metric links lowers it to <strong>76.2%</strong>. Structure helps selectively; physical proximity alone introduces plausible noise.</EvidenceConclusion>
+        <p className="mt-6 leading-7 text-muted-foreground">The results show that the connections behave differently. <strong className="text-foreground">Same-entity links provide the strongest useful signal, while same-metric links also help. Adjacent-page links introduce noise and make retrieval worse. Same-page links show little clear benefit.</strong></p>
+        <EvidenceConclusion><strong>Key finding:</strong> Graph structure helps when the connections are meaningful, but adding more connections does not automatically improve retrieval.</EvidenceConclusion>
       </section>
 
       <section>
