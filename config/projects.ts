@@ -385,16 +385,12 @@ export const Projects: ProjectInterface[] = [
     ],
     descriptionDetails: {
       paragraphs: [
-        "This project studies structure-aware retrieval for evidence grounding over long annual reports. The goal is not merely to retrieve topically similar text, but to locate the correct report, page, and exact evidence object in a repetitive multi-year archive.",
-        "The method builds a typed metadata graph over reports, years, pages, retrieval objects, entities, and financial metric categories. In a controlled E5-only fusion experiment, selected-graph candidates improve Object Recall@10 from 0.838 to 0.858, while adding graph paths raises Page Recall@10 from 0.905 to 0.917 with little additional object-recall gain.",
-        "I designed the GraphRAG experiments, typed edge ablations, temporal validation, controlled candidate fusion, and question-type analyses. The results show that graph structure is useful selectively: entity and metric links create evidence bridges, while broad adjacent-page expansion adds plausible but distracting context.",
+        "This project explores graph-based evidence retrieval from long annual reports. The graph connects related evidence through shared entities and financial metrics. As first author and experimental lead, I designed the GraphRAG approach and led the experiments and evaluation.",
       ],
       bullets: [
-        "Constructed a 52,278-node, 310,796-edge metadata graph over 41,736 retrieval objects from 15 annual reports.",
-        "Designed a controlled fusion study that holds the E5 retriever, reranker, and candidate ceiling fixed while varying graph candidate sources.",
-        "Used leave-one-edge-out ablations to show that entity and metric links help exact grounding, while adjacent-page links reduce retrieval quality.",
-        "Validated the edge-selection decision on held-out 2022–2024 reports, improving Object Recall@10 from 0.713 to 0.840 over the full graph.",
-        "Separated exact-object recovery, page coverage, and question-aware ordering across multi-hop and visual/layout analyses.",
+        "Built a GraphRAG system to find supporting evidence in long annual reports using document structure, entities, and financial metrics.",
+        "Compared standard retrieval with graph-based retrieval, finding that graph expansion improved evidence-object recovery while graph paths added page coverage.",
+        "Analyzed which graph connections helped or hurt retrieval, using statistical tests and cross-year evaluation to validate the results.",
       ],
     },
   },
