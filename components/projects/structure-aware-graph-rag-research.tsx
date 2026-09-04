@@ -86,16 +86,15 @@ export default function StructureAwareGraphRagResearch() {
           title="GraphRAG as Controlled Evidence Navigation"
           description={
             <>
-              <p>For each question, the benchmark provides the reference document and year. We use the same BM25 + E5 hybrid search within this report scope, then test whether graph-based evidence adds value beyond the original retrieval results. The experiment measures evidence retrieval within a known report, not automatic report selection or answer generation.</p>
-              <p className="mt-4">The hybrid results feed two routes. We rerank and retain the original top-10 for fusion. Separately, selected-graph expansion starts from the <strong>pre-reranking top-10</strong>, follows same-page, same-entity, and same-metric links, and reranks the expanded candidates. Graph-path retrieval independently follows entity and metric cues from the question within the same report scope.</p>
-              <p className="mt-4">We combine the retained hybrid results with the selected-graph top-10, graph-path candidates, or both. Duplicate evidence objects are merged while preserving their source information. The combined pool is capped at 80 candidates and reranked with the same cross-encoder to produce the final evidence ranking.</p>
+              <p>Standard retrieval finds evidence mainly through <strong>text similarity</strong>. Our GraphRAG approach also uses <strong>document structure</strong>, connecting evidence through shared pages, entities, and financial metrics. The goal is to test whether these graph connections can recover useful evidence that standard retrieval misses.</p>
+              <p className="mt-4">For each question, the benchmark provides the reference report and year. We first run BM25 + E5 hybrid retrieval within this scope and retain its reranked top-10 results. Two graph-based methods then add evidence in different ways: <strong>selected-graph expansion</strong> starts from the hybrid top-10 and follows same-page, same-entity, and same-metric links, while <strong>graph-path retrieval</strong> independently uses entity and metric cues from the question to navigate the graph. The original hybrid results and graph candidates are then combined, deduplicated, and reranked with the same cross-encoder.</p>
             </>
           }
         />
-        <PaperFigure src="/projects/graph-rag-evidence/paper-controlled-fusion.png" alt="Controlled GraphRAG fusion pipeline" height={1150} caption="Controlled GraphRAG fusion within a benchmark-provided report and year. The reranked hybrid top-10 is retained for fusion, while selected-graph expansion and independent graph-path retrieval add candidates before final reranking." />
+        <PaperFigure src="/projects/graph-rag-evidence/paper-controlled-fusion.png" alt="Controlled GraphRAG fusion pipeline" height={1150} caption="Controlled GraphRAG fusion. Selected-graph expansion builds on hybrid retrieval, while graph paths provide an independent, query-guided source of evidence." />
         <div className="mt-6">
           <h3 className="font-heading text-2xl">Why this design?</h3>
-          <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">In this fusion design, graph candidates supplement rather than replace the retained hybrid results. Keeping the E5 source, reranker, and candidate ceiling unchanged lets us compare the added value of selected-graph expansion and graph paths. The 80-candidate budget is an upper limit, not a fixed pool size: hybrid plus selected graph contributes at most 20 source candidates, while path-based variants can add more. The comparison therefore measures the value of additional evidence sources under a common cap.</p>
+          <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">By retaining the original hybrid results, we can directly test whether graph-based retrieval finds <strong>additional useful evidence</strong> that standard retrieval missed, rather than simply replacing a strong baseline.</p>
         </div>
       </section>
 
