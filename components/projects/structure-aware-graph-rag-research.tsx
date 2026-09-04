@@ -99,28 +99,30 @@ export default function StructureAwareGraphRagResearch() {
       </section>
 
       <section id="rq1">
-        <SectionHeader title="RQ1. Which Graph Connections Help?" description={<><p>The graph keeps the original document structure from <strong>report → year → page → evidence object</strong>. It then connects evidence in four ways: by <strong>same page</strong>, <strong>same entity</strong>, <strong>same financial metric</strong>, and <strong>adjacent pages</strong>.</p><p className="mt-4">To understand which connections are useful, we remove one type at a time and measure how retrieval changes.</p></>} />
-        <PaperFigure src="/projects/graph-rag-evidence/paper-graph-schema.png" alt="Typed metadata evidence graph schema" height={1050} caption="The graph keeps track of where each piece of evidence comes from and how it is connected to related evidence." />
+        <SectionHeader title="RQ1. Which Graph Connections Help?" description={<><p>The graph connects evidence through four types of relations: <strong>same-page, same-entity, same-metric, and adjacent-page</strong>. But adding more connections does not necessarily improve retrieval.</p><p className="mt-4">To understand which relations actually help, we remove one relation at a time while keeping the rest of the retrieval pipeline unchanged.</p></>} />
+        <PaperFigure src="/projects/graph-rag-evidence/paper-graph-schema.png" alt="Typed metadata evidence graph schema" height={1050} caption="The graph connects evidence based on document structure, shared entities, and financial metrics." />
         <div className="mt-8">
-          <PaperFigure src="/projects/graph-rag-evidence/paper-edge-ablation.png" alt="Edge-type ablation for Object Recall at 10" height={900} caption="Web rendering of paper Figure 3. Positive values mean retrieval improves when that relation is removed." />
+          <PaperFigure src="/projects/graph-rag-evidence/paper-edge-ablation.png" alt="Edge-type ablation for Object Recall at 10" height={900} caption="Positive values mean retrieval improves when a relation is removed." />
         </div>
-        <p className="mt-6 leading-7 text-muted-foreground">The results show that the connections behave differently. <strong className="text-foreground">Same-entity links provide the strongest useful signal, while same-metric links also help. Adjacent-page links introduce noise and make retrieval worse. Same-page links show little clear benefit.</strong></p>
-        <EvidenceConclusion><strong>Key finding:</strong> Graph structure helps when the connections are meaningful, but adding more connections does not automatically improve retrieval.</EvidenceConclusion>
+        <p className="mt-6 leading-7 text-muted-foreground">The results show clear differences between relation types. <strong className="text-foreground">Same-entity links provide the strongest useful signal, while same-metric links provide a smaller benefit. Same-page links show little clear effect on object retrieval. In contrast, adjacent-page links introduce noise: removing them improves retrieval.</strong></p>
+        <EvidenceConclusion><strong>Key finding:</strong> GraphRAG benefits from <strong>meaningful connections</strong>, not simply more connections.</EvidenceConclusion>
       </section>
 
       <section>
-        <SectionHeader title="Does the Edge Policy Transfer to Later Reports?" description={<p>The no-adjacent-page policy was selected on reports from 2010–2021 and evaluated on held-out reports from 2022–2024.</p>} />
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-2xl border bg-background p-5 sm:p-6">
-            <h3 className="font-heading text-2xl">Object Recall@10</h3>
-            <div className="mt-6 space-y-5"><MetricBar label="Full graph" value={0.713} color="bg-slate-500" /><MetricBar label="Without adjacent-page" value={0.84} color="bg-emerald-600" /></div>
-          </div>
-          <div className="rounded-2xl border bg-background p-5 sm:p-6">
-            <h3 className="font-heading text-2xl">MRR</h3>
-            <div className="mt-6 space-y-5"><MetricBar label="Full graph" value={0.644} color="bg-slate-500" /><MetricBar label="Without adjacent-page" value={0.728} color="bg-violet-600" /></div>
+        <SectionHeader title="Does This Pattern Hold Across Reporting Years?" description={<p>As an additional <strong>temporal robustness check</strong>, we repeat the adjacent-page comparison on later reports from <strong>2022–2024</strong>. The same pattern remains: removing adjacent-page links improves both object retrieval and ranking quality.</p>} />
+        <div className="overflow-hidden rounded-2xl border bg-background">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[480px] text-left text-sm">
+              <thead className="bg-blue-700 text-white"><tr><th scope="col" className="px-5 py-4 font-semibold">Metric</th><th scope="col" className="px-5 py-4 text-right font-semibold">Full graph</th><th scope="col" className="px-5 py-4 text-right font-semibold">Without adjacent-page</th></tr></thead>
+              <tbody className="divide-y">
+                <tr><th scope="row" className="px-5 py-4 font-medium">Object Recall@10</th><td className="px-5 py-4 text-right font-mono tabular-nums">71.3%</td><td className="px-5 py-4 text-right font-mono tabular-nums"><strong>84.0%</strong></td></tr>
+                <tr className="bg-muted/35"><th scope="row" className="px-5 py-4 font-medium">MRR</th><td className="px-5 py-4 text-right font-mono tabular-nums">0.644</td><td className="px-5 py-4 text-right font-mono tabular-nums"><strong>0.728</strong></td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
-        <p className="mt-4 text-sm leading-6 text-muted-foreground">On 150 held-out questions, Object Recall@10 improves by 12.7 points and MRR by 8.4 points; both differences have p&lt;0.001 in the paired-bootstrap analysis.</p>
+        <p className="mt-6 leading-7 text-muted-foreground">This provides additional evidence that the negative effect of adjacent-page expansion is <strong>consistent across reporting years within the Equinor collection</strong>.</p>
+        <EvidenceConclusion><strong>Scope:</strong> This is a robustness check within one company&apos;s reports, not a separate train/test evaluation or evidence of generalization to other companies or industries.</EvidenceConclusion>
       </section>
 
       <section id="rq2">
