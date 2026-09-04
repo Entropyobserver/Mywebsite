@@ -81,11 +81,21 @@ export default function StructureAwareGraphRagResearch() {
       </section>
 
       <section>
-        <SectionHeader eyebrow="Method overview" title="GraphRAG as Controlled Evidence Navigation" description={<p>We first retrieve evidence using the same hybrid search for every question. The original retrieval results are kept, while graph connections and paths add additional evidence candidates. This makes it possible to measure what the graph contributes beyond standard retrieval.</p>} />
-        <PaperFigure src="/projects/graph-rag-evidence/paper-controlled-fusion.png" alt="Controlled GraphRAG fusion pipeline" height={1150} caption="Controlled GraphRAG fusion. The original retrieval results are preserved, while graph expansion and graph paths add complementary evidence before final reranking." />
+        <SectionHeader
+          eyebrow="Method overview"
+          title="GraphRAG as Controlled Evidence Navigation"
+          description={
+            <>
+              <p>For each question, the benchmark provides the reference document and year. We use the same BM25 + E5 hybrid search within this report scope, then test whether graph-based evidence adds value beyond the original retrieval results. The experiment measures evidence retrieval within a known report, not automatic report selection or answer generation.</p>
+              <p className="mt-4">The hybrid results feed two routes. We rerank and retain the original top-10 for fusion. Separately, selected-graph expansion starts from the <strong>pre-reranking top-10</strong>, follows same-page, same-entity, and same-metric links, and reranks the expanded candidates. Graph-path retrieval independently follows entity and metric cues from the question within the same report scope.</p>
+              <p className="mt-4">We combine the retained hybrid results with the selected-graph top-10, graph-path candidates, or both. Duplicate evidence objects are merged while preserving their source information. The combined pool is capped at 80 candidates and reranked with the same cross-encoder to produce the final evidence ranking.</p>
+            </>
+          }
+        />
+        <PaperFigure src="/projects/graph-rag-evidence/paper-controlled-fusion.png" alt="Controlled GraphRAG fusion pipeline" height={1150} caption="Controlled GraphRAG fusion within a benchmark-provided report and year. The reranked hybrid top-10 is retained for fusion, while selected-graph expansion and independent graph-path retrieval add candidates before final reranking." />
         <div className="mt-6">
           <h3 className="font-heading text-2xl">Why this design?</h3>
-          <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">GraphRAG does not replace the original retrieval results. Instead, it adds evidence that standard retrieval may have missed. This allows a direct comparison between standard retrieval and retrieval with graph-based evidence.</p>
+          <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">In this fusion design, graph candidates supplement rather than replace the retained hybrid results. Keeping the E5 source, reranker, and candidate ceiling unchanged lets us compare the added value of selected-graph expansion and graph paths. The 80-candidate budget is an upper limit, not a fixed pool size: hybrid plus selected graph contributes at most 20 source candidates, while path-based variants can add more. The comparison therefore measures the value of additional evidence sources under a common cap.</p>
         </div>
       </section>
 
@@ -151,13 +161,6 @@ export default function StructureAwareGraphRagResearch() {
         </div>
       </section>
 
-      <section>
-        <SectionHeader title="Conclusion and Scope" />
-        <div className="grid gap-5 md:grid-cols-2">
-          <div className="rounded-2xl border bg-blue-50 p-6 text-blue-950 dark:bg-blue-950/30 dark:text-blue-100"><h3 className="font-heading text-2xl">Main finding</h3><p className="mt-3 leading-7">Graph structure is most useful as a selective complement to strong semantic retrieval. Selected relations recover exact objects; paths add page coverage; reranking remains essential.</p></div>
-          <div className="rounded-2xl border bg-muted/20 p-6"><h3 className="font-heading text-2xl">Current scope</h3><p className="mt-3 leading-7 text-muted-foreground">The study covers one English annual-report archive. The graph is heuristic metadata—not a manually curated knowledge graph—and the ordering layer is a diagnostic baseline rather than an autonomous agent.</p></div>
-        </div>
-      </section>
     </div>
   );
 }
