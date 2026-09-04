@@ -126,7 +126,7 @@ export default function StructureAwareGraphRagResearch() {
       </section>
 
       <section id="rq2">
-        <SectionHeader title="RQ2. Selected Graph Expansion Drives Object Recovery" description={<p>Every fusion row retains the same reranked E5 output and uses the same cross-encoder with a maximum 80-candidate budget. Only the added graph candidate source changes.</p>} />
+        <SectionHeader title="RQ2. What Does Each Graph Source Add?" description={<p>We compare the same hybrid baseline with <strong>selected-graph candidates, graph-path candidates, and both together</strong>.</p>} />
         <PaperFigure src="/projects/graph-rag-evidence/paper-controlled-fusion-results.png" alt="Controlled GraphRAG fusion results" height={950} caption="Visualization of paper Table 4. Selected-graph candidates provide most of the exact-object gain; paths mainly add complementary page coverage." />
         <div className="mt-8 overflow-hidden rounded-2xl border bg-background">
           <div className="overflow-x-auto">
@@ -134,16 +134,22 @@ export default function StructureAwareGraphRagResearch() {
               <thead className="bg-blue-700 text-white"><tr><th className="px-5 py-4 font-semibold">Method</th><th className="px-5 py-4 text-right font-semibold">Obj R@1</th><th className="px-5 py-4 text-right font-semibold">Obj R@10</th><th className="px-5 py-4 text-right font-semibold">Page R@10</th><th className="px-5 py-4 text-right font-semibold">MRR</th></tr></thead>
               <tbody className="divide-y">
                 {fusionRows.map((row, index) => (
-                  <tr key={row[0]} className={index === fusionRows.length - 1 ? "bg-emerald-50 font-semibold dark:bg-emerald-950/25" : index % 2 ? "bg-muted/35" : ""}>
+                  <tr key={row[0]} className={index === fusionRows.length - 1 ? "bg-emerald-50 dark:bg-emerald-950/25" : index % 2 ? "bg-muted/35" : ""}>
                     <td className="px-5 py-4">{row[0]}</td>
-                    {row.slice(1).map((value, valueIndex) => <td key={`${row[0]}-${valueIndex}`} className="px-5 py-4 text-right font-mono tabular-nums">{value}</td>)}
+                    {row.slice(1).map((value, valueIndex) => {
+                      const isBest = (index === 0 && valueIndex === 0)
+                        || (index === 1 && (valueIndex === 0 || valueIndex === 3))
+                        || (index === 3 && (valueIndex === 1 || valueIndex === 2));
+                      return <td key={`${row[0]}-${valueIndex}`} className={`px-5 py-4 text-right font-mono tabular-nums ${isBest ? "font-bold" : ""}`}>{value}</td>;
+                    })}
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         </div>
-        <EvidenceConclusion>Adding selected-graph candidates improves Object Recall@10 from <strong>83.8%</strong> to <strong>85.8%</strong> (p=0.013). Adding paths on top changes object recall only to 85.9%, but raises Page Recall@10 from <strong>90.5%</strong> to <strong>91.7%</strong> (p=0.037). These uncorrected marginal results should be interpreted cautiously.</EvidenceConclusion>
+        <p className="mt-6 leading-7 text-muted-foreground"><strong className="text-foreground">Selected-graph expansion provides most of the object-recovery gain</strong>, improving Object Recall@10 from <strong className="text-foreground">83.8% to 85.8%</strong>. Adding graph paths on top changes object recall very little (<strong className="text-foreground">85.8% → 85.9%</strong>), but increases Page Recall@10 from <strong className="text-foreground">90.5% to 91.7%</strong>.</p>
+        <EvidenceConclusion><strong>Key finding:</strong> Selected graph mainly helps recover missing evidence objects, while graph paths contribute more to <strong>page-level coverage</strong> than exact-object recovery.</EvidenceConclusion>
       </section>
 
       <section id="rq3">
