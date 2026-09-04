@@ -106,9 +106,9 @@ export const publications: PublicationInterface[] = [
     status: "In Preparation",
     venue: "TBD",
     date: "December 2026",
-    role: "First author; attribution framework and experiment lead",
+    role: "First author; attribution framework, experimental design, and analysis lead",
     description:
-      "Investigates group-level training-data attribution in neural machine translation using exact Shapley analysis, coalition training, size-matched baselines, bootstrap confidence intervals, and group-level statistical tests.",
+      "Introduces exact group-level Shapley attribution over all 16 training-data coalitions across encoder-decoder and decoder-only machine translation models. The results show that data value depends on both the measured behaviour and the evaluation distribution: high-Bokmål data contributes most consistently, while Nynorsk-like data creates trade-offs across translation quality, terminology performance, and written-standard behaviour that size-matched baselines do not explain.",
   },
   {
     title:
