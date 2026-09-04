@@ -81,8 +81,8 @@ export const publications: PublicationInterface[] = [
     title:
       "Beyond Routing: Diagnosing Modular LoRA Experts for Low-Resource Multilingual Petroleum-Domain Translation",
     authors: "Xiaojing Yang, Zhihan Li, Meriem Beloucif",
-    status: "Under Review",
-    venue: "EMNLP 2026",
+    status: "In Preparation",
+    venue: "COLING 2027 via ACL Rolling Review (ARR)",
     date: "October 2026",
     role: "First author; framework design and experimental lead",
     description:
