@@ -33,7 +33,7 @@ export const experiences: ExperienceInterface[] = [
     ],
     achievements: [
       "Published EAMT 2026 work on LoRA fine-tuning for English-Norwegian petroleum-domain NMT.",
-      "Submitted an EMNLP 2026 manuscript on modular LoRA experts and prepared structure-aware graph retrieval work for the October 2026 ARR cycle, targeting COLING 2027.",
+      "Submitted an EMNLP 2026 manuscript on modular LoRA experts and developed ongoing work on structure-aware graph retrieval.",
       "Developed ongoing work on group-level training data attribution using exact Shapley analysis.",
       "Released or prepared research code and demos for LoRA NMT, modular expert adaptation, and bias evaluation.",
     ],
