@@ -126,8 +126,8 @@ export const publications: PublicationInterface[] = [
       "FinRAG-Equinor: From Annual Report PDFs to a Reliability-Audited Benchmark for Evidence-Grounded RAG",
     authors: "Xiaojing Yang, Zhihan Li, Meriem Beloucif",
     status: "In Preparation",
-    venue: "TBD",
-    date: "2027",
+    venue: "COLING 2027 via ACL Rolling Review (ARR)",
+    date: "October 2026",
     role: "First author; benchmark construction and retrieval evaluation lead",
     description:
       "Introduces a reliability-audited, 720-item benchmark built from 15 consecutive Equinor/Statoil annual reports, with traceable report-, page-, and object-level evidence. The work evaluates hierarchical evidence grounding, retrieval and reranking failures, multi-hop completeness, and end-to-end answer reliability.",
