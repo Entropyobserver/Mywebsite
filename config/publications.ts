@@ -32,7 +32,7 @@ export const publications: PublicationInterface[] = [
     date: "June 2026",
     role: "First author; lead experimental contributor",
     description:
-      "Pages 385-398. Tilburg, The Netherlands. European Association for Machine Translation. ISBN 9789403901411.",
+      "EAMT 2026 research on LoRA adaptation for low-resource petroleum-domain machine translation.",
     links: [
       {
         label: "ACL Anthology",
@@ -86,7 +86,7 @@ export const publications: PublicationInterface[] = [
     date: "October 2026",
     role: "First author; framework design and experimental lead",
     description:
-      "Studies modular LoRA experts for low-resource petroleum NMT, showing that shared adaptation leads on controlled synthetic sources while learned-routing MoE generalises better to authentic source text.",
+      "A diagnostic study of modular LoRA experts for low-resource petroleum translation.",
   },
   {
     title:
@@ -97,7 +97,7 @@ export const publications: PublicationInterface[] = [
     date: "December 2026",
     role: "First author; retrieval framework and evaluation lead",
     description:
-      "Evaluates how document structure, graph-based candidate expansion, and deterministic routing can improve evidence grounding over long financial reports, with robustness testing and held-out-year validation.",
+      "Controlled GraphRAG research showing that selected graph expansion improves exact evidence recovery, while graph paths add complementary page coverage over long annual reports.",
   },
   {
     title:
@@ -108,7 +108,7 @@ export const publications: PublicationInterface[] = [
     date: "December 2026",
     role: "First author; attribution framework, experimental design, and analysis lead",
     description:
-      "Introduces exact group-level Shapley attribution over all 16 training-data coalitions across encoder-decoder and decoder-only machine translation models. The results show that data value depends on both the measured behaviour and the evaluation distribution: high-Bokmål data contributes most consistently, while Nynorsk-like data creates trade-offs across translation quality, terminology performance, and written-standard behaviour that size-matched baselines do not explain.",
+      "Exact Shapley analysis of how training groups shape machine-translation behavior.",
   },
   {
     title:
@@ -119,7 +119,7 @@ export const publications: PublicationInterface[] = [
     date: "December 2026",
     role: "Co-author; controlled experiment design and analysis lead",
     description:
-      "Uses size-controlled LoRA-based NLLB experiments to show how Bokmål filtering changes output standards and reverses BLEU and chrF rankings across reference standards, framing implicit specialization as an MT audit problem.",
+      "A controlled English-Norwegian MT study showing how Bokmål filtering creates target-standard specialization—and how reference choice can turn that specialization into an evaluation-bias problem.",
   },
   {
     title:
@@ -130,15 +130,13 @@ export const publications: PublicationInterface[] = [
     date: "October 2026",
     role: "First author; benchmark construction and retrieval evaluation lead",
     description:
-      "Introduces a reliability-audited, 720-item benchmark built from 15 consecutive Equinor/Statoil annual reports, with traceable report-, page-, and object-level evidence. The work evaluates hierarchical evidence grounding, retrieval and reranking failures, multi-hop completeness, and end-to-end answer reliability.",
+      "A reliability-audited benchmark for evidence-grounded RAG on 15 long annual reports, with 720 QA items and traceable report-, page-, and object-level evidence.",
   },
 ];
-
-export const featuredPublications: PublicationInterface[] = publications.slice(
-  0,
-  3
-);
 
 export const publicationsByDate: PublicationInterface[] = [...publications].sort(
   (a, b) => Date.parse(b.date) - Date.parse(a.date)
 );
+
+export const featuredPublications: PublicationInterface[] =
+  publicationsByDate.slice(0, 3);
