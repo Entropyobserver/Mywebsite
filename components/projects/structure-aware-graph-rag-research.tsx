@@ -47,24 +47,6 @@ function EvidenceConclusion({ children }: { children: React.ReactNode }) {
   return <div className="mt-6 rounded-r-xl border-l-4 border-blue-600 bg-blue-50 px-5 py-4 font-medium leading-relaxed text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">{children}</div>;
 }
 
-function MetricBar({ label, value, color = "bg-blue-600" }: {
-  label: string;
-  value: number;
-  color?: string;
-}) {
-  return (
-    <div>
-      <div className="mb-2 flex items-center justify-between gap-4 text-sm">
-        <span className="font-medium">{label}</span>
-        <span className="font-mono font-semibold tabular-nums">{(value * 100).toFixed(1)}%</span>
-      </div>
-      <div className="h-3 overflow-hidden rounded-full bg-muted">
-        <div className={`h-full rounded-full ${color}`} style={{ width: `${value * 100}%` }} role="img" aria-label={`${label}: ${(value * 100).toFixed(1)}%`} />
-      </div>
-    </div>
-  );
-}
-
 export default function StructureAwareGraphRagResearch() {
   return (
     <div className="space-y-16">
@@ -152,18 +134,39 @@ export default function StructureAwareGraphRagResearch() {
       </section>
 
       <section id="rq3">
-        <SectionHeader title="RQ3. Coverage and Precise Grounding Remain Different Problems" description={<p>Multi-hop questions require every supporting item, while visual questions may require page context that text-only object retrieval cannot fully represent.</p>} />
-        <div className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border bg-background p-5 sm:p-6">
-            <h3 className="font-heading text-2xl">90 multi-hop questions</h3>
-            <div className="mt-6 space-y-5"><MetricBar label="Hybrid E5 · any object R@10" value={1} color="bg-slate-500" /><MetricBar label="Hybrid E5 · all objects R@10" value={0.678} /><MetricBar label="Retained E5 + both · all objects R@10" value={0.722} color="bg-emerald-600" /><MetricBar label="Retained E5 + both · all pages R@10" value={0.744} color="bg-violet-600" /></div>
-            <p className="mt-5 text-sm leading-6 text-muted-foreground">Finding at least one evidence item is easy here; retrieving the complete evidence set remains substantially harder.</p>
+        <SectionHeader title="RQ3. Coverage and Precise Grounding Remain Different Problems" description={<p>Some questions require more than finding a single relevant evidence object. <strong>Multi-hop questions require complete evidence coverage</strong>, while <strong>visual and layout questions often require locating the right evidence within a relevant page</strong>.</p>} />
+        <div>
+          <h3 className="font-heading text-2xl">Multi-Hop Questions</h3>
+          <div className="mt-5 overflow-hidden rounded-2xl border bg-background">
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[560px] text-left text-sm">
+                <thead className="bg-blue-700 text-white"><tr><th scope="col" className="px-5 py-4 font-semibold">Retrieval result</th><th scope="col" className="px-5 py-4 text-right font-semibold">Hybrid E5</th><th scope="col" className="px-5 py-4 text-right font-semibold">E5 + Graph + Paths</th></tr></thead>
+                <tbody className="divide-y">
+                  <tr><th scope="row" className="px-5 py-4 font-medium">At least one evidence object found</th><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">100.0%</td><td className="px-5 py-4 text-right font-mono tabular-nums">—</td></tr>
+                  <tr className="bg-muted/35"><th scope="row" className="px-5 py-4 font-medium">All evidence objects found</th><td className="px-5 py-4 text-right font-mono tabular-nums">67.8%</td><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">72.2%</td></tr>
+                  <tr><th scope="row" className="px-5 py-4 font-medium">All evidence pages found</th><td className="px-5 py-4 text-right font-mono tabular-nums">71.1%</td><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">74.4%</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div className="rounded-2xl border bg-background p-5 sm:p-6">
-            <h3 className="font-heading text-2xl">90 visual/layout questions</h3>
-            <div className="mt-6 space-y-5"><MetricBar label="Hybrid E5 · object R@10" value={0.411} /><MetricBar label="Retained E5 + graph + paths · object R@10" value={0.5} color="bg-emerald-600" /><MetricBar label="Retained E5 + graph + paths · page R@10" value={0.778} color="bg-violet-600" /><MetricBar label="Rule-routed GraphRAG · MRR" value={0.32} color="bg-amber-500" /></div>
-            <p className="mt-5 text-sm leading-6 text-muted-foreground">Fusion retrieves more supporting objects, while diagnostic ordering improves top-rank quality. Page-image encoders and multimodal rerankers remain future work.</p>
+          <p className="mt-5 leading-7 text-muted-foreground">The baseline finds at least one relevant object for every multi-hop question, but complete evidence recovery is much harder. Graph and path candidates improve coverage of the full evidence set.</p>
+          <EvidenceConclusion><strong>Key finding:</strong> Finding part of the evidence is easier than finding <strong>all evidence required to support an answer</strong>.</EvidenceConclusion>
+        </div>
+        <div className="mt-10">
+          <h3 className="font-heading text-2xl">Visual and Layout Questions</h3>
+          <div className="mt-5 overflow-hidden rounded-2xl border bg-background">
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[560px] text-left text-sm">
+                <thead className="bg-blue-700 text-white"><tr><th scope="col" className="px-5 py-4 font-semibold">Retrieval result</th><th scope="col" className="px-5 py-4 text-right font-semibold">Hybrid E5</th><th scope="col" className="px-5 py-4 text-right font-semibold">E5 + Graph + Paths</th></tr></thead>
+                <tbody className="divide-y">
+                  <tr><th scope="row" className="px-5 py-4 font-medium">Evidence object found</th><td className="px-5 py-4 text-right font-mono tabular-nums">41.1%</td><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">50.0%</td></tr>
+                  <tr className="bg-muted/35"><th scope="row" className="px-5 py-4 font-medium">Evidence page found</th><td className="px-5 py-4 text-right font-mono tabular-nums">73.3%</td><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">77.8%</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
+          <p className="mt-5 leading-7 text-muted-foreground">Graph and path candidates improve both object and page coverage, but a substantial gap remains between finding the correct page and locating the exact evidence object within it.</p>
+          <EvidenceConclusion><strong>Key finding:</strong> For visual and layout questions, reaching the right page does not guarantee <strong>precise evidence grounding</strong>. Richer visual or multimodal retrieval may be needed to close this gap.</EvidenceConclusion>
         </div>
       </section>
 
