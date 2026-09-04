@@ -134,9 +134,18 @@ export const publications: PublicationInterface[] = [
   },
 ];
 
-export const publicationsByDate: PublicationInterface[] = [...publications].sort(
-  (a, b) => Date.parse(b.date) - Date.parse(a.date)
+const fixedPublications = publications.filter(
+  ({ status }) => status === "Published" || status === "Thesis"
 );
+
+const manuscriptsInPreparation = publications
+  .filter(({ status }) => status !== "Published" && status !== "Thesis")
+  .sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+
+export const publicationsByDate: PublicationInterface[] = [
+  ...fixedPublications,
+  ...manuscriptsInPreparation,
+];
 
 export const featuredPublications: PublicationInterface[] =
   publicationsByDate.slice(0, 3);
