@@ -123,14 +123,14 @@ export const publications: PublicationInterface[] = [
   },
   {
     title:
-      "A Human-Validated Benchmark for Long-Form Financial Document Question Answering",
+      "FinRAG-Equinor: From Annual Report PDFs to a Reliability-Audited Benchmark for Evidence-Grounded RAG",
     authors: "Xiaojing Yang, Zhihan Li, Meriem Beloucif",
     status: "In Preparation",
     venue: "TBD",
-    date: "December 2026",
+    date: "2027",
     role: "First author; benchmark construction and retrieval evaluation lead",
     description:
-      "Introduces a human-validated benchmark for long-form financial document question answering over annual reports, including evidence-object construction, retrieval evaluation, reranking, and statistical analysis.",
+      "Introduces a reliability-audited, 720-item benchmark built from 15 consecutive Equinor/Statoil annual reports, with traceable report-, page-, and object-level evidence. The work evaluates hierarchical evidence grounding, retrieval and reranking failures, multi-hop completeness, and end-to-end answer reliability.",
   },
 ];
 
