@@ -91,10 +91,10 @@ export const publications: PublicationInterface[] = [
   {
     title:
       "Structure-Aware Graph Retrieval for Evidence Grounding over Long Annual Reports",
-    authors: "Xiaojing Yang, Zhihan Li, Meriem Beloucif",
-    status: "Under Review",
-    venue: "EMNLP 2026",
-    date: "October 2026",
+    authors: "Xiaojing Yang, Zhihan Li",
+    status: "In Preparation",
+    venue: "European Conference on Information Retrieval (ECIR 2027)",
+    date: "March 2027",
     role: "First author; retrieval framework and evaluation lead",
     description:
       "Evaluates how document structure, graph-based candidate expansion, and deterministic routing can improve evidence grounding over long financial reports, with robustness testing and held-out-year validation.",
