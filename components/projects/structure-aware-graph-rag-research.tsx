@@ -127,8 +127,7 @@ export default function StructureAwareGraphRagResearch() {
 
       <section id="rq2">
         <SectionHeader title="RQ2. What Does Each Graph Source Add?" description={<p>We compare the same hybrid baseline with <strong>selected-graph candidates, graph-path candidates, and both together</strong>.</p>} />
-        <PaperFigure src="/projects/graph-rag-evidence/paper-controlled-fusion-results.png" alt="Controlled GraphRAG fusion results" height={950} caption="Visualization of paper Table 4. Selected-graph candidates provide most of the exact-object gain; paths mainly add complementary page coverage." />
-        <div className="mt-8 overflow-hidden rounded-2xl border bg-background">
+        <div className="overflow-hidden rounded-2xl border bg-background">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[720px] text-left text-sm">
               <thead className="bg-blue-700 text-white"><tr><th className="px-5 py-4 font-semibold">Method</th><th className="px-5 py-4 text-right font-semibold">Obj R@1</th><th className="px-5 py-4 text-right font-semibold">Obj R@10</th><th className="px-5 py-4 text-right font-semibold">Page R@10</th><th className="px-5 py-4 text-right font-semibold">MRR</th></tr></thead>
