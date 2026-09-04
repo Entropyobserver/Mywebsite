@@ -94,7 +94,7 @@ export const publications: PublicationInterface[] = [
     authors: "Xiaojing Yang, Zhihan Li",
     status: "In Preparation",
     venue: "TBD",
-    date: "TBD",
+    date: "December 2026",
     role: "First author; retrieval framework and evaluation lead",
     description:
       "Evaluates how document structure, graph-based candidate expansion, and deterministic routing can improve evidence grounding over long financial reports, with robustness testing and held-out-year validation.",
@@ -137,4 +137,8 @@ export const publications: PublicationInterface[] = [
 export const featuredPublications: PublicationInterface[] = publications.slice(
   0,
   3
+);
+
+export const publicationsByDate: PublicationInterface[] = [...publications].sort(
+  (a, b) => Date.parse(b.date) - Date.parse(a.date)
 );
