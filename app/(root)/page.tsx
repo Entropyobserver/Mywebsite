@@ -150,33 +150,17 @@ export default function IndexPage() {
           </AnimatedText>
           <div className="mt-6 space-y-5 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
             <AnimatedText as="p" delay={0.1}>
-              My name is Xiaojing Yang. I am a master&apos;s student in Language
-              Technology at Uppsala University with a background in Business
-              Analytics and four years of professional experience as a data
-              analyst. My previous work gave me a strong foundation in data
-              analysis, machine learning, statistical modelling, and
-              experimental design.
-            </AnimatedText>
-            <AnimatedText as="p" delay={0.2}>
-              My research focuses on multilingual NLP, model adaptation, and
-              reliable language technology. It began with low-resource machine
-              translation in the petroleum domain, where I explored
-              parameter-efficient adaptation using LoRA. I later extended this
-              work in my master&apos;s thesis to multilingual adaptation using
-              Mixture-of-Experts and language-specific adapters. Through these
-              projects, I became increasingly interested not only in how models
-              can be adapted to improve their performance, but also in how
-              training data shape model behaviour.
-            </AnimatedText>
-            <AnimatedText as="p" delay={0.3}>
-              My recent work investigates this question through group-level
-              training-data attribution using Shapley values. I also work on
-              evidence-grounded retrieval, including GraphRAG for long
-              documents, and bias evaluation in language and vision-language
-              models. Across these areas, my broader goal is to develop NLP
-              systems that are adaptable, interpretable, and reliable,
-              together with methods for systematically auditing and
-              understanding model behaviour.
+              I am completing an MSc in Language Technology at Uppsala
+              University, with a background in Business Analytics and four
+              years of professional experience as a data analyst. My research
+              focuses on multilingual NLP, model adaptation, and reliable
+              language technology. My work includes a first-author EAMT 2026
+              publication on LoRA-based low-resource machine translation, as
+              well as research on modular Mixture-of-Experts, training-data
+              attribution, and evidence-grounded retrieval over long documents.
+              My broader goal is to develop adaptable and reliable NLP systems
+              and to understand how training data and system design shape model
+              behaviour.
             </AnimatedText>
           </div>
         </div>
