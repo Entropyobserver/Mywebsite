@@ -37,7 +37,7 @@ export default function IndexPage() {
     name: siteConfig.authorName,
     url: siteConfig.url,
     image: siteConfig.ogImage,
-    jobTitle: "AI Researcher & Machine Learning Engineer",
+    jobTitle: "AI & NLP Researcher | Machine Learning Engineer",
     sameAs: [siteConfig.links.github, siteConfig.links.twitter],
   };
 
@@ -81,7 +81,7 @@ export default function IndexPage() {
             width={100}
             sizes="100vw"
             className="bg-primary rounded-full mb-0 h-auto md:mb-2 w-[60%] max-w-[16rem] border-8 border-primary"
-            alt="Xiaojing Yang - AI Researcher and Machine Learning Engineer"
+            alt="Xiaojing Yang - AI and NLP Researcher and Machine Learning Engineer"
             priority
           />
           <AnimatedText
@@ -96,11 +96,11 @@ export default function IndexPage() {
             delay={0.4}
             className="font-heading text-base sm:text-xl md:text-xl lg:text-2xl"
           >
-            AI Researcher & Machine Learning Engineer
+            AI & NLP Researcher | Machine Learning Engineer
           </AnimatedText>
           <div className="mt-4 max-w-[42rem] text-center">
             <p className="leading-normal text-muted-foreground text-sm sm:text-base">
-              NLP | Responsible AI | Data-Centric ML | Intelligent Systems
+              Multilingual NLP | Data-Centric ML | Responsible AI | Intelligent Systems
             </p>
           </div>
 
