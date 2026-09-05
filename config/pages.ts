@@ -54,7 +54,7 @@ export const pagesConfig: PagesConfig = {
   publications: {
     title: "Publications",
     description:
-      "Peer-reviewed work and ongoing manuscripts, with links to publication records and related research projects.",
+      "I currently have one peer-reviewed publication, and I’m working on several other manuscripts that are either under review or still in preparation. You can find them all here, with links to the related project pages if you’d like to learn more about the research behind each paper.",
     metadata: {
       title: "Publications",
       description:
