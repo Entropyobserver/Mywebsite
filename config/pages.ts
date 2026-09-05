@@ -34,7 +34,7 @@ export const pagesConfig: PagesConfig = {
   projects: {
     title: "Projects",
     description:
-      "Selected work across data science, business analytics, NLP research, and applied AI—from exploratory analysis and experimentation to modeling, evaluation, and decision-ready reporting.",
+      "I have hands-on experience taking projects from idea and experimentation to implementation and evaluation, covering both research projects and applied AI systems.",
     metadata: {
       title: "Projects",
       description:
