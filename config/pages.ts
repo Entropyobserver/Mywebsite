@@ -54,7 +54,7 @@ export const pagesConfig: PagesConfig = {
   publications: {
     title: "Publications",
     description:
-      "I currently have one peer-reviewed publication, with several additional manuscripts under review and in preparation. My research outputs span multilingual NLP, machine translation, model adaptation, information retrieval, and data-centric evaluation, reflecting my broader interest in developing and understanding reliable language technologies.",
+      "Peer-reviewed work and ongoing manuscripts, with links to publication records and related research projects.",
     metadata: {
       title: "Publications",
       description:
