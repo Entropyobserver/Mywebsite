@@ -567,6 +567,126 @@ export const Projects: ProjectInterface[] = [
     },
   },
   {
+    id: "equinor-web-corpus",
+    companyName:
+      "Equinor Web Corpus: Reproducible Petroleum-Domain Corpus Pipeline",
+    type: "Research",
+    category: [
+      "Research",
+      "Data Quality",
+      "Data-Centric ML",
+      "Machine Translation",
+      "RAG",
+    ],
+    shortDescription:
+      "A reproducible pipeline for building English-Norwegian MT data and retrieval-ready text from public Equinor web pages and PDFs.",
+    githubLink:
+      "https://github.com/Entropyobserver/norwegian-petroleum-corpus",
+    techStack: [
+      "Python",
+      "Pandas",
+      "Data Curation",
+      "Hugging Face",
+      "NLP",
+      "RAG",
+      "Statistics",
+    ],
+    startDate: new Date("2026-06-01"),
+    endDate: new Date("2026-07-31"),
+    companyLogoImg: "/projects/equinor-web-corpus/cover.svg",
+    keyMetrics: [
+      { value: "52,865", label: "MT pairs" },
+      { value: "73,866", label: "RAG chunks" },
+      { value: "0", label: "Split leakage" },
+    ],
+    pagesInfoArr: [
+      {
+        title: "Reproducible Corpus Pipeline",
+        description:
+          "The pipeline crawls public Equinor web pages and PDFs, extracts bilingual documents, builds sentence candidates, aligns English-Norwegian text, filters the resulting pairs, and creates document-level train, validation, and test splits.",
+        imgArr: ["/projects/equinor-web-corpus/cover.svg"],
+      },
+      {
+        title: "Corpus Outputs and Quality Control",
+        description:
+          "The current release contains aggregate reports and reproducible construction code. It produces 52,865 filtered English-Norwegian sentence pairs and 73,866 retrieval chunks, with document-level split control to prevent leakage.",
+        imgArr: [
+          "/projects/equinor-web-corpus/equinor-mt-pairs-by-year.png",
+        ],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "This open-source research project builds a reproducible corpus-construction pipeline for Norwegian petroleum-domain language technology. The current version uses public Equinor web pages and PDFs as its first source.",
+        "The same processed source supports English-Norwegian machine translation, language-model pretraining, retrieval experiments, and continual domain adaptation.",
+      ],
+      bullets: [
+        "Built a reproducible pipeline for crawling, extracting, aligning, and filtering public Equinor web and PDF sources.",
+        "Produced 52,865 English-Norwegian sentence pairs and 73,866 RAG chunks with document-level split control.",
+      ],
+    },
+  },
+  {
+    id: "continual-petroleum-mt",
+    companyName:
+      "Replay-Based Continual Adaptation for English-Norwegian Petroleum Machine Translation",
+    type: "Research",
+    category: [
+      "Research",
+      "Machine Translation",
+      "LoRA / PEFT",
+      "Domain Adaptation",
+      "Evaluation",
+    ],
+    shortDescription:
+      "A continual LoRA adaptation study examining new-source learning, old-source forgetting, and replay-based retention in petroleum-domain MT.",
+    techStack: [
+      "Python",
+      "PyTorch",
+      "Transformers",
+      "Hugging Face",
+      "NLLB-200",
+      "LoRA",
+      "PEFT",
+      "SacreBLEU",
+      "chrF",
+      "Statistics",
+    ],
+    startDate: new Date("2026-06-01"),
+    endDate: new Date("2026-07-31"),
+    companyLogoImg: "/projects/continual-petroleum-mt/cover.svg",
+    keyMetrics: [
+      { value: "27", label: "Model runs" },
+      { value: "3", label: "Random seeds" },
+      { value: "10%", label: "Max replay" },
+    ],
+    pagesInfoArr: [
+      {
+        title: "Continual Adaptation Design",
+        description:
+          "An NPD-adapted LoRA model is updated on the newer Equinor corpus. The study compares adaptation without replay, 5% NPD replay, 10% NPD replay, and mixed-source training under fixed NPD and Equinor test sets.",
+        imgArr: ["/projects/continual-petroleum-mt/cover.svg"],
+      },
+      {
+        title: "Retention-Adaptation Trade-Off",
+        description:
+          "Continual adaptation without replay reaches 42.72 BLEU on Equinor but reduces NPD BLEU from 61.16 to 54.73. Adding 5% or 10% replay recovers NPD BLEU to 58.21 and 59.22, with Equinor BLEU of 42.11 and 41.85 respectively.",
+        imgArr: [],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "This research project studies how an English-Norwegian petroleum MT system can be updated when new domain data arrive without fully retraining on all earlier data.",
+        "The experiments separate adaptation to the Equinor source from retention on the earlier NPD source, making the cost of forgetting and the benefit of replay directly measurable.",
+      ],
+      bullets: [
+        "Built a petroleum MT pipeline for LoRA fine-tuning, continual adaptation, replay, and terminology-sensitive evaluation.",
+        "Fine-tuned NLLB-200 distilled 600M across single-source, mixed-source, continual, and replay-based update settings to study adaptation under changing domain data.",
+        "Compared continual and replay-based updates using BLEU, chrF, terminology metrics, and qualitative error analysis to identify retention, forgetting, and domain-shift patterns.",
+      ],
+    },
+  },
+  {
     id: "vlm-bias-evaluation",
     companyName: "Reusable Bias Evaluation Framework for LMs and VLMs",
     type: "Technical Project",

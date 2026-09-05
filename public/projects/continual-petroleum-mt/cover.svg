@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 810" role="img" aria-labelledby="title desc">
+  <title id="title">Replay-based continual petroleum machine translation</title>
+  <desc id="desc">A technical diagram comparing continual LoRA adaptation with five and ten percent replay for retaining earlier petroleum translation performance.</desc>
+  <rect width="1440" height="810" fill="#0b1220"/>
+  <rect x="72" y="62" width="1296" height="686" rx="20" fill="#111b2e" stroke="#30405d" stroke-width="2"/>
+  <text x="112" y="132" fill="#93c5fd" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="700">CONTINUAL MACHINE TRANSLATION</text>
+  <text x="112" y="207" fill="#f8fafc" font-family="Inter,Arial,sans-serif" font-size="50" font-weight="750">Adapt new. Retain old.</text>
+  <text x="112" y="252" fill="#aebbd0" font-family="Inter,Arial,sans-serif" font-size="24">LoRA updates across NPD and Equinor petroleum data</text>
+  <g transform="translate(112 330)" font-family="Inter,Arial,sans-serif">
+    <rect width="300" height="126" rx="12" fill="#17243a" stroke="#60a5fa" stroke-width="2"/>
+    <text x="28" y="48" fill="#93c5fd" font-size="20" font-weight="700">STAGE 1</text>
+    <text x="28" y="85" fill="#f8fafc" font-size="26" font-weight="700">NPD LoRA adapter</text>
+    <path d="M320 63h120" stroke="#6ee7d8" stroke-width="7"/><path d="m420 44 28 19-28 19" fill="none" stroke="#6ee7d8" stroke-width="7"/>
+    <rect x="470" width="370" height="126" rx="12" fill="#17243a" stroke="#2dd4bf" stroke-width="2"/>
+    <text x="498" y="48" fill="#6ee7d8" font-size="20" font-weight="700">STAGE 2</text>
+    <text x="498" y="85" fill="#f8fafc" font-size="26" font-weight="700">Equinor continual update</text>
+    <path d="M655 150v62H344v-62" fill="none" stroke="#f6c177" stroke-width="6"/>
+    <text x="500" y="245" fill="#f6c177" font-size="21" font-weight="700" text-anchor="middle">5% / 10% NPD replay</text>
+  </g>
+  <g transform="translate(990 325)" font-family="Inter,Arial,sans-serif">
+    <text x="0" y="26" fill="#eef4ff" font-size="23" font-weight="700">NPD retention</text>
+    <rect x="0" y="58" width="232" height="42" rx="6" fill="#334155"/>
+    <rect x="0" y="116" width="270" height="42" rx="6" fill="#3b82f6"/>
+    <rect x="0" y="174" width="286" height="42" rx="6" fill="#2dd4bf"/>
+    <text x="244" y="86" fill="#cbd5e1" font-size="20">54.73</text>
+    <text x="282" y="144" fill="#cbd5e1" font-size="20">58.21</text>
+    <text x="298" y="202" fill="#cbd5e1" font-size="20">59.22</text>
+    <text x="0" y="252" fill="#94a3b8" font-size="18">no replay / 5% / 10%</text>
+  </g>
+  <line x1="112" y1="672" x2="1328" y2="672" stroke="#30405d" stroke-width="2"/>
+  <text x="112" y="714" fill="#aebbd0" font-family="Inter,Arial,sans-serif" font-size="21">Evaluation: BLEU · chrF · terminology metrics · qualitative error analysis</text>
+</svg>

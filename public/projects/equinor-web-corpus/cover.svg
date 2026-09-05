@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 810" role="img" aria-labelledby="title desc">
+  <title id="title">Equinor Web Corpus pipeline</title>
+  <desc id="desc">A technical diagram of a reproducible petroleum-domain corpus pipeline from public documents to machine translation pairs and retrieval chunks.</desc>
+  <rect width="1440" height="810" fill="#0b1220"/>
+  <rect x="72" y="62" width="1296" height="686" rx="20" fill="#111b2e" stroke="#30405d" stroke-width="2"/>
+  <text x="112" y="132" fill="#6ee7d8" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="700">DATA-CENTRIC LANGUAGE TECHNOLOGY</text>
+  <text x="112" y="207" fill="#f8fafc" font-family="Inter,Arial,sans-serif" font-size="54" font-weight="750">Equinor Web Corpus</text>
+  <text x="112" y="252" fill="#aebbd0" font-family="Inter,Arial,sans-serif" font-size="24">Reproducible English-Norwegian petroleum-domain data pipeline</text>
+  <g transform="translate(112 340)" font-family="Inter,Arial,sans-serif">
+    <g fill="#17243a" stroke="#3b82f6" stroke-width="2">
+      <rect width="190" height="92" rx="10"/><rect x="225" width="190" height="92" rx="10"/>
+      <rect x="450" width="190" height="92" rx="10"/><rect x="675" width="190" height="92" rx="10"/>
+      <rect x="900" width="190" height="92" rx="10"/>
+    </g>
+    <g fill="#eef4ff" font-size="22" font-weight="700" text-anchor="middle">
+      <text x="95" y="56">CRAWL</text><text x="320" y="56">EXTRACT</text>
+      <text x="545" y="56">ALIGN</text><text x="770" y="56">FILTER</text>
+      <text x="995" y="56">SPLIT</text>
+    </g>
+    <g stroke="#6ee7d8" stroke-width="5">
+      <path d="M190 46h35"/><path d="M415 46h35"/><path d="M640 46h35"/><path d="M865 46h35"/>
+    </g>
+  </g>
+  <g transform="translate(112 522)" font-family="Inter,Arial,sans-serif">
+    <rect width="350" height="132" rx="12" fill="#16263c" stroke="#2dd4bf"/>
+    <rect x="390" width="350" height="132" rx="12" fill="#16263c" stroke="#60a5fa"/>
+    <rect x="780" width="310" height="132" rx="12" fill="#16263c" stroke="#94a3b8"/>
+    <text x="28" y="55" fill="#f8fafc" font-size="38" font-weight="750">52,865</text>
+    <text x="28" y="91" fill="#aebbd0" font-size="21">filtered MT pairs</text>
+    <text x="418" y="55" fill="#f8fafc" font-size="38" font-weight="750">73,866</text>
+    <text x="418" y="91" fill="#aebbd0" font-size="21">retrieval chunks</text>
+    <text x="808" y="55" fill="#f8fafc" font-size="38" font-weight="750">0</text>
+    <text x="808" y="91" fill="#aebbd0" font-size="21">document split leakage</text>
+  </g>
+</svg>
