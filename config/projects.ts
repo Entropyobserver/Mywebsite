@@ -572,8 +572,7 @@ export const Projects: ProjectInterface[] = [
   },
   {
     id: "equinor-web-corpus",
-    companyName:
-      "Equinor Web Corpus: Reproducible Petroleum-Domain Corpus Pipeline",
+    companyName: "Norwegian Petroleum Corpus",
     type: "Research",
     category: [
       "Research",
