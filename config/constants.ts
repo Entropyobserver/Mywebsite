@@ -122,6 +122,10 @@ export type ValidSkills =
   | "Cohen's Kappa"
   | "VLM"
   | "Data Curation"
+  | "Web Crawling"
+  | "PDF Processing"
+  | "LaBSE"
+  | "Multilingual NLP"
   | "Benchmarking"
   | "LaTeX"
   | "SLIDE";

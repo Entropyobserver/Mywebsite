@@ -572,7 +572,7 @@ export const Projects: ProjectInterface[] = [
   },
   {
     id: "equinor-web-corpus",
-    companyName: "Norwegian Petroleum Corpus",
+    companyName: "Norwegian Petroleum Language Data Pipeline",
     type: "Research",
     category: [
       "Research",
@@ -587,12 +587,11 @@ export const Projects: ProjectInterface[] = [
       "https://github.com/Entropyobserver/norwegian-petroleum-corpus",
     techStack: [
       "Python",
-      "Pandas",
-      "Data Curation",
-      "Hugging Face",
-      "NLP",
-      "RAG",
-      "Statistics",
+      "Web Crawling",
+      "PDF Processing",
+      "LaBSE",
+      "Multilingual NLP",
+      "Information Retrieval",
     ],
     startDate: new Date("2026-06-01"),
     endDate: new Date("2026-07-31"),
@@ -630,13 +629,9 @@ export const Projects: ProjectInterface[] = [
     ],
     descriptionDetails: {
       paragraphs: [
-        "This project develops an open-source and reproducible pipeline for constructing Norwegian petroleum-domain research data from public English and Norwegian documents. The current implementation processes Equinor web pages and PDFs to support machine translation, language-model training and adaptation, and information retrieval while preserving document-level provenance.",
-        "The public repository provides the processing code, schemas, aggregate reports, and reproducibility materials rather than redistributing the full source-derived text corpus.",
+        "This project develops an open-source and reproducible pipeline for constructing Norwegian petroleum-domain research data from public English and Norwegian documents. The current implementation processes Equinor web pages and PDFs to support machine translation, language-model research, and information retrieval while preserving document-level provenance.",
       ],
-      bullets: [
-        "Built a reproducible pipeline for crawling, extracting, aligning, and filtering public Equinor web and PDF sources.",
-        "Produced 52,865 English-Norwegian sentence pairs and 73,866 RAG chunks with document-level split control.",
-      ],
+      bullets: [],
     },
   },
   {

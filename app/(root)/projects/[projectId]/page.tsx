@@ -6,6 +6,7 @@ import { Icons } from "@/components/common/icons";
 import FinragEquinorResearch from "@/components/projects/finrag-equinor-research";
 import GroupShapleyResearch from "@/components/projects/group-shapley-research";
 import ModularLoraResearch from "@/components/projects/modular-lora-research";
+import NorwegianPetroleumCorpusResearch from "@/components/projects/norwegian-petroleum-corpus-research";
 import ProjectDescription from "@/components/projects/project-description";
 import StructureAwareGraphRagResearch from "@/components/projects/structure-aware-graph-rag-research";
 import { buttonVariants } from "@/components/ui/button";
@@ -153,6 +154,8 @@ export default function Project({ params }: ProjectPageProps) {
         <GroupShapleyResearch />
       ) : project.id === "structure-aware-graph-rag" ? (
         <StructureAwareGraphRagResearch />
+      ) : project.id === "equinor-web-corpus" ? (
+        <NorwegianPetroleumCorpusResearch />
       ) : (
         <div className="mb-7 ">
           <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-5">
