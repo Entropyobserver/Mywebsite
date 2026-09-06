@@ -6,63 +6,63 @@ import { cn } from "@/lib/utils";
 
 const designRows = [
   [
-    "NPD-only adaptation",
-    "How well the original adapted model performs on the earlier NPD source.",
+    "NPD only",
+    "Performance before the model is updated with Equinor data.",
   ],
   [
-    "Equinor-full adaptation",
-    "How much performance improves when adapting directly to the newer Equinor source.",
+    "Equinor only",
+    "Performance when the model is trained directly on Equinor data.",
   ],
   [
-    "Mixed-full training",
-    "A full retraining baseline using both NPD and Equinor data.",
+    "Mixed training",
+    "Performance when all NPD and Equinor data are used together.",
   ],
   [
-    "Continual NPD to Equinor",
-    "Whether updating the NPD adapter on Equinor improves new-source performance but causes old-source forgetting.",
+    "Continual adaptation",
+    "What happens when the NPD model is updated using only Equinor data.",
   ],
   [
-    "Continual + 5% / 10% replay",
+    "Continual + replay",
     "Whether adding a small amount of NPD data during the Equinor update reduces forgetting.",
   ],
 ] as const;
 
 const resultRows = [
   [
-    "NPD-only",
+    "NPD only",
     "61.16",
     "34.03",
-    "Strong earlier-source performance, weak Equinor transfer.",
+    "Strong on NPD but weak on Equinor.",
   ],
   [
-    "Equinor-full",
+    "Equinor only",
     "50.37",
     "42.29",
-    "Strong newer-source performance, weaker NPD retention.",
+    "Strong on Equinor but weak on NPD.",
   ],
   [
-    "Mixed-full",
+    "Mixed training",
     "59.92",
     "42.26",
-    "Strong full-retraining baseline across both sources.",
+    "Strong overall results using all data.",
   ],
   [
-    "Continual NPD to Equinor",
+    "Continual adaptation",
     "54.73",
     "42.72",
-    "Best Equinor score, but clear NPD performance loss.",
+    "Learns Equinor well but forgets some NPD knowledge.",
   ],
   [
     "Continual + 5% replay",
     "58.21",
     "42.11",
-    "Recovers much of the NPD loss with small Equinor cost.",
+    "Reduces forgetting using a small amount of NPD data.",
   ],
   [
     "Continual + 10% replay",
     "59.22",
     "41.85",
-    "Best replay retention, close to mixed-full on NPD.",
+    "Gives the best lightweight balance across both sources.",
   ],
 ] as const;
 
@@ -131,8 +131,8 @@ export default function ContinualPetroleumMtResearch() {
           Research Question
         </h2>
         <p className="mt-4 max-w-3xl text-xl font-medium leading-8">
-          How should an English-Norwegian petroleum MT system be updated when
-          new data from a different source become available?
+          How can an MT model learn from a new data source without forgetting
+          what it learned from the previous source?
         </p>
         <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">
           The answer is evaluated through a controlled comparison of
@@ -146,10 +146,12 @@ export default function ContinualPetroleumMtResearch() {
           Experimental Design
         </h2>
         <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">
-          The experiments compare single-source training, mixed-source
-          training, continual adaptation, and replay-based continual adaptation.
-          All settings use fixed NPD and Equinor test sets. In total, 27 LoRA
-          adapters were trained across three random seeds.
+          The experiments compare five update strategies using the same NLLB-200
+          distilled 600M backbone and LoRA configuration. All strategies are
+          evaluated on fixed NPD and Equinor test sets.
+        </p>
+        <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">
+          In total, 27 LoRA adapters were trained across three random seeds.
         </p>
         <ResultsTable
           headers={["Strategy", "What it tests"]}
@@ -158,9 +160,9 @@ export default function ContinualPetroleumMtResearch() {
       </section>
 
       <section>
-        <h2 className="font-heading text-3xl leading-tight">Evidence</h2>
+        <h2 className="font-heading text-3xl leading-tight">Results</h2>
         <ResultsTable
-          headers={["Update strategy", "NPD BLEU", "Equinor BLEU", "Takeaway"]}
+          headers={["Update strategy", "NPD BLEU", "Equinor BLEU", "What it shows"]}
           rows={resultRows}
         />
         <div className="mt-6 rounded-r-md border-l-4 border-blue-700 bg-blue-50 px-5 py-4 leading-7 text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
