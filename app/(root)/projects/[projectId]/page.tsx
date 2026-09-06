@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { Icons } from "@/components/common/icons";
+import ContinualPetroleumMtResearch from "@/components/projects/continual-petroleum-mt-research";
 import FinragEquinorResearch from "@/components/projects/finrag-equinor-research";
 import GroupShapleyResearch from "@/components/projects/group-shapley-research";
 import ModularLoraResearch from "@/components/projects/modular-lora-research";
@@ -36,7 +37,8 @@ export default function Project({ params }: ProjectPageProps) {
         project.id === "modular-lora-experts" ||
           project.id === "finrag-equinor" ||
           project.id === "group-shapley-attribution" ||
-          project.id === "structure-aware-graph-rag"
+          project.id === "structure-aware-graph-rag" ||
+          project.id === "continual-petroleum-mt"
           ? "max-w-5xl"
           : "max-w-3xl"
       )}
@@ -156,6 +158,8 @@ export default function Project({ params }: ProjectPageProps) {
         <StructureAwareGraphRagResearch />
       ) : project.id === "equinor-web-corpus" ? (
         <NorwegianPetroleumCorpusResearch />
+      ) : project.id === "continual-petroleum-mt" ? (
+        <ContinualPetroleumMtResearch />
       ) : (
         <div className="mb-7 ">
           <h2 className="inline-block font-heading text-3xl leading-tight lg:text-3xl mb-5">
