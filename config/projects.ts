@@ -497,73 +497,78 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Experimental Design",
         description:
-          "The study compares three training conditions:",
+          "The study compares three training datasets:",
         table: {
-          headers: ["Training condition", "Purpose"],
+          headers: ["Training dataset", "Purpose"],
           rows: [
             [
               "Original mixed data",
-              "Contains both Bokmål and Nynorsk forms",
+              "Contains both Bokmål and Nynorsk",
             ],
             [
               "Bokmål-filtered data",
-              "Contains mainly Bokmål forms",
+              "Contains mainly Bokmål",
             ],
             [
               "Same-size mixed subset",
-              "Controls for differences in data size",
+              "Contains mixed data but has the same size as the filtered data",
             ],
           ],
         },
         followupParagraphs: [
-          "The Bokmål-filtered data and the same-size mixed subset contain exactly the same number of sentence pairs. This allows us to test whether any change comes from the type of data selected rather than the amount of data.",
+          "The filtered dataset and the same-size mixed dataset contain exactly the same number of sentence pairs. Comparing them allows us to separate the effect of data selection from the effect of data size.",
         ],
         imgArr: ["/projects/target-standard-bias/study-design.svg"],
       },
       {
         title:
-          "RQ1. Does Bokmål-oriented filtering change the model’s output?",
+          "RQ1. Does filtering change the type of Norwegian produced by the model?",
         answer:
-          "Yes. The filtered model produces much more Bokmål and almost no Nynorsk.",
+          "Yes. After training on Bokmål-filtered data, the model produces much more Bokmål and much less Nynorsk.",
         description:
-          "On the same mixed-standard test set, Bokmål-only outputs increase from 79.0% to 93.4%, while Nynorsk-only outputs fall from 14.2% to 0.7%.\n\nHuman evaluation also showed that filtering made the translations more Bokmål-like but did not clearly improve translation accuracy.",
+          "We compared two models on the same 1,313 test sentences: one trained on mixed Bokmål–Nynorsk data and one trained on Bokmål-filtered data. We then used SLIDE to identify whether each translation was written in Bokmål or Nynorsk.\n\nWith mixed training data, 79.0% of the translations were Bokmål and 14.2% were Nynorsk. After Bokmål filtering, 93.4% were Bokmål and only 0.7% were Nynorsk.\n\nHuman evaluation confirmed that the filtered model produced more Bokmål, but its translations were not clearly more accurate.",
         imgArr: ["/projects/target-standard-bias/written-standard-shift.svg"],
       },
       {
         title:
-          "RQ2. Is the change caused by having less training data?",
-        answer: "No. It is caused by the type of data selected.",
+          "RQ2. Is the change caused by using less training data?",
+        answer: "No. The change is caused by the type of examples selected.",
         description:
-          "Both models use the same amount of training data, but the filtered model still produces much more Bokmål. This shows that the change comes from selecting Bokmål-oriented examples, not from using fewer examples.\n\nThe same result appears across the 600M, 1.3B, and 3.3B NLLB-200 models.",
+          "The Bokmål-filtered model and the same-size mixed-data model were trained on exactly the same number of sentence pairs. However, the filtered model still produced much more Bokmål.\n\nThis means that the model changed because Bokmål-oriented examples were selected—not because the amount of training data was reduced.\n\nThe result was also consistent across the 600M, 1.3B, and 3.3B NLLB-200 models.",
         imgArr: ["/projects/target-standard-bias/model-scale-results.svg"],
       },
       {
         title:
-          "RQ3. Does the choice of reference translations change which model looks better?",
+          "RQ3. Does the test set change which model looks better?",
         answer:
-          "Yes. The better model depends on the written standard used in the reference translations.",
+          "Yes. Each model performs better when the test references are closer to the type of data on which it was trained.",
         table: {
           headers: [
-            "Reference translations",
-            "Mixed-data model",
-            "Bokmål-filtered model",
+            "Test references",
+            "Same-size mixed model (BLEU)",
+            "Bokmål-filtered model (BLEU)",
             "Better model",
           ],
           rows: [
             ["Bokmål", "59.37", "61.28", "Bokmål-filtered"],
-            ["Mixed Bokmål–Nynorsk", "61.77", "58.49", "Mixed-data"],
+            [
+              "Mixed Bokmål–Nynorsk",
+              "61.77",
+              "58.49",
+              "Same-size mixed",
+            ],
           ],
         },
         followupParagraphs: [
-          "When the reference translations are in Bokmål, the Bokmål-filtered model scores higher. When the references contain both Bokmål and Nynorsk, the mixed-data model scores higher.",
-          "This shows that a model can receive a higher score because its written standard matches the references—not necessarily because its translations are more accurate.",
+          "On the Bokmål test set, the Bokmål-filtered model receives the higher score. On the mixed-standard test set, the mixed-data model receives the higher score.",
+          "Therefore, a model may receive a higher score because it uses the same written standard as the reference translations—not necessarily because it translates the meaning more accurately.",
         ],
         imgArr: ["/projects/target-standard-bias/in-domain-results.svg"],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "This project investigates how filtering a mixed Bokmål–Nynorsk training corpus toward Bokmål changes a Norwegian machine translation model. It examines whether filtering changes the model’s output and whether the choice of reference translations affects the evaluation result.",
+        "This project investigates whether data filtering changes the type of Norwegian produced by a machine translation model. The original petroleum corpus contains both Bokmål and Nynorsk. We examine what happens when the training data are filtered to contain mainly Bokmål.",
         "As co-author and experimental analysis lead, I designed and conducted the controlled study of how Bokmål-oriented data filtering affects model behaviour and evaluation.",
       ],
       bullets: [
