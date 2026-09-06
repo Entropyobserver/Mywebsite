@@ -146,11 +146,10 @@ export default function ContinualPetroleumMtResearch() {
           Experimental Design
         </h2>
         <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">
-          The study starts from an NPD-adapted English-Norwegian petroleum MT
-          model and uses newer Equinor data as the update source. It compares
-          update strategies under the same NLLB-200 distilled 600M backbone,
-          LoRA configuration, three random seeds, and fixed NPD and Equinor
-          test sets.
+          The experiments compare single-source training, mixed-source
+          training, continual adaptation, and replay-based continual adaptation.
+          All settings use fixed NPD and Equinor test sets. In total, 27 LoRA
+          adapters were trained across three random seeds.
         </p>
         <ResultsTable
           headers={["Strategy", "What it tests"]}
