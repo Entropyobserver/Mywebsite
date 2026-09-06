@@ -656,7 +656,7 @@ export const Projects: ProjectInterface[] = [
     endDate: new Date("2026-07-31"),
     companyLogoImg: "/projects/continual-petroleum-mt/cover.svg",
     keyMetrics: [
-      { value: "27", label: "Model runs" },
+      { value: "27", label: "Trained adapters" },
       { value: "3", label: "Random seeds" },
       { value: "10%", label: "Max replay" },
     ],
@@ -664,7 +664,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Corpus Foundation",
         description:
-          "This study builds on the reproducible Equinor corpus pipeline, using its temporally organized English-Norwegian sentence pairs as the new adaptation stream.",
+          "This study builds on the reproducible Equinor corpus pipeline, using its temporally organized English-Norwegian sentence pairs as the newer source stream for continual adaptation.",
         imgArr: [],
         relatedProject: {
           href: "/projects/equinor-web-corpus",
@@ -674,25 +674,27 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Continual Adaptation Design",
         description:
-          "An NPD-adapted LoRA model is updated on the newer Equinor corpus. The study compares adaptation without replay, 5% NPD replay, 10% NPD replay, and mixed-source training under fixed NPD and Equinor test sets.",
+          "An NPD-adapted LoRA model is continued on newer Equinor data and evaluated on both sources. The study compares single-source training, mixed-source training, continual adaptation without replay, and replay-based continual adaptation with 5% and 10% NPD replay.",
         imgArr: ["/projects/continual-petroleum-mt/cover.svg"],
       },
       {
         title: "Retention-Adaptation Trade-Off",
         description:
-          "Continual adaptation without replay reaches 42.72 BLEU on Equinor but reduces NPD BLEU from 61.16 to 54.73. Adding 5% or 10% replay recovers NPD BLEU to 58.21 and 59.22, with Equinor BLEU of 42.11 and 41.85 respectively.",
+          "Continual adaptation without replay reaches 42.72 BLEU on Equinor but reduces NPD BLEU from 61.16 to 54.73. Adding 5% and 10% replay recovers NPD BLEU to 58.21 and 59.22, while keeping Equinor BLEU at 42.11 and 41.85 respectively.",
         imgArr: [],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "Building on the reproducible Equinor corpus pipeline, this research project studies how an English-Norwegian petroleum MT system can be updated when new domain data arrive without fully retraining on all earlier data.",
-        "The experiments separate adaptation to the Equinor source from retention on the earlier NPD source, making the cost of forgetting and the benefit of replay directly measurable.",
+        "Building on the reproducible Equinor corpus pipeline, this research project studies how an English-Norwegian petroleum MT system can be updated from an earlier NPD source to newer Equinor data without joint retraining on all old and new data.",
+        "Across 27 trained LoRA adapters and three random seeds, the experiments compare single-source training, mixed-source training, continual adaptation, and replay-based continual adaptation under fixed NPD and Equinor test sets.",
+        "The study separates adaptation to the newer Equinor source from retention on the earlier NPD source, making the cost of forgetting and the benefit of replay directly measurable.",
       ],
       bullets: [
-        "Built a petroleum MT pipeline for LoRA fine-tuning, continual adaptation, replay, and terminology-sensitive evaluation.",
-        "Fine-tuned NLLB-200 distilled 600M across single-source, mixed-source, continual, and replay-based update settings to study adaptation under changing domain data.",
-        "Compared continual and replay-based updates using BLEU, chrF, terminology metrics, and qualitative error analysis to identify retention, forgetting, and domain-shift patterns.",
+        "Designed a controlled continual-adaptation study for English-Norwegian petroleum-domain MT.",
+        "Built NPD, Equinor, mixed-source, and replay-based training conditions for LoRA-adapted NLLB-200 distilled 600M.",
+        "Implemented replay-based update settings with 5% and 10% NPD replay.",
+        "Evaluated all update strategies on fixed NPD and Equinor test sets using BLEU, chrF, terminology metrics, and predefined comparison deltas.",
       ],
     },
   },
