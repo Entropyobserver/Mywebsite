@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import { Icons } from "@/components/common/icons";
 import { buttonVariants } from "@/components/ui/button";
@@ -60,6 +61,21 @@ export default function NorwegianPetroleumCorpusResearch() {
         <h3 className="mt-5 font-heading text-2xl leading-tight">
           Reproducible Corpus Pipeline
         </h3>
+        <a
+          href="/projects/equinor-web-corpus/cover.svg"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Open Norwegian Petroleum Language Data Pipeline figure at full size"
+          className="mt-6 block overflow-hidden rounded-md border bg-slate-50"
+        >
+          <Image
+            src="/projects/equinor-web-corpus/cover.svg"
+            alt="Norwegian Petroleum Language Data Pipeline"
+            width={1440}
+            height={810}
+            className="h-auto w-full"
+          />
+        </a>
         <ol className="mt-6 divide-y border-y">
           {pipelineSteps.map((step, index) => (
             <li key={step.title} className="grid gap-3 py-6 sm:grid-cols-[3rem_1fr]">
