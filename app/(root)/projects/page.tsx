@@ -48,6 +48,11 @@ const renderContent = (tabVal: string) => {
 export default function ProjectsPage() {
   const tabItems = [
     {
+      value: "all",
+      label: "All Projects",
+      content: renderContent("all"),
+    },
+    {
       value: "research",
       label: "Research",
       content: renderContent("research"),
@@ -64,7 +69,7 @@ export default function ProjectsPage() {
       title={pagesConfig.projects.title}
       description={pagesConfig.projects.description}
     >
-      <ResponsiveTabs items={tabItems} defaultValue="research" />
+      <ResponsiveTabs items={tabItems} defaultValue="all" />
     </PageContainer>
   );
 }

@@ -698,8 +698,8 @@ export const Projects: ProjectInterface[] = [
   {
     id: "vlm-bias-evaluation",
     companyName: "Reusable Bias Evaluation Framework for LMs and VLMs",
-    type: "Technical Project",
-    category: ["Technical Project", "Responsible AI", "NLP", "Evaluation"],
+    type: "Research",
+    category: ["Research", "Responsible AI", "NLP", "Evaluation"],
     shortDescription:
       "A reusable evaluation framework for matched-prompt and image-instruction bias studies, covering geographic, gender-occupation, and political/moral VLM framing cases.",
     techStack: [
