@@ -687,14 +687,11 @@ export const Projects: ProjectInterface[] = [
     descriptionDetails: {
       paragraphs: [
         "This project studies this question in a source-update setting: an MT model is first adapted to an earlier NPD petroleum corpus and then updated with newer Equinor data. The goal is to compare different update strategies and understand the trade-off between learning from the newer source and retaining performance on the earlier source.",
-        "Across 27 trained LoRA adapters and three random seeds, the experiments compare single-source training, mixed-source training, continual adaptation, and replay-based continual adaptation under fixed NPD and Equinor test sets.",
-        "The study separates adaptation to the newer Equinor source from retention on the earlier NPD source, making the cost of forgetting and the benefit of replay directly measurable.",
+        "As the project and experimental lead, my contributions included:",
       ],
       bullets: [
-        "Designed a controlled continual-adaptation study for English-Norwegian petroleum-domain MT.",
-        "Built NPD, Equinor, mixed-source, and replay-based training conditions for LoRA-adapted NLLB-200 distilled 600M.",
-        "Implemented replay-based update settings with 5% and 10% NPD replay.",
-        "Evaluated all update strategies on fixed NPD and Equinor test sets using BLEU, chrF, terminology metrics, and predefined comparison deltas.",
+        "Developing a continual-adaptation pipeline comparing single-source, mixed-source, sequential, and replay-based LoRA training.",
+        "Evaluating new-source adaptation, previous-source retention, and catastrophic forgetting using translation-quality and terminology metrics.",
       ],
     },
   },
