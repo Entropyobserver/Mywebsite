@@ -522,7 +522,6 @@ export const Projects: ProjectInterface[] = [
         },
         followupParagraphs: [
           "The Bokmål-filtered data and the same-size mixed subset contain exactly the same number of examples. This makes it possible to determine whether the results come from selecting more Bokmål data or simply from using less training data.",
-          "The experiments use LoRA-adapted NLLB-200 models and are repeated across three model sizes.",
         ],
         imgArr: [],
       },
