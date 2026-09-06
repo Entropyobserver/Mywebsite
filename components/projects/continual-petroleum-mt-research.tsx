@@ -69,9 +69,13 @@ const resultRows = [
 function ResultsTable({
   headers,
   rows,
+  highlightCells = {},
+  highlightRows = {},
 }: {
   headers: readonly string[];
   rows: readonly (readonly string[])[];
+  highlightCells?: Record<string, string>;
+  highlightRows?: Record<string, string>;
 }) {
   return (
     <div className="mt-5 overflow-hidden rounded-md border">
@@ -95,7 +99,7 @@ function ResultsTable({
           </thead>
           <tbody className="divide-y">
             {rows.map((row) => (
-              <tr key={row[0]}>
+              <tr key={row[0]} className={highlightRows[row[0]]}>
                 {row.map((cell, index) =>
                   index === 0 ? (
                     <th key={cell} scope="row" className="px-5 py-4 font-medium">
@@ -107,7 +111,8 @@ function ResultsTable({
                       className={cn(
                         "px-5 py-4 text-muted-foreground",
                         index < row.length - 1 &&
-                          "text-right font-mono tabular-nums text-foreground"
+                          "text-right font-mono tabular-nums text-foreground",
+                        highlightCells[`${row[0]}-${headers[index]}`]
                       )}
                     >
                       {cell}
@@ -162,6 +167,18 @@ export default function ContinualPetroleumMtResearch() {
         <ResultsTable
           headers={["Update strategy", "NPD BLEU", "Equinor BLEU", "What it shows"]}
           rows={resultRows}
+          highlightRows={{
+            "Continual + 10% replay": "bg-emerald-50/70 dark:bg-emerald-950/20",
+          }}
+          highlightCells={{
+            "NPD only-NPD BLEU": "font-bold text-emerald-700 dark:text-emerald-300",
+            "Continual adaptation-Equinor BLEU":
+              "font-bold text-blue-700 dark:text-blue-300",
+            "Continual + 10% replay-NPD BLEU":
+              "font-bold text-emerald-700 dark:text-emerald-300",
+            "Continual + 10% replay-Equinor BLEU":
+              "font-semibold text-foreground",
+          }}
         />
         <div className="mt-6 rounded-r-md border-l-4 border-blue-700 bg-blue-50 px-5 py-4 leading-7 text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
           <h3 className="font-heading text-xl leading-tight">Main Finding</h3>
