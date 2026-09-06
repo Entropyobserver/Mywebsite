@@ -579,9 +579,12 @@ export const Projects: ProjectInterface[] = [
     descriptionDetails: {
       paragraphs: [
         "This project investigates how data filtering changes the written standard produced by a Norwegian machine translation model. The original petroleum corpus contains both Bokmål and Nynorsk forms. After the training data are filtered toward Bokmål, the model produces substantially more Bokmål and almost no Nynorsk. It performs better on a Bokmål test set but worse on a test set containing both written standards.",
-        "As co-author and controlled-experiment analysis lead, I contributed to the size-controlled experimental design, model-scale replication, statistical analysis, written-standard evaluation, and interpretation of the results.",
+        "As co-author and experimental analysis lead, I designed and conducted the controlled study of how Bokmål-oriented data filtering affects model behaviour and evaluation.",
       ],
-      bullets: [],
+      bullets: [
+        "Designed the size-controlled experiments and replicated them across three NLLB-200 model scales.",
+        "Analyzed changes in translation quality and written-standard output, and validated the findings through statistical tests and human evaluation.",
+      ],
     },
   },
   {
