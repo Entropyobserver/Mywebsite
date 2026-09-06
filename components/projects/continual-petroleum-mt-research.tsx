@@ -134,6 +134,13 @@ export default function ContinualPetroleumMtResearch() {
           How should an English-Norwegian petroleum MT system be updated when
           new data from a different source become available?
         </p>
+        <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">
+          This project studies this question in a source-update setting: an MT
+          model is first adapted to an earlier NPD petroleum corpus and then
+          updated with newer Equinor data. The goal is to compare different
+          update strategies and understand the trade-off between learning from
+          the newer source and retaining performance on the earlier source.
+        </p>
       </section>
 
       <section>
