@@ -146,12 +146,10 @@ export default function ContinualPetroleumMtResearch() {
           Experimental Design
         </h2>
         <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">
-          The experiments compare five update strategies using the same NLLB-200
-          distilled 600M backbone and LoRA configuration. All strategies are
-          evaluated on fixed NPD and Equinor test sets.
-        </p>
-        <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">
-          In total, 27 LoRA adapters were trained across three random seeds.
+          The experiments compare single-source training, mixed-source
+          training, continual adaptation, and replay-based continual adaptation.
+          All settings use fixed NPD and Equinor test sets. In total, 27 LoRA
+          adapters were trained across three random seeds.
         </p>
         <ResultsTable
           headers={["Strategy", "What it tests"]}
