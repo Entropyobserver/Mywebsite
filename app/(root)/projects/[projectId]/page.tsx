@@ -171,7 +171,14 @@ export default function Project({ params }: ProjectPageProps) {
                 <Icons.star className="h-5 w-5 mr-2" /> {page.title}
               </h3>
               <div>
-                <p className="whitespace-pre-line">{page.description}</p>
+                {page.answer && (
+                  <p className="mb-4">
+                    <strong>Answer:</strong> {page.answer}
+                  </p>
+                )}
+                {page.description && (
+                  <p className="whitespace-pre-line">{page.description}</p>
+                )}
                 {page.table && (
                   <div className="my-4 overflow-x-auto rounded-md border">
                     <table className="w-full border-collapse text-left text-sm">

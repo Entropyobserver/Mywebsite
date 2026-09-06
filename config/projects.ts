@@ -4,6 +4,7 @@ interface PagesInfoInterface {
   title: string;
   imgArr: string[];
   description?: string;
+  answer?: string;
   table?: {
     headers: string[];
     rows: string[][];
@@ -494,12 +495,6 @@ export const Projects: ProjectInterface[] = [
     companyLogoImg: "/projects/target-standard-bias/cover.svg",
     pagesInfoArr: [
       {
-        title: "Research Questions",
-        description:
-          "1. Does Bokmål-oriented filtering change the written standard produced by the model?\n\n2. Is this change caused by data selection rather than reduced training-data size?\n\n3. Does the written standard of the test data affect the evaluation results?",
-        imgArr: [],
-      },
-      {
         title: "Experimental Design",
         description:
           "The study compares three training conditions:",
@@ -508,81 +503,72 @@ export const Projects: ProjectInterface[] = [
           rows: [
             [
               "Original mixed data",
-              "Represents the original Bokmål–Nynorsk distribution",
+              "Contains both Bokmål and Nynorsk forms",
             ],
             [
               "Bokmål-filtered data",
-              "Tests the effect of filtering toward Bokmål",
+              "Contains mainly Bokmål forms",
             ],
             [
               "Same-size mixed subset",
-              "Separates the filtering effect from the effect of data size",
+              "Controls for differences in data size",
             ],
           ],
         },
         followupParagraphs: [
-          "The Bokmål-filtered data and the same-size mixed subset contain exactly the same number of examples. This makes it possible to determine whether the results come from selecting more Bokmål data or simply from using less training data.",
+          "The Bokmål-filtered data and the same-size mixed subset contain exactly the same number of sentence pairs. This allows us to test whether any change comes from the type of data selected rather than the amount of data.",
         ],
-        imgArr: [],
-      },
-      {
-        title:
-          "RQ1 · How does Bokmål filtering affect in-domain MT performance under Bokmål references?",
-        description:
-          "Experiment: compare the Bokmål-filtered model with the equally sized original-subsampled baseline on the in-domain Bokmål test set. Result: filtering raises BLEU from 59.37 to 61.28, chrF from 78.02 to 79.34, and Bokmål-oriented TermF1 from 0.7702 to 0.7912. Paired bootstrap testing gives a sentence-level chrF change of +1.0585 (95% CI +0.8561 to +1.2522, p < 0.001) and a TermF1 change of +0.0210 (95% CI +0.0147 to +0.0282, p < 0.001). The BLEU gain also appears at 1.3B (60.78 to 63.13) and 3.3B (62.71 to 64.47). Answer: under Bokmål references, filtering consistently improves in-domain Bokmål-conforming performance.",
-        imgArr: ["/projects/target-standard-bias/model-scale-results.svg"],
-      },
-      {
-        title:
-          "RQ2 · Are the effects separable from reduced training-data size?",
-        description:
-          "Experiment: hold data volume constant by comparing Bokmål-filtered and original-subsampled conditions with exactly 10,114/1,305/1,313 train/validation/test examples. Result: despite identical sizes, the filtered model improves Bokmål-test BLEU by 1.91 points and chrF by 1.32 points, while its output on the original test becomes 93.4% Bokmål-only versus 79.0% for the matched baseline; Nynorsk-only output falls from 14.2% to 0.7%. The direction persists across 600M, 1.3B, and 3.3B models. Answer: yes—the effect is associated with which examples are retained, not merely with having less training data.",
         imgArr: ["/projects/target-standard-bias/study-design.svg"],
       },
       {
         title:
-          "RQ3 · Does filtering change the written-standard distribution of model outputs?",
+          "RQ1. Does Bokmål-oriented filtering change the model’s output?",
+        answer:
+          "Yes. The filtered model produces much more Bokmål and almost no Nynorsk.",
         description:
-          "Experiment: apply SLIDE to references and paired model outputs on the same original mixed-standard test set, then test sentence-level label changes with exact McNemar tests. Result: references are 76.2% Bokmål-only, 17.2% Nynorsk-only, and 6.0% mixed. Original-subsampled outputs remain close at 79.0%, 14.2%, and 5.7%, whereas filtered outputs shift to 93.4% Bokmål-only, 0.7% Nynorsk-only, and 4.8% mixed. Across seeds, Bokmål-only rises by 13.8-15.2 points and Nynorsk-only falls by 13.1-14.2 points, with p < 0.001 in every comparison. A one-reviewer diagnostic sample finds +0.79 Bokmål conformity but only +0.01 adequacy. Answer: filtering produces a large, human-perceptible shift toward Bokmål.",
+          "On the same mixed-standard test set, Bokmål-only outputs increase from 79.0% to 93.4%, while Nynorsk-only outputs fall from 14.2% to 0.7%.\n\nHuman evaluation also showed that filtering made the translations more Bokmål-like but did not clearly improve translation accuracy.",
         imgArr: ["/projects/target-standard-bias/written-standard-shift.svg"],
       },
       {
         title:
-          "RQ4 · How does evaluation against different written standards affect automatic MT scores?",
+          "RQ2. Is the change caused by having less training data?",
+        answer: "No. It is caused by the type of data selected.",
         description:
-          "Experiment: evaluate the same size-controlled systems against Bokmål and original mixed-standard references, then use FLORES NB/NN as an out-of-domain reference-mismatch check. Result: the filtered model wins on the Bokmål test (BLEU 61.28 vs. 59.37; chrF 79.34 vs. 78.02) but loses on the original mixed test (BLEU 58.49 vs. 61.77; chrF 77.43 vs. 79.12). The original-test sentence-level chrF change is -1.7956 (95% CI -2.0872 to -1.5148, p < 0.001), even though Bokmål-oriented TermF1 increases from 0.7309 to 0.7908. On FLORES, the filtered model scores BLEU 27.66 against NB references but 15.37 against NN references; all systems decode with nob_Latn, so the NN result measures reference-standard mismatch, not Nynorsk generation. Answer: reference choice can reverse the apparent system ranking and can reward conformity to the dominant standard rather than language-neutral quality.",
-        imgArr: [
-          "/projects/target-standard-bias/in-domain-results.svg",
-          "/projects/target-standard-bias/flores-results.svg",
+          "Both models use the same amount of training data, but the filtered model still produces much more Bokmål. This shows that the change comes from selecting Bokmål-oriented examples, not from using fewer examples.\n\nThe same result appears across the 600M, 1.3B, and 3.3B NLLB-200 models.",
+        imgArr: ["/projects/target-standard-bias/model-scale-results.svg"],
+      },
+      {
+        title:
+          "RQ3. Does the choice of reference translations change which model looks better?",
+        answer:
+          "Yes. The better model depends on the written standard used in the reference translations.",
+        table: {
+          headers: [
+            "Reference translations",
+            "Mixed-data model",
+            "Bokmål-filtered model",
+            "Better model",
+          ],
+          rows: [
+            ["Bokmål", "59.37", "61.28", "Bokmål-filtered"],
+            ["Mixed Bokmål–Nynorsk", "61.77", "58.49", "Mixed-data"],
+          ],
+        },
+        followupParagraphs: [
+          "When the reference translations are in Bokmål, the Bokmål-filtered model scores higher. When the references contain both Bokmål and Nynorsk, the mixed-data model scores higher.",
+          "This shows that a model can receive a higher score because its written standard matches the references—not necessarily because its translations are more accurate.",
         ],
-      },
-      {
-        title: "Human Review Separates Adequacy from Conformity",
-        description:
-          "One human reviewer blindly evaluated 100 items: 50 shift-enriched cases and 50 controls. One item was invalid, leaving 99 valid comparisons. Filtering changes mean adequacy by only +0.01 on a 0-2 scale but increases mean Bokmål conformity by +0.79. The reviewer preferred the filtered output in 55 cases, the original-subsampled output in 11, and marked 33 ties. Because the sample is deliberately enriched for predicted shifts and uses one reviewer, these results are diagnostic rather than population-level estimates.",
-        imgArr: ["/projects/target-standard-bias/human-evaluation.svg"],
-      },
-      {
-        title: "SLIDE Measurement Validation",
-        description:
-          "A separate stratified review of 120 outputs by one human reviewer finds 60.8% exact agreement with SLIDE, macro-F1 0.552, and Cohen's kappa 0.478. Bokmål precision is 0.900 and Nynorsk recall is 0.957. This supports SLIDE as a useful written-standard diagnostic while requiring caution for mixed or uncertain cases. AI-assisted annotation passes are excluded from the reported human evidence.",
-        imgArr: ["/projects/target-standard-bias/slide-validation.svg"],
-      },
-      {
-        title: "Interpretation, Scope, and Responsible Deployment",
-        description:
-          "Target-standard specialization is not inherently harmful: Bokmål specialization is appropriate when the deployment target is explicitly Bokmål petroleum translation. The broader bias problem arises when that specialization is implicit, reinforced by a single-standard evaluation, or presented under a generic Norwegian label. Evidence is limited to one direction and domain; all systems decode with nob_Latn; terminology metrics use Bokmål forms; FLORES, significance tests, and human review are scoped mainly to 600M; and the one-reviewer diagnostic samples do not provide inter-annotator reliability or population estimates. Deployment should document the intended standard and report output-standard distributions beside BLEU and chrF.",
-        imgArr: [],
+        imgArr: ["/projects/target-standard-bias/in-domain-results.svg"],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "This project investigates how data filtering changes the written standard produced by a Norwegian machine translation model. The original petroleum corpus contains both Bokmål and Nynorsk forms. After the training data are filtered toward Bokmål, the model produces substantially more Bokmål and almost no Nynorsk. It performs better on a Bokmål test set but worse on a test set containing both written standards.",
+        "This project investigates how filtering a mixed Bokmål–Nynorsk training corpus toward Bokmål changes a Norwegian machine translation model. It examines whether filtering changes the model’s output and whether the choice of reference translations affects the evaluation result.",
         "As co-author and experimental analysis lead, I designed and conducted the controlled study of how Bokmål-oriented data filtering affects model behaviour and evaluation.",
       ],
       bullets: [
-        "Designed the size-controlled experiments and replicated them across three NLLB-200 model scales.",
-        "Analyzed changes in translation quality and written-standard output, and validated the findings through statistical tests and human evaluation.",
+        "Designed size-controlled experiments and repeated them across three NLLB-200 model sizes.",
+        "Analyzed translation quality and written-standard output using statistical tests and human evaluation.",
       ],
     },
   },
