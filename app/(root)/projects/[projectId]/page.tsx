@@ -165,6 +165,18 @@ export default function Project({ params }: ProjectPageProps) {
               </h3>
               <div>
                 <p className="whitespace-pre-line">{page.description}</p>
+                {page.relatedProject && (
+                  <Link
+                    href={page.relatedProject.href}
+                    className={cn(
+                      buttonVariants({ variant: "outline", size: "sm" }),
+                      "mt-4"
+                    )}
+                  >
+                    {page.relatedProject.label}
+                    <Icons.chevronRight className="ml-2 h-4 w-4" />
+                  </Link>
+                )}
                 {page.imgArr.map((img, ind) => (
                   <a
                     key={ind}

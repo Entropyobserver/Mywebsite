@@ -5,6 +5,10 @@ interface PagesInfoInterface {
   imgArr: string[];
   description?: string;
   imageLayout?: "landscape" | "portrait";
+  relatedProject?: {
+    href: string;
+    label: string;
+  };
 }
 
 interface DescriptionDetailsInterface {
@@ -614,6 +618,16 @@ export const Projects: ProjectInterface[] = [
           "/projects/equinor-web-corpus/equinor-mt-pairs-by-year.png",
         ],
       },
+      {
+        title: "Research Connection",
+        description:
+          "This corpus provides the new-domain data for a subsequent continual-adaptation study, which investigates how an NPD-adapted translation model can learn from newer Equinor data while retaining previously acquired domain knowledge.",
+        imgArr: [],
+        relatedProject: {
+          href: "/projects/continual-petroleum-mt",
+          label: "View Continual Adaptation Study",
+        },
+      },
     ],
     descriptionDetails: {
       paragraphs: [
@@ -662,6 +676,16 @@ export const Projects: ProjectInterface[] = [
     ],
     pagesInfoArr: [
       {
+        title: "Corpus Foundation",
+        description:
+          "This study builds on the reproducible Equinor corpus pipeline, using its temporally organized English-Norwegian sentence pairs as the new adaptation stream.",
+        imgArr: [],
+        relatedProject: {
+          href: "/projects/equinor-web-corpus",
+          label: "View Corpus Pipeline",
+        },
+      },
+      {
         title: "Continual Adaptation Design",
         description:
           "An NPD-adapted LoRA model is updated on the newer Equinor corpus. The study compares adaptation without replay, 5% NPD replay, 10% NPD replay, and mixed-source training under fixed NPD and Equinor test sets.",
@@ -676,7 +700,7 @@ export const Projects: ProjectInterface[] = [
     ],
     descriptionDetails: {
       paragraphs: [
-        "This research project studies how an English-Norwegian petroleum MT system can be updated when new domain data arrive without fully retraining on all earlier data.",
+        "Building on the reproducible Equinor corpus pipeline, this research project studies how an English-Norwegian petroleum MT system can be updated when new domain data arrive without fully retraining on all earlier data.",
         "The experiments separate adaptation to the Equinor source from retention on the earlier NPD source, making the cost of forgetting and the benefit of replay directly measurable.",
       ],
       bullets: [
