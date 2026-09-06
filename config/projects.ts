@@ -686,7 +686,7 @@ export const Projects: ProjectInterface[] = [
     ],
     descriptionDetails: {
       paragraphs: [
-        "Building on the reproducible Equinor corpus pipeline, this research project studies how an English-Norwegian petroleum MT system can be updated from an earlier NPD source to newer Equinor data without joint retraining on all old and new data.",
+        "This project studies this question in a source-update setting: an MT model is first adapted to an earlier NPD petroleum corpus and then updated with newer Equinor data. The goal is to compare different update strategies and understand the trade-off between learning from the newer source and retaining performance on the earlier source.",
         "Across 27 trained LoRA adapters and three random seeds, the experiments compare single-source training, mixed-source training, continual adaptation, and replay-based continual adaptation under fixed NPD and Equinor test sets.",
         "The study separates adaptation to the newer Equinor source from retention on the earlier NPD source, making the cost of forgetting and the benefit of replay directly measurable.",
       ],
