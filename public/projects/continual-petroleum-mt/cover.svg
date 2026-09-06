@@ -1,53 +1,65 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 810" role="img" aria-labelledby="title desc">
-  <title id="title">Replay-based continual adaptation</title>
-  <desc id="desc">An NPD-adapted model learns from Equinor with optional NPD replay. Results compare retention and adaptation on fixed test sets.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Petroleum MT: Experimental Overview</title>
+  <desc id="desc">Nine LoRA training configurations across four experimental groups, each run with three seeds and evaluated on fixed NPD and Equinor test sets.</desc>
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#64748b"/></marker>
-    <marker id="replay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#087f70"/></marker>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#7b8794"/></marker>
   </defs>
-  <rect width="1440" height="810" fill="#f8fafc"/>
+  <rect width="1600" height="1000" fill="#f8fafc"/>
   <g font-family="Arial, Helvetica, sans-serif">
-    <text x="64" y="66" font-size="18" font-weight="700" fill="#2563eb">ENGLISH-NORWEGIAN PETROLEUM TRANSLATION</text>
-    <text x="64" y="124" font-size="42" font-weight="700" fill="#17202b">Replay-based continual adaptation</text>
-    <text x="64" y="164" font-size="22" fill="#566273">Learning from Equinor data while retaining performance on NPD</text>
-    <line x1="64" y1="196" x2="1376" y2="196" stroke="#d8e0e8"/>
-    <text x="64" y="242" font-size="18" font-weight="700" fill="#566273">01 / SOURCE UPDATE</text>
-    <rect x="64" y="274" width="320" height="132" rx="8" fill="#eff6ff" stroke="#a9c7f5"/>
-    <text x="88" y="311" font-size="18" fill="#2563eb">INITIAL MODEL</text>
-    <text x="88" y="348" font-size="26" font-weight="700" fill="#17202b">NPD-adapted model</text>
-    <text x="88" y="382" font-size="19" fill="#566273">NLLB-200 distilled 600M + LoRA</text>
-    <path d="M398 340 H527" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
-    <text x="464" y="318" text-anchor="middle" font-size="16" fill="#566273">continue training</text>
-    <rect x="544" y="274" width="352" height="132" rx="8" fill="#ffffff" stroke="#aab6c4"/>
-    <text x="568" y="311" font-size="18" fill="#566273">UPDATE DATA</text>
-    <text x="568" y="348" font-size="26" font-weight="700" fill="#17202b">Equinor corpus</text>
-    <text x="568" y="382" font-size="20" fill="#566273">With or without NPD replay</text>
-    <path d="M910 340 H1039" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
-    <rect x="1056" y="274" width="320" height="132" rx="8" fill="#ffffff" stroke="#aab6c4"/>
-    <text x="1080" y="311" font-size="18" fill="#566273">EVALUATION</text>
-    <text x="1080" y="348" font-size="26" font-weight="700" fill="#17202b">Fixed test sets</text>
-    <text x="1080" y="382" font-size="19" fill="#566273">NPD retention + Equinor gain</text>
-    <path d="M224 418 V458 H720 V418" fill="none" stroke="#087f70" stroke-width="3" marker-end="url(#replay)"/>
-    <rect x="300" y="440" width="346" height="34" fill="#f8fafc"/>
-    <text x="473" y="464" text-anchor="middle" font-size="19" font-weight="700" fill="#087f70">Replay: 5% or 10% NPD data</text>
-    <text x="64" y="522" font-size="18" font-weight="700" fill="#566273">02 / RETENTION AND ADAPTATION</text>
-    <text x="1376" y="522" text-anchor="end" font-size="18" fill="#566273">BLEU on fixed test sets</text>
-    <text x="88" y="566" font-size="19" fill="#566273">Update strategy</text>
-    <text x="934" y="566" text-anchor="end" font-size="19" fill="#566273">NPD</text>
-    <text x="1320" y="566" text-anchor="end" font-size="19" fill="#566273">Equinor</text>
-    <line x1="64" y1="582" x2="1376" y2="582" stroke="#d8e0e8"/>
-    <text x="88" y="616" font-size="22" fill="#17202b">Continual adaptation / no replay</text>
-    <text x="934" y="616" text-anchor="end" font-size="25" fill="#17202b">54.73</text>
-    <text x="1320" y="616" text-anchor="end" font-size="25" font-weight="700" fill="#2563eb">42.72</text>
-    <line x1="64" y1="635" x2="1376" y2="635" stroke="#e3e8ee"/>
-    <text x="88" y="669" font-size="22" fill="#17202b">Continual adaptation + 5% replay</text>
-    <text x="934" y="669" text-anchor="end" font-size="25" fill="#17202b">58.21</text>
-    <text x="1320" y="669" text-anchor="end" font-size="25" fill="#17202b">42.11</text>
-    <rect x="64" y="688" width="1312" height="53" rx="4" fill="#e6f4ee"/>
-    <text x="88" y="722" font-size="22" font-weight="700" fill="#087f70">Continual adaptation + 10% replay</text>
-    <text x="934" y="722" text-anchor="end" font-size="25" font-weight="700" fill="#087f70">59.22</text>
-    <text x="1320" y="722" text-anchor="end" font-size="25" fill="#17202b">41.85</text>
-    <text x="64" y="781" font-size="18" fill="#566273">27 trained adapters / 3 random seeds</text>
-    <text x="1376" y="781" text-anchor="end" font-size="18" fill="#566273">Evaluation: BLEU / chrF / terminology metrics</text>
+    <text x="64" y="77" font-size="40" font-weight="700" fill="#18232e">Petroleum MT: Experimental Overview</text>
+    <text x="64" y="122" font-size="23" fill="#566273">How should an NPD-adapted model be updated with Equinor data?</text>
+    <line x1="64" y1="155" x2="1536" y2="155" stroke="#d7dfe7"/>
+    <text x="64" y="199" font-size="22" font-weight="700" fill="#18232e">NLLB-200 distilled 600M + LoRA</text>
+    <text x="1536" y="199" text-anchor="end" font-size="22" fill="#566273">9 configurations x 3 seeds = 27 trained adapters</text>
+
+    <rect x="64" y="246" width="350" height="367" rx="8" fill="#ffffff" stroke="#c4d3e8" stroke-width="2"/>
+    <path d="M80 246 H398" stroke="#3971c5" stroke-width="4"/>
+    <text x="88" y="292" font-size="25" font-weight="700" fill="#285fab">Single-source</text>
+    <text x="88" y="330" font-size="20" fill="#566273">Train on one source</text>
+    <line x1="88" y1="352" x2="390" y2="352" stroke="#e1e6ec"/>
+    <text x="88" y="396" font-size="23" fill="#18232e">NPD only</text>
+    <text x="88" y="449" font-size="23" fill="#18232e">Equinor 10k</text>
+    <text x="88" y="502" font-size="23" fill="#18232e">Equinor full</text>
+    <text x="88" y="581" font-size="19" fill="#566273">Baseline + data-size effect</text>
+
+    <rect x="438" y="246" width="350" height="367" rx="8" fill="#ffffff" stroke="#d4c8e0" stroke-width="2"/>
+    <path d="M454 246 H772" stroke="#86639e" stroke-width="4"/>
+    <text x="462" y="292" font-size="25" font-weight="700" fill="#79538e">Mixed-source</text>
+    <text x="462" y="330" font-size="20" fill="#566273">Train on NPD + Equinor</text>
+    <line x1="462" y1="352" x2="764" y2="352" stroke="#e1e6ec"/>
+    <text x="462" y="396" font-size="23" fill="#18232e">Mixed balanced</text>
+    <text x="462" y="449" font-size="23" fill="#18232e">Mixed full</text>
+    <text x="462" y="581" font-size="19" fill="#566273">Joint-training comparison</text>
+
+    <rect x="812" y="246" width="350" height="367" rx="8" fill="#ffffff" stroke="#dfd1ae" stroke-width="2"/>
+    <path d="M828 246 H1146" stroke="#aa7b20" stroke-width="4"/>
+    <text x="836" y="292" font-size="25" font-weight="700" fill="#916b21">Continual adaptation</text>
+    <text x="836" y="330" font-size="20" fill="#566273">Update the NPD model</text>
+    <line x1="836" y1="352" x2="1138" y2="352" stroke="#e1e6ec"/>
+    <text x="836" y="396" font-size="23" fill="#18232e">NPD &#8594; Equinor 10k</text>
+    <text x="836" y="449" font-size="23" fill="#18232e">NPD &#8594; Equinor full</text>
+    <text x="836" y="502" font-size="20" fill="#566273">No NPD data during update</text>
+    <text x="836" y="581" font-size="19" fill="#566273">Adaptation + forgetting</text>
+
+    <rect x="1186" y="246" width="350" height="367" rx="8" fill="#f0f8f4" stroke="#a3ccbb" stroke-width="2"/>
+    <path d="M1202 246 H1520" stroke="#178365" stroke-width="4"/>
+    <text x="1210" y="292" font-size="25" font-weight="700" fill="#117557">Continual + replay</text>
+    <text x="1210" y="330" font-size="20" fill="#566273">Update the NPD model</text>
+    <line x1="1210" y1="352" x2="1512" y2="352" stroke="#d6e6de"/>
+    <text x="1210" y="396" font-size="23" fill="#18232e">NPD &#8594; Equinor full</text>
+    <text x="1210" y="449" font-size="23" font-weight="700" fill="#117557">+ 5% NPD replay</text>
+    <text x="1210" y="502" font-size="23" font-weight="700" fill="#117557">+ 10% NPD replay</text>
+    <text x="1210" y="581" font-size="19" fill="#566273">Can replay reduce forgetting?</text>
+
+    <path d="M239 613 V667 H1361 V613 M613 613 V667 M987 613 V667 M800 667 V721" fill="none" stroke="#7b8794" stroke-width="2.5"/>
+    <path d="M800 707 V736" stroke="#7b8794" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="800" y="780" text-anchor="middle" font-size="25" font-weight="700" fill="#18232e">Evaluate every configuration on the same fixed test sets</text>
+    <text x="425" y="840" text-anchor="middle" font-size="27" font-weight="700" fill="#285fab">NPD test set</text>
+    <text x="425" y="879" text-anchor="middle" font-size="22" fill="#566273">Retention on the earlier source</text>
+    <line x1="800" y1="811" x2="800" y2="891" stroke="#d7dfe7"/>
+    <text x="1175" y="840" text-anchor="middle" font-size="27" font-weight="700" fill="#117557">Equinor test set</text>
+    <text x="1175" y="879" text-anchor="middle" font-size="22" fill="#566273">Adaptation to the new source</text>
+    <line x1="64" y1="923" x2="1536" y2="923" stroke="#d7dfe7"/>
+    <text x="800" y="967" text-anchor="middle" font-size="22" fill="#566273">BLEU / chrF / Terminology metrics</text>
   </g>
 </svg>
