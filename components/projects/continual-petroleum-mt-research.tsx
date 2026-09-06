@@ -174,14 +174,13 @@ export default function ContinualPetroleumMtResearch() {
           headers={["Update strategy", "NPD BLEU", "Equinor BLEU", "Takeaway"]}
           rows={resultRows}
         />
-      </section>
-
-      <section className="border-t pt-8">
-        <h2 className="font-heading text-2xl leading-tight">Short Summary</h2>
-        <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">
-          The results show that replay is a lightweight alternative to full
-          mixed retraining: 10% NPD replay recovers NPD BLEU from 54.73 to
-          59.22 while keeping Equinor BLEU high at 41.85.
+        <p className="mt-5 max-w-3xl leading-7 text-muted-foreground">
+          Mixed-full training achieves the strongest overall performance, but
+          it requires access to the complete NPD and Equinor training data.
+          With only 10% NPD replay, continual adaptation comes close to
+          mixed-full performance on both test sets. This suggests that a small
+          replay set can substantially reduce forgetting without requiring full
+          mixed retraining.
         </p>
         <Link
           href="/projects/equinor-web-corpus"
