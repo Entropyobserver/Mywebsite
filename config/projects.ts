@@ -671,11 +671,6 @@ export const Projects: ProjectInterface[] = [
     startDate: new Date("2026-06-01"),
     endDate: new Date("2026-07-31"),
     companyLogoImg: "/projects/continual-petroleum-mt/cover.svg",
-    keyMetrics: [
-      { value: "27", label: "Trained adapters" },
-      { value: "3", label: "Random seeds" },
-      { value: "10%", label: "Max replay" },
-    ],
     pagesInfoArr: [
       {
         title: "Corpus Foundation",
