@@ -609,14 +609,6 @@ export const Projects: ProjectInterface[] = [
         imgArr: ["/projects/equinor-web-corpus/cover.svg"],
       },
       {
-        title: "Corpus Outputs and Quality Control",
-        description:
-          "The current release contains aggregate reports and reproducible construction code. It produces 52,865 filtered English-Norwegian sentence pairs and 73,866 retrieval chunks, with document-level split control to prevent leakage.",
-        imgArr: [
-          "/projects/equinor-web-corpus/equinor-mt-pairs-by-year.png",
-        ],
-      },
-      {
         title: "Research Connection",
         description:
           "This corpus provides the new-domain data for a subsequent continual-adaptation study, which investigates how an NPD-adapted translation model can learn from newer Equinor data while retaining previously acquired domain knowledge.",
