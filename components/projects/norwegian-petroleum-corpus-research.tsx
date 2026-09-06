@@ -65,12 +65,12 @@ export default function NorwegianPetroleumCorpusResearch() {
           href="/projects/equinor-web-corpus/cover.svg"
           target="_blank"
           rel="noreferrer"
-          aria-label="Open Norwegian Petroleum Language Data Pipeline figure at full size"
+          aria-label="Open Norwegian Petroleum Corpus figure at full size"
           className="mt-6 block overflow-hidden rounded-md border bg-slate-50"
         >
           <Image
             src="/projects/equinor-web-corpus/cover.svg"
-            alt="Norwegian Petroleum Language Data Pipeline"
+            alt="Norwegian Petroleum Corpus"
             width={1440}
             height={810}
             className="h-auto w-full"
