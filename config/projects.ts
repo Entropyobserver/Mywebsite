@@ -603,7 +603,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Reproducible Corpus Pipeline",
         description:
-          "The pipeline crawls public Equinor web pages and PDFs, extracts bilingual documents, builds sentence candidates, aligns English-Norwegian text, filters the resulting pairs, and creates document-level train, validation, and test splits.",
+          "1. Collect and Extract\nThe pipeline collects public English and Norwegian web pages and PDFs from Equinor. It extracts the text and saves the source information for each document.\n\n2. Pair the Articles\nFor the machine translation data, the website's language links are used to find matching English and Norwegian articles.\n\n3. Align the Sentences\nThe matched articles are split into sentences. LaBSE is then used to find English and Norwegian sentences that are likely to be translations of each other.\n\n4. Filter the Sentence Pairs\nThe pipeline keeps pairs that are similar in meaning, have reasonable lengths, and do not contain website noise or duplicates. It also checks that the Norwegian sentence is clearly written in Bokmal.\n\n5. Split the Dataset\nThe final sentence pairs are divided into training, validation, and test sets by article pair. This prevents content from the same article from appearing in different sets.\n\nPDFs and web pages without a matching translation are used only for the language-model and retrieval data.",
         imgArr: ["/projects/equinor-web-corpus/cover.svg"],
       },
       {
@@ -617,8 +617,8 @@ export const Projects: ProjectInterface[] = [
     ],
     descriptionDetails: {
       paragraphs: [
-        "This open-source research project builds a reproducible corpus-construction pipeline for Norwegian petroleum-domain language technology. The current version uses public Equinor web pages and PDFs as its first source.",
-        "The same processed source supports English-Norwegian machine translation, language-model pretraining, retrieval experiments, and continual domain adaptation.",
+        "This project develops an open-source and reproducible pipeline for constructing Norwegian petroleum-domain research data from public English and Norwegian documents. The current implementation processes Equinor web pages and PDFs to support machine translation, language-model training and adaptation, and information retrieval while preserving document-level provenance.",
+        "The public repository provides the processing code, schemas, aggregate reports, and reproducibility materials rather than redistributing the full source-derived text corpus.",
       ],
       bullets: [
         "Built a reproducible pipeline for crawling, extracting, aligning, and filtering public Equinor web and PDF sources.",
