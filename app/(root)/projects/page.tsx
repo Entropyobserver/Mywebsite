@@ -12,7 +12,10 @@ export const metadata: Metadata = {
 };
 
 const renderContent = (tabVal: string) => {
-  let projectArr = Projects;
+  let projectArr = Projects.filter(
+    (project) =>
+      project.id !== "multilingual-sentiment" && project.id !== "SmartReview"
+  );
   if (tabVal === "research") {
     projectArr = projectArr.filter((val) => val.type === "Research");
   } else if (tabVal === "applied") {
