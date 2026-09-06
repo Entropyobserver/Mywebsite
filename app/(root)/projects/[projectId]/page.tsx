@@ -172,6 +172,42 @@ export default function Project({ params }: ProjectPageProps) {
               </h3>
               <div>
                 <p className="whitespace-pre-line">{page.description}</p>
+                {page.table && (
+                  <div className="my-4 overflow-x-auto rounded-md border">
+                    <table className="w-full border-collapse text-left text-sm">
+                      <thead className="bg-muted">
+                        <tr>
+                          {page.table.headers.map((header) => (
+                            <th
+                              key={header}
+                              className="border-b px-4 py-3 font-semibold"
+                            >
+                              {header}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {page.table.rows.map((row, rowIndex) => (
+                          <tr key={rowIndex} className="border-b last:border-b-0">
+                            {row.map((cell, cellIndex) => (
+                              <td key={cellIndex} className="px-4 py-3 align-top">
+                                {cell}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+                {page.followupParagraphs && (
+                  <div className="space-y-4">
+                    {page.followupParagraphs.map((paragraph, paragraphIndex) => (
+                      <p key={paragraphIndex}>{paragraph}</p>
+                    ))}
+                  </div>
+                )}
                 {page.relatedProject && (
                   <Link
                     href={page.relatedProject.href}

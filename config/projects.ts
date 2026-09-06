@@ -4,6 +4,11 @@ interface PagesInfoInterface {
   title: string;
   imgArr: string[];
   description?: string;
+  table?: {
+    headers: string[];
+    rows: string[][];
+  };
+  followupParagraphs?: string[];
   imageLayout?: "landscape" | "portrait";
   relatedProject?: {
     href: string;
@@ -491,19 +496,34 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Research Questions",
         description:
-          "RQ1. How does Bokmål filtering affect in-domain MT performance under Bokmål references?\n\nRQ2. Are the effects separable from the reduced training-data size?\n\nRQ3. Does filtering change the written-standard distribution of model outputs?\n\nRQ4. How does evaluation against different written standards affect automatic MT scores?",
+          "1. Does Bokmål-oriented filtering change the written standard produced by the model?\n\n2. Is this change caused by data selection rather than reduced training-data size?\n\n3. Does the written standard of the test data affect the evaluation results?",
         imgArr: [],
       },
       {
-        title: "Data Filtering and Size-Controlled Design",
+        title: "Experimental Design",
         description:
-          "The original petroleum-domain split contains 13,935 training pairs. SLIDE filtering retains targets with Bokmål score at least 0.80 and Nynorsk score below 0.30, producing 10,114 training pairs. A deterministic original-subsampled condition uses the same 10,114/1,305/1,313 train/validation/test sizes, isolating written-standard filtering from data-volume effects. Nearby thresholds retain 71.2-73.3% of the original training set, placing the selected threshold in a stable region of the score distribution.",
-        imgArr: [],
-      },
-      {
-        title: "LoRA Fine-Tuning and Evaluation Protocol",
-        description:
-          "The main experiments fine-tune NLLB-200 distilled 600M with LoRA using rank 8, alpha 64, zero dropout, three epochs, learning rate 5e-4, beam size 5, and seeds 42, 123, and 456. The size-controlled in-domain comparison is replicated with 1.3B and 3.3B NLLB-200 models. Evaluation uses BLEU, chrF, Bokmål-oriented TermR/TermP/TermF1, SLIDE written-standard labels, 1,000-sample paired bootstrap tests, and exact McNemar tests. The paper deliberately does not use COMET because transparent form-sensitive metrics are central to the evaluation-bias analysis.",
+          "The study compares three training conditions:",
+        table: {
+          headers: ["Training condition", "Purpose"],
+          rows: [
+            [
+              "Original mixed data",
+              "Represents the original Bokmål–Nynorsk distribution",
+            ],
+            [
+              "Bokmål-filtered data",
+              "Tests the effect of filtering toward Bokmål",
+            ],
+            [
+              "Same-size mixed subset",
+              "Separates the filtering effect from the effect of data size",
+            ],
+          ],
+        },
+        followupParagraphs: [
+          "The Bokmål-filtered data and the same-size mixed subset contain exactly the same number of examples. This makes it possible to determine whether the results come from selecting more Bokmål data or simply from using less training data.",
+          "The experiments use LoRA-adapted NLLB-200 models and are repeated across three model sizes.",
+        ],
         imgArr: [],
       },
       {
@@ -558,16 +578,10 @@ export const Projects: ProjectInterface[] = [
     ],
     descriptionDetails: {
       paragraphs: [
-        "This research project, titled 'When Data Cleaning Becomes Bias: Target-Standard Specialization in Norwegian Machine Translation,' studies how filtering a mixed Bokmål/Nynorsk petroleum corpus toward Bokmål changes both model output and evaluation outcomes. It treats target-standard specialization as the observable shift and target-standard bias as the broader audit problem when that shift is hidden or rewarded by a narrow evaluation setup.",
-        "Using LoRA-adapted NLLB-200 models, the study compares full original data, a SLIDE-filtered Bokmål subset, and a random original subset of exactly the same size. Results are measured against Bokmål and mixed-standard references, replicated across 600M, 1.3B, and 3.3B backbones, checked on FLORES, and triangulated with two explicitly scoped one-reviewer studies: SLIDE measurement validation and blind diagnostic MT comparison.",
-        "As co-author and controlled-experiment analysis lead, I contributed to the size-controlled design, model-scale replication, statistical analysis, written-standard diagnostics, and interpretation of reference and terminology bias.",
+        "This project investigates how data filtering changes the written standard produced by a Norwegian machine translation model. The original petroleum corpus contains both Bokmål and Nynorsk forms. After the training data are filtered toward Bokmål, the model produces substantially more Bokmål and almost no Nynorsk. It performs better on a Bokmål test set but worse on a test set containing both written standards.",
+        "As co-author and controlled-experiment analysis lead, I contributed to the size-controlled experimental design, model-scale replication, statistical analysis, written-standard evaluation, and interpretation of the results.",
       ],
-      bullets: [
-        "Controlled for data size with matched 10,114-pair filtered and original-subsampled training conditions.",
-        "Demonstrated a reference-dependent metric reversal across three NLLB-200 model scales.",
-        "Measured the output shift from 79.0% to 93.4% Bokmål-only and from 14.2% to 0.7% Nynorsk-only on the same mixed-standard test set.",
-        "Validated the interpretation with paired bootstrap tests, exact McNemar tests, a 120-item one-reviewer SLIDE audit, and a separate 99-valid-item blind diagnostic MT comparison.",
-      ],
+      bullets: [],
     },
   },
   {
