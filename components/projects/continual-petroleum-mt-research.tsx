@@ -158,30 +158,21 @@ export default function ContinualPetroleumMtResearch() {
       </section>
 
       <section>
-        <h2 className="font-heading text-3xl leading-tight">Main Finding</h2>
-        <div className="mt-5 rounded-r-md border-l-4 border-blue-700 bg-blue-50 px-5 py-4 leading-7 text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
-          Replay-based continual adaptation gives the best practical update
-          strategy. Continual adaptation improves performance on newer Equinor
-          data but reduces performance on the earlier NPD source. Adding 5-10%
-          NPD replay recovers much of the NPD loss while preserving most of the
-          Equinor gain.
-        </div>
-      </section>
-
-      <section>
         <h2 className="font-heading text-3xl leading-tight">Evidence</h2>
         <ResultsTable
           headers={["Update strategy", "NPD BLEU", "Equinor BLEU", "Takeaway"]}
           rows={resultRows}
         />
-        <p className="mt-5 max-w-3xl leading-7 text-muted-foreground">
-          Mixed-full training achieves the strongest overall performance, but
-          it requires access to the complete NPD and Equinor training data.
-          With only 10% NPD replay, continual adaptation comes close to
-          mixed-full performance on both test sets. This suggests that a small
-          replay set can substantially reduce forgetting without requiring full
-          mixed retraining.
-        </p>
+        <div className="mt-6 rounded-r-md border-l-4 border-blue-700 bg-blue-50 px-5 py-4 leading-7 text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
+          <h3 className="font-heading text-xl leading-tight">Main Finding</h3>
+          <p className="mt-3">
+            Replay-based continual adaptation gives the best practical update
+            strategy. Continual adaptation improves performance on newer
+            Equinor data but reduces performance on the earlier NPD source.
+            Adding 5-10% NPD replay recovers much of the NPD loss while
+            preserving most of the Equinor gain.
+          </p>
+        </div>
         <Link
           href="/projects/equinor-web-corpus"
           className={cn(
