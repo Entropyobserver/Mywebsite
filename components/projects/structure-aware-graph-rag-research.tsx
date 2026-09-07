@@ -69,7 +69,7 @@ export default function StructureAwareGraphRagResearch() {
           description={
             <>
               <p>Standard retrieval finds evidence mainly through <strong>text similarity</strong>. Our GraphRAG approach also uses <strong>document structure</strong>, connecting evidence through shared pages, entities, and financial metrics. The goal is to test whether these graph connections can recover useful evidence that standard retrieval misses.</p>
-              <p className="mt-4">Hybrid retrieval produces two outputs: its reranked top-10 is retained directly for fusion, while its pre-cross-encoder top-10 provides seeds for selected-graph expansion. Graph-path retrieval independently follows year, entity, and metric cues within the benchmark-provided report scope. The resulting candidates are deduplicated, capped at a maximum of 80, and reranked with the same cross-encoder.</p>
+              <p className="mt-4">The system combines evidence from three sources: <strong>hybrid retrieval</strong> provides the original results, <strong>selected-graph expansion</strong> finds related evidence from those results, and <strong>graph paths</strong> independently find evidence using cues from the question. All candidates are then combined and reranked.</p>
             </>
           }
         />
