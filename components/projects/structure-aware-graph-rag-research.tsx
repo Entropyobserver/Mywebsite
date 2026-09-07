@@ -87,11 +87,11 @@ export default function StructureAwareGraphRagResearch() {
       </section>
 
       <section>
-        <SectionHeader title="Does This Pattern Hold Across Reporting Years?" description={<p>As an additional <strong>temporal robustness check</strong>, we repeat the adjacent-page comparison on later reports from <strong>2022–2024</strong>. The same pattern remains: removing adjacent-page links improves both object retrieval and ranking quality.</p>} />
+        <SectionHeader title="Does This Finding Hold in Later Reports?" description={<p>Our main analysis shows that <strong>adjacent-page links can introduce noise and hurt retrieval</strong>. We repeat the comparison on reports from <strong>2022–2024</strong> to see whether the same finding holds in later years.</p>} />
         <div className="overflow-hidden rounded-2xl border bg-background">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[480px] text-left text-sm">
-              <thead className="bg-blue-700 text-white"><tr><th scope="col" className="px-5 py-4 font-semibold">Metric</th><th scope="col" className="px-5 py-4 text-right font-semibold">Full graph</th><th scope="col" className="px-5 py-4 text-right font-semibold">Without adjacent-page</th></tr></thead>
+              <thead className="bg-blue-700 text-white"><tr><th scope="col" className="px-5 py-4 font-semibold">Metric</th><th scope="col" className="px-5 py-4 text-right font-semibold">With adjacent-page links</th><th scope="col" className="px-5 py-4 text-right font-semibold">Without adjacent-page links</th></tr></thead>
               <tbody className="divide-y">
                 <tr><th scope="row" className="px-5 py-4 font-medium">Object Recall@10</th><td className="px-5 py-4 text-right font-mono tabular-nums">70.0%</td><td className="px-5 py-4 text-right font-mono tabular-nums"><strong>84.7%</strong></td></tr>
                 <tr className="bg-muted/35"><th scope="row" className="px-5 py-4 font-medium">MRR</th><td className="px-5 py-4 text-right font-mono tabular-nums">0.633</td><td className="px-5 py-4 text-right font-mono tabular-nums"><strong>0.729</strong></td></tr>
@@ -99,8 +99,7 @@ export default function StructureAwareGraphRagResearch() {
             </table>
           </div>
         </div>
-        <p className="mt-6 leading-7 text-muted-foreground">This provides additional evidence that the negative effect of adjacent-page expansion is <strong>consistent across reporting years within the Equinor collection</strong>.</p>
-        <EvidenceConclusion><strong>Scope:</strong> This is a held-out-year robustness check for the adjacent-page edge policy. It is not an untouched test split for every experiment, nor does it establish generalization beyond the Equinor collection.</EvidenceConclusion>
+        <p className="mt-6 leading-7 text-muted-foreground">Removing adjacent-page links again improves retrieval, suggesting that this effect is <strong>consistent across different years within the Equinor reports</strong>. This check does not test generalization to other companies or document collections.</p>
       </section>
 
       <section id="rq2">
