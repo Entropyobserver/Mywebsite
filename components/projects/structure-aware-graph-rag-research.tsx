@@ -77,13 +77,13 @@ export default function StructureAwareGraphRagResearch() {
       </section>
 
       <section id="rq1">
-        <SectionHeader title="RQ1. Which Graph Connections Help?" description={<><p>The full graph evaluates <strong>same-page, same-entity, same-metric, and adjacent-page</strong> relations. The selected graph used in downstream experiments excludes adjacent-page links.</p><p className="mt-4">To understand which relations actually help, we remove one relation at a time while keeping the rest of the retrieval pipeline unchanged.</p></>} />
-        <PaperFigure src="/projects/graph-rag-evidence/paper-graph-schema.png" alt="Simplified typed metadata graph schema" height={1050} caption="Simplified web illustration of the typed metadata graph." />
+        <SectionHeader title="RQ1. Which Graph Connections Help?" description={<><p>The graph connects evidence in four ways: evidence can appear on the <strong>same page</strong>, mention the <strong>same entity</strong>, refer to the <strong>same financial metric</strong>, or appear on <strong>adjacent pages</strong>.</p><p className="mt-4">We test these connections one at a time to see <strong>which ones help GraphRAG find the right evidence and which ones introduce noise</strong>.</p></>} />
+        <PaperFigure src="/projects/graph-rag-evidence/paper-graph-schema.png" alt="Simplified typed metadata graph schema" height={1050} caption="Evidence is connected through document structure, shared entities, and shared financial metrics." />
         <div className="mt-8">
-          <PaperFigure src="/projects/graph-rag-evidence/paper-edge-ablation.png" alt="Edge-type ablation for Object Recall at 10" height={900} caption="Positive values mean retrieval improves when a relation is removed." />
+          <PaperFigure src="/projects/graph-rag-evidence/paper-edge-ablation.png" alt="Edge-type ablation for Object Recall at 10" height={900} caption="Each relation is removed in turn to measure how it affects retrieval." />
         </div>
-        <p className="mt-6 leading-7 text-muted-foreground">The results show clear differences between relation types. <strong className="text-foreground">Same-entity links provide the strongest useful signal, while same-metric links provide a smaller benefit. Same-page links show mixed effects: removing them slightly improves final Object Recall@10 but reduces candidate recall before reranking. In contrast, adjacent-page links introduce noise: removing them improves retrieval.</strong></p>
-        <EvidenceConclusion><strong>Key finding:</strong> GraphRAG benefits from <strong>meaningful connections</strong>, not simply more connections.</EvidenceConclusion>
+        <p className="mt-6 leading-7 text-muted-foreground">The results show that <strong className="text-foreground">same-entity connections are the most useful, while same-metric connections provide a smaller benefit. Same-page connections have limited impact. Adjacent-page connections are harmful because they bring in distracting evidence from nearby pages.</strong></p>
+        <EvidenceConclusion><strong>Key finding:</strong> More graph connections are not always better. <strong>What matters is connecting evidence that is meaningfully related.</strong></EvidenceConclusion>
       </section>
 
       <section>
