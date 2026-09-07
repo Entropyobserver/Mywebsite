@@ -400,7 +400,7 @@ export const Projects: ProjectInterface[] = [
       bullets: [
         "Built a GraphRAG system to find supporting evidence in long annual reports using document structure, entities, and financial metrics.",
         "Compared standard retrieval with graph-based retrieval, finding that graph expansion improved evidence-object recovery while graph paths added page coverage.",
-        "Analyzed which graph connections helped or hurt retrieval, using statistical tests and cross-year evaluation to validate the results.",
+        "Analyzed which graph relations helped or harmed retrieval through edge ablations, paired bootstrap tests, and a held-out-year robustness check.",
       ],
     },
   },
