@@ -1,27 +1,50 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 810" role="img" aria-labelledby="title desc">
-  <title id="title">Model-scale replication across 600M, 1.3B, and 3.3B NLLB-200</title>
-  <desc id="desc">Bokmål filtering improves BLEU on the Bokmål test set at every scale and preserves a high Bokmål-only output rate on the original test set.</desc>
+  <title id="title">RQ2 size-controlled replication across model scales</title>
+  <desc id="desc">At 600M, 1.3B, and 3.3B parameters, models trained on the same number of sentence pairs produce substantially more Bokmål-only output when the selected examples are Bokmål-filtered.</desc>
   <rect width="1440" height="810" fill="#f8fafc"/>
-  <text x="720" y="68" text-anchor="middle" fill="#0f172a" font-family="Inter,Arial,sans-serif" font-size="38" font-weight="760">Larger models do not remove target-standard specialization</text>
-  <text x="720" y="107" text-anchor="middle" fill="#64748b" font-family="Inter,Arial,sans-serif" font-size="20">Size-controlled comparison across NLLB-200 backbones</text>
+  <text x="720" y="66" text-anchor="middle" fill="#0f172a" font-family="Inter,Arial,sans-serif" font-size="40" font-weight="760">RQ2 · The shift comes from data selection—not less data</text>
+  <text x="720" y="108" text-anchor="middle" fill="#64748b" font-family="Inter,Arial,sans-serif" font-size="21">Within every model size, both systems use the same 10,114 training sentence pairs</text>
   <g font-family="Inter,Arial,sans-serif">
-    <rect x="75" y="155" width="625" height="500" rx="24" fill="white" stroke="#cbd5e1"/>
-    <text x="387" y="202" text-anchor="middle" fill="#0f172a" font-size="25" font-weight="800">BLEU · Bokmål test</text>
-    <line x1="150" y1="570" x2="625" y2="570" stroke="#94a3b8" stroke-width="2"/><line x1="150" y1="250" x2="150" y2="570" stroke="#94a3b8" stroke-width="2"/>
-    <g fill="#64748b" font-size="16"><text x="120" y="575">58</text><text x="120" y="415">62</text><text x="120" y="255">66</text><text x="215" y="608">600M</text><text x="370" y="608">1.3B</text><text x="535" y="608">3.3B</text></g>
-    <polyline points="230,439 390,365 550,311" fill="none" stroke="#4f46e5" stroke-width="7"/><polyline points="230,516 390,460 550,383" fill="none" stroke="#94a3b8" stroke-width="6" stroke-dasharray="12 10"/>
-    <g fill="#4f46e5"><circle cx="230" cy="439" r="9"/><circle cx="390" cy="365" r="9"/><circle cx="550" cy="311" r="9"/></g><g fill="#64748b"><circle cx="230" cy="516" r="8"/><circle cx="390" cy="460" r="8"/><circle cx="550" cy="383" r="8"/></g>
-    <g fill="#3730a3" font-size="16" font-weight="800"><text x="196" y="422">61.28</text><text x="356" y="348">63.13</text><text x="516" y="294">64.47</text></g>
-    <g fill="#475569" font-size="16" font-weight="800"><text x="196" y="540">59.37</text><text x="356" y="484">60.78</text><text x="516" y="407">62.71</text></g>
-    <rect x="740" y="155" width="625" height="500" rx="24" fill="white" stroke="#cbd5e1"/>
-    <text x="1052" y="202" text-anchor="middle" fill="#0f172a" font-size="25" font-weight="800">Bokmål-only output · original test</text>
-    <line x1="815" y1="570" x2="1290" y2="570" stroke="#94a3b8" stroke-width="2"/><line x1="815" y1="250" x2="815" y2="570" stroke="#94a3b8" stroke-width="2"/>
-    <g fill="#64748b" font-size="16"><text x="780" y="575">75%</text><text x="780" y="415">87%</text><text x="780" y="255">99%</text><text x="880" y="608">600M</text><text x="1035" y="608">1.3B</text><text x="1200" y="608">3.3B</text></g>
-    <polyline points="895,321 1055,305 1215,297" fill="none" stroke="#4f46e5" stroke-width="7"/><polyline points="895,515 1055,502 1215,497" fill="none" stroke="#94a3b8" stroke-width="6" stroke-dasharray="12 10"/>
-    <g fill="#4f46e5"><circle cx="895" cy="321" r="9"/><circle cx="1055" cy="305" r="9"/><circle cx="1215" cy="297" r="9"/></g><g fill="#64748b"><circle cx="895" cy="515" r="8"/><circle cx="1055" cy="502" r="8"/><circle cx="1215" cy="497" r="8"/></g>
-    <g fill="#3730a3" font-size="16" font-weight="800"><text x="862" y="303">93.7%</text><text x="1022" y="287">94.3%</text><text x="1182" y="279">94.6%</text></g>
-    <g fill="#475569" font-size="16" font-weight="800"><text x="862" y="540">79.1%</text><text x="1022" y="527">79.6%</text><text x="1182" y="522">79.8%</text></g>
+    <rect x="80" y="165" width="1280" height="88" rx="22" fill="#0f172a"/>
+    <rect x="135" y="194" width="24" height="24" rx="5" fill="#94a3b8"/>
+    <text x="174" y="214" fill="#e2e8f0" font-size="18" font-weight="750">Same-size mixed</text>
+    <rect x="370" y="194" width="24" height="24" rx="5" fill="#4f46e5"/>
+    <text x="409" y="214" fill="#e2e8f0" font-size="18" font-weight="750">Bokmål-filtered</text>
+    <text x="1260" y="214" text-anchor="end" fill="#5eead4" font-size="19" font-weight="800">Controlled variable: type of examples selected</text>
+
+    <rect x="80" y="290" width="390" height="365" rx="24" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="275" y="340" text-anchor="middle" fill="#0f172a" font-size="30" font-weight="850">600M</text>
+    <text x="275" y="375" text-anchor="middle" fill="#64748b" font-size="17">Bokmål-only output · original test</text>
+    <rect x="145" y="430" width="260" height="58" rx="12" fill="#e2e8f0"/>
+    <rect x="145" y="430" width="205" height="58" rx="12" fill="#94a3b8"/>
+    <text x="360" y="467" fill="#475569" font-size="20" font-weight="850">79.1%</text>
+    <rect x="145" y="520" width="260" height="58" rx="12" fill="#c7d2fe"/>
+    <rect x="145" y="520" width="244" height="58" rx="12" fill="#4f46e5"/>
+    <text x="350" y="557" text-anchor="end" fill="#ffffff" font-size="20" font-weight="850">93.7%</text>
+    <text x="275" y="620" text-anchor="middle" fill="#3730a3" font-size="22" font-weight="850">+14.6 points</text>
+
+    <rect x="525" y="290" width="390" height="365" rx="24" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="720" y="340" text-anchor="middle" fill="#0f172a" font-size="30" font-weight="850">1.3B</text>
+    <text x="720" y="375" text-anchor="middle" fill="#64748b" font-size="17">Bokmål-only output · original test</text>
+    <rect x="590" y="430" width="260" height="58" rx="12" fill="#e2e8f0"/>
+    <rect x="590" y="430" width="207" height="58" rx="12" fill="#94a3b8"/>
+    <text x="807" y="467" fill="#475569" font-size="20" font-weight="850">79.6%</text>
+    <rect x="590" y="520" width="260" height="58" rx="12" fill="#c7d2fe"/>
+    <rect x="590" y="520" width="245" height="58" rx="12" fill="#4f46e5"/>
+    <text x="796" y="557" text-anchor="end" fill="#ffffff" font-size="20" font-weight="850">94.3%</text>
+    <text x="720" y="620" text-anchor="middle" fill="#3730a3" font-size="22" font-weight="850">+14.7 points</text>
+
+    <rect x="970" y="290" width="390" height="365" rx="24" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="1165" y="340" text-anchor="middle" fill="#0f172a" font-size="30" font-weight="850">3.3B</text>
+    <text x="1165" y="375" text-anchor="middle" fill="#64748b" font-size="17">Bokmål-only output · original test</text>
+    <rect x="1035" y="430" width="260" height="58" rx="12" fill="#e2e8f0"/>
+    <rect x="1035" y="430" width="207" height="58" rx="12" fill="#94a3b8"/>
+    <text x="1252" y="467" fill="#475569" font-size="20" font-weight="850">79.8%</text>
+    <rect x="1035" y="520" width="260" height="58" rx="12" fill="#c7d2fe"/>
+    <rect x="1035" y="520" width="246" height="58" rx="12" fill="#4f46e5"/>
+    <text x="1242" y="557" text-anchor="end" fill="#ffffff" font-size="20" font-weight="850">94.6%</text>
+    <text x="1165" y="620" text-anchor="middle" fill="#3730a3" font-size="22" font-weight="850">+14.8 points</text>
   </g>
-  <g font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700"><line x1="450" y1="710" x2="505" y2="710" stroke="#4f46e5" stroke-width="7"/><text x="520" y="717" fill="#334155">Bokmål-filtered</text><line x1="755" y1="710" x2="810" y2="710" stroke="#94a3b8" stroke-width="6" stroke-dasharray="12 10"/><text x="825" y="717" fill="#334155">Original-subsampled</text></g>
-  <text x="720" y="772" text-anchor="middle" fill="#0f172a" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800">Capacity improves absolute quality; it does not remove the standard shift</text>
+  <rect x="285" y="700" width="870" height="62" rx="31" fill="#eef2ff" stroke="#a5b4fc"/>
+  <text x="720" y="739" text-anchor="middle" fill="#312e81" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800">The same selection effect appears at all three model sizes</text>
 </svg>

@@ -1,47 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 810" role="img" aria-labelledby="title desc">
-  <title id="title">Size-controlled in-domain metric reversal</title>
-  <desc id="desc">Bokmål filtering improves BLEU and chrF against Bokmål references but lowers both metrics against mixed-standard references.</desc>
+  <title id="title">RQ3 reference choice reverses the BLEU ranking</title>
+  <desc id="desc">The Bokmål-filtered model has higher BLEU with Bokmål references, while the same-size mixed model has higher BLEU with mixed Bokmål-Nynorsk references.</desc>
   <rect width="1440" height="810" fill="#f8fafc"/>
-  <text x="720" y="65" text-anchor="middle" fill="#0f172a" font-family="Inter,Arial,sans-serif" font-size="38" font-weight="760">The same intervention produces opposite metric effects</text>
-  <text x="720" y="104" text-anchor="middle" fill="#64748b" font-family="Inter,Arial,sans-serif" font-size="20">600M NLLB-200 · means over three seeds · both systems trained on 10,114 pairs</text>
+  <text x="720" y="66" text-anchor="middle" fill="#0f172a" font-family="Inter,Arial,sans-serif" font-size="40" font-weight="760">RQ3 · Changing the test references changes the winner</text>
+  <text x="720" y="108" text-anchor="middle" fill="#64748b" font-family="Inter,Arial,sans-serif" font-size="21">Same two size-controlled models · BLEU score · only the written standard of the references changes</text>
   <g font-family="Inter,Arial,sans-serif">
-    <rect x="70" y="150" width="625" height="520" rx="24" fill="#eef2ff" stroke="#c7d2fe"/>
-    <text x="382" y="198" text-anchor="middle" fill="#312e81" font-size="26" font-weight="800">Bokmål reference test</text>
-    <text x="382" y="230" text-anchor="middle" fill="#6366f1" font-size="18">Filtering is rewarded</text>
-    <g>
-      <line x1="145" y1="560" x2="620" y2="560" stroke="#94a3b8" stroke-width="2"/>
-      <rect x="195" y="405" width="115" height="155" rx="8" fill="#aebcfb"/>
-      <rect x="330" y="345" width="115" height="215" rx="8" fill="#4f46e5"/>
-      <text x="252" y="390" text-anchor="middle" fill="#334155" font-size="22" font-weight="800">59.37</text>
-      <text x="387" y="330" text-anchor="middle" fill="#3730a3" font-size="22" font-weight="800">61.28</text>
-      <text x="320" y="606" text-anchor="middle" fill="#0f172a" font-size="21" font-weight="750">BLEU</text>
-      <rect x="485" y="402" width="60" height="158" rx="8" fill="#aebcfb"/>
-      <rect x="555" y="350" width="60" height="210" rx="8" fill="#4f46e5"/>
-      <text x="515" y="388" text-anchor="middle" fill="#334155" font-size="18" font-weight="800">78.02</text>
-      <text x="585" y="336" text-anchor="middle" fill="#3730a3" font-size="18" font-weight="800">79.34</text>
-      <text x="550" y="606" text-anchor="middle" fill="#0f172a" font-size="21" font-weight="750">chrF</text>
-    </g>
-    <rect x="745" y="150" width="625" height="520" rx="24" fill="#fff7ed" stroke="#fed7aa"/>
-    <text x="1057" y="198" text-anchor="middle" fill="#7c2d12" font-size="26" font-weight="800">Mixed-standard reference test</text>
-    <text x="1057" y="230" text-anchor="middle" fill="#ea580c" font-size="18">Filtering is penalized</text>
-    <g>
-      <line x1="820" y1="560" x2="1295" y2="560" stroke="#94a3b8" stroke-width="2"/>
-      <rect x="870" y="342" width="115" height="218" rx="8" fill="#aebcfb"/>
-      <rect x="1005" y="448" width="115" height="112" rx="8" fill="#f97316"/>
-      <text x="927" y="327" text-anchor="middle" fill="#334155" font-size="22" font-weight="800">61.77</text>
-      <text x="1062" y="433" text-anchor="middle" fill="#9a3412" font-size="22" font-weight="800">58.49</text>
-      <text x="995" y="606" text-anchor="middle" fill="#0f172a" font-size="21" font-weight="750">BLEU</text>
-      <rect x="1160" y="350" width="60" height="210" rx="8" fill="#aebcfb"/>
-      <rect x="1230" y="418" width="60" height="142" rx="8" fill="#f97316"/>
-      <text x="1190" y="336" text-anchor="middle" fill="#334155" font-size="18" font-weight="800">79.12</text>
-      <text x="1260" y="404" text-anchor="middle" fill="#9a3412" font-size="18" font-weight="800">77.43</text>
-      <text x="1225" y="606" text-anchor="middle" fill="#0f172a" font-size="21" font-weight="750">chrF</text>
-    </g>
+    <rect x="80" y="165" width="610" height="470" rx="26" fill="#eef2ff" stroke="#818cf8" stroke-width="3"/>
+    <text x="385" y="215" text-anchor="middle" fill="#312e81" font-size="27" font-weight="850">Bokmål test references</text>
+    <text x="385" y="251" text-anchor="middle" fill="#6366f1" font-size="18">Match the filtered model’s written standard</text>
+    <text x="195" y="335" fill="#475569" font-size="20" font-weight="750">Same-size mixed</text>
+    <rect x="195" y="360" width="300" height="68" rx="12" fill="#cbd5e1"/>
+    <rect x="195" y="360" width="267" height="68" rx="12" fill="#94a3b8"/>
+    <text x="475" y="403" fill="#334155" font-size="25" font-weight="850">59.37</text>
+    <text x="195" y="480" fill="#3730a3" font-size="20" font-weight="750">Bokmål-filtered</text>
+    <rect x="195" y="505" width="300" height="68" rx="12" fill="#c7d2fe"/>
+    <rect x="195" y="505" width="276" height="68" rx="12" fill="#4f46e5"/>
+    <text x="482" y="548" fill="#312e81" font-size="25" font-weight="850">61.28</text>
+    <rect x="250" y="588" width="270" height="42" rx="21" fill="#4f46e5"/>
+    <text x="385" y="616" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="850">WINNER · Bokmål-filtered</text>
+
+    <rect x="750" y="165" width="610" height="470" rx="26" fill="#fff7ed" stroke="#fb923c" stroke-width="3"/>
+    <text x="1055" y="215" text-anchor="middle" fill="#7c2d12" font-size="27" font-weight="850">Mixed Bokmål–Nynorsk references</text>
+    <text x="1055" y="251" text-anchor="middle" fill="#ea580c" font-size="18">Match the mixed-data model’s written-standard coverage</text>
+    <text x="865" y="335" fill="#7c2d12" font-size="20" font-weight="750">Same-size mixed</text>
+    <rect x="865" y="360" width="300" height="68" rx="12" fill="#fed7aa"/>
+    <rect x="865" y="360" width="278" height="68" rx="12" fill="#f97316"/>
+    <text x="1154" y="403" fill="#7c2d12" font-size="25" font-weight="850">61.77</text>
+    <text x="865" y="480" fill="#475569" font-size="20" font-weight="750">Bokmål-filtered</text>
+    <rect x="865" y="505" width="300" height="68" rx="12" fill="#e2e8f0"/>
+    <rect x="865" y="505" width="263" height="68" rx="12" fill="#94a3b8"/>
+    <text x="1139" y="548" fill="#334155" font-size="25" font-weight="850">58.49</text>
+    <rect x="920" y="588" width="270" height="42" rx="21" fill="#f97316"/>
+    <text x="1055" y="616" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="850">WINNER · Same-size mixed</text>
   </g>
-  <g font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700">
-    <rect x="410" y="706" width="26" height="26" rx="5" fill="#aebcfb"/><text x="449" y="726" fill="#334155">Original-subsampled</text>
-    <rect x="690" y="706" width="26" height="26" rx="5" fill="#4f46e5"/><text x="729" y="726" fill="#334155">Bokmål-filtered on Bokmål test</text>
-    <rect x="1034" y="706" width="26" height="26" rx="5" fill="#f97316"/><text x="1073" y="726" fill="#334155">Filtered on mixed test</text>
-  </g>
-  <text x="720" y="775" text-anchor="middle" fill="#0f172a" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="800">Result: target-standard specialization, not a uniform quality gain</text>
+  <path d="M675 686h90" stroke="#0f172a" stroke-width="4"/>
+  <path d="M675 686l16-10v20zM765 686l-16-10v20z" fill="#0f172a"/>
+  <text x="720" y="730" text-anchor="middle" fill="#0f172a" font-family="Inter,Arial,sans-serif" font-size="23" font-weight="850">Reference match can reverse the apparent ranking</text>
+  <text x="720" y="765" text-anchor="middle" fill="#64748b" font-family="Inter,Arial,sans-serif" font-size="18">A higher overlap score does not by itself prove more accurate meaning</text>
 </svg>
