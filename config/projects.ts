@@ -707,13 +707,13 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Research Questions",
         description:
-          "RQ1. How does model architecture affect the amount of political and social context preserved in VLM-generated descriptions?\n\nRQ2. Which image scenarios show the strongest omission and depoliticization patterns?\n\nRQ3. Are changes in salient visual cues associated with measurable changes in model framing?\n\nRQ4. Which automatic signals are useful for screening, and which conclusions still require human validation?",
+          "1. How do different VLMs preserve political and social context in image descriptions?\n\n2. Which social and political scenarios show the strongest omission and depoliticization?\n\n3. How are changes in visible cues associated with differences in model framing?",
         imgArr: [],
       },
       {
         title: "Experimental Setup",
         description:
-          "The main experiment uses 115 reviewed real-world images across 10 political and social scenarios. Each image is paired with three captioning instructions, producing 345 image–instruction tasks. Seven VLMs generate 2,415 descriptions, which are evaluated using expected-element coverage, omission rate, depoliticization, agency and threat framing, sentiment, and zero-shot framing labels. Bootstrap confidence intervals quantify uncertainty in the model-level comparisons.",
+          "The main experiment compares how different VLMs describe reviewed real-world images covering elections, protests, migration, conflict, homelessness, and other political and social scenarios.\n\nEach model describes the same images under the same instructions. The resulting descriptions are evaluated for contextual coverage, omission, depoliticization, agency, threat framing, and sentiment.",
         imgArr: [
           "/projects/vlm-bias-evaluation/vlm-image-review-contact-sheet.jpg",
         ],
@@ -722,41 +722,33 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Experiment 1: Model-Level Results",
         description:
-          "Modern instruction-following VLMs preserved more expected context than older captioning baselines, but omission remained substantial across every model. InternVL2.5-1B achieved the highest expected-element coverage at 0.289, while GIT-base was lowest at 0.128. Qwen2-VL-2B had the lowest depoliticization score at 0.226, compared with 0.365 for ViT-GPT2. These results indicate differences in contextual coverage, not that any model is bias-free.",
+          "Newer instruction-following VLMs preserved more contextual information than older captioning models. However, substantial omission remained across all models.\n\nThese results show differences in contextual coverage, but they do not establish that any model is bias-free.",
         imgArr: ["/projects/vlm-bias-evaluation/model-results.png"],
       },
       {
         title: "Experiment 2: Scenario-Level Results",
         description:
-          "The strongest recurring pattern was omission rather than explicitly hostile or moralizing language. Climate-disaster, war-aid, and homelessness images had omission rates above 0.96. Depoliticization was concentrated in scenarios with explicit political or social context: migration reached 0.960, protest 0.837, and election 0.775. Because the depoliticization measure depends on scenario-specific lexicons, omission is the broader result and depoliticization is interpreted as a targeted screening signal.",
+          "The clearest recurring pattern was omission rather than explicitly hostile or moralizing language.\n\nImages involving climate disasters, war aid, and homelessness frequently lost important contextual details. Migration, protest, and election images were also often described without their broader political or social meaning.",
         imgArr: ["/projects/vlm-bias-evaluation/scenario-results.png"],
       },
       {
-        title: "Experiment 3: Exploratory Counterfactual Analysis",
+        title: "Experiment 3: Exploratory Image-Pair Analysis",
         description:
-          "An exploratory subset of 34 matched image pairs produced 714 pair-level comparisons across seven models and three instructions. Caption text changed in nearly every comparison, and several cues were associated with large changes in coverage or depoliticization. For example, a more salient ballot-booth context increased mean coverage by 0.286 and reduced depoliticization by 0.381, while a busier polling-station exterior reduced coverage by 0.270. Because the pairs use real-world rather than synthetically controlled images, these differences are hypothesis-generating rather than causal evidence.",
+          "The study also compares matched real-world image pairs to examine whether changes in visible cues are associated with different model descriptions.\n\nFor example, a clearer ballot-booth setting increased the coverage of election-related context, while a visually busier polling-station scene reduced it. Because these images are not fully controlled synthetic pairs, the results suggest possible relationships rather than establish causal effects.",
         imgArr: ["/projects/vlm-bias-evaluation/counterfactual-pairs.jpg"],
         imageLayout: "portrait",
-      },
-      {
-        title: "Conclusion and Limitations",
-        description:
-          "The main result is that representational bias can appear through selection and omission, even when captions contain little overtly negative language. Newer instruction-following VLMs recover more context than conventional captioning models, but even the strongest model covers less than 30% of the predefined expected elements. The automatic metrics identify candidate patterns; they do not establish that every omission is normatively biased. Stronger claims require completed human annotation, inter-annotator agreement, and validation of the scenario-specific expected-element and depoliticization rules.",
-        imgArr: [],
       },
     ],
     descriptionDetails: {
       paragraphs: [
-        "This technical research project builds a reusable way to test whether language and vision-language models produce systematic framing differences across social, political, or cultural groups.",
-        "Instead of treating bias evaluation as a collection of ad hoc prompts, the framework makes the comparison design explicit: controlled inputs, reproducible model runs, group-level screening metrics, uncertainty estimates, and auditable human validation. It supports both text-only matched prompts and image-instruction VLM tasks.",
-        "My contribution was to design the framework, implement the shared evaluation modules, structure three case studies, and define the evidence boundary. Automatic scores are treated as screening signals; stronger interpretations require reviewed examples, annotation guidelines, and agreement analysis.",
+        "This project investigates whether language and vision-language models produce systematic framing differences across social, political, and cultural groups.",
+        "The framework uses controlled inputs to compare what different models preserve, omit, or frame differently. It supports both text-based comparisons and image-description tasks, while treating automatic metrics as screening signals rather than definitive evidence of bias.",
+        "As the project lead, I designed the evaluation framework, implemented the experimental pipeline, structured the case studies, and defined how the results should be interpreted.",
       ],
       bullets: [
-        "Built a configuration-driven framework for geographic, gender–occupation, and VLM political or moral framing studies.",
-        "Implemented matched-prompt construction, reusable inference wrappers, metric screening, group-disparity summaries, bootstrap intervals, and error-slice exports.",
-        "Extended the same controlled-comparison logic from text-only variables to reviewed image-instruction VLM tasks.",
-        "Added annotation-sheet generation and Cohen's kappa analysis so automatic patterns can be checked by human reviewers.",
-        "Documented the boundary between exploratory signals and evidence-backed claims, keeping the project useful without overstating unfinished case-study results.",
+        "Built a reusable framework for controlled bias evaluation across language and vision-language models.",
+        "Developed a consistent experimental pipeline for comparing what different models preserve, omit, or frame differently.",
+        "Evaluated how VLMs preserve, omit, or depoliticize important context in political and social images.",
       ],
     },
   },
