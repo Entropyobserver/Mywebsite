@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -21,6 +22,58 @@ import profileImg from "@/public/profile-avatar.png";
 interface ProjectPageProps {
   params: {
     projectId: string;
+  };
+}
+
+const finragMetadata = {
+  title: "FinRAG-Equinor | Reliability-Audited Financial RAG Benchmark",
+  description:
+    "A 720-question benchmark for report-, page-, object-, and multi-hop evidence retrieval over 15 annual reports.",
+};
+
+export function generateMetadata({ params }: ProjectPageProps): Metadata {
+  const project = Projects.find((val) => val.id === params.projectId);
+
+  if (!project) {
+    return {};
+  }
+
+  const canonical = `${siteConfig.url}/projects/${params.projectId}`;
+  const title =
+    project.id === "finrag-equinor"
+      ? finragMetadata.title
+      : project.companyName;
+  const description =
+    project.id === "finrag-equinor"
+      ? finragMetadata.description
+      : project.shortDescription;
+  const socialImage =
+    project.id === "finrag-equinor"
+      ? "/projects/finrag-equinor/cover.png"
+      : project.companyLogoImg;
+
+  return {
+    title: { absolute: title },
+    description,
+    alternates: { canonical },
+    openGraph: {
+      type: "article",
+      url: canonical,
+      title,
+      description,
+      images: [
+        {
+          url: socialImage,
+          alt: project.companyName,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [socialImage],
+    },
   };
 }
 

@@ -350,7 +350,7 @@ export const Projects: ProjectInterface[] = [
         "Built a traceable evidence corpus from long annual-report PDFs, preserving report-, page-, and object-level provenance.",
         "Constructed and audited the benchmark across factual, numerical, table-grounded, temporal, multi-hop, visual/layout, policy, causal, and unanswerable cases.",
         "Evaluated retrieval and end-to-end QA across sparse, dense, hybrid, hierarchical, and reranked approaches, examining how evidence localization affects answer quality.",
-        "Investigated RAG reliability and failure recovery, including missing evidence, wrong citations, conflicting-year evidence, unsupported claims, under-answering, and cases where abstention is safer than unsupported answering.",
+        "Analyzed retrieval failures at report, page, object, ranking, and multi-hop levels, and connected retrieval quality to end-to-end answer accuracy.",
       ],
     },
   },

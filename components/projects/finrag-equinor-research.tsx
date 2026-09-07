@@ -65,7 +65,7 @@ export default function FinragEquinorResearch() {
       <section>
         <SectionHeader
           title="From Annual-Report PDFs to Traceable Evidence"
-          description="We start with 15 Equinor/Statoil annual reports covering 4,369 pages and turn them into a structured, traceable evidence corpus. The PDFs are first split into 100,150 layout objects, which are then filtered into 41,736 retrieval units, including paragraphs, headings, and tables. Each unit stays linked to its original report, page, and location. We then build a 720-item QA benchmark, with 660 answerable questions linked to reference evidence and 60 unanswerable questions."
+          description="We turn annual-report PDFs into retrieval units that remain linked to their original report, page, and location, then use them to build an audited QA benchmark."
         />
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[
@@ -94,7 +94,7 @@ export default function FinragEquinorResearch() {
       <section>
         <SectionHeader
           title="Benchmark Composition and Reliability"
-          description="The benchmark covers nine question types, from direct factual and numerical questions to table-based, temporal, multi-hop, visual/layout, and unanswerable cases. We checked all 720 questions by hand and ran separate audits for PDF extraction and QA quality. The audits found that most extracted pages were suitable for RAG, and the QA items showed high agreement on overall quality, answer correctness, and evidence support."
+          description="The benchmark covers nine question types. We manually checked all 720 QA items and separately audited PDF extraction and QA quality."
         />
         <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
           <div className="overflow-hidden rounded-2xl border bg-background">
@@ -147,7 +147,7 @@ export default function FinragEquinorResearch() {
       <section id="rq1">
         <SectionHeader
           title={`RQ1. ${researchQuestions[0]}`}
-          description="RQ1 is evaluated through two controlled comparisons. First, we compare searching all 15 reports with searching only the reference-year report. Second, while keeping BM25 and the reference-year filter fixed, we compare objects, pages, and context windows as retrieval units."
+          description="RQ1 tests two things: whether searching only the correct report helps, and whether page-sized context makes the exact evidence easier to retrieve."
         />
         <div className="space-y-8">
           <div className="overflow-hidden rounded-2xl border bg-background">
@@ -211,10 +211,9 @@ export default function FinragEquinorResearch() {
                 a controlled oracle setting rather than a learned report router.
               </p>
               <p className="border-l-4 border-blue-600 pl-4 font-medium">
-                When BM25 searches all 15 reports, it finds the exact evidence
-                in the top 10 for 51.5% of questions. When we give the system
-                the correct report year, this rises to 75.6%. This shows that
-                report-year information can substantially improve retrieval.
+                Reference-year filtering raises exact-object Recall@10 from
+                51.5% to 75.6%, showing that cross-year competition is a major
+                source of retrieval error.
               </p>
             </div>
           </div>
@@ -228,11 +227,9 @@ export default function FinragEquinorResearch() {
                 Does retrieving more context help?
               </h3>
               <p className="mt-3 max-w-4xl text-sm leading-6 text-muted-foreground">
-                In this experiment, retrieval is restricted to the{" "}
+                Using the{" "}
                 <strong className="text-foreground">correct report year</strong>
-                , as in Experiment 1. We compare four retrieval units to see
-                whether adding more context helps retrieve the reference
-                evidence.
+                , we compare objects, pages, page windows, and object windows.
               </p>
             </div>
             <div className="overflow-x-auto">
@@ -296,18 +293,11 @@ export default function FinragEquinorResearch() {
                 same report and page as a reference evidence object.
               </p>
             </div>
-            <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
+            <div className="border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p>
-                Whole-page retrieval gets the highest Chunk Recall@10, giving
-                the best observed evidence coverage. Expanding the unit to a
-                three-page window does not improve this further. Object windows
-                get the highest observed Page Recall@10.
-              </p>
-              <p className="border-l-4 border-blue-600 pl-4 font-medium">
-                <strong>Conclusion:</strong> More context helps to a point, but
-                bigger retrieval units are not always better—and finding the
-                evidence in a chunk does not mean finding the exact supporting
-                object.
+                Whole pages achieve the highest Chunk Recall@10 at 90.5%. Larger
+                windows do not improve chunk retrieval, although object windows
+                achieve the highest Page Recall@10 at 91.7%.
               </p>
             </div>
           </div>
@@ -605,153 +595,12 @@ export default function FinragEquinorResearch() {
       </section>
 
       <section>
-        <SectionHeader title="Exploratory Recovery" />
-        <h3 className="font-heading text-2xl">
-          Can the system recover when retrieval goes wrong?
-        </h3>
-        <p className="mt-3 max-w-4xl leading-7 text-muted-foreground">
-          All 720 questions are first retrieved using{" "}
-          <strong className="text-foreground">BM25 + BGE-M3 fusion</strong>. A
-          rule-based detector checks the initial top-10 results for likely
-          retrieval failures. If a problem is detected, the system changes its
-          search strategy and retrieves again.
+        <SectionHeader title="Scope" />
+        <p className="max-w-4xl leading-7 text-muted-foreground">
+          This is a controlled longitudinal study of one company and 15 English
+          annual reports. Cross-company, multilingual, and fully multimodal
+          evaluation remain future work.
         </p>
-        <div className="mt-6 rounded-2xl border border-blue-200 bg-blue-50 px-5 py-4 text-center font-semibold text-blue-950 dark:border-blue-900 dark:bg-blue-950/30 dark:text-blue-100">
-          Retrieve → Detect the problem → Change the strategy → Retrieve again
-        </div>
-
-        <div className="mt-8 overflow-hidden rounded-2xl border bg-background">
-          <div className="border-b bg-muted/30 px-5 py-4 sm:px-6">
-            <h4 className="font-heading text-xl">How does recovery work?</h4>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[560px] text-left text-sm">
-              <thead className="bg-blue-700 text-white">
-                <tr>
-                  <th className="px-5 py-3 font-semibold sm:px-6">Problem</th>
-                  <th className="px-5 py-3 font-semibold sm:px-6">
-                    What the system does
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y">
-                {[
-                  [
-                    "Wrong report",
-                    "Search the year in the question or the three most likely reports",
-                  ],
-                  ["Wrong page", "Search likely pages and nearby pages"],
-                  ["Wrong object", "Reorder objects within likely pages"],
-                  ["Missing hop", "Split the question and search each part"],
-                ].map((row, index) => (
-                  <tr key={row[0]} className={index % 2 ? "bg-muted/35" : ""}>
-                    <td className="px-5 py-4 font-medium sm:px-6">{row[0]}</td>
-                    <td className="px-5 py-4 sm:px-6">{row[1]}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <p className="mt-8 max-w-4xl leading-7 text-muted-foreground">
-          Using thresholds tuned on separate training years, the detector flags{" "}
-          <strong className="text-foreground">250 of 720 questions</strong> for
-          recovery. New results are kept only when evidence coverage improves.
-        </p>
-
-        <h4 className="mt-10 font-heading text-xl">
-          Does selective recovery help?
-        </h4>
-        <p className="mt-3 max-w-4xl leading-7 text-muted-foreground">
-          We compare no recovery, recovery only for the{" "}
-          <strong className="text-foreground">250 flagged questions</strong>,
-          and recovery for{" "}
-          <strong className="text-foreground">all 720 questions</strong>.
-        </p>
-        <p className="mt-3 max-w-4xl leading-7 text-muted-foreground">
-          Selective recovery reaches the same Object Recall@10 as always-on
-          recovery with far fewer recovery attempts. Always-on recovery performs
-          slightly better on the stricter completeness measures.
-        </p>
-        <div className="mt-5 overflow-hidden rounded-2xl border bg-background">
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[820px] text-left text-sm">
-              <thead className="bg-blue-700 text-white">
-                <tr>
-                  <th className="px-5 py-3 font-semibold sm:px-6">Policy</th>
-                  <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                    Questions recovered
-                  </th>
-                  <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                    Object R@10
-                  </th>
-                  <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                    Complete R@10
-                  </th>
-                  <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                    Multi-hop All R@10
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y">
-                <tr>
-                  <td className="px-5 py-4 font-medium sm:px-6">No recovery</td>
-                  <td className="px-5 py-4 text-right font-mono tabular-nums sm:px-6">
-                    0 / 720
-                  </td>
-                  <td className="px-5 py-4 text-right font-mono tabular-nums sm:px-6">
-                    70.2%
-                  </td>
-                  <td className="px-5 py-4 text-right font-mono tabular-nums sm:px-6">
-                    64.4%
-                  </td>
-                  <td className="px-5 py-4 text-right font-mono tabular-nums sm:px-6">
-                    47.8%
-                  </td>
-                </tr>
-                <tr className="bg-muted/35">
-                  <td className="px-5 py-4 font-medium sm:px-6">
-                    Selective recovery
-                  </td>
-                  <td className="px-5 py-4 text-right font-mono font-bold tabular-nums text-blue-700 sm:px-6 dark:text-blue-300">
-                    250 / 720
-                  </td>
-                  <td className="px-5 py-4 text-right font-mono font-bold tabular-nums text-blue-700 sm:px-6 dark:text-blue-300">
-                    71.7%
-                  </td>
-                  <td className="px-5 py-4 text-right font-mono tabular-nums sm:px-6">
-                    66.1%
-                  </td>
-                  <td className="px-5 py-4 text-right font-mono tabular-nums sm:px-6">
-                    50.0%
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-5 py-4 font-medium sm:px-6">
-                    Always-on recovery
-                  </td>
-                  <td className="px-5 py-4 text-right font-mono tabular-nums sm:px-6">
-                    720 / 720
-                  </td>
-                  <td className="px-5 py-4 text-right font-mono font-bold tabular-nums text-blue-700 sm:px-6 dark:text-blue-300">
-                    71.7%
-                  </td>
-                  <td className="px-5 py-4 text-right font-mono font-bold tabular-nums text-blue-700 sm:px-6 dark:text-blue-300">
-                    66.5%
-                  </td>
-                  <td className="px-5 py-4 text-right font-mono font-bold tabular-nums text-blue-700 sm:px-6 dark:text-blue-300">
-                    52.2%
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p className="border-t bg-muted/20 px-5 py-4 text-sm leading-6 text-muted-foreground sm:px-6">
-            All 720 questions are retrieved once initially. Recall is evaluated
-            on the 660 answerable questions.
-          </p>
-        </div>
       </section>
     </div>
   );
