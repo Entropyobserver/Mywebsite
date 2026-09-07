@@ -122,7 +122,7 @@ def save_edge_ablation():
     d.text((80, 55), "Which graph relations help?", font=font(48, True), fill=NAVY)
     d.text((80, 118), "Paper Figure 3 - change in Object Recall@10 when an edge type is removed", font=font(24), fill=SLATE)
     labels = ["No same-page", "No adjacent-page", "No same-entity", "No same-metric"]
-    values = [0.000, 0.056, -0.020, -0.008]
+    values = [0.005, 0.061, -0.018, -0.008]
     colors = [BLUE, ORANGE, GREEN, RED]
     zero_x = 850
     scale = 9000

@@ -8,9 +8,9 @@ const researchQuestions = [
 
 const fusionRows = [
   ["Hybrid E5 + rerank", ".673", ".838", ".908", ".730"],
-  ["Retained E5 + selected graph", ".673", ".858", ".905", ".737"],
+  ["Retained E5 + selected graph", ".671", ".856", ".903", ".735"],
   ["Retained E5 + graph paths", ".668", ".850", ".914", ".733"],
-  ["Retained E5 + graph + paths", ".670", ".859", ".917", ".736"],
+  ["Retained E5 + graph + paths", ".670", ".859", ".918", ".736"],
 ] as const;
 
 function SectionHeader({ eyebrow, title, description }: {
@@ -81,7 +81,7 @@ export default function StructureAwareGraphRagResearch() {
       </section>
 
       <section id="rq1">
-        <SectionHeader title="RQ1. Which Graph Connections Help?" description={<><p>The graph connects evidence through four types of relations: <strong>same-page, same-entity, same-metric, and adjacent-page</strong>. But adding more connections does not necessarily improve retrieval.</p><p className="mt-4">To understand which relations actually help, we remove one relation at a time while keeping the rest of the retrieval pipeline unchanged.</p></>} />
+        <SectionHeader title="RQ1. Which Graph Connections Help?" description={<><p>The full graph evaluates <strong>same-page, same-entity, same-metric, and adjacent-page</strong> relations. The selected graph used in downstream experiments excludes adjacent-page links.</p><p className="mt-4">To understand which relations actually help, we remove one relation at a time while keeping the rest of the retrieval pipeline unchanged.</p></>} />
         <PaperFigure src="/projects/graph-rag-evidence/paper-graph-schema.png" alt="Typed metadata evidence graph schema" height={1050} caption="The graph connects evidence based on document structure, shared entities, and financial metrics." />
         <div className="mt-8">
           <PaperFigure src="/projects/graph-rag-evidence/paper-edge-ablation.png" alt="Edge-type ablation for Object Recall at 10" height={900} caption="Positive values mean retrieval improves when a relation is removed." />
@@ -97,8 +97,8 @@ export default function StructureAwareGraphRagResearch() {
             <table className="w-full min-w-[480px] text-left text-sm">
               <thead className="bg-blue-700 text-white"><tr><th scope="col" className="px-5 py-4 font-semibold">Metric</th><th scope="col" className="px-5 py-4 text-right font-semibold">Full graph</th><th scope="col" className="px-5 py-4 text-right font-semibold">Without adjacent-page</th></tr></thead>
               <tbody className="divide-y">
-                <tr><th scope="row" className="px-5 py-4 font-medium">Object Recall@10</th><td className="px-5 py-4 text-right font-mono tabular-nums">71.3%</td><td className="px-5 py-4 text-right font-mono tabular-nums"><strong>84.0%</strong></td></tr>
-                <tr className="bg-muted/35"><th scope="row" className="px-5 py-4 font-medium">MRR</th><td className="px-5 py-4 text-right font-mono tabular-nums">0.644</td><td className="px-5 py-4 text-right font-mono tabular-nums"><strong>0.728</strong></td></tr>
+                <tr><th scope="row" className="px-5 py-4 font-medium">Object Recall@10</th><td className="px-5 py-4 text-right font-mono tabular-nums">70.0%</td><td className="px-5 py-4 text-right font-mono tabular-nums"><strong>84.7%</strong></td></tr>
+                <tr className="bg-muted/35"><th scope="row" className="px-5 py-4 font-medium">MRR</th><td className="px-5 py-4 text-right font-mono tabular-nums">0.633</td><td className="px-5 py-4 text-right font-mono tabular-nums"><strong>0.729</strong></td></tr>
               </tbody>
             </table>
           </div>
@@ -119,8 +119,7 @@ export default function StructureAwareGraphRagResearch() {
                     <td className="px-5 py-4">{row[0]}</td>
                     {row.slice(1).map((value, valueIndex) => {
                       const isBest = (index === 0 && valueIndex === 0)
-                        || (index === 1 && (valueIndex === 0 || valueIndex === 3))
-                        || (index === 3 && (valueIndex === 1 || valueIndex === 2));
+                        || (index === 3 && (valueIndex === 1 || valueIndex === 2 || valueIndex === 3));
                       return <td key={`${row[0]}-${valueIndex}`} className={`px-5 py-4 text-right font-mono tabular-nums ${isBest ? "font-bold" : ""}`}>{value}</td>;
                     })}
                   </tr>
@@ -129,7 +128,7 @@ export default function StructureAwareGraphRagResearch() {
             </table>
           </div>
         </div>
-        <p className="mt-6 leading-7 text-muted-foreground"><strong className="text-foreground">Selected-graph expansion provides most of the object-recovery gain</strong>, improving Object Recall@10 from <strong className="text-foreground">83.8% to 85.8%</strong>. Adding graph paths on top changes object recall very little (<strong className="text-foreground">85.8% → 85.9%</strong>), but increases Page Recall@10 from <strong className="text-foreground">90.5% to 91.7%</strong>.</p>
+        <p className="mt-6 leading-7 text-muted-foreground">Adding selected-graph candidates improves Object Recall@10 from 83.8% to 85.6% (<code>p=0.016</code>). Adding graph paths on top provides little additional object-recall gain, reaching 85.9% (<code>p=0.707</code>), but raises Page Recall@10 from 90.3% to 91.8% (<code>p=0.012</code>). These uncorrected results should be interpreted cautiously.</p>
         <EvidenceConclusion><strong>Key finding:</strong> Selected graph mainly helps recover missing evidence objects, while graph paths contribute more to <strong>page-level coverage</strong> than exact-object recovery.</EvidenceConclusion>
       </section>
 
@@ -160,7 +159,7 @@ export default function StructureAwareGraphRagResearch() {
                 <thead className="bg-blue-700 text-white"><tr><th scope="col" className="px-5 py-4 font-semibold">Retrieval result</th><th scope="col" className="px-5 py-4 text-right font-semibold">Hybrid E5</th><th scope="col" className="px-5 py-4 text-right font-semibold">E5 + Graph + Paths</th></tr></thead>
                 <tbody className="divide-y">
                   <tr><th scope="row" className="px-5 py-4 font-medium">Evidence object found</th><td className="px-5 py-4 text-right font-mono tabular-nums">41.1%</td><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">50.0%</td></tr>
-                  <tr className="bg-muted/35"><th scope="row" className="px-5 py-4 font-medium">Evidence page found</th><td className="px-5 py-4 text-right font-mono tabular-nums">73.3%</td><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">77.8%</td></tr>
+                  <tr className="bg-muted/35"><th scope="row" className="px-5 py-4 font-medium">Evidence page found</th><td className="px-5 py-4 text-right font-mono tabular-nums">73.3%</td><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">78.9%</td></tr>
                 </tbody>
               </table>
             </div>
