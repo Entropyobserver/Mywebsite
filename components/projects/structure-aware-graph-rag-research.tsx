@@ -74,10 +74,6 @@ export default function StructureAwareGraphRagResearch() {
           }
         />
         <PaperFigure src="/projects/graph-rag-evidence/paper-controlled-fusion.png" alt="Simplified controlled GraphRAG fusion pipeline" height={1150} caption="Simplified web illustration of the controlled fusion pipeline." />
-        <div className="mt-6">
-          <h3 className="font-heading text-2xl">Why this design?</h3>
-          <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">By retaining the original hybrid results, we can directly test whether graph-based retrieval finds <strong>additional useful evidence</strong> that standard retrieval missed, rather than simply replacing a strong baseline.</p>
-        </div>
       </section>
 
       <section id="rq1">
