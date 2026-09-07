@@ -541,7 +541,7 @@ export const Projects: ProjectInterface[] = [
         title:
           "RQ3. Does the test set change which model looks better?",
         answer:
-          "Yes. The Bokmål-filtered model performs better on the Bokmål test set, while the Original-subsampled model performs better on the mixed-standard test set.",
+          "Yes. The Bokmål-filtered model performs better on the Bokmål test set, while the Original-subsampled model performs better on the mixed-standard test set. The test set can change which model looks better, so a higher BLEU score does not always mean a better translation.",
         imgArr: ["/projects/target-standard-bias/in-domain-results.svg"],
       },
     ],
