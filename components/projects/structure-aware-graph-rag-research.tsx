@@ -124,13 +124,14 @@ export default function StructureAwareGraphRagResearch() {
       </section>
 
       <section id="rq3">
-        <SectionHeader title="RQ3. Coverage and Precise Grounding Remain Different Problems" description={<p>Some questions require more than finding a single relevant evidence object. <strong>Multi-hop questions require complete evidence coverage</strong>, while <strong>visual and layout questions often require locating the right evidence within a relevant page</strong>.</p>} />
+        <SectionHeader title="RQ3. Where Does Retrieval Still Fail?" description={<p>Even with graph-based retrieval, two challenges remain: <strong>finding all the evidence needed for multi-hop questions</strong> and <strong>finding the exact evidence inside visually complex pages</strong>.</p>} />
         <div>
           <h3 className="font-heading text-2xl">Multi-Hop Questions</h3>
+          <p className="mt-3 leading-7 text-muted-foreground">Some questions require evidence from <strong className="text-foreground">multiple places</strong> in the reports. Finding only one of them is not enough.</p>
           <div className="mt-5 overflow-hidden rounded-2xl border bg-background">
             <div className="overflow-x-auto">
               <table className="w-full min-w-[560px] text-left text-sm">
-                <thead className="bg-blue-700 text-white"><tr><th scope="col" className="px-5 py-4 font-semibold">Retrieval result</th><th scope="col" className="px-5 py-4 text-right font-semibold">Hybrid E5</th><th scope="col" className="px-5 py-4 text-right font-semibold">Retained E5 + Graph + Paths</th></tr></thead>
+                <thead className="bg-blue-700 text-white"><tr><th scope="col" className="px-5 py-4 font-semibold">Retrieval Result</th><th scope="col" className="px-5 py-4 text-right font-semibold">Hybrid E5</th><th scope="col" className="px-5 py-4 text-right font-semibold">+ Graph + Paths</th></tr></thead>
                 <tbody className="divide-y">
                   <tr><th scope="row" className="px-5 py-4 font-medium">At least one evidence object found</th><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">100.0%</td><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">100.0%</td></tr>
                   <tr className="bg-muted/35"><th scope="row" className="px-5 py-4 font-medium">All evidence objects found</th><td className="px-5 py-4 text-right font-mono tabular-nums">67.8%</td><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">72.2%</td></tr>
@@ -139,15 +140,16 @@ export default function StructureAwareGraphRagResearch() {
               </table>
             </div>
           </div>
-          <p className="mt-5 leading-7 text-muted-foreground">The baseline finds at least one relevant object for every multi-hop question, but complete evidence recovery is much harder. Graph and path candidates improve coverage of the full evidence set.</p>
-          <EvidenceConclusion><strong>Key finding:</strong> Finding part of the evidence is easier than finding <strong>all evidence required to support an answer</strong>.</EvidenceConclusion>
+          <p className="mt-5 leading-7 text-muted-foreground">Both methods can always find <strong className="text-foreground">some</strong> relevant evidence. The harder problem is finding <strong className="text-foreground">all</strong> the evidence needed for the question. Adding Graph and Paths improves this from 67.8% to 72.2%.</p>
+          <EvidenceConclusion><strong>Key finding:</strong> Multi-hop retrieval still struggles to <strong>find all required evidence</strong>, even when some relevant evidence is easy to find.</EvidenceConclusion>
         </div>
         <div className="mt-10">
           <h3 className="font-heading text-2xl">Visual and Layout Questions</h3>
+          <p className="mt-3 leading-7 text-muted-foreground">For questions involving tables, figures, or page layout, the system may find the <strong className="text-foreground">correct page</strong> but still miss the <strong className="text-foreground">specific evidence on that page</strong>.</p>
           <div className="mt-5 overflow-hidden rounded-2xl border bg-background">
             <div className="overflow-x-auto">
               <table className="w-full min-w-[560px] text-left text-sm">
-                <thead className="bg-blue-700 text-white"><tr><th scope="col" className="px-5 py-4 font-semibold">Retrieval result</th><th scope="col" className="px-5 py-4 text-right font-semibold">Hybrid E5</th><th scope="col" className="px-5 py-4 text-right font-semibold">Retained E5 + Graph + Paths</th></tr></thead>
+                <thead className="bg-blue-700 text-white"><tr><th scope="col" className="px-5 py-4 font-semibold">Retrieval Result</th><th scope="col" className="px-5 py-4 text-right font-semibold">Hybrid E5</th><th scope="col" className="px-5 py-4 text-right font-semibold">+ Graph + Paths</th></tr></thead>
                 <tbody className="divide-y">
                   <tr><th scope="row" className="px-5 py-4 font-medium">Evidence object found</th><td className="px-5 py-4 text-right font-mono tabular-nums">41.1%</td><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">50.0%</td></tr>
                   <tr className="bg-muted/35"><th scope="row" className="px-5 py-4 font-medium">Evidence page found</th><td className="px-5 py-4 text-right font-mono tabular-nums">73.3%</td><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">78.9%</td></tr>
@@ -155,8 +157,8 @@ export default function StructureAwareGraphRagResearch() {
               </table>
             </div>
           </div>
-          <p className="mt-5 leading-7 text-muted-foreground">Graph and path candidates improve both object and page coverage, but a substantial gap remains between finding the correct page and locating the exact evidence object within it.</p>
-          <EvidenceConclusion><strong>Key finding:</strong> For visual and layout questions, reaching the right page does not guarantee <strong>precise evidence grounding</strong>. Richer visual or multimodal retrieval may be needed to close this gap.</EvidenceConclusion>
+          <p className="mt-5 leading-7 text-muted-foreground">This gap is still large. With Graph and Paths, the system reaches the correct page in 78.9% of cases, but finds the specific evidence in only 50.0%.</p>
+          <EvidenceConclusion><strong>Key finding:</strong> For visual and layout questions, <strong>finding the right page is much easier than finding the exact evidence inside it</strong>.</EvidenceConclusion>
         </div>
       </section>
 
