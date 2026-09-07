@@ -698,39 +698,51 @@ export const Projects: ProjectInterface[] = [
     startDate: new Date("2025-11-01"),
     endDate: new Date("2026-08-01"),
     companyLogoImg: "/projects/vlm-bias-evaluation/cover.svg",
+    keyMetrics: [
+      { value: "2,415", label: "VLM generations" },
+      { value: "115", label: "Reviewed images" },
+      { value: "7", label: "VLMs evaluated" },
+    ],
     pagesInfoArr: [
       {
-        title: "Evaluation Questions",
+        title: "Research Questions",
         description:
-          "RQ1. Can matched prompts reveal systematic framing differences while keeping the task context fixed?\n\nRQ2. Can the same evaluation architecture support both language-only and vision-language studies?\n\nRQ3. Which automatic signals are useful for screening, and where is human judgment required?\n\nRQ4. How should uncertainty, reviewer agreement, and study limitations constrain the final claim?",
+          "RQ1. How does model architecture affect the amount of political and social context preserved in VLM-generated descriptions?\n\nRQ2. Which image scenarios show the strongest omission and depoliticization patterns?\n\nRQ3. Are changes in salient visual cues associated with measurable changes in model framing?\n\nRQ4. Which automatic signals are useful for screening, and which conclusions still require human validation?",
         imgArr: [],
       },
       {
-        title: "Configuration-Driven Evaluation Framework",
+        title: "Experimental Setup",
         description:
-          "The framework separates case-specific resources from shared evaluation code. Each study defines its controlled variable, prompt or image set, group labels, and metric configuration; the shared engine handles inference, disparity summaries, bootstrap uncertainty, error slices, and exports for human review.",
-        imgArr: ["/projects/vlm-bias-evaluation/framework.svg"],
-      },
-      {
-        title: "Three Case Studies, One Evaluation Discipline",
-        description:
-          "The current project spans geographic framing, gender–occupation associations, and political or moral framing in VLM descriptions. Their inputs differ, but each uses matched conditions, explicit analysis units, pre-defined comparison groups, and a human-validation target.",
-        imgArr: ["/projects/vlm-bias-evaluation/case-study-matrix.svg"],
-      },
-      {
-        title: "Reviewed VLM Image Set",
-        description:
-          "For the vision-language case study, images are organized and reviewed before inference so that file identity, group labels, and visible context can be audited. The contact sheet supports coverage checks and helps identify duplicates, ambiguous scenes, or category leakage before model outputs are compared.",
+          "The main experiment uses 115 reviewed real-world images across 10 political and social scenarios. Each image is paired with three captioning instructions, producing 345 image–instruction tasks. Seven VLMs generate 2,415 descriptions, which are evaluated using expected-element coverage, omission rate, depoliticization, agency and threat framing, sentiment, and zero-shot framing labels. Bootstrap confidence intervals quantify uncertainty in the model-level comparisons.",
         imgArr: [
           "/projects/vlm-bias-evaluation/vlm-image-review-contact-sheet.jpg",
         ],
         imageLayout: "portrait",
       },
       {
-        title: "Human Validation Boundary",
+        title: "Experiment 1: Model-Level Results",
         description:
-          "Automatic metrics are used to locate candidate disparities, not to make a final diagnosis. Selected outputs move through structured annotation, context and severity review, and inter-annotator agreement analysis. Claims are then limited to what the reviewed evidence can support.",
-        imgArr: ["/projects/vlm-bias-evaluation/validation-boundary.svg"],
+          "Modern instruction-following VLMs preserved more expected context than older captioning baselines, but omission remained substantial across every model. InternVL2.5-1B achieved the highest expected-element coverage at 0.289, while GIT-base was lowest at 0.128. Qwen2-VL-2B had the lowest depoliticization score at 0.226, compared with 0.365 for ViT-GPT2. These results indicate differences in contextual coverage, not that any model is bias-free.",
+        imgArr: ["/projects/vlm-bias-evaluation/model-results.png"],
+      },
+      {
+        title: "Experiment 2: Scenario-Level Results",
+        description:
+          "The strongest recurring pattern was omission rather than explicitly hostile or moralizing language. Climate-disaster, war-aid, and homelessness images had omission rates above 0.96. Depoliticization was concentrated in scenarios with explicit political or social context: migration reached 0.960, protest 0.837, and election 0.775. Because the depoliticization measure depends on scenario-specific lexicons, omission is the broader result and depoliticization is interpreted as a targeted screening signal.",
+        imgArr: ["/projects/vlm-bias-evaluation/scenario-results.png"],
+      },
+      {
+        title: "Experiment 3: Exploratory Counterfactual Analysis",
+        description:
+          "An exploratory subset of 34 matched image pairs produced 714 pair-level comparisons across seven models and three instructions. Caption text changed in nearly every comparison, and several cues were associated with large changes in coverage or depoliticization. For example, a more salient ballot-booth context increased mean coverage by 0.286 and reduced depoliticization by 0.381, while a busier polling-station exterior reduced coverage by 0.270. Because the pairs use real-world rather than synthetically controlled images, these differences are hypothesis-generating rather than causal evidence.",
+        imgArr: ["/projects/vlm-bias-evaluation/counterfactual-pairs.jpg"],
+        imageLayout: "portrait",
+      },
+      {
+        title: "Conclusion and Limitations",
+        description:
+          "The main result is that representational bias can appear through selection and omission, even when captions contain little overtly negative language. Newer instruction-following VLMs recover more context than conventional captioning models, but even the strongest model covers less than 30% of the predefined expected elements. The automatic metrics identify candidate patterns; they do not establish that every omission is normatively biased. Stronger claims require completed human annotation, inter-annotator agreement, and validation of the scenario-specific expected-element and depoliticization rules.",
+        imgArr: [],
       },
     ],
     descriptionDetails: {
