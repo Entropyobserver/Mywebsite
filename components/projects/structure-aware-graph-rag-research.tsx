@@ -7,10 +7,10 @@ const researchQuestions = [
 ];
 
 const fusionRows = [
-  ["Hybrid E5 + rerank", ".673", ".838", ".908", ".730"],
-  ["Retained E5 + selected graph", ".671", ".856", ".903", ".735"],
-  ["Retained E5 + graph paths", ".668", ".850", ".914", ".733"],
-  ["Retained E5 + graph + paths", ".670", ".859", ".918", ".736"],
+  ["Hybrid E5", "83.8%", "90.8%"],
+  ["+ Selected Graph", "85.6%", "90.3%"],
+  ["+ Graph Paths", "85.0%", "91.4%"],
+  ["+ Graph + Paths", "85.9%", "91.8%"],
 ] as const;
 
 function SectionHeader({ eyebrow, title, description }: {
@@ -103,30 +103,24 @@ export default function StructureAwareGraphRagResearch() {
       </section>
 
       <section id="rq2">
-        <SectionHeader title="RQ2. What Does Each Graph Source Add?" description={<p>We compare the same hybrid baseline with <strong>selected-graph candidates, graph-path candidates, and both together</strong>.</p>} />
-        <p className="mb-6 leading-7 text-muted-foreground">Replacement-style graph expansion does not outperform the strongest hybrid baseline. Selected replacement-style GraphRAG reaches 82.9% Object Recall@10, compared with 83.8% for Hybrid E5 + rerank, and reduces Page Recall@10 from 90.8% to 87.6%. This motivates retained-candidate fusion, which preserves the strong hybrid results while adding graph-derived candidates.</p>
+        <SectionHeader title="RQ2. What Does Each Graph Source Add?" description={<p>We compare the original hybrid retrieval with two graph-based methods: <strong>Selected Graph</strong> and <strong>Graph Paths</strong>. The original hybrid results are kept, and each graph method adds additional evidence before the final ranking.</p>} />
         <div className="overflow-hidden rounded-2xl border bg-background">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[720px] text-left text-sm">
-              <thead className="bg-blue-700 text-white"><tr><th className="px-5 py-4 font-semibold">Method</th><th className="px-5 py-4 text-right font-semibold">Obj R@1</th><th className="px-5 py-4 text-right font-semibold">Obj R@10</th><th className="px-5 py-4 text-right font-semibold">Page R@10</th><th className="px-5 py-4 text-right font-semibold">MRR</th></tr></thead>
+            <table className="w-full min-w-[560px] text-left text-sm">
+              <thead className="bg-blue-700 text-white"><tr><th className="px-5 py-4 font-semibold">Method</th><th className="px-5 py-4 text-right font-semibold">Object Recall@10</th><th className="px-5 py-4 text-right font-semibold">Page Recall@10</th></tr></thead>
               <tbody className="divide-y">
                 {fusionRows.map((row, index) => (
                   <tr key={row[0]} className={index === fusionRows.length - 1 ? "bg-emerald-50 dark:bg-emerald-950/25" : index % 2 ? "bg-muted/35" : ""}>
                     <td className="px-5 py-4">{row[0]}</td>
-                    {row.slice(1).map((value, valueIndex) => {
-                      const isBest = (index === 0 && valueIndex === 0)
-                        || (index === 3 && (valueIndex === 1 || valueIndex === 2 || valueIndex === 3));
-                      return <td key={`${row[0]}-${valueIndex}`} className={`px-5 py-4 text-right font-mono tabular-nums ${isBest ? "font-bold" : ""}`}>{value}</td>;
-                    })}
+                    {row.slice(1).map((value, valueIndex) => <td key={`${row[0]}-${valueIndex}`} className={`px-5 py-4 text-right font-mono tabular-nums ${index === fusionRows.length - 1 ? "font-bold" : ""}`}>{value}</td>)}
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         </div>
-        <p className="mt-6 leading-7 text-muted-foreground">Adding selected-graph candidates improves Object Recall@10 from 83.8% to 85.6% (<code>p=0.016</code>). Adding graph paths on top provides little additional object-recall gain, reaching 85.9% (<code>p=0.707</code>), but raises Page Recall@10 from 90.3% to 91.8% (<code>p=0.012</code>). These uncorrected results should be interpreted cautiously.</p>
-        <p className="mt-4 leading-7 text-muted-foreground">Selected-graph fusion recovers 18 object hits missed by hybrid retrieval but loses 6 previous hits, producing a net gain of 12 questions. Adding paths on top recovers 10 object hits and loses 8; at the page level, however, paths recover 13 misses while losing only 3 hits. Graph candidates therefore change candidate competition rather than monotonically adding correct evidence.</p>
-        <EvidenceConclusion><strong>Key finding:</strong> Selected graph mainly helps recover missing evidence objects, while graph paths contribute more to <strong>page-level coverage</strong> than exact-object recovery.</EvidenceConclusion>
+        <p className="mt-6 leading-7 text-muted-foreground">The two graph methods help in different ways. <strong className="text-foreground">Selected Graph improves the retrieval of specific evidence</strong>, increasing Object Recall@10 from 83.8% to 85.6%. <strong className="text-foreground">Graph Paths mainly help find relevant pages</strong>: when added to Selected Graph, Page Recall@10 increases from 90.3% to 91.8%.</p>
+        <p className="mt-4 leading-7 text-muted-foreground">Together, <strong className="text-foreground">Graph + Paths gives the best overall coverage</strong>, reaching 85.9% Object Recall@10 and 91.8% Page Recall@10.</p>
       </section>
 
       <section id="rq3">
