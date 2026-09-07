@@ -171,13 +171,6 @@ export default function StructureAwareGraphRagResearch() {
         </div>
       </section>
 
-      <section>
-        <SectionHeader
-          title="Scope and Limitations"
-          description={<p>The study uses English annual reports from one company in the energy sector. The graph relies on zero-shot GLiNER entity extraction and pattern-based metric categories rather than a manually curated knowledge graph. The reported relation effects may partly reflect Equinor&apos;s recurring terminology and reporting structure and should be validated across companies and industries. Statistical tests are based on paired bootstrap estimates, and reported p-values are not corrected for multiple comparisons.</p>}
-        />
-      </section>
-
     </div>
   );
 }
