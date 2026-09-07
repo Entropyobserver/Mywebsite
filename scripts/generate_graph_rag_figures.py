@@ -57,10 +57,11 @@ def save_pipeline():
     img = Image.new("RGB", (1600, 1150), LIGHT)
     d = ImageDraw.Draw(img)
     d.text((80, 55), "Controlled GraphRAG fusion", font=font(48, True), fill=NAVY)
-    d.text((80, 118), "Paper Figure 1 - fixed E5 source, reranker, and candidate budget", font=font(24), fill=SLATE)
+    d.text((80, 118), "Simplified web illustration - shared maximum 80-candidate cap", font=font(24), fill=SLATE)
 
     boxes = {
-        "q": (470, 190, 1130, 285),
+        "q": (180, 190, 700, 285),
+        "scope": (900, 190, 1420, 285),
         "cues": (390, 335, 1210, 435),
         "hybrid": (390, 485, 1210, 600),
         "base": (150, 690, 530, 820),
@@ -69,14 +70,16 @@ def save_pipeline():
         "fusion": (390, 900, 1210, 1000),
     }
     rounded_box(d, boxes["q"], "#f1f5f9", SLATE, "Question")
-    rounded_box(d, boxes["cues"], "#ecfeff", TEAL, "Query cues", "Year, entity, metric")
+    rounded_box(d, boxes["scope"], "#f1f5f9", SLATE, "Reference document and year")
+    rounded_box(d, boxes["cues"], "#ecfeff", TEAL, "Query cues + report scope", "Year, entity, metric; document, year")
     rounded_box(d, boxes["hybrid"], "#dbeafe", BLUE, "Year-filtered hybrid retrieval", "BM25 + E5")
-    rounded_box(d, boxes["base"], "#eff6ff", BLUE, "E5 top-10", "Retained")
-    rounded_box(d, boxes["graph"], "#f0fdfa", TEAL, "Selected graph", "Expansion")
+    rounded_box(d, boxes["base"], "#eff6ff", BLUE, "Rerank hybrid", "Retain top-10")
+    rounded_box(d, boxes["graph"], "#f0fdfa", TEAL, "Selected graph", "Pre-rerank top-10 seeds")
     rounded_box(d, boxes["path"], "#fff7ed", ORANGE, "Graph paths", "Query-guided")
     rounded_box(d, boxes["fusion"], "#fefce8", ORANGE, "Candidate fusion", "Deduplicate; maximum 80")
 
-    arrow(d, (800, 285), (800, 335))
+    arrow(d, (440, 285), (620, 335))
+    arrow(d, (1160, 285), (980, 335))
     arrow(d, (800, 435), (800, 485))
     arrow(d, (800, 600), (340, 690))
     arrow(d, (800, 600), (800, 690), color=TEAL, dashed=True)
@@ -92,7 +95,7 @@ def save_graph_schema():
     img = Image.new("RGB", (1600, 1050), LIGHT)
     d = ImageDraw.Draw(img)
     d.text((80, 55), "Typed metadata evidence graph", font=font(48, True), fill=NAVY)
-    d.text((80, 118), "Paper Figure 2 - containment hierarchy with typed evidence links", font=font(24), fill=SLATE)
+    d.text((80, 118), "Simplified web illustration of the typed metadata graph", font=font(24), fill=SLATE)
 
     rounded_box(d, (540, 180, 1060, 275), "#f3e8ff", PURPLE, "2022 Annual Report")
     rounded_box(d, (630, 325, 970, 410), "#fff7ed", ORANGE, "Year 2022")

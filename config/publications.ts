@@ -90,7 +90,7 @@ export const publications: PublicationInterface[] = [
   },
   {
     title:
-      "Structure-Aware Graph Retrieval for Evidence Grounding over Long Annual Reports",
+      "When Does GraphRAG Help? A Controlled Study of Evidence Localization in Long Annual Reports",
     authors: "Xiaojing Yang, Zhihan Li",
     status: "In Preparation",
     venue: "TBD",

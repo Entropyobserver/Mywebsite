@@ -69,11 +69,11 @@ export default function StructureAwareGraphRagResearch() {
           description={
             <>
               <p>Standard retrieval finds evidence mainly through <strong>text similarity</strong>. Our GraphRAG approach also uses <strong>document structure</strong>, connecting evidence through shared pages, entities, and financial metrics. The goal is to test whether these graph connections can recover useful evidence that standard retrieval misses.</p>
-              <p className="mt-4">For each question, the benchmark provides the reference report and year. We first run BM25 + E5 hybrid retrieval within this scope and retain its reranked top-10 results. Two graph-based methods then add evidence in different ways: <strong>selected-graph expansion</strong> starts from the hybrid top-10 and follows same-page, same-entity, and same-metric links, while <strong>graph-path retrieval</strong> independently uses entity and metric cues from the question to navigate the graph. The original hybrid results and graph candidates are then combined, deduplicated, and reranked with the same cross-encoder.</p>
+              <p className="mt-4">Hybrid retrieval produces two outputs: its reranked top-10 is retained directly for fusion, while its pre-cross-encoder top-10 provides seeds for selected-graph expansion. Graph-path retrieval independently follows year, entity, and metric cues within the benchmark-provided report scope. The resulting candidates are deduplicated, capped at a maximum of 80, and reranked with the same cross-encoder.</p>
             </>
           }
         />
-        <PaperFigure src="/projects/graph-rag-evidence/paper-controlled-fusion.png" alt="Controlled GraphRAG fusion pipeline" height={1150} caption="Controlled GraphRAG fusion. Selected-graph expansion builds on hybrid retrieval, while graph paths provide an independent, query-guided source of evidence." />
+        <PaperFigure src="/projects/graph-rag-evidence/paper-controlled-fusion.png" alt="Simplified controlled GraphRAG fusion pipeline" height={1150} caption="Simplified web illustration of the controlled fusion pipeline." />
         <div className="mt-6">
           <h3 className="font-heading text-2xl">Why this design?</h3>
           <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">By retaining the original hybrid results, we can directly test whether graph-based retrieval finds <strong>additional useful evidence</strong> that standard retrieval missed, rather than simply replacing a strong baseline.</p>
@@ -82,11 +82,11 @@ export default function StructureAwareGraphRagResearch() {
 
       <section id="rq1">
         <SectionHeader title="RQ1. Which Graph Connections Help?" description={<><p>The full graph evaluates <strong>same-page, same-entity, same-metric, and adjacent-page</strong> relations. The selected graph used in downstream experiments excludes adjacent-page links.</p><p className="mt-4">To understand which relations actually help, we remove one relation at a time while keeping the rest of the retrieval pipeline unchanged.</p></>} />
-        <PaperFigure src="/projects/graph-rag-evidence/paper-graph-schema.png" alt="Typed metadata evidence graph schema" height={1050} caption="The graph connects evidence based on document structure, shared entities, and financial metrics." />
+        <PaperFigure src="/projects/graph-rag-evidence/paper-graph-schema.png" alt="Simplified typed metadata graph schema" height={1050} caption="Simplified web illustration of the typed metadata graph." />
         <div className="mt-8">
           <PaperFigure src="/projects/graph-rag-evidence/paper-edge-ablation.png" alt="Edge-type ablation for Object Recall at 10" height={900} caption="Positive values mean retrieval improves when a relation is removed." />
         </div>
-        <p className="mt-6 leading-7 text-muted-foreground">The results show clear differences between relation types. <strong className="text-foreground">Same-entity links provide the strongest useful signal, while same-metric links provide a smaller benefit. Same-page links show little clear effect on object retrieval. In contrast, adjacent-page links introduce noise: removing them improves retrieval.</strong></p>
+        <p className="mt-6 leading-7 text-muted-foreground">The results show clear differences between relation types. <strong className="text-foreground">Same-entity links provide the strongest useful signal, while same-metric links provide a smaller benefit. Same-page links show mixed effects: removing them slightly improves final Object Recall@10 but reduces candidate recall before reranking. In contrast, adjacent-page links introduce noise: removing them improves retrieval.</strong></p>
         <EvidenceConclusion><strong>Key finding:</strong> GraphRAG benefits from <strong>meaningful connections</strong>, not simply more connections.</EvidenceConclusion>
       </section>
 
@@ -104,11 +104,12 @@ export default function StructureAwareGraphRagResearch() {
           </div>
         </div>
         <p className="mt-6 leading-7 text-muted-foreground">This provides additional evidence that the negative effect of adjacent-page expansion is <strong>consistent across reporting years within the Equinor collection</strong>.</p>
-        <EvidenceConclusion><strong>Scope:</strong> This is a robustness check within one company&apos;s reports, not a separate train/test evaluation or evidence of generalization to other companies or industries.</EvidenceConclusion>
+        <EvidenceConclusion><strong>Scope:</strong> This is a held-out-year robustness check for the adjacent-page edge policy. It is not an untouched test split for every experiment, nor does it establish generalization beyond the Equinor collection.</EvidenceConclusion>
       </section>
 
       <section id="rq2">
         <SectionHeader title="RQ2. What Does Each Graph Source Add?" description={<p>We compare the same hybrid baseline with <strong>selected-graph candidates, graph-path candidates, and both together</strong>.</p>} />
+        <p className="mb-6 leading-7 text-muted-foreground">Replacement-style graph expansion does not outperform the strongest hybrid baseline. Selected replacement-style GraphRAG reaches 82.9% Object Recall@10, compared with 83.8% for Hybrid E5 + rerank, and reduces Page Recall@10 from 90.8% to 87.6%. This motivates retained-candidate fusion, which preserves the strong hybrid results while adding graph-derived candidates.</p>
         <div className="overflow-hidden rounded-2xl border bg-background">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[720px] text-left text-sm">
@@ -129,6 +130,7 @@ export default function StructureAwareGraphRagResearch() {
           </div>
         </div>
         <p className="mt-6 leading-7 text-muted-foreground">Adding selected-graph candidates improves Object Recall@10 from 83.8% to 85.6% (<code>p=0.016</code>). Adding graph paths on top provides little additional object-recall gain, reaching 85.9% (<code>p=0.707</code>), but raises Page Recall@10 from 90.3% to 91.8% (<code>p=0.012</code>). These uncorrected results should be interpreted cautiously.</p>
+        <p className="mt-4 leading-7 text-muted-foreground">Selected-graph fusion recovers 18 object hits missed by hybrid retrieval but loses 6 previous hits, producing a net gain of 12 questions. Adding paths on top recovers 10 object hits and loses 8; at the page level, however, paths recover 13 misses while losing only 3 hits. Graph candidates therefore change candidate competition rather than monotonically adding correct evidence.</p>
         <EvidenceConclusion><strong>Key finding:</strong> Selected graph mainly helps recover missing evidence objects, while graph paths contribute more to <strong>page-level coverage</strong> than exact-object recovery.</EvidenceConclusion>
       </section>
 
@@ -139,9 +141,9 @@ export default function StructureAwareGraphRagResearch() {
           <div className="mt-5 overflow-hidden rounded-2xl border bg-background">
             <div className="overflow-x-auto">
               <table className="w-full min-w-[560px] text-left text-sm">
-                <thead className="bg-blue-700 text-white"><tr><th scope="col" className="px-5 py-4 font-semibold">Retrieval result</th><th scope="col" className="px-5 py-4 text-right font-semibold">Hybrid E5</th><th scope="col" className="px-5 py-4 text-right font-semibold">E5 + Graph + Paths</th></tr></thead>
+                <thead className="bg-blue-700 text-white"><tr><th scope="col" className="px-5 py-4 font-semibold">Retrieval result</th><th scope="col" className="px-5 py-4 text-right font-semibold">Hybrid E5</th><th scope="col" className="px-5 py-4 text-right font-semibold">Retained E5 + Graph + Paths</th></tr></thead>
                 <tbody className="divide-y">
-                  <tr><th scope="row" className="px-5 py-4 font-medium">At least one evidence object found</th><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">100.0%</td><td className="px-5 py-4 text-right font-mono tabular-nums">—</td></tr>
+                  <tr><th scope="row" className="px-5 py-4 font-medium">At least one evidence object found</th><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">100.0%</td><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">100.0%</td></tr>
                   <tr className="bg-muted/35"><th scope="row" className="px-5 py-4 font-medium">All evidence objects found</th><td className="px-5 py-4 text-right font-mono tabular-nums">67.8%</td><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">72.2%</td></tr>
                   <tr><th scope="row" className="px-5 py-4 font-medium">All evidence pages found</th><td className="px-5 py-4 text-right font-mono tabular-nums">71.1%</td><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">74.4%</td></tr>
                 </tbody>
@@ -156,7 +158,7 @@ export default function StructureAwareGraphRagResearch() {
           <div className="mt-5 overflow-hidden rounded-2xl border bg-background">
             <div className="overflow-x-auto">
               <table className="w-full min-w-[560px] text-left text-sm">
-                <thead className="bg-blue-700 text-white"><tr><th scope="col" className="px-5 py-4 font-semibold">Retrieval result</th><th scope="col" className="px-5 py-4 text-right font-semibold">Hybrid E5</th><th scope="col" className="px-5 py-4 text-right font-semibold">E5 + Graph + Paths</th></tr></thead>
+                <thead className="bg-blue-700 text-white"><tr><th scope="col" className="px-5 py-4 font-semibold">Retrieval result</th><th scope="col" className="px-5 py-4 text-right font-semibold">Hybrid E5</th><th scope="col" className="px-5 py-4 text-right font-semibold">Retained E5 + Graph + Paths</th></tr></thead>
                 <tbody className="divide-y">
                   <tr><th scope="row" className="px-5 py-4 font-medium">Evidence object found</th><td className="px-5 py-4 text-right font-mono tabular-nums">41.1%</td><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">50.0%</td></tr>
                   <tr className="bg-muted/35"><th scope="row" className="px-5 py-4 font-medium">Evidence page found</th><td className="px-5 py-4 text-right font-mono tabular-nums">73.3%</td><td className="px-5 py-4 text-right font-mono font-bold tabular-nums">78.9%</td></tr>
@@ -167,6 +169,13 @@ export default function StructureAwareGraphRagResearch() {
           <p className="mt-5 leading-7 text-muted-foreground">Graph and path candidates improve both object and page coverage, but a substantial gap remains between finding the correct page and locating the exact evidence object within it.</p>
           <EvidenceConclusion><strong>Key finding:</strong> For visual and layout questions, reaching the right page does not guarantee <strong>precise evidence grounding</strong>. Richer visual or multimodal retrieval may be needed to close this gap.</EvidenceConclusion>
         </div>
+      </section>
+
+      <section>
+        <SectionHeader
+          title="Scope and Limitations"
+          description={<p>The study uses English annual reports from one company in the energy sector. The graph relies on zero-shot GLiNER entity extraction and pattern-based metric categories rather than a manually curated knowledge graph. The reported relation effects may partly reflect Equinor&apos;s recurring terminology and reporting structure and should be validated across companies and industries. Statistical tests are based on paired bootstrap estimates, and reported p-values are not corrected for multiple comparisons.</p>}
+        />
       </section>
 
     </div>

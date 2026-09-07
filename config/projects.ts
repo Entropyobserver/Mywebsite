@@ -357,11 +357,11 @@ export const Projects: ProjectInterface[] = [
   {
     id: "structure-aware-graph-rag",
     companyName:
-      "Structure-Aware Graph Retrieval for Evidence Grounding over Long Annual Reports",
+      "When Does GraphRAG Help? A Controlled Study of Evidence Localization in Long Annual Reports",
     type: "Research",
     category: ["Research", "RAG", "Information Retrieval", "Evaluation"],
     shortDescription:
-      "Controlled GraphRAG research showing that selected graph expansion improves exact evidence recovery, while graph paths add complementary page coverage over long annual reports.",
+      "A controlled study of when graph structure improves evidence localization in long annual reports, separating object recovery, page coverage, and candidate competition.",
     techStack: [
       "Python",
       "GraphRAG",
@@ -380,14 +380,14 @@ export const Projects: ProjectInterface[] = [
     companyLogoImg: "/projects/graph-rag-evidence/cover.png",
     keyMetrics: [
       { value: "85.9%", label: "Object Recall@10" },
-      { value: "91.7%", label: "Page Recall@10" },
-      { value: "52,278", label: "Graph nodes" },
+      { value: "91.8%", label: "Page Recall@10" },
+      { value: "48,292", label: "Graph nodes" },
     ],
     pagesInfoArr: [
       {
         title: "Typed Evidence Graph",
         description:
-          "The controlled fusion design retains the same E5 hybrid retrieval output and adds selected graph expansion, graph-path candidates, or both before cross-encoder reranking.",
+          "The controlled fusion design retains reranked hybrid evidence and adds selected-graph expansion, graph-path candidates, or both under a common maximum 80-candidate cap.",
         imgArr: [
           "/projects/graph-rag-evidence/paper-controlled-fusion.png",
         ],
