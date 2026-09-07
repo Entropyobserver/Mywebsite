@@ -123,7 +123,7 @@ export const publications: PublicationInterface[] = [
   },
   {
     title:
-      "FinRAG-Equinor: From Annual Report PDFs to a Reliability-Audited Benchmark for Evidence-Grounded RAG",
+      "FinRAG-Equinor: A Reliability-Audited Benchmark for Evidence Localization in Longitudinal Annual Reports",
     authors: "Xiaojing Yang, Zhihan Li, Meriem Beloucif",
     status: "In Preparation",
     venue: "COLING 2027 via ACL Rolling Review (ARR)",

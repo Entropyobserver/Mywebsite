@@ -26,7 +26,8 @@ interface ProjectPageProps {
 }
 
 const finragMetadata = {
-  title: "FinRAG-Equinor | Reliability-Audited Financial RAG Benchmark",
+  title:
+    "FinRAG-Equinor: A Reliability-Audited Benchmark for Evidence Localization in Longitudinal Annual Reports",
   description:
     "A 720-question benchmark for report-, page-, object-, and multi-hop evidence retrieval over 15 annual reports.",
 };

@@ -304,7 +304,7 @@ export const Projects: ProjectInterface[] = [
   {
     id: "finrag-equinor",
     companyName:
-      "FinRAG-Equinor | Reliability-Audited Financial RAG Benchmark",
+      "FinRAG-Equinor: A Reliability-Audited Benchmark for Evidence Localization in Longitudinal Annual Reports",
     type: "Research",
     category: [
       "Research",
