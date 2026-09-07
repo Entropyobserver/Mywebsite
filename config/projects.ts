@@ -541,28 +541,7 @@ export const Projects: ProjectInterface[] = [
         title:
           "RQ3. Does the test set change which model looks better?",
         answer:
-          "Yes. Each model performs better when the test references are closer to the type of data on which it was trained.",
-        table: {
-          headers: [
-            "Test references",
-            "Same-size mixed model (BLEU)",
-            "Bokmål-filtered model (BLEU)",
-            "Better model",
-          ],
-          rows: [
-            ["Bokmål", "59.37", "61.28", "Bokmål-filtered"],
-            [
-              "Mixed Bokmål–Nynorsk",
-              "61.77",
-              "58.49",
-              "Same-size mixed",
-            ],
-          ],
-        },
-        followupParagraphs: [
-          "On the Bokmål test set, the Bokmål-filtered model receives the higher score. On the mixed-standard test set, the mixed-data model receives the higher score.",
-          "Therefore, a model may receive a higher score because it uses the same written standard as the reference translations—not necessarily because it translates the meaning more accurately.",
-        ],
+          "Yes. The Bokmål-filtered model performs better on the Bokmål test set, while the Original-subsampled model performs better on the mixed-standard test set.",
         imgArr: ["/projects/target-standard-bias/in-domain-results.svg"],
       },
     ],
