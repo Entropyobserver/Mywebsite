@@ -150,17 +150,27 @@ export default function IndexPage() {
           </AnimatedText>
           <div className="mt-6 space-y-5 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
             <AnimatedText as="p" delay={0.1}>
-              I am completing an MSc in Language Technology at Uppsala
-              University, with a background in Business Analytics and four
-              years of professional experience as a data analyst. My research
-              focuses on multilingual NLP, model adaptation, and reliable
-              language technology. My work includes a first-author EAMT 2026
-              publication on LoRA-based low-resource machine translation, as
-              well as research on modular Mixture-of-Experts, training-data
-              attribution, and evidence-grounded retrieval over long documents.
-              My broader goal is to develop adaptable and reliable NLP systems
-              and to understand how training data and system design shape model
-              behaviour.
+              I am an AI and NLP researcher completing an MSc in Language
+              Technology at Uppsala University. I have a background in Business
+              Analytics and four years of experience as a data analyst, which
+              shaped my approach to empirical research, data analysis, and
+              solving real-world problems.
+            </AnimatedText>
+            <AnimatedText as="p" delay={0.15}>
+              My research began with low-resource machine translation and
+              efficient model adaptation using LoRA, leading to my first
+              peer-reviewed publication. I later extended this work in my
+              master&apos;s thesis to multilingual adaptation using modular
+              experts and language-specific adapters.
+            </AnimatedText>
+            <AnimatedText as="p" delay={0.2}>
+              My current research focuses on three connected areas: efficient
+              and modular model adaptation, training-data attribution and
+              behavioural evaluation, and information retrieval and evidence
+              grounding. Across these areas, I study how training data and
+              system design affect model behaviour across languages and
+              domains. My broader goal is to develop AI systems that are
+              adaptable, understandable, auditable, and reliable.
             </AnimatedText>
           </div>
         </div>
