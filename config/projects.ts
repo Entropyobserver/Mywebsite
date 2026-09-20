@@ -208,7 +208,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Research Questions",
         description:
-          "RQ1. Can Target-Anchored Synthesis provide useful training data for low-resource petroleum translation?\n\nRQ2. To what extent do language-specific LoRA experts specialise and overlap?\n\nRQ3. When does expert selection matter for translation quality, and how informative is routing accuracy?",
+          "RQ1. Can Target-Anchored Synthesis provide useful training data for low-resource petroleum translation?\n\nRQ2. Do language-specific LoRA experts specialise, and how much do their capabilities overlap?\n\nRQ3. When does expert selection improve translation quality, and does more accurate routing lead to better translations?",
         imgArr: [],
       },
       {

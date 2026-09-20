@@ -1,7 +1,7 @@
 const researchQuestions = [
   "Can Target-Anchored Synthesis provide useful training data for low-resource petroleum translation?",
-  "To what extent do language-specific LoRA experts specialise and overlap?",
-  "When does expert selection matter for translation quality, and how informative is routing accuracy?",
+  "Do language-specific LoRA experts specialise, and how much do their capabilities overlap?",
+  "When does expert selection improve translation quality, and does more accurate routing lead to better translations?",
 ];
 
 const confusionMatrix = [
