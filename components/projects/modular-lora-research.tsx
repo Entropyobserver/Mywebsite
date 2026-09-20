@@ -166,10 +166,10 @@ export default function ModularLoraResearch() {
         <div className="grid gap-6 rounded-2xl border bg-muted/20 p-5 sm:p-7 lg:grid-cols-[minmax(300px,0.9fr)_minmax(0,1.1fr)] lg:items-center">
           <div>
             <Image
-              src="/projects/modular-lora-experts/fig1_system_architecture.png"
+              src="/projects/modular-lora-experts/fig1_system_architecture_updated.png"
               alt="Figure 1: language-specific LoRA expert training, router training on a frozen NLLB backbone, and top-1 expert inference"
-              width={919}
-              height={1001}
+              width={766}
+              height={805}
               className="mx-auto h-auto w-full max-w-md rounded-xl bg-white object-contain"
             />
             <p className="mt-3 text-center text-xs text-muted-foreground">
