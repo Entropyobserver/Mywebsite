@@ -139,6 +139,92 @@ function CrossExpertMatrix() {
   );
 }
 
+function SystemArchitectureDiagram() {
+  const experts = [
+    { language: "EN–NO", source: "authentic", expert: "EN expert" },
+    { language: "DE–NO", source: "synthetic", expert: "DE expert" },
+    { language: "NL–NO", source: "synthetic", expert: "NL expert" },
+    { language: "FR–NO", source: "synthetic", expert: "FR expert" },
+  ];
+
+  return (
+    <div className="space-y-5 rounded-xl bg-white p-4 text-slate-900 sm:p-5">
+      <div>
+        <p className="mb-3 text-center text-sm font-semibold text-slate-600">
+          Phase 1 · Expert training
+        </p>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {experts.map(({ language, source, expert }) => (
+            <div key={language} className="flex flex-col items-center gap-2">
+              <div className="w-full rounded-lg border border-teal-300 bg-teal-50 px-2 py-2 text-center text-xs font-semibold leading-snug">
+                {language}
+                <span className="block font-normal text-slate-600">
+                  {source} data
+                </span>
+              </div>
+              <span aria-hidden="true" className="text-slate-400">
+                ↓
+              </span>
+              <div className="w-full rounded-lg border border-violet-300 bg-violet-50 px-2 py-2 text-center text-xs font-semibold leading-snug">
+                {expert}
+                <span className="block font-normal text-slate-600">
+                  LoRA r=16
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-3 rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 text-center text-xs font-semibold sm:text-sm">
+          NLLB-200-distilled-600M · frozen backbone
+        </div>
+      </div>
+
+      <div className="border-t border-slate-200 pt-4">
+        <p className="mb-3 text-center text-sm font-semibold text-slate-600">
+          Phase 2 · Router training
+        </p>
+        <div className="flex flex-col items-center gap-2 text-xs sm:text-sm">
+          <div className="w-full rounded-lg border border-teal-300 bg-teal-50 px-3 py-2 text-center">
+            Mixed EN + DE + NL + FR data
+          </div>
+          <span aria-hidden="true" className="text-slate-400">
+            ↓
+          </span>
+          <div className="w-full rounded-lg border border-orange-300 bg-orange-50 px-3 py-2 text-center">
+            <span className="font-semibold">Gated MLP router</span>
+            <span className="block text-slate-600">
+              Mean-pooled encoder state · only router updated
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div className="border-t border-slate-200 pt-4">
+        <p className="mb-3 text-center text-sm font-semibold text-slate-600">
+          Inference
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm">
+          <span className="rounded-lg border border-slate-300 bg-slate-50 px-3 py-2">
+            Input
+          </span>
+          <span aria-hidden="true" className="text-slate-400">
+            →
+          </span>
+          <span className="rounded-lg border border-orange-300 bg-orange-50 px-3 py-2 font-semibold">
+            Top-1 expert
+          </span>
+          <span aria-hidden="true" className="text-slate-400">
+            →
+          </span>
+          <span className="rounded-lg border border-teal-300 bg-teal-50 px-3 py-2">
+            Norwegian output
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ModularLoraResearch() {
   return (
     <div className="space-y-16">
@@ -165,15 +251,10 @@ export default function ModularLoraResearch() {
         <SectionHeader title="System Overview" />
         <div className="grid gap-6 rounded-2xl border bg-muted/20 p-5 sm:p-7 lg:grid-cols-[minmax(300px,0.9fr)_minmax(0,1.1fr)] lg:items-center">
           <div>
-            <Image
-              src="/projects/modular-lora-experts/fig1_system_architecture.png"
-              alt="System architecture with four language-specific LoRA experts, a frozen NLLB backbone, gated router training, and top-1 expert inference"
-              width={919}
-              height={1001}
-              className="mx-auto h-auto w-full max-w-md rounded-xl bg-white object-contain"
-            />
+            <SystemArchitectureDiagram />
             <p className="mt-3 text-center text-xs text-muted-foreground">
-              Figure 1. Expert training, router training, and top-1 inference.
+              System architecture: expert training, router training, and top-1
+              inference.
             </p>
           </div>
           <div className="space-y-5 text-base leading-8 text-muted-foreground sm:text-lg">
