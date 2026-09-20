@@ -46,6 +46,123 @@ export interface ProjectInterface {
 
 export const Projects: ProjectInterface[] = [
   {
+    id: "aspect-controlled-biomedical-retrieval",
+    companyName:
+      "When Relevance Is Not Enough: Aspect-Controlled Biomedical Evidence Retrieval",
+    type: "Research",
+    category: [
+      "Research",
+      "Information Retrieval",
+      "NLP",
+      "LoRA / PEFT",
+      "Evaluation",
+    ],
+    shortDescription:
+      "A controlled study of whether embeddings can retrieve different clinical evidence when the requested information changes.",
+    techStack: [
+      "Python",
+      "PyTorch",
+      "Transformers",
+      "Hugging Face",
+      "E5",
+      "LoRA",
+      "PEFT",
+      "Information Retrieval",
+      "Benchmarking",
+      "Statistics",
+      "LaTeX",
+    ],
+    startDate: new Date("2026-09-01"),
+    endDate: new Date("2026-09-01"),
+    companyLogoImg: "/projects/aspect-controlled-biomedical-retrieval/cover.svg",
+    keyMetrics: [
+      { value: "186", label: "Expert-test abstracts" },
+      { value: "0.4%", label: "Instruction-only switching" },
+      { value: "38.8%", label: "Adapted switching" },
+    ],
+    pagesInfoArr: [
+      {
+        title: "Research Questions",
+        description:
+          "A clinical-trial abstract may describe who participated (Population), what treatment was given (Intervention), and what happened (Outcome). All three concern the same study, but a user may need only one.\n\nRQ1. Can an instruction alone make a frozen embedding model retrieve the requested evidence type?\n\nRQ2. Does training a small query-side LoRA module improve this control without harming ordinary retrieval?\n\nRQ3. Does the effect differ for Population, Intervention, and Outcome?",
+        imgArr: [],
+      },
+      {
+        title: "Experimental Pipeline",
+        description:
+          "The same abstract supplies the same candidate sentences for all three requests. Only the requested evidence type changes. The dataset's labels are used to check the rankings, not shown to the model during testing.",
+        table: {
+          headers: ["Step", "What happens"],
+          rows: [
+            ["1. Prepare data", "Use real English EBM-NLP 2.0 trial abstracts. Split their text into candidate sentences and transfer token-level P/I/O labels to each candidate; a sentence may have more than one label."],
+            ["2. Split by document", "Use 4,187 documents for training, 474 for development, and 186 expert-annotated documents for the final test."],
+            ["3. Train", "Construct 18,921 training examples from labelled candidates. Each query has a correct sentence and two incorrect sentences. Update only the query-side LoRA module."],
+            ["4. Select", "After each epoch, check retrieval on the development documents and retain the best checkpoint. Do not train on the development or test sets."],
+            ["5. Test", "Ask for P, I, and O separately for each of the 186 test abstracts (558 queries). Rank the same candidates each time and compare the rankings with expert labels."],
+          ],
+        },
+        imgArr: [],
+      },
+      {
+        title: "Three Approaches",
+        table: {
+          headers: ["Approach", "What changes?"],
+          rows: [
+            [
+              "Generic retrieval",
+              "No Population/Intervention/Outcome instruction or training.",
+            ],
+            [
+              "Aspect-instructed",
+              "The frozen encoder receives an aspect instruction; no training.",
+            ],
+            [
+              "Aspect-adapted",
+              "A query-side LoRA module is trained to respond to the aspect instruction; candidate embeddings stay fixed.",
+            ],
+          ],
+        },
+        imgArr: [],
+      },
+      {
+        title: "Results and Analysis",
+        description:
+          "The expert-test results below are percentages. Top-1 asks whether the first sentence contains the requested aspect. Aspect-Specific Top-1 is stricter: the first sentence must contain only that aspect. Two-Aspect Switching requires both requests in an eligible pair to retrieve different, correct aspect-only sentences.",
+        table: {
+          headers: ["Method", "Top-1", "Aspect-Specific Top-1", "Two-Aspect Switching"],
+          rows: [
+            ["Generic", "82.1", "2.7", "0.0"],
+            ["Instruction-only", "84.2", "4.0", "0.4"],
+            ["Query-side LoRA", "89.7 ± 0.8", "61.3 ± 1.2", "38.8 ± 3.1"],
+          ],
+        },
+        followupParagraphs: [
+          "Instructions slightly improved ordinary retrieval but almost never made the model switch to the correct aspect-only evidence. This is why a good Top-1 score does not by itself demonstrate control.",
+          "With query-side LoRA, Two-Aspect Switching rose from 0.4% to 38.8% on average across three seeds, and ordinary Top-1 also rose from 84.2% to 89.7%. The switching score uses 264 eligible aspect pairs from 128 test documents, not all 558 queries.",
+          "Control improved for all three aspects, but Intervention remained harder: its Aspect-Specific Top-1 was 50.7%, compared with 67.8% for Population and 65.6% for Outcome. The study does not yet establish why this difference occurs.",
+        ],
+        imgArr: [],
+      },
+      {
+        title: "Scope and Next Questions",
+        description:
+          "This is a controlled proof of concept, not an open-corpus clinical search system. It uses one English biomedical dataset, fixed aspect instructions, and one base encoder. Further work needs to test natural questions, other languages and datasets, different embedding models, and larger document collections.",
+        imgArr: [],
+      },
+    ],
+    descriptionDetails: {
+      paragraphs: [
+        "Semantic search can find text about the right clinical trial yet miss the specific evidence a question asks for. This project tests whether an embedding model can change its sentence ranking when the requested evidence changes from Population to Intervention or Outcome.",
+        "I developed a within-document retrieval evaluation from EBM-NLP 2.0 and compared generic retrieval, instruction-only retrieval, and a lightweight query-side LoRA adaptation of multilingual E5. This is a preliminary research study; the paper is currently a draft.",
+      ],
+      bullets: [
+        "Converted token-level P/I/O annotations into sentence-level retrieval targets, retaining multi-aspect candidates in the search pool.",
+        "Measured both ordinary retrieval and strict aspect-specific switching on an expert-annotated test set.",
+        "Found that query-side adaptation substantially improved two-aspect switching over instructions alone without reducing ordinary retrieval quality.",
+      ],
+    },
+  },
+  {
     id: "lora-nmt-petroleum",
     companyName:
       "LoRA Fine-Tuning of English-Norwegian NMT for the Oil & Gas Industry",

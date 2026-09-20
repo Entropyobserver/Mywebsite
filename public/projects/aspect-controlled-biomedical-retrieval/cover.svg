@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 810" role="img" aria-labelledby="title desc">
+  <title id="title">Aspect-controlled biomedical evidence retrieval</title>
+  <desc id="desc">The same clinical abstract can be searched for population, intervention, or outcome evidence.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1220"/><stop offset="1" stop-color="#18233d"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6d86ff"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient>
+  </defs>
+  <rect width="1440" height="810" fill="url(#background)"/>
+  <circle cx="1280" cy="70" r="250" fill="#6d86ff" opacity=".08"/>
+  <circle cx="110" cy="760" r="270" fill="#2dd4bf" opacity=".07"/>
+  <text x="90" y="103" fill="#94a3b8" font-family="Inter,Arial,sans-serif" font-size="23" font-weight="700" letter-spacing="4">BIOMEDICAL INFORMATION RETRIEVAL</text>
+  <text x="90" y="188" fill="#f8fafc" font-family="Inter,Arial,sans-serif" font-size="54" font-weight="750">When relevance is not enough</text>
+  <text x="92" y="245" fill="#cbd5e1" font-family="Inter,Arial,sans-serif" font-size="26">Same abstract. Different information need. Different evidence.</text>
+  <rect x="90" y="326" width="400" height="322" rx="26" fill="#172033" stroke="#52627d" stroke-width="2"/>
+  <text x="124" y="384" fill="#94a3b8" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="700">ONE CLINICAL ABSTRACT</text>
+  <rect x="124" y="420" width="324" height="16" rx="8" fill="#61708b"/>
+  <rect x="124" y="455" width="273" height="16" rx="8" fill="#61708b" opacity=".8"/>
+  <rect x="124" y="490" width="307" height="16" rx="8" fill="#61708b" opacity=".7"/>
+  <rect x="124" y="525" width="239" height="16" rx="8" fill="#61708b" opacity=".55"/>
+  <rect x="124" y="560" width="289" height="16" rx="8" fill="#61708b" opacity=".45"/>
+  <text x="124" y="615" fill="#cbd5e1" font-family="Inter,Arial,sans-serif" font-size="22">Candidate sentences stay fixed</text>
+  <path d="M522 488h110" fill="none" stroke="url(#accent)" stroke-width="7" stroke-linecap="round"/>
+  <path d="m616 469 26 19-26 19" fill="none" stroke="#2dd4bf" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <rect x="682" y="330" width="668" height="82" rx="19" fill="#263653" stroke="#6d86ff" stroke-width="2"/>
+    <rect x="705" y="347" width="48" height="48" rx="12" fill="#5873ed"/>
+    <text x="729" y="379" text-anchor="middle" fill="white" font-size="25" font-weight="800">P</text>
+    <text x="777" y="380" fill="#f8fafc" font-size="26" font-weight="700">Who participated?</text>
+    <text x="1316" y="380" text-anchor="end" fill="#bfccff" font-size="22">Population evidence</text>
+    <rect x="682" y="448" width="668" height="82" rx="19" fill="#263653" stroke="#2dd4bf" stroke-width="2"/>
+    <rect x="705" y="465" width="48" height="48" rx="12" fill="#12a892"/>
+    <text x="729" y="497" text-anchor="middle" fill="white" font-size="25" font-weight="800">I</text>
+    <text x="777" y="498" fill="#f8fafc" font-size="26" font-weight="700">What treatment?</text>
+    <text x="1316" y="498" text-anchor="end" fill="#a7f3d0" font-size="22">Intervention evidence</text>
+    <rect x="682" y="566" width="668" height="82" rx="19" fill="#263653" stroke="#f2b45d" stroke-width="2"/>
+    <rect x="705" y="583" width="48" height="48" rx="12" fill="#d5963d"/>
+    <text x="729" y="615" text-anchor="middle" fill="white" font-size="25" font-weight="800">O</text>
+    <text x="777" y="616" fill="#f8fafc" font-size="26" font-weight="700">What happened?</text>
+    <text x="1316" y="616" text-anchor="end" fill="#f9d79b" font-size="22">Outcome evidence</text>
+  </g>
+  <rect x="90" y="717" width="1260" height="3" rx="2" fill="url(#accent)"/>
+  <text x="90" y="767" fill="#94a3b8" font-family="Inter,Arial,sans-serif" font-size="22">EBM-NLP 2.0 · multilingual E5 · query-side LoRA · expert-test evaluation</text>
+</svg>
