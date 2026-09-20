@@ -174,6 +174,9 @@ function SystemArchitectureDiagram() {
             </div>
           ))}
         </div>
+        <div aria-hidden="true" className="mt-2 text-center text-slate-400">
+          ↓
+        </div>
         <div className="mt-3 rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 text-center text-xs font-semibold sm:text-sm">
           NLLB-200-distilled-600M · frozen backbone
         </div>
@@ -185,7 +188,7 @@ function SystemArchitectureDiagram() {
         </p>
         <div className="flex flex-col items-center gap-2 text-xs sm:text-sm">
           <div className="w-full rounded-lg border border-teal-300 bg-teal-50 px-3 py-2 text-center">
-            Mixed EN + DE + NL + FR data
+            Mixed EN + DE + NL + FR data through frozen NLLB encoder
           </div>
           <span aria-hidden="true" className="text-slate-400">
             ↓
@@ -253,8 +256,7 @@ export default function ModularLoraResearch() {
           <div>
             <SystemArchitectureDiagram />
             <p className="mt-3 text-center text-xs text-muted-foreground">
-              System architecture: expert training, router training, and top-1
-              inference.
+              Figure 1. Expert training, router training, and top-1 inference.
             </p>
           </div>
           <div className="space-y-5 text-base leading-8 text-muted-foreground sm:text-lg">
