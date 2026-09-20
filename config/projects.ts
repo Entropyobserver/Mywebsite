@@ -195,7 +195,6 @@ export const Projects: ProjectInterface[] = [
       "NLLB-200",
       "LoRA",
       "PEFT",
-      "SacreBLEU",
       "COMET",
       "chrF",
       "LaTeX",
@@ -209,7 +208,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Research Questions",
         description:
-          "RQ1. How effective is Target-Anchored Synthesis as a training signal for low-resource petroleum-domain translation in German–Norwegian, French–Norwegian, and Dutch–Norwegian?\n\nRQ2. How do independent language-specific LoRA experts compare with shared multitask LoRA in translation quality and terminology accuracy?\n\nRQ3. What do routing behavior and cross-expert transfer reveal about expert specialization and shared capacity in modular multilingual adaptation?",
+          "RQ1. Can Target-Anchored Synthesis provide useful training data for low-resource petroleum translation?\n\nRQ2. To what extent do language-specific LoRA experts specialise and overlap?\n\nRQ3. When does expert selection matter for translation quality, and how informative is routing accuracy?",
         imgArr: [],
       },
       {
@@ -227,7 +226,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Target-Anchored Synthesis",
         description:
-          "Authentic petroleum-domain parallel data are available only for English–Norwegian. For German, French, and Dutch, GPT-4o-mini generates synthetic source sentences from authentic English–Norwegian pairs while validated Norwegian targets act as semantic anchors. LaBSE similarity and terminology accuracy provide dual quality checks. The pipeline produces 41,527 synthetic training pairs and 51,890 synthetic pairs across train, development, and test splits.",
+          "Authentic petroleum-domain parallel data are available only for English–Norwegian. For German, French, and Dutch, GPT-4o-mini generates synthetic source sentences from authentic English–Norwegian pairs while validated Norwegian targets act as semantic anchors. LaBSE similarity and terminology accuracy provide dual quality checks. The retained DE–NO, NL–NO, and FR–NO corpus contains 51,890 synthetic pairs across train, development, and test splits, including 41,527 training pairs.",
         imgArr: [],
       },
       {
@@ -265,7 +264,13 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Why Better Routing Is Not Enough",
         description:
-          "Adding explicit language identity raises routing accuracy from 64.8% to 77.6%, but average BLEU rises by only 0.5 and terminology recall by 0.009. Closing the remaining gap to oracle routing adds just 0.2 BLEU. Better routing helps individual terminology and named-entity cases, but it is not the sole aggregate bottleneck.",
+          "Adding explicit language identity raises routing accuracy from 64.8% to 77.5%, but average BLEU rises by only 0.5 and terminology recall by 0.009. Closing the remaining gap to oracle routing adds just 0.2 BLEU. Better routing helps individual terminology and named-entity cases, but it is not the sole aggregate bottleneck.",
+        imgArr: [],
+      },
+      {
+        title: "Representation Interventions",
+        description:
+          "Removing a rank-3 language-related subspace at encoder layer 12 reduces routing accuracy by 22.6 points and changes 33.5% of routes, but lowers BLEU by only 0.74. Removing the 16 highest-ranked router hidden units lowers routing accuracy by 6.64 points. These controlled interventions show that routing uses identifiable language signals, while expert overlap buffers translation quality.",
         imgArr: [],
       },
       {
@@ -297,7 +302,7 @@ export const Projects: ProjectInterface[] = [
         "Designed a Mixture-of-Experts (MoE) framework with language-specific LoRA adapters and a learned router for parameter-efficient multilingual NMT adaptation.",
         "Developed Target-Anchored Synthesis, an LLM-based pipeline for generating and filtering domain-specific parallel data for low-resource translation.",
         "Conducted routing ablations and cross-expert analyses to investigate routing accuracy, expert specialisation, and shared target-side capacity.",
-        "Evaluated modular adaptation on synthetic-source and authentic petroleum-domain text using BLEU, COMET, and terminology-aware metrics.",
+        "Evaluated modular adaptation on synthetic-source and authentic petroleum-domain text using BLEU, chrF, COMET, and terminology-aware metrics, including a fixed 180-sentence authentic benchmark with 60 sentences per language.",
       ],
     },
   },
@@ -388,9 +393,7 @@ export const Projects: ProjectInterface[] = [
         title: "Typed Evidence Graph",
         description:
           "The controlled fusion design retains reranked hybrid evidence and adds selected-graph expansion, graph-path candidates, or both under a common maximum 80-candidate cap.",
-        imgArr: [
-          "/projects/graph-rag-evidence/paper-controlled-fusion.png",
-        ],
+        imgArr: ["/projects/graph-rag-evidence/paper-controlled-fusion.png"],
       },
     ],
     descriptionDetails: {
@@ -496,19 +499,12 @@ export const Projects: ProjectInterface[] = [
     pagesInfoArr: [
       {
         title: "Experimental Design",
-        description:
-          "The study compares three training datasets:",
+        description: "The study compares three training datasets:",
         table: {
           headers: ["Training dataset", "Purpose"],
           rows: [
-            [
-              "Original mixed data",
-              "Contains both Bokmål and Nynorsk",
-            ],
-            [
-              "Bokmål-filtered data",
-              "Contains mainly Bokmål",
-            ],
+            ["Original mixed data", "Contains both Bokmål and Nynorsk"],
+            ["Bokmål-filtered data", "Contains mainly Bokmål"],
             [
               "Same-size mixed subset",
               "Contains mixed data but has the same size as the filtered data",
@@ -530,16 +526,14 @@ export const Projects: ProjectInterface[] = [
         imgArr: ["/projects/target-standard-bias/written-standard-shift.svg"],
       },
       {
-        title:
-          "RQ2. Is the change caused by using less training data?",
+        title: "RQ2. Is the change caused by using less training data?",
         answer: "No. The change is caused by the type of examples selected.",
         description:
           "The Bokmål-filtered model and the same-size mixed-data model were trained on exactly the same number of sentence pairs. However, the filtered model still produced much more Bokmål.\n\nThis means that the model changed because Bokmål-oriented examples were selected—not because the amount of training data was reduced.\n\nThe result was also consistent across the 600M, 1.3B, and 3.3B NLLB-200 models.",
         imgArr: ["/projects/target-standard-bias/model-scale-results.svg"],
       },
       {
-        title:
-          "RQ3. Does the test set change which model looks better?",
+        title: "RQ3. Does the test set change which model looks better?",
         answer:
           "Yes. The Bokmål-filtered model performs better on the Bokmål test set, while the Original-subsampled model performs better on the mixed-standard test set. The test set can change which model looks better, so a higher BLEU score does not always mean a better translation.",
         imgArr: ["/projects/target-standard-bias/in-domain-results.svg"],
@@ -569,8 +563,7 @@ export const Projects: ProjectInterface[] = [
     ],
     shortDescription:
       "A reproducible pipeline for building English-Norwegian MT data and retrieval-ready text from public Equinor web pages and PDFs.",
-    githubLink:
-      "https://github.com/Entropyobserver/norwegian-petroleum-corpus",
+    githubLink: "https://github.com/Entropyobserver/norwegian-petroleum-corpus",
     techStack: [
       "Python",
       "Web Crawling",
@@ -864,7 +857,8 @@ export const Projects: ProjectInterface[] = [
     ],
     pagesInfoArr: [
       {
-        title: "Q1. Can the transactions support reliable customer segmentation?",
+        title:
+          "Q1. Can the transactions support reliable customer segmentation?",
         description:
           "Question:\n\nCan two years of transaction history be converted into a trustworthy customer-level analysis table?\n\nAnalysis:\n\nI audited 1,067,371 transaction lines, separated successful purchases from cancellations, and used a fixed 365-day observation window ending on 1 September 2011. Customers needed at least one successful purchase during that window. Fifteen features capture value, frequency, lifecycle, purchase cadence, product breadth, recent trend, and cancellation behavior.\n\nFinding:\n\nThe final clustering population contains 4,335 customers. Missing purchase intervals are treated as expected single-order behavior, while extreme values are clipped rather than deleting customers. The following 90 days remain completely outside the clustering features.",
         imgArr: [
@@ -875,12 +869,11 @@ export const Projects: ProjectInterface[] = [
         title: "Q2. How many customer segments are useful?",
         description:
           "Question:\n\nWhich cluster count balances statistical quality, stability, and operational usability?\n\nAnalysis:\n\nI evaluated K-Means solutions from two to eight clusters using silhouette, Davies–Bouldin, Calinski–Harabasz, perturbation stability, and minimum segment share. The operational choice was restricted to four to six clusters with no segment smaller than 3%.\n\nFinding:\n\nThe five-cluster solution provides the best combined rank within the operational range. Its perturbation stability ARI is 0.974 and its smallest segment contains 9.5% of customers. The silhouette score is only 0.225, so the segments are presented as a stable operational simplification—not five strongly separated natural customer types.",
-        imgArr: [
-          "/projects/ecommerce-retention-segmentation/k-selection.svg",
-        ],
+        imgArr: ["/projects/ecommerce-retention-segmentation/k-selection.svg"],
       },
       {
-        title: "Q3. Does another clustering method produce a better operational solution?",
+        title:
+          "Q3. Does another clustering method produce a better operational solution?",
         description:
           "Question:\n\nHow do K-Means, Ward hierarchical clustering, Gaussian Mixture, and HDBSCAN compare on the same features?\n\nAnalysis:\n\nEvery algorithm uses the same clipped, transformed, imputed, and standardized feature matrix. I compare separation, cluster balance, and noise share, then use adjusted Rand index to measure agreement between K-Means and Ward labels.\n\nFinding:\n\nK-Means retains five operationally sized segments. Ward creates a 1.6% micro-segment, while HDBSCAN labels 68.3% of customers as noise. K-Means and Ward have moderate agreement (ARI 0.532). K-Means is selected because it is stable, reproducible, and can assign future customers to the nearest center; hierarchical clustering remains a structural cross-check.",
         imgArr: [
@@ -921,7 +914,8 @@ export const Projects: ProjectInterface[] = [
   },
   {
     id: "marketing-ab-testing",
-    companyName: "Marketing Conversion A/B Testing: Does Advertising Increase Conversion?",
+    companyName:
+      "Marketing Conversion A/B Testing: Does Advertising Increase Conversion?",
     type: "Data Science",
     category: ["Data Science", "Experimentation", "Business Analytics"],
     shortDescription:
@@ -1090,9 +1084,7 @@ export const Projects: ProjectInterface[] = [
         title: "Q1. What exactly is the model predicting?",
         description:
           "Question:\n\nCan transaction history define a reproducible customer-risk target without pretending to observe permanent churn?\n\nAnalysis:\n\nAt the start of each month, I identify customers who purchased during the previous 180 days. Features use only that historical window. The target is one when the customer makes no successful purchase during the following 90 days. Customer ID never enters the model.\n\nFinding:\n\nSixteen monthly snapshots produce 48,079 customer-month observations with an overall inactivity rate of 50.9%. The target is explicitly named 90-day purchase inactivity—not permanent churn—because the data contain no account closure or customer-departure field.",
-        imgArr: [
-          "/projects/ecommerce-churn-prediction/target-design.svg",
-        ],
+        imgArr: ["/projects/ecommerce-churn-prediction/target-design.svg"],
       },
       {
         title: "Q2. How does the validation prevent future leakage?",
@@ -1106,25 +1098,21 @@ export const Projects: ProjectInterface[] = [
         title: "Q3. Which classifier is most reliable over time?",
         description:
           "Question:\n\nWhich model ranks future inactivity most consistently across the three rolling validation months?\n\nAnalysis:\n\nLogistic Regression, Random Forest, HistGradientBoosting, and XGBoost use the same 23 behavioral features and temporal folds. Model selection uses mean PR-AUC, with ROC-AUC, F1, and Brier score retained as diagnostics.\n\nFinding:\n\nLogistic Regression ranks first with mean PR-AUC 0.744, narrowly ahead of HistGradientBoosting at 0.742 and XGBoost at 0.741. The result supports a simpler champion rather than assuming the most complex model must win.",
-        imgArr: [
-          "/projects/ecommerce-churn-prediction/model-comparison.svg",
-        ],
+        imgArr: ["/projects/ecommerce-churn-prediction/model-comparison.svg"],
       },
       {
-        title: "Q4. Does the selected model generalize to the untouched final month?",
+        title:
+          "Q4. Does the selected model generalize to the untouched final month?",
         description:
           "Question:\n\nDoes the rolling-validation winner maintain its performance on a completely unseen September 2011 customer snapshot?\n\nAnalysis:\n\nAfter model selection, Logistic Regression is refit on eligible snapshots through June 2011 and evaluated once on 2,772 September customers. The positive-class baseline is the observed 39.3% inactivity rate.\n\nFinding:\n\nFinal PR-AUC is 0.628 versus a 0.393 no-model baseline; ROC-AUC is 0.740 and F1 is 0.622. The decline from 0.744 rolling-validation PR-AUC is retained as evidence of temporal distribution change—not hidden by reporting only the best cross-validation result.",
-        imgArr: [
-          "/projects/ecommerce-churn-prediction/final-holdout.svg",
-        ],
+        imgArr: ["/projects/ecommerce-churn-prediction/final-holdout.svg"],
       },
       {
-        title: "Q5. What does the model change under limited retention capacity?",
+        title:
+          "Q5. What does the model change under limited retention capacity?",
         description:
           "Question:\n\nIf the business can contact only 10% of recent customers, how concentrated is inactivity in the highest-risk group?\n\nAnalysis:\n\nI rank final-test customers by predicted risk and evaluate the highest-risk 10% using precision, recall, and lift. Risk deciles and calibration compare predicted probabilities with observed inactivity. Only aggregate outputs are retained; no public customer-level list is exported.\n\nFinding:\n\nThe top-risk 278 customers have a 74.8% observed inactivity rate, capture 19.1% of all inactive customers, and provide 1.90× lift over untargeted selection. This supports prioritization, not a claim that outreach will cause retention; incremental impact and ROI require a randomized experiment with margin and treatment-cost data.",
-        imgArr: [
-          "/projects/ecommerce-churn-prediction/targeting-value.svg",
-        ],
+        imgArr: ["/projects/ecommerce-churn-prediction/targeting-value.svg"],
       },
     ],
     descriptionDetails: {

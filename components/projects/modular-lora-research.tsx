@@ -1,7 +1,7 @@
 const researchQuestions = [
-  "Can synthetic data support low-resource petroleum translation from German, French, and Dutch into Norwegian?",
-  "How do language-specific experts compare with a shared multitask adapter in translation quality and terminology accuracy?",
-  "Does more accurate expert routing improve translation quality?",
+  "Can Target-Anchored Synthesis provide useful training data for low-resource petroleum translation?",
+  "To what extent do language-specific LoRA experts specialise and overlap?",
+  "When does expert selection matter for translation quality, and how informative is routing accuracy?",
 ];
 
 const confusionMatrix = [
@@ -227,15 +227,16 @@ export default function ModularLoraResearch() {
               , while keeping the Norwegian targets unchanged. Validated
               terminology is injected as generation constraints, and the
               resulting pairs are filtered using LaBSE similarity and FTA-based
-              quality checks. The final dataset contains{" "}
+              quality checks. The retained DE–NO, NL–NO, and FR–NO corpus
+              contains{" "}
               <strong className="font-semibold text-foreground">
-                41,527 high-quality synthetic pairs
+                51,890 synthetic pairs
               </strong>{" "}
-              from{" "}
+              across train, development, and test splits, including{" "}
               <strong className="font-semibold text-foreground">
-                51,890 generated pairs
-              </strong>{" "}
-              across DE–NO, NL–NO, and FR–NO.
+                41,527 training pairs
+              </strong>
+              .
             </p>
           </div>
         </div>
@@ -401,6 +402,44 @@ export default function ModularLoraResearch() {
           </div>
 
           <div className="grid gap-6 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="rounded-xl border bg-muted/30 p-4">
+                <p className="text-sm font-semibold">Layer-12 intervention</p>
+                <p className="mt-3 text-2xl font-semibold text-foreground">
+                  −22.6 pp
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  routing accuracy
+                </p>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  −0.74 BLEU after removing a rank-3 language subspace
+                </p>
+              </div>
+              <div className="rounded-xl border bg-muted/30 p-4">
+                <p className="text-sm font-semibold">Router-unit ablation</p>
+                <p className="mt-3 text-2xl font-semibold text-foreground">
+                  −6.64 pp
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  routing accuracy
+                </p>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  removing the 16 highest-ranked hidden units
+                </p>
+              </div>
+            </div>
+            <p className="text-base leading-8 text-muted-foreground">
+              Controlled representation interventions change routing much more
+              than translation quality. Removing the rank-3 language-related
+              subspace at encoder layer 12 changes 33.5% of routes but lowers
+              BLEU by only 0.74; targeted removal of 16 router hidden units
+              lowers routing accuracy by 6.64 points. These interventions show
+              that routing decisions depend on identifiable language signals,
+              while translation remains buffered by expert overlap.
+            </p>
+          </div>
+
+          <div className="grid gap-6 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
               <p className="mb-4 text-sm font-semibold">Cross-expert BLEU</p>
               <CrossExpertMatrix />
@@ -470,7 +509,9 @@ export default function ModularLoraResearch() {
                 These scores come from the{" "}
                 <strong>authentic-source evaluation</strong>, using naturally
                 occurring petroleum-domain sentences with the same Norwegian
-                references for all systems.
+                references for all systems: 180 sentences in total, 60 per
+                language. The Norwegian references were machine-assisted and
+                manually reviewed.
               </p>
             </div>
             <p className="text-base leading-8 text-muted-foreground">
