@@ -108,12 +108,14 @@ export default function Project({ params }: ProjectPageProps) {
         All Projects
       </Link>
       <div>
-        <time
-          dateTime={Date.now().toString()}
-          className="block text-sm text-muted-foreground"
-        >
-          {formatDateFromObj(project.startDate)}
-        </time>
+        {project.id !== "modular-lora-experts" && (
+          <time
+            dateTime={Date.now().toString()}
+            className="block text-sm text-muted-foreground"
+          >
+            {formatDateFromObj(project.startDate)}
+          </time>
+        )}
         <h1 className="flex items-center justify-between mt-2 font-heading text-4xl leading-tight lg:text-5xl">
           {project.companyName}
           <div className="flex items-center">

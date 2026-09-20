@@ -272,7 +272,6 @@ export default function ModularLoraResearch() {
               </thead>
               <tbody className="divide-y">
                 {[
-                  ["EN–NO (real)", "61.7 ± 0.0", "100%", "−0.124"],
                   ["DE–NO (synthetic)", "57.7 ± 0.8", "93.5%", "+0.013"],
                   ["NL–NO (synthetic)", "59.3 ± 0.1", "96.1%", "+0.121*"],
                   ["FR–NO (synthetic)", "57.8 ± 0.6", "93.7%", "+0.062*"],
@@ -285,13 +284,7 @@ export default function ModularLoraResearch() {
                     <td className="px-5 py-4 text-right tabular-nums">
                       {retained}
                     </td>
-                    <td
-                      className={
-                        gain.startsWith("+")
-                          ? "px-5 py-4 text-right font-medium tabular-nums text-emerald-600 dark:text-emerald-400"
-                          : "px-5 py-4 text-right font-medium tabular-nums text-red-600 dark:text-red-400"
-                      }
-                    >
+                    <td className="px-5 py-4 text-right font-medium tabular-nums text-emerald-600 dark:text-emerald-400">
                       {gain}
                     </td>
                   </tr>
@@ -300,6 +293,7 @@ export default function ModularLoraResearch() {
             </table>
           </div>
           <p className="border-t px-5 py-3 text-xs text-muted-foreground">
+            EN–NO expert BLEU: 61.7 on authentic data (comparison baseline).{" "}
             * Significant terminology gain over Google Translate.
           </p>
         </div>
@@ -366,6 +360,39 @@ export default function ModularLoraResearch() {
             affect translation quality.
           </strong>
         </EvidenceConclusion>
+
+        <div className="mt-6 grid gap-6 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <p className="mb-4 text-sm font-semibold">Cross-expert BLEU</p>
+            <CrossExpertMatrix />
+            <p className="mt-3 text-xs leading-5 text-muted-foreground">
+              Rows show the source language, and columns show which expert is
+              used for translation. Bold diagonal cells show the performance
+              when each language is translated by its matching expert. All
+              values are BLEU, with higher scores indicating better
+              translation.
+            </p>
+          </div>
+          <p className="text-base leading-8 text-muted-foreground">
+            Matching experts achieve the highest BLEU for every language pair,
+            supporting the interpretation that the adapters develop
+            language-specific capabilities. The off-diagonal cells show that
+            non-matching experts remain competitive: for example, the DE expert
+            reaches{" "}
+            <strong className="font-semibold text-foreground">
+              56.2 BLEU on NL–NO
+            </strong>
+            , while the NL expert reaches{" "}
+            <strong className="font-semibold text-foreground">
+              53.9 BLEU on DE–NO
+            </strong>
+            .{" "}
+            <strong className="font-semibold text-foreground">
+              The experts are specialised, but their capabilities overlap, so
+              selecting the wrong expert is not always catastrophic.
+            </strong>
+          </p>
+        </div>
       </section>
 
       <section id="rq3">
@@ -445,40 +472,9 @@ export default function ModularLoraResearch() {
               subspace at encoder layer 12 changes 33.5% of routes but lowers
               BLEU by only 0.74; targeted removal of 16 router hidden units
               lowers routing accuracy by 6.64 points. These interventions show
-              that routing decisions depend on identifiable language signals,
-              while translation remains buffered by expert overlap.
-            </p>
-          </div>
-
-          <div className="grid gap-6 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div>
-              <p className="mb-4 text-sm font-semibold">Cross-expert BLEU</p>
-              <CrossExpertMatrix />
-              <p className="mt-3 text-xs leading-5 text-muted-foreground">
-                Rows show the source language, and columns show which expert is
-                used for translation. Bold diagonal cells show the performance
-                when each language is translated by its matching expert. All
-                values are BLEU, with higher scores indicating better
-                translation.
-              </p>
-            </div>
-            <p className="text-base leading-8 text-muted-foreground">
-              Matching experts achieve the highest BLEU for every language pair,
-              confirming that the adapters develop language-specific
-              capabilities. The off-diagonal cells show that non-matching
-              experts remain competitive: for example, the DE expert reaches{" "}
-              <strong className="font-semibold text-foreground">
-                56.2 BLEU on NL–NO
-              </strong>
-              , while the NL expert reaches{" "}
-              <strong className="font-semibold text-foreground">
-                53.9 BLEU on DE–NO
-              </strong>
-              .{" "}
-              <strong className="font-semibold text-foreground">
-                The experts are specialised, but their capabilities overlap, so
-                selecting the wrong expert is not always catastrophic.
-              </strong>
+              that routing decisions depend on identifiable language signals.
+              The small translation effect is consistent with the overlap
+              observed in cross-expert evaluation.
             </p>
           </div>
 

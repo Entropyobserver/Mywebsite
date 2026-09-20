@@ -387,7 +387,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Representation Interventions",
         description:
-          "Removing a rank-3 language-related subspace at encoder layer 12 reduces routing accuracy by 22.6 points and changes 33.5% of routes, but lowers BLEU by only 0.74. Removing the 16 highest-ranked router hidden units lowers routing accuracy by 6.64 points. These controlled interventions show that routing uses identifiable language signals, while expert overlap buffers translation quality.",
+          "Removing a rank-3 language-related subspace at encoder layer 12 reduces routing accuracy by 22.6 points and changes 33.5% of routes, but lowers BLEU by only 0.74. Removing the 16 highest-ranked router hidden units lowers routing accuracy by 6.64 points. These controlled interventions show that routing uses identifiable language signals. The small translation effect is consistent with the overlap observed in cross-expert evaluation.",
         imgArr: [],
       },
       {
@@ -399,7 +399,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Cross-Expert Transfer and Shared Capacity",
         description:
-          "The matching expert is strongest for every source language, confirming genuine specialization. Yet non-matching experts remain competitive: the Dutch expert reaches 53.9 BLEU on German inputs, and the German expert reaches 56.2 BLEU on Dutch inputs. This shared Norwegian petroleum target-side capacity explains why routing errors can be locally costly without producing a large aggregate performance gap.",
+          "The matching expert is strongest for every source language, supporting the interpretation of language-specific specialization. Yet non-matching experts remain competitive: the Dutch expert reaches 53.9 BLEU on German inputs, and the German expert reaches 56.2 BLEU on Dutch inputs. This overlap is consistent with routing errors having a limited aggregate effect on translation quality.",
         imgArr: [],
       },
       {
