@@ -227,28 +227,29 @@ export default function ModularLoraResearch() {
               Figure 4. Target-Anchored Synthesis and filtering stages.
             </p>
           </div>
-          <div className="self-center">
-            <p className="text-base leading-8 text-muted-foreground sm:text-lg">
-              We use authentic Norwegian NPD text as a semantic anchor and use{" "}
-              <strong className="font-semibold text-foreground">
-                English sentences as an intermediate source to generate German,
-                Dutch, and French sentences with GPT-4o-mini
-              </strong>
-              , while keeping the Norwegian targets unchanged. Validated
-              terminology is injected as generation constraints, and the
-              resulting pairs are filtered using LaBSE similarity and FTA-based
-              quality checks. The retained DE–NO, NL–NO, and FR–NO corpus
-              contains{" "}
-              <strong className="font-semibold text-foreground">
-                51,890 synthetic pairs
-              </strong>{" "}
-              across train, development, and test splits, including{" "}
-              <strong className="font-semibold text-foreground">
-                41,527 training pairs
-              </strong>
-              .
-            </p>
-          </div>
+    <div className="self-center space-y-5 text-base leading-8 text-muted-foreground sm:text-lg">
+      <p>
+        We start with authentic Norwegian NPD text and its English translations.
+        We keep the Norwegian sentences unchanged as reliable target anchors,
+        and use GPT-4o-mini to generate German, Dutch, and French versions of
+        the English source sentences. This gives us synthetic DE–NO, NL–NO, and
+        FR–NO training pairs without collecting authentic parallel data for
+        these languages.
+      </p>
+      <p>
+        We constrain generation with 70 validated terminology pairs and filter
+        the generated sentences using LaBSE similarity and FTA-based quality
+        checks. The final corpus contains{" "}
+        <strong className="font-semibold text-foreground">
+          51,890 synthetic pairs
+        </strong>{" "}
+        across the train, development, and test splits, including{" "}
+        <strong className="font-semibold text-foreground">
+          41,527 training pairs
+        </strong>
+        .
+      </p>
+    </div>
         </div>
       </section>
 
