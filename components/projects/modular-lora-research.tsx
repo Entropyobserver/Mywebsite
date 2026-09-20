@@ -259,25 +259,35 @@ export default function ModularLoraResearch() {
           </div>
           <div className="space-y-5 text-base leading-8 text-muted-foreground sm:text-lg">
             <p>
-              The system adapts a frozen{" "}
+              The system uses a frozen{" "}
               <strong className="font-semibold text-foreground">
                 NLLB-200-distilled-600M
               </strong>{" "}
               backbone with four language-specific LoRA experts. The EN expert
               is trained on authentic EN–NO data, while the DE, NL, and FR
-              experts are trained on synthetic source data paired with Norwegian
-              targets.
+              experts are trained on synthetic source sentences paired with
+              Norwegian targets.
             </p>
             <p>
-              After expert training, a gated MLP router is trained on mixed
-              multilingual data while the backbone and experts remain frozen. At
-              inference, the router selects a{" "}
+              After training the experts, we train a gated MLP router on mixed
+              multilingual data, while keeping the backbone and experts frozen.
+              At inference, the router selects one expert for each input
+              sentence and uses that expert to generate the Norwegian
+              translation.
+            </p>
+            <p>
+              We compare three settings:{" "}
               <strong className="font-semibold text-foreground">
-                top-1 expert
-              </strong>{" "}
-              to generate the Norwegian translation. Independent Experts use the
-              matching adapter directly, Multitask LoRA shares one adapter, and
-              the MoE performs automatic expert selection.
+                Independent Experts
+              </strong>
+              , which directly use the expert corresponding to the source
+              language;{" "}
+              <strong className="font-semibold text-foreground">
+                Multitask LoRA
+              </strong>
+              , which uses one shared LoRA adapter for all languages; and{" "}
+              <strong className="font-semibold text-foreground">MoE</strong>,
+              which uses the router to automatically select an expert.
             </p>
           </div>
         </div>
