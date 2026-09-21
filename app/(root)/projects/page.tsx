@@ -36,6 +36,21 @@ const renderContent = (tabVal: string) => {
     projectArr.splice(2, 0, groupShapleyProject);
   }
 
+  const aspectProjectIndex = projectArr.findIndex(
+    (project) => project.id === "aspect-controlled-biomedical-retrieval"
+  );
+  const graphRagIndex = projectArr.findIndex(
+    (project) => project.id === "structure-aware-graph-rag"
+  );
+  if (aspectProjectIndex !== -1 && graphRagIndex !== -1) {
+    projectArr = [...projectArr];
+    const [aspectProject] = projectArr.splice(aspectProjectIndex, 1);
+    const updatedGraphRagIndex = projectArr.findIndex(
+      (project) => project.id === "structure-aware-graph-rag"
+    );
+    projectArr.splice(updatedGraphRagIndex + 1, 0, aspectProject);
+  }
+
   return (
     <div className="mx-auto my-4 grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3 static">
       {projectArr.map((project) => (
