@@ -235,7 +235,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "2.1 Grid Search: Mapping the Hyperparameter Landscape",
         description:
-          "We tested 27 combinations of LoRA rank, alpha, and dropout. Higher alpha generally improved validation BLEU, while increasing rank showed no consistent benefit. Models without dropout tended to perform slightly better. The best observed setting was r = 8, alpha = 64, and dropout = 0. Since grid search tests only fixed values, better settings may exist between or beyond them.",
+          "We tested 27 LoRA configurations with different ranks, alpha values, and dropout rates. Higher alpha generally improved BLEU, while rank and dropout had smaller effects. The best setting was r = 8, alpha = 64, dropout = 0. Since grid search tests only fixed values, better settings may exist between or beyond them.",
         imgArr: ["/projects/lora-nmt-petroleum/hyperparameter_heatmaps.png"],
       },
       {
