@@ -272,13 +272,13 @@ export const Projects: ProjectInterface[] = [
       {
         title: "3.3 Human Evaluation Protocol",
         description:
-          "We also conducted a human error analysis to complement BLEU, chrF, and COMET. We sampled 50 sentences from low-, mid-, and high-BLEU groups in the held-out NPD test set. Two reviewers annotated translation errors by type and severity. Cohen's kappa showed substantial agreement for error type (kappa = 0.71) and moderate agreement for severity (kappa = 0.61).",
+          "We conducted a human error analysis to complement BLEU, chrF, and COMET. We reviewed 50 held-out NPD test sentences from low-, mid-, and high-BLEU groups. Two reviewers annotated errors by type and severity. Agreement was substantial for error type (\u03ba = 0.71) and moderate for severity (\u03ba = 0.61).",
         imgArr: [],
       },
       {
         title: "3.4 Human Error Analysis: Findings",
         description:
-          "We found 62 errors in 41 of the 50 sentences. Most errors were minor, but 12% were critical and changed the factual or technical meaning. The most common errors were word choice and mixing Norwegian variants. Importantly, some critical errors also appeared in high-BLEU translations, showing that automatic metrics alone may miss important domain-specific errors.",
+          "We found 62 errors across 41 sentences. Most were minor, but some critical errors changed the meaning. Word choice and Norwegian variant mixing were the most common errors. Some critical errors appeared even in high-BLEU translations, showing that human evaluation is still important for domain-specific translation.",
         imgArr: [
           "/projects/lora-nmt-petroleum/human-error-analysis-results.png",
         ],
