@@ -281,7 +281,7 @@ export const Projects: ProjectInterface[] = [
         "Designed a data-quality assessment and cleaning pipeline for noisy parallel corpora, assessing alignment quality, completeness, duplication, and domain-specific terminology coverage.",
         "Optimized LoRA configurations using grid search and Optuna/ASHA, with fANOVA identifying the LoRA scaling factor as a major contributor to adaptation performance.",
         "Benchmarked the final LoRA model against full fine-tuning and commercial MT systems using automatic translation metrics.",
-        "Jointly conducted terminology-focused review and a 50-sentence human evaluation, including inter-annotator agreement analysis, alongside automatic evaluation using BLEU, chrF++, and COMET.",
+        "Jointly conducted terminology-focused review and human evaluation with inter-annotator agreement analysis, complementing automatic model evaluation.",
       ],
     },
   },
