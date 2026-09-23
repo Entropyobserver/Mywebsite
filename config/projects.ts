@@ -217,7 +217,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Data Preparation: Corpus Diagnostics and Cleaning",
         description:
-          "The dataset comes from the Norwegian Petroleum Directorate translation memory released through ELRC. Before training, I built a diagnostic and cleaning pipeline to understand the quality of the raw EN-NO data and prepare it for domain adaptation. The pipeline checks alignment, completeness, duplicates, and domain relevance, then cleans the corpus and creates fixed train/dev/test splits.",
+          "Before training, I built a data diagnostic and cleaning pipeline to assess the quality of the raw English-Norwegian translation data. The pipeline checks sentence length, alignment, completeness, duplicates, and domain relevance, then normalizes the text and removes very short sentences and duplicate pairs. The corpus is finally divided into fixed training, development, and test sets using an 80/10/10 split. The raw data has a high overall quality score (OQS 2.0 = 0.976), while 30.9% of sentence pairs were removed as duplicates. The high level of duplication mainly comes from repeated standard text in regulatory documents, while Nynorsk sentences are deliberately retained.",
         imgArr: ["/projects/lora-nmt-petroleum/corpus-source-pipeline.png"],
       },
       {
