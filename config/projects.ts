@@ -272,7 +272,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "3.3 Human Evaluation Protocol",
         description:
-          "We also conducted a human error analysis to complement BLEU, chrF, and COMET. We sampled 50 sentences from low-, mid-, and high-BLEU groups in the held-out NPD test set. Two reviewers annotated translation errors by type and severity, and Cohen's kappa was used to measure their agreement.",
+          "We also conducted a human error analysis to complement BLEU, chrF, and COMET. We sampled 50 sentences from low-, mid-, and high-BLEU groups in the held-out NPD test set. Two reviewers annotated translation errors by type and severity. Cohen's kappa showed substantial agreement for error type (kappa = 0.71) and moderate agreement for severity (kappa = 0.61).",
         imgArr: [],
       },
       {
