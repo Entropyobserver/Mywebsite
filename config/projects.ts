@@ -248,7 +248,7 @@ export const Projects: ProjectInterface[] = [
         title:
           "2.3 Multi-Objective Selection and Stability Validation",
         description:
-          "We used Optuna to optimize BLEU and chrF and identified the best-performing configurations. The top three configurations were then retrained on 8,000 pairs with three random seeds. The selected setting, r = 8, alpha = 64, dropout = 0, achieved similar BLEU scores across all three runs, indicating stable performance.",
+          "We used Optuna to optimize both BLEU and chrF and identified Pareto-optimal configurations that performed well on both metrics. We selected the top three candidates and retrained them on 8,000 pairs with three random seeds. Based on their performance and stability, we selected r = 8, alpha = 64, dropout = 0 as the final configuration.",
         imgArr: ["/projects/lora-nmt-petroleum/pareto_front.png"],
       },
       {
