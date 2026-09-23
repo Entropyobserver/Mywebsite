@@ -254,7 +254,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "Experiment 3: How Well Does the Final Model Perform? (RQ3)",
         description:
-          "We evaluated the selected LoRA configuration from three perspectives: comparison with zero-shot and commercial baselines, comparison with full fine-tuning across training sizes, and human analysis of domain-specific translation errors.",
+          "We evaluated the selected LoRA model through three comparisons: zero-shot and commercial baselines, full fine-tuning, and human analysis of translation errors.",
         imgArr: [],
       },
       {
