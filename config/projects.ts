@@ -202,15 +202,15 @@ export const Projects: ProjectInterface[] = [
     companyLogoImg: "/projects/lora-nmt-petroleum/cover.png",
     pagesInfoArr: [
       {
-        title: "Research Questions",
+        title: "Research Question",
         description:
-          "RQ1. Can we adapt a general-purpose model to this domain without a lot of data or heavy computation?\n\nRQ2. How much training data do we actually need?\n\nRQ3. Can we further improve results through hyperparameter optimization?\n\nRQ4. How can we rigorously evaluate the final model on the held-out test set?",
+          "Can we adapt a general-purpose model to petroleum-domain English-Norwegian translation with little data and little compute?\n\n1. Stage 1: How much training data do we need?\n\n2. Stage 2: Which LoRA hyperparameters matter most?\n\n3. Stage 3: How well does the final model perform?",
         imgArr: [],
       },
       {
         title: "Experimental Framework",
         description:
-          "To answer these research questions, we designed a three-stage framework covering data scaling, dual-track LoRA hyperparameter optimization, and final benchmarking.",
+          "To answer this research question, we designed a three-stage framework covering data scaling, dual-track LoRA hyperparameter optimization, and final benchmarking.",
         imgArr: ["/projects/lora-nmt-petroleum/framework_vertical_paper.png"],
         imageLayout: "portrait",
       },
