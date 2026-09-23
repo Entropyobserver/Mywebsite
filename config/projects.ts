@@ -202,69 +202,81 @@ export const Projects: ProjectInterface[] = [
     companyLogoImg: "/projects/lora-nmt-petroleum/cover.png",
     pagesInfoArr: [
       {
-        title: "Research Aim and Questions",
+        title: "Research Questions",
         description:
-          "Research aim: Can we adapt a general-purpose model to petroleum-domain English-Norwegian translation with limited data and computation?\n\nRQ1. How much training data do we need?\n\nRQ2. Which LoRA hyperparameters matter most?\n\nRQ3. How well does the final model perform?",
+          "RQ1. How much training data do we need?\n\nRQ2. Which LoRA hyperparameters matter most?\n\nRQ3. How well does the final model perform?",
         imgArr: [],
       },
       {
         title: "Experimental Framework",
         description:
-          "To answer these research questions, we designed a three-stage framework covering data scaling, dual-track LoRA hyperparameter optimization, and final model evaluation.",
+          "We designed a three-stage experimental framework to answer these questions. Experiment 1 determines the training-data budget, Experiment 2 identifies and validates the LoRA configuration, and Experiment 3 evaluates the final model against strong baselines and through domain-aware human analysis.",
         imgArr: ["/projects/lora-nmt-petroleum/framework_vertical_paper.png"],
         imageLayout: "portrait",
       },
       {
-        title: "Corpus Source, Diagnostics, and Cleaning",
+        title: "Data Preparation: Corpus Diagnostics and Cleaning",
         description:
           "The dataset comes from the Norwegian Petroleum Directorate translation memory released through ELRC. Before training, I built a diagnostic and cleaning pipeline to understand the quality of the raw EN-NO data and prepare it for domain adaptation. The pipeline checks alignment, completeness, duplicates, and domain relevance, then cleans the corpus and creates fixed train/dev/test splits.",
         imgArr: ["/projects/lora-nmt-petroleum/corpus-source-pipeline.png"],
       },
       {
-        title: "Experiment 1 (RQ1): Data Scaling",
+        title: "Experiment 1: How Much Training Data Do We Need? (RQ1)",
         description:
           "We trained LoRA models with nine different subsets of training data, ranging from 100 to 13,935 sentence pairs, using three random seeds for each setting. The learning curve shows three stages: rapid gains up to 2,000 pairs, diminishing returns from 2,000 to 8,000, and little additional improvement beyond 8,000. The 8,000-pair subset used 57% of the full training data while retaining 96% of the maximum BLEU, so we selected it as the training budget for subsequent hyperparameter optimization.",
         imgArr: ["/projects/lora-nmt-petroleum/experiment-1-data-scaling.png"],
       },
       {
-        title: "Experiment 2a (RQ2): Grid Search Hyperparameter Landscape",
+        title: "Experiment 2: Which LoRA Hyperparameters Matter Most? (RQ2)",
+        description:
+          "We used two complementary search strategies to study LoRA rank, scaling factor, and dropout. Grid search mapped a fixed set of configurations, while Optuna with ASHA explored the space more flexibly and stopped weak trials early. The strongest candidates were then compared across BLEU and chrF and retrained with multiple random seeds.",
+        imgArr: [],
+      },
+      {
+        title: "2.1 Grid Search: Mapping the Hyperparameter Landscape",
         description:
           "We tested 27 combinations of LoRA rank, alpha, and dropout. Higher alpha generally improved validation BLEU, while increasing rank showed no consistent benefit. Models without dropout tended to perform slightly better. The best observed setting was r = 8, alpha = 64, and dropout = 0. Since grid search tests only fixed values, better settings may exist between or beyond them.",
         imgArr: ["/projects/lora-nmt-petroleum/hyperparameter_heatmaps.png"],
       },
       {
-        title: "Experiment 2b (RQ2): Optuna with ASHA Pruning",
+        title: "2.2 Optuna with ASHA: Efficient Search",
         description:
           "We ran 50 Optuna trials on a 2,000-pair subset to explore a wider range of LoRA configurations. Optuna proposed new parameter combinations, while ASHA stopped poorly performing trials early. The most promising configurations were then selected for further evaluation on the 8,000-pair subset. An fANOVA analysis attributed 97.3% of the observed performance variation to alpha, compared with 1.9% for rank and 0.8% for dropout.",
         imgArr: ["/projects/lora-nmt-petroleum/optuna_importance.png"],
       },
       {
         title:
-          "Experiment 2c (RQ2): Multi-Objective Selection and Stability Validation",
+          "2.3 Multi-Objective Selection and Stability Validation",
         description:
           "We used Optuna to optimize both BLEU and chrF. We identified Pareto-optimal configurations, meaning configurations where improving one metric would require sacrificing the other. We then selected the top three candidates and retrained them on the 8,000-pair subset with three different random seeds. The selected configuration, r = 8, alpha = 64, and dropout = 0, achieved BLEU scores of 60.33, 60.61, and 60.11 across the three runs. The similar scores suggest that the configuration was stable.",
         imgArr: ["/projects/lora-nmt-petroleum/pareto_front.png"],
       },
       {
-        title: "Experiment 3a (RQ3): Final Model vs. Baselines",
+        title: "Experiment 3: How Well Does the Final Model Perform? (RQ3)",
+        description:
+          "We evaluated the selected LoRA configuration from three perspectives: comparison with zero-shot and commercial baselines, comparison with full fine-tuning across training sizes, and human analysis of domain-specific translation errors.",
+        imgArr: [],
+      },
+      {
+        title: "3.1 Final Model vs. Baselines",
         description:
           "We then compared the final LoRA model with the zero-shot NLLB baseline and commercial MT systems. In this petroleum-domain setting, it achieved comparable performance on BLEU, chrF++, and COMET. These sentence-level results should not be taken as representative of real-world petroleum-domain performance, given the limited data available in this study.",
         imgArr: ["/projects/lora-nmt-petroleum/final_model_performance.png"],
       },
       {
-        title: "Experiment 3b (RQ3): LoRA vs. Full Fine-Tuning",
+        title: "3.2 LoRA vs. Full Fine-Tuning",
         description:
           "We then compared LoRA with full fine-tuning across different training sizes. The BLEU difference between the two methods remained below one point, showing that LoRA can achieve similar performance to full fine-tuning while using fewer trainable parameters and less computation.",
         imgArr: ["/projects/lora-nmt-petroleum/lora_vs_full_ft.png"],
       },
       {
-        title: "RQ3: Human Evaluation Protocol",
+        title: "3.3 Human Evaluation Protocol",
         description:
           "We also conducted a human error analysis to complement BLEU, chrF, and COMET. We sampled 50 sentences from low-, mid-, and high-BLEU groups in the 1,742-sentence held-out NPD test set. Two reviewers annotated errors using eight categories and three severity levels, and we used Cohen's kappa to measure their agreement before combining the results.",
         imgArr: ["/projects/lora-nmt-petroleum/human_eval_process_flow.png"],
       },
       {
-        title: "RQ3: Human Error Analysis Findings",
+        title: "3.4 Human Error Analysis: Findings",
         description:
           "We found 62 errors in 41 of the 50 sentences. Most errors were minor, but 12% were critical and changed the factual or technical meaning. The most common errors were word choice and mixing Norwegian variants. Importantly, some critical errors also appeared in high-BLEU translations, showing that automatic metrics alone may miss important domain-specific errors.",
         imgArr: [
