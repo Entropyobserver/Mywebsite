@@ -27,6 +27,15 @@ const renderContent = (tabVal: string) => {
     );
   }
 
+  const shapleyIndex = projectArr.findIndex(
+    (project) => project.id === "group-shapley-attribution"
+  );
+  if (shapleyIndex !== -1) {
+    projectArr = [...projectArr];
+    const [shapleyProject] = projectArr.splice(shapleyIndex, 1);
+    projectArr.splice(Math.min(2, projectArr.length), 0, shapleyProject);
+  }
+
   const aspectProjectIndex = projectArr.findIndex(
     (project) => project.id === "aspect-controlled-biomedical-retrieval"
   );

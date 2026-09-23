@@ -1363,4 +1363,12 @@ export const Projects: ProjectInterface[] = [
   },
 ];
 
-export const featuredProjects = Projects.slice(0, 3);
+const featuredProjectIds = [
+  "lora-nmt-petroleum",
+  "modular-lora-experts",
+  "group-shapley-attribution",
+];
+
+export const featuredProjects = featuredProjectIds
+  .map((id) => Projects.find((project) => project.id === id))
+  .filter((project): project is ProjectInterface => Boolean(project));
