@@ -260,7 +260,7 @@ export const Projects: ProjectInterface[] = [
       {
         title: "3.1 Final Model vs. Baselines",
         description:
-          "We then compared the final LoRA model with the zero-shot NLLB baseline and commercial MT systems. In this petroleum-domain setting, it achieved comparable performance on BLEU, chrF++, and COMET. These sentence-level results should not be taken as representative of real-world petroleum-domain performance, given the limited data available in this study.",
+          "We compared the final LoRA model with zero-shot NLLB and commercial MT systems. It achieved comparable performance on BLEU, chrF++, and COMET. However, these results are based on a limited dataset and may not fully reflect real-world petroleum-domain performance.",
         imgArr: ["/projects/lora-nmt-petroleum/final_model_performance.png"],
       },
       {
