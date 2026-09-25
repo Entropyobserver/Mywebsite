@@ -1,5 +1,5 @@
 const researchQuestions = [
-  "Can Target-Anchored Synthesis provide useful training data for low-resource petroleum translation?",
+  "Can Target-Anchored Synthesis provide useful training data?",
   "Do language-specific LoRA experts specialise, and how much do their capabilities overlap?",
   "When does expert selection improve translation quality, and does more accurate routing lead to better translations?",
 ];
@@ -280,6 +280,15 @@ export default function ModularLoraResearch() {
 
       <section id="rq1">
         <SectionHeader title={`RQ1 · ${researchQuestions[0]}`} />
+        <p className="mb-6 max-w-3xl text-base leading-7 text-muted-foreground sm:text-lg">
+          We first test whether models trained on the synthetic data learn a
+          useful translation signal. We then use human evaluation to assess the
+          quality of the generated source sentences.
+        </p>
+
+        <h3 className="mb-3 text-lg font-semibold">
+          Translation results — Does the synthetic data work for training?
+        </h3>
         <div className="overflow-hidden rounded-2xl border bg-background">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[700px] text-left text-sm">
@@ -288,18 +297,18 @@ export default function ModularLoraResearch() {
                   <th className="px-5 py-4 font-semibold">Language pair</th>
                   <th className="px-5 py-4 text-right font-semibold">BLEU</th>
                   <th className="px-5 py-4 text-right font-semibold">
-                    EN–NO BLEU retained
+                    % of EN–NO BLEU
                   </th>
                   <th className="px-5 py-4 text-right font-semibold">
-                    FTA gain vs GT
+                    FTA gain vs Google Translate
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y">
                 {[
-                  ["DE–NO (synthetic)", "57.7 ± 0.8", "93.5%", "+0.013"],
-                  ["NL–NO (synthetic)", "59.3 ± 0.1", "96.1%", "+0.121*"],
-                  ["FR–NO (synthetic)", "57.8 ± 0.6", "93.7%", "+0.062*"],
+                  ["DE–NO", "57.7", "93.5%", "+0.013"],
+                  ["NL–NO", "59.3", "96.1%", "+0.121*"],
+                  ["FR–NO", "57.8", "93.7%", "+0.062*"],
                 ].map(([pair, bleu, retained, gain], index) => (
                   <tr key={pair} className={index % 2 ? "bg-muted/35" : ""}>
                     <td className="px-5 py-4 font-medium">{pair}</td>
@@ -317,20 +326,55 @@ export default function ModularLoraResearch() {
               </tbody>
             </table>
           </div>
-          <p className="border-t px-5 py-3 text-xs text-muted-foreground">
-            EN–NO expert BLEU: 61.7 on authentic data (comparison baseline).{" "}
-            * Significant terminology gain over Google Translate.
+          <p className="border-t px-5 py-4 text-sm leading-6 text-muted-foreground">
+            <strong className="font-semibold text-foreground">
+              EN–NO benchmark: 61.7 BLEU.
+            </strong>{" "}
+            Synthetic-data experts reach <strong>93.5–96.1%</strong> of the
+            benchmark, with statistically significant terminology gains for
+            NL–NO and FR–NO. * Statistically significant improvement over
+            Google Translate.
           </p>
         </div>
+
+        <h3 className="mb-3 mt-8 text-lg font-semibold">
+          Human validation — Are the generated sources reliable?
+        </h3>
+        <div className="rounded-2xl border bg-background p-5 sm:p-6">
+          <p className="mb-5 text-sm leading-6 text-muted-foreground sm:text-base">
+            <strong className="font-semibold text-foreground">
+              300 source sentences
+            </strong>{" "}
+            were manually evaluated—100 each in German, Dutch, and French.
+          </p>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {[
+              ["Adequacy", "4.86 / 5"],
+              ["Fluency", "4.70 / 5"],
+              ["Terminology accuracy", "94.4%"],
+            ].map(([label, value]) => (
+              <div key={label} className="rounded-xl bg-muted/40 p-4 text-center">
+                <p className="text-2xl font-semibold tabular-nums text-blue-600 dark:text-blue-400">
+                  {value}
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground">{label}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-5 text-sm leading-6 text-muted-foreground sm:text-base">
+            The generated sources generally preserve the intended meaning,
+            remain fluent, and use the required petroleum terminology
+            correctly.
+          </p>
+        </div>
+
         <EvidenceConclusion>
-          Experts trained on synthetic DE–NO, NL–NO, and FR–NO data reach{" "}
-          <strong>93.5–96.1% of the BLEU</strong> of the authentic-data EN–NO
-          expert. NL–NO and FR–NO also achieve significant terminology gains
-          over Google Translate.{" "}
           <strong>
-            So, the synthetic data works as a useful training signal—but we
-            still need to test how well it transfers to real-world source text.
-          </strong>
+            Overall, Target-Anchored Synthesis provides a useful controlled
+            training signal for low-resource translation.
+          </strong>{" "}
+          Transfer to naturally occurring source text is examined separately
+          under RQ3.
         </EvidenceConclusion>
       </section>
 
