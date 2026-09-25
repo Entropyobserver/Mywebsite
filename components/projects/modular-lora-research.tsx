@@ -227,29 +227,54 @@ export default function ModularLoraResearch() {
               Figure 4. Target-Anchored Synthesis and filtering stages.
             </p>
           </div>
-    <div className="self-center space-y-5 text-base leading-8 text-muted-foreground sm:text-lg">
-      <p>
-        We start with authentic Norwegian NPD text and its English translations.
-        We keep the Norwegian sentences unchanged as reliable target anchors,
-        and use GPT-4o-mini to generate German, Dutch, and French versions of
-        the English source sentences. This gives us synthetic DE–NO, NL–NO, and
-        FR–NO training pairs without collecting authentic parallel data for
-        these languages.
-      </p>
-      <p>
-        We constrain generation with 70 validated terminology pairs and filter
-        the generated sentences using LaBSE similarity and FTA-based quality
-        checks. The final corpus contains{" "}
-        <strong className="font-semibold text-foreground">
-          51,890 synthetic pairs
-        </strong>{" "}
-        across the train, development, and test splits, including{" "}
-        <strong className="font-semibold text-foreground">
-          41,527 training pairs
-        </strong>
-        .
-      </p>
-    </div>
+          <div className="self-center space-y-4 text-base leading-8 text-muted-foreground sm:text-lg">
+            <p>
+              We start with authentic English–Norwegian petroleum data from the
+              Norwegian Petroleum Directorate (NPD). The Norwegian sentences
+              are kept unchanged as reliable target anchors.
+            </p>
+            <p>
+              <strong className="font-semibold text-foreground">
+                Step one is generation.
+              </strong>{" "}
+              We scan the NPD glossary and inject 70 validated terminology
+              pairs into the prompt as hard constraints. GPT-4o-mini then
+              generates German, Dutch, and French source sentences from the
+              corresponding English sources.
+            </p>
+            <p>
+              <strong className="font-semibold text-foreground">
+                Step two is quality checking.
+              </strong>{" "}
+              We use LaBSE similarity to check whether the meaning is preserved,
+              and FTA to check terminology accuracy.
+            </p>
+            <p>
+              <strong className="font-semibold text-foreground">
+                Step three is a round-trip check.
+              </strong>{" "}
+              We back-translate the generated sources into English and use BLEU
+              as a diagnostic only, without a hard threshold.
+            </p>
+            <p>
+              <strong className="font-semibold text-foreground">
+                Step four is the final quality gate.
+              </strong>{" "}
+              A pair is discarded only when both the LaBSE and FTA checks fail.
+              Otherwise, it is retained.
+            </p>
+            <p>
+              The final corpus contains{" "}
+              <strong className="font-semibold text-foreground">
+                51,890 synthetic pairs
+              </strong>{" "}
+              across the training, development, and test splits, including{" "}
+              <strong className="font-semibold text-foreground">
+                41,527 training pairs
+              </strong>
+              .
+            </p>
+          </div>
         </div>
       </section>
 
