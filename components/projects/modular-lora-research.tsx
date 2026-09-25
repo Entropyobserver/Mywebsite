@@ -380,6 +380,7 @@ export default function ModularLoraResearch() {
 
       <section id="rq2">
         <SectionHeader title={`RQ2 · ${researchQuestions[1]}`} />
+        <h3 className="mb-3 text-lg font-semibold">Overall comparison</h3>
         <div className="overflow-hidden rounded-2xl border bg-background">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[560px] text-left text-sm">
@@ -418,50 +419,64 @@ export default function ModularLoraResearch() {
             </table>
           </div>
         </div>
+        <p className="mt-4 text-base leading-7 text-muted-foreground">
+          On the synthetic-source benchmark, Multitask LoRA achieves the
+          highest average BLEU, while Independent Experts achieve the highest
+          average FTA. MoE hard routing is lower on both metrics. No single
+          adaptation strategy dominates: the shared adapter achieves the
+          highest BLEU, while the language-specific experts achieve the highest
+          terminology accuracy.
+        </p>
         <EvidenceConclusion>
-          On the synthetic-source benchmark, Multitask LoRA gets the highest
-          average BLEU (<strong>61.0</strong>), while Independent Experts get
-          the highest terminology accuracy (<strong>FTA .726</strong>). MoE hard
-          routing is lower on both (<strong>58.4 BLEU, .711 FTA</strong>).{" "}
           <strong>
-            Rather than being the best-performing model, we use the MoE as a
-            diagnostic tool to understand how routing and expert specialisation
-            affect translation quality.
+            We therefore use the MoE primarily as a diagnostic framework to
+            study expert specialisation and routing, rather than as the
+            best-performing system.
           </strong>
         </EvidenceConclusion>
 
-        <div className="mt-6 grid gap-6 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <h3 className="mb-3 mt-8 text-lg font-semibold">
+          Cross-expert analysis
+        </h3>
+        <div className="grid gap-6 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
-            <p className="mb-4 text-sm font-semibold">Cross-expert BLEU</p>
             <CrossExpertMatrix />
             <p className="mt-3 text-xs leading-5 text-muted-foreground">
               Rows show the source language, and columns show which expert is
-              used for translation. Bold diagonal cells show the performance
-              when each language is translated by its matching expert. All
-              values are BLEU, with higher scores indicating better
-              translation.
+              used for translation. All values are BLEU; the highlighted
+              diagonal cells use the matching expert.
             </p>
           </div>
-          <p className="text-base leading-8 text-muted-foreground">
-            Matching experts achieve the highest BLEU for every language pair,
-            supporting the interpretation that the adapters develop
-            language-specific capabilities. The off-diagonal cells show that
-            non-matching experts remain competitive: for example, the DE expert
-            reaches{" "}
-            <strong className="font-semibold text-foreground">
-              56.2 BLEU on NL–NO
-            </strong>
-            , while the NL expert reaches{" "}
-            <strong className="font-semibold text-foreground">
-              53.9 BLEU on DE–NO
-            </strong>
-            .{" "}
-            <strong className="font-semibold text-foreground">
-              The experts are specialised, but their capabilities overlap, so
-              selecting the wrong expert is not always catastrophic.
-            </strong>
-          </p>
+          <div className="space-y-5 text-base leading-8 text-muted-foreground">
+            <p>
+              <strong className="font-semibold text-foreground">
+                Specialisation:
+              </strong>{" "}
+              The matching expert achieves the highest BLEU for all four
+              language pairs, suggesting that the experts develop
+              language-specific capabilities.
+            </p>
+            <p>
+              <strong className="font-semibold text-foreground">Overlap:</strong>{" "}
+              Off-diagonal performance remains relatively strong. For example,
+              the DE expert achieves{" "}
+              <strong className="font-semibold text-foreground">
+                56.2 BLEU on NL–NO
+              </strong>
+              , compared with{" "}
+              <strong className="font-semibold text-foreground">
+                59.5 BLEU
+              </strong>{" "}
+              from the matching NL expert. This provides evidence of
+              meaningful functional overlap between the experts.
+            </p>
+          </div>
         </div>
+        <EvidenceConclusion>
+          <strong>Conclusion:</strong> The experts are specialised, but not
+          fully separated. Their capabilities overlap, so selecting a
+          non-matching expert does not always produce a large BLEU loss.
+        </EvidenceConclusion>
       </section>
 
       <section id="rq3">
