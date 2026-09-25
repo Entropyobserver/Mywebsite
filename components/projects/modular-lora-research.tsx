@@ -482,6 +482,9 @@ export default function ModularLoraResearch() {
       <section id="rq3">
         <SectionHeader title={`RQ3 · ${researchQuestions[2]}`} />
         <div className="space-y-6">
+          <h3 className="text-lg font-semibold">
+            Does more accurate routing improve translation?
+          </h3>
           <div className="grid gap-6 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
               <p className="mb-4 text-sm font-semibold">
@@ -523,45 +526,65 @@ export default function ModularLoraResearch() {
             </p>
           </div>
 
-          <div className="grid gap-6 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border bg-muted/30 p-4">
-                <p className="text-sm font-semibold">Layer-12 intervention</p>
-                <p className="mt-3 text-2xl font-semibold text-foreground">
-                  −22.6 pp
+          <h3 className="pt-2 text-lg font-semibold">
+            What information drives routing?
+          </h3>
+          <div className="rounded-2xl border bg-background p-5 sm:p-6">
+            <Image
+              src="/projects/modular-lora-experts/fig_representation_interventions.png"
+              alt="Controlled routing interventions showing layer-wise language-subspace removal and router hidden-unit ablation"
+              width={1655}
+              height={540}
+              className="h-auto w-full rounded-xl bg-white object-contain"
+            />
+            <p className="mt-3 text-xs leading-5 text-muted-foreground">
+              Controlled routing interventions averaged over three runs. Left:
+              routing-accuracy drop after removing a rank-3 language-related
+              subspace at encoder layers 3, 6, 9, and 12, with equal-rank random
+              controls. Right: routing-accuracy drop after removing the 16
+              highest-ranked router hidden units or 16 random units.
+            </p>
+
+            <div className="mt-6 grid gap-4 lg:grid-cols-2">
+              <div className="rounded-xl border bg-muted/30 p-5">
+                <p className="font-semibold text-foreground">
+                  Layer-wise representation intervention
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  routing accuracy
-                </p>
-                <p className="mt-3 text-sm text-muted-foreground">
-                  −0.74 BLEU after removing a rank-3 language subspace
+                <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
+                  The targeted routing effect grows in deeper encoder layers.
+                  At layer 12, removing the language-related subspace lowers
+                  routing accuracy by <strong>22.6 points</strong> and changes{" "}
+                  <strong>33.5% of routes</strong>, while the equal-rank random
+                  control changes routing accuracy by only 0.4 points. BLEU
+                  falls by just <strong>0.74</strong>, and FTA does not change
+                  robustly.
                 </p>
               </div>
-              <div className="rounded-xl border bg-muted/30 p-4">
-                <p className="text-sm font-semibold">Router-unit ablation</p>
-                <p className="mt-3 text-2xl font-semibold text-foreground">
-                  −6.64 pp
+              <div className="rounded-xl border bg-muted/30 p-5">
+                <p className="font-semibold text-foreground">
+                  Router hidden-unit ablation
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  routing accuracy
-                </p>
-                <p className="mt-3 text-sm text-muted-foreground">
-                  removing the 16 highest-ranked hidden units
+                <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
+                  Removing the 16 highest-ranked router hidden units lowers
+                  routing accuracy by <strong>6.64 points</strong>, whereas
+                  removing 16 random units produces no robust reduction. This
+                  suggests that routing behaviour depends disproportionately
+                  on a small subset of hidden units.
                 </p>
               </div>
             </div>
-            <p className="text-base leading-8 text-muted-foreground">
-              Controlled representation interventions change routing much more
-              than translation quality. Removing the rank-3 language-related
-              subspace at encoder layer 12 changes 33.5% of routes but lowers
-              BLEU by only 0.74; targeted removal of 16 router hidden units
-              lowers routing accuracy by 6.64 points. These interventions show
-              that routing decisions depend on identifiable language signals.
-              The small translation effect is consistent with the overlap
-              observed in cross-expert evaluation.
-            </p>
           </div>
+          <EvidenceConclusion>
+            The interventions provide controlled evidence that identifiable
+            language-related directions and a small subset of router units
+            influence expert selection. They do not show that language is the
+            sole basis of routing. The small translation effect is consistent
+            with the functional overlap observed in RQ2.
+          </EvidenceConclusion>
 
+          <h3 className="pt-2 text-lg font-semibold">
+            When does expert selection help?
+          </h3>
           <div className="grid gap-6 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             <div>
               <p className="mb-5 text-sm font-semibold">
@@ -606,7 +629,10 @@ export default function ModularLoraResearch() {
               </p>
             </div>
             <p className="text-base leading-8 text-muted-foreground">
-              On authentic petroleum-domain source text, the MoE reaches{" "}
+              On the synthetic-source benchmark, Multitask LoRA leads the MoE
+              in BLEU (<strong className="font-semibold text-foreground">61.0 vs 58.4</strong>).
+              On authentic petroleum-domain source text, the ranking reverses:
+              the MoE reaches{" "}
               <strong className="font-semibold text-foreground">
                 41.89 BLEU
               </strong>
