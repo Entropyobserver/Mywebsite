@@ -1,6 +1,6 @@
 const researchQuestions = [
   "Can Target-Anchored Synthesis provide useful training data?",
-  "Do language-specific LoRA experts specialise, and how much do their capabilities overlap?",
+  "Do language-specific LoRA experts specialise, and how much do they overlap?",
   "When does expert selection improve translation quality, and does more accurate routing lead to better translations?",
 ];
 
@@ -380,103 +380,105 @@ export default function ModularLoraResearch() {
 
       <section id="rq2">
         <SectionHeader title={`RQ2 · ${researchQuestions[1]}`} />
-        <h3 className="mb-3 text-lg font-semibold">Overall comparison</h3>
-        <div className="overflow-hidden rounded-2xl border bg-background">
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[560px] text-left text-sm">
-              <thead className="bg-blue-700 text-white">
-                <tr>
-                  <th className="px-5 py-4 font-semibold">System</th>
-                  <th className="px-5 py-4 text-right font-semibold">
-                    BLEU (avg)
-                  </th>
-                  <th className="px-5 py-4 text-right font-semibold">
-                    FTA (avg)
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y">
-                <tr>
-                  <td className="px-5 py-4 font-medium">Independent Experts</td>
-                  <td className="px-5 py-4 text-right tabular-nums">59.1</td>
-                  <td className="px-5 py-4 text-right font-semibold tabular-nums text-emerald-600 dark:text-emerald-400">
-                    .726
-                  </td>
-                </tr>
-                <tr className="bg-muted/35">
-                  <td className="px-5 py-4 font-medium">Multitask LoRA</td>
-                  <td className="px-5 py-4 text-right font-semibold tabular-nums text-blue-600 dark:text-blue-400">
-                    61.0
-                  </td>
-                  <td className="px-5 py-4 text-right tabular-nums">.713</td>
-                </tr>
-                <tr>
-                  <td className="px-5 py-4 font-medium">MoE hard routing</td>
-                  <td className="px-5 py-4 text-right tabular-nums">58.4</td>
-                  <td className="px-5 py-4 text-right tabular-nums">.711</td>
-                </tr>
-              </tbody>
-            </table>
+        <div className="grid gap-6 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center">
+          <div className="overflow-hidden rounded-xl border">
+            <p className="border-b bg-muted/30 px-5 py-3 text-sm font-semibold">
+              Overall comparison
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[500px] text-left text-sm">
+                <thead className="bg-blue-700 text-white">
+                  <tr>
+                    <th className="px-5 py-4 font-semibold">System</th>
+                    <th className="px-5 py-4 text-right font-semibold">
+                      BLEU (avg)
+                    </th>
+                    <th className="px-5 py-4 text-right font-semibold">
+                      FTA (avg)
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y">
+                  <tr>
+                    <td className="px-5 py-4 font-medium">
+                      Independent Experts
+                    </td>
+                    <td className="px-5 py-4 text-right tabular-nums">59.1</td>
+                    <td className="px-5 py-4 text-right font-semibold tabular-nums text-emerald-600 dark:text-emerald-400">
+                      .726
+                    </td>
+                  </tr>
+                  <tr className="bg-muted/35">
+                    <td className="px-5 py-4 font-medium">Multitask LoRA</td>
+                    <td className="px-5 py-4 text-right font-semibold tabular-nums text-blue-600 dark:text-blue-400">
+                      61.0
+                    </td>
+                    <td className="px-5 py-4 text-right tabular-nums">.713</td>
+                  </tr>
+                  <tr>
+                    <td className="px-5 py-4 font-medium">MoE hard routing</td>
+                    <td className="px-5 py-4 text-right tabular-nums">58.4</td>
+                    <td className="px-5 py-4 text-right tabular-nums">.711</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="space-y-4 text-base leading-7 text-muted-foreground">
+            <p>
+              Multitask LoRA gets the highest average BLEU, while Independent
+              Experts get the highest average FTA. MoE hard routing is lower on
+              both metrics.
+            </p>
+            <p className="rounded-xl bg-blue-50 p-4 font-semibold text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
+              Here, we use the MoE mainly to study what the experts learn and
+              how routing works.
+            </p>
           </div>
         </div>
-        <p className="mt-4 text-base leading-7 text-muted-foreground">
-          On the synthetic-source benchmark, Multitask LoRA achieves the
-          highest average BLEU, while Independent Experts achieve the highest
-          average FTA. MoE hard routing is lower on both metrics. No single
-          adaptation strategy dominates: the shared adapter achieves the
-          highest BLEU, while the language-specific experts achieve the highest
-          terminology accuracy.
-        </p>
-        <EvidenceConclusion>
-          <strong>
-            We therefore use the MoE primarily as a diagnostic framework to
-            study expert specialisation and routing, rather than as the
-            best-performing system.
-          </strong>
-        </EvidenceConclusion>
 
-        <h3 className="mb-3 mt-8 text-lg font-semibold">
-          Cross-expert analysis
-        </h3>
-        <div className="grid gap-6 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div>
-            <CrossExpertMatrix />
-            <p className="mt-3 text-xs leading-5 text-muted-foreground">
-              Rows show the source language, and columns show which expert is
-              used for translation. All values are BLEU; the highlighted
-              diagonal cells use the matching expert.
-            </p>
+        <div className="mt-5 overflow-hidden rounded-2xl border bg-background">
+          <div className="grid gap-6 p-5 sm:p-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center">
+            <div>
+              <p className="mb-4 text-sm font-semibold">
+                Cross-expert analysis
+              </p>
+              <CrossExpertMatrix />
+              <p className="mt-3 text-xs leading-5 text-muted-foreground">
+                Bold cells show each language with its matching expert.
+              </p>
+            </div>
+            <div className="space-y-4">
+              <div className="rounded-xl bg-muted/35 p-4">
+                <p className="font-semibold text-foreground">Specialisation</p>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground sm:text-base">
+                  The matching expert gets the highest BLEU for all four
+                  languages.
+                </p>
+                <p className="mt-2 font-semibold text-foreground">
+                  → The experts learn language-specific skills.
+                </p>
+              </div>
+              <div className="rounded-xl bg-muted/35 p-4">
+                <p className="font-semibold text-foreground">Overlap</p>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground sm:text-base">
+                  Other experts can also perform quite well. For example, the
+                  DE expert gets <strong>56.2 BLEU</strong> on the Dutch test
+                  data, compared with <strong>59.5 BLEU</strong> from the NL
+                  expert.
+                </p>
+                <p className="mt-2 font-semibold text-foreground">
+                  → The experts still share some capabilities.
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="space-y-5 text-base leading-8 text-muted-foreground">
-            <p>
-              <strong className="font-semibold text-foreground">
-                Specialisation:
-              </strong>{" "}
-              The matching expert achieves the highest BLEU for all four
-              language pairs, suggesting that the experts develop
-              language-specific capabilities.
-            </p>
-            <p>
-              <strong className="font-semibold text-foreground">Overlap:</strong>{" "}
-              Off-diagonal performance remains relatively strong. For example,
-              the DE expert achieves{" "}
-              <strong className="font-semibold text-foreground">
-                56.2 BLEU on NL–NO
-              </strong>
-              , compared with{" "}
-              <strong className="font-semibold text-foreground">
-                59.5 BLEU
-              </strong>{" "}
-              from the matching NL expert. This provides evidence of
-              meaningful functional overlap between the experts.
-            </p>
-          </div>
+          <p className="border-t border-blue-200 bg-blue-50 px-5 py-4 font-medium leading-7 text-blue-950 dark:border-blue-900 dark:bg-blue-950/30 dark:text-blue-100 sm:px-6">
+            <strong>Conclusion:</strong> The experts are specialised, but they
+            are not completely separate. This helps explain why choosing the
+            wrong expert does not always cause a large drop in BLEU.
+          </p>
         </div>
-        <EvidenceConclusion>
-          <strong>Conclusion:</strong> The experts are specialised, but not
-          fully separated. Their capabilities overlap, so selecting a
-          non-matching expert does not always produce a large BLEU loss.
-        </EvidenceConclusion>
       </section>
 
       <section id="rq3">
