@@ -57,7 +57,6 @@ function EvidenceConclusion({ children }: { children: React.ReactNode }) {
 function ConfusionMatrix() {
   return (
     <div>
-      <p className="mb-3 text-center text-sm font-semibold">Hard routing</p>
       <div className="grid grid-cols-[auto_repeat(4,minmax(0,1fr))] gap-1 text-center text-xs">
         <div />
         {languageLabels.map((label) => (
@@ -496,7 +495,7 @@ export default function ModularLoraResearch() {
             <p className="mb-5 text-sm font-semibold uppercase tracking-[0.16em] text-blue-600 dark:text-blue-400">
               01 · Does better routing improve translation?
             </p>
-            <div className="grid gap-7 lg:grid-cols-2 lg:items-center">
+            <div className="grid gap-7 lg:grid-cols-2 lg:items-start">
             <div>
               <p className="mb-4 text-sm font-semibold">
                 Hard-routing confusion matrix
@@ -506,7 +505,7 @@ export default function ModularLoraResearch() {
                 Rows show source languages; columns show selected experts.
                 Diagonal cells are correct routes.
               </p>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+              <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
                 The router gets <strong>64.8%</strong> of routes correct
                 overall. German is the hardest to route correctly (
                 <strong>40.1%</strong>), while Dutch is the easiest (
@@ -517,32 +516,63 @@ export default function ModularLoraResearch() {
                 <p className="mb-4 text-sm font-semibold">
                   Learned router vs. LangID router
                 </p>
-                <div className="overflow-hidden rounded-xl border">
-                  <table className="w-full text-sm">
+                <div className="overflow-x-auto rounded-xl border">
+                  <table className="w-full min-w-[460px] text-sm">
                     <thead className="bg-blue-700 text-white">
                       <tr>
-                        <th className="px-4 py-3 text-left font-semibold" />
-                        <th className="px-4 py-3 text-right font-semibold">
-                          Learned
+                        <th className="px-4 py-3 text-left font-semibold">
+                          Router
                         </th>
                         <th className="px-4 py-3 text-right font-semibold">
-                          LangID
+                          Routing accuracy
+                        </th>
+                        <th className="px-4 py-3 text-right font-semibold">
+                          BLEU
+                        </th>
+                        <th className="px-4 py-3 text-right font-semibold">
+                          FTA
                         </th>
                       </tr>
                     </thead>
                     <tbody className="divide-y">
                       {[
-                        ["Routing accuracy", "64.8%", "77.5%"],
-                        ["BLEU", "58.4", "58.9"],
-                        ["FTA", ".711", ".720"],
-                      ].map(([metric, learned, langId]) => (
-                        <tr key={metric}>
-                          <td className="px-4 py-3 font-medium">{metric}</td>
-                          <td className="px-4 py-3 text-right font-mono tabular-nums">
-                            {learned}
+                        ["Learned", "64.8%", "58.4", ".711", false],
+                        ["LangID", "77.5%", "58.9", ".720", true],
+                      ].map(([router, accuracy, bleu, fta, highlighted]) => (
+                        <tr
+                          key={String(router)}
+                          className={highlighted ? "bg-muted/35" : ""}
+                        >
+                          <td className="px-4 py-3 font-medium">{router}</td>
+                          <td
+                            className={
+                              "px-4 py-3 text-right font-mono tabular-nums " +
+                              (highlighted
+                                ? "font-semibold text-blue-600 dark:text-blue-400"
+                                : "")
+                            }
+                          >
+                            {accuracy}
                           </td>
-                          <td className="px-4 py-3 text-right font-mono font-semibold tabular-nums text-blue-600 dark:text-blue-400">
-                            {langId}
+                          <td
+                            className={
+                              "px-4 py-3 text-right font-mono tabular-nums " +
+                              (highlighted
+                                ? "font-semibold text-blue-600 dark:text-blue-400"
+                                : "")
+                            }
+                          >
+                            {bleu}
+                          </td>
+                          <td
+                            className={
+                              "px-4 py-3 text-right font-mono tabular-nums " +
+                              (highlighted
+                                ? "font-semibold text-blue-600 dark:text-blue-400"
+                                : "")
+                            }
+                          >
+                            {fta}
                           </td>
                         </tr>
                       ))}
