@@ -747,14 +747,13 @@ export default function ModularLoraResearch() {
 
           <div className="bg-slate-950 px-5 py-6 text-white sm:px-7">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
-              RQ3 · Answer
+              Conclusion
             </p>
             <p className="mt-2 text-base font-medium leading-7 sm:text-lg">
-              Better routing alone produces only small translation gains. The
-              router uses language-related information, but the experts
-              overlap, so changing the selected expert often has a limited
-              effect. Expert selection becomes more useful on authentic source
-              text.
+              Better routing does not always mean better translation. Different
+              experts can give similar results. On authentic petroleum text,
+              MoE performs better than Multitask LoRA and comes close to the
+              matching expert.
             </p>
           </div>
         </div>
