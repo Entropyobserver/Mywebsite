@@ -38,7 +38,13 @@ export default function IndexPage() {
     url: siteConfig.url,
     image: siteConfig.ogImage,
     jobTitle: "AI & NLP Researcher | Machine Learning Engineer",
-    sameAs: [siteConfig.links.github, siteConfig.links.twitter],
+    sameAs: [
+      siteConfig.links.github,
+      siteConfig.links.twitter,
+      siteConfig.links.googleScholar,
+      siteConfig.links.orcid,
+      siteConfig.links.aclAnthology,
+    ],
   };
 
   // Structured data for website as a software application (template)

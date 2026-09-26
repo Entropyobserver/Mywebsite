@@ -38,4 +38,22 @@ export const SocialLinks: SocialInterface[] = [
     icon: Icons.openai,
     link: "https://huggingface.co/entropy25",
   },
+  {
+    name: "Google Scholar",
+    username: "Xiaojing Yang",
+    icon: Icons.googleScholar,
+    link: "https://scholar.google.com/citations?user=ynVr7PAAAAAJ&hl=en",
+  },
+  {
+    name: "ORCID",
+    username: "0009-0009-2573-6982",
+    icon: Icons.orcid,
+    link: "https://orcid.org/0009-0009-2573-6982",
+  },
+  {
+    name: "ACL Anthology",
+    username: "Xiaojing Yang",
+    icon: Icons.aclAnthology,
+    link: "https://aclanthology.org/people/xiaojing-yang/unverified/",
+  },
 ];

@@ -8,6 +8,11 @@ export const siteConfig = {
   links: {
     twitter: "https://x.com/Entropyobserver",
     github: "https://github.com/Entropyobserver",
+    googleScholar:
+      "https://scholar.google.com/citations?user=ynVr7PAAAAAJ&hl=en",
+    orcid: "https://orcid.org/0009-0009-2573-6982",
+    aclAnthology:
+      "https://aclanthology.org/people/xiaojing-yang/unverified/",
   },
   ogImage: "/profile-avatar.png",
   iconIco:

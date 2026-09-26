@@ -2,6 +2,7 @@ import {
   AlertTriangle,
   ArrowRight,
   BookMarked,
+  BookOpen,
   Building,
   Check,
   ChevronDown,
@@ -98,6 +99,8 @@ import {
   SiScipy,
   SiStreamlit,
   SiGithub,
+  SiGooglescholar,
+  SiOrcid,
 
 } from "react-icons/si";
 
@@ -156,6 +159,9 @@ export const Icons = {
   tailwindcss: SiTailwindcss,
   typescript: SiTypescript,
   gmail: SiGmail,
+  googleScholar: SiGooglescholar,
+  orcid: SiOrcid,
+  aclAnthology: BookOpen,
   twitter: SiTwitter,
   linkedin: SiLinkedin,
   userFill: BiSolidUser,
