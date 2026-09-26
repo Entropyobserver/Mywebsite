@@ -33,21 +33,6 @@ export default function ProjectListItem({ project }: ProjectListItemProps) {
         <ChipContainer textArr={project.category} compact maxItems={3} />
       </div>
 
-      {project.keyMetrics && (
-        <div className="hidden w-[270px] shrink-0 grid-cols-3 gap-3 border-l border-border pl-4 lg:grid">
-          {project.keyMetrics.map((metric) => (
-            <div key={metric.label} className="min-w-0 text-center">
-              <p className="text-sm font-bold text-foreground">
-                {metric.value}
-              </p>
-              <p className="mt-0.5 text-[10px] leading-tight text-muted-foreground">
-                {metric.label}
-              </p>
-            </div>
-          ))}
-        </div>
-      )}
-
       <Link
         href={`/projects/${project.id}`}
         className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"

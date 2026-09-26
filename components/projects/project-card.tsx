@@ -9,11 +9,13 @@ import { ProjectInterface } from "@/config/projects";
 interface ProjectCardProps {
   project: ProjectInterface;
   compact?: boolean;
+  showMetrics?: boolean;
 }
 
 export default function ProjectCard({
   project,
   compact = false,
+  showMetrics = true,
 }: ProjectCardProps) {
   return (
     <article
@@ -42,7 +44,7 @@ export default function ProjectCard({
         >
           {project.shortDescription}
         </p>
-        {project.keyMetrics && (
+        {showMetrics && project.keyMetrics && (
           <div
             className={`grid grid-cols-3 gap-2 border-y border-border ${
               compact ? "py-2" : "py-3"

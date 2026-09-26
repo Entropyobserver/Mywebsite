@@ -111,7 +111,12 @@ export default function ProjectDirectory() {
         {viewMode === "cards" ? (
           <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
-              <ProjectCard project={project} key={project.id} compact />
+              <ProjectCard
+                project={project}
+                key={project.id}
+                compact
+                showMetrics={false}
+              />
             ))}
           </div>
         ) : (
@@ -143,5 +148,5 @@ export default function ProjectDirectory() {
     },
   ];
 
-  return <ResponsiveTabs items={tabItems} defaultValue="all" />;
+  return <ResponsiveTabs items={tabItems} defaultValue="research" />;
 }
