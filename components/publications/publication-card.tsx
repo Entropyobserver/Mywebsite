@@ -5,7 +5,7 @@ import { PublicationInterface } from "@/config/publications";
 
 interface PublicationCardProps {
   publications: PublicationInterface[];
-  variant?: "cards" | "list";
+  variant?: "cards" | "compact-cards" | "list";
 }
 
 const statusStyles: Record<PublicationInterface["status"], string> = {
@@ -91,6 +91,8 @@ export default function PublicationCard({
     );
   }
 
+  const compact = variant === "compact-cards";
+
   return (
     <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {publications.map((publication) => {
@@ -100,11 +102,17 @@ export default function PublicationCard({
 
         return (
           <div
-            className="relative h-full rounded-lg border bg-background p-6 hover:bg-accent hover:text-accent-foreground"
+            className={`relative h-full rounded-lg border bg-background hover:bg-accent hover:text-accent-foreground ${
+              compact ? "p-4" : "p-6"
+            }`}
             key={publication.title}
           >
-            <div className="flex h-full min-h-[300px] flex-col justify-between gap-5">
-              <div className="space-y-3">
+            <div
+              className={`flex h-full flex-col justify-between ${
+                compact ? "gap-3" : "min-h-[300px] gap-5"
+              }`}
+            >
+              <div className={compact ? "space-y-2" : "space-y-3"}>
                 <div className="flex flex-wrap items-center gap-2">
                   <span
                     className={`rounded-full border px-2.5 py-1 text-xs font-medium ${statusStyles[publication.status]}`}
@@ -115,24 +123,40 @@ export default function PublicationCard({
                     {publication.date}
                   </span>
                 </div>
-                <h3 className="font-heading text-xl leading-snug">
+                <h3
+                  className={`font-heading leading-snug ${
+                    compact ? "line-clamp-2 text-lg" : "text-xl"
+                  }`}
+                >
                   {publication.title}
                 </h3>
-                <p className="text-sm font-medium text-foreground">
+                <p
+                  className={`text-sm font-medium text-foreground ${
+                    compact ? "line-clamp-1" : ""
+                  }`}
+                >
                   {publication.authors}
                 </p>
-                <p className="text-sm text-muted-foreground">
+                <p
+                  className={`text-sm text-muted-foreground ${
+                    compact ? "line-clamp-2" : ""
+                  }`}
+                >
                   {publication.description}
                 </p>
               </div>
-              <div className="space-y-2 text-sm text-muted-foreground">
+              <div
+                className={`${compact ? "space-y-1.5" : "space-y-2"} text-sm text-muted-foreground`}
+              >
                 <p className="flex items-center gap-2">
                   <Icons.star className="h-4 w-4" />
-                  <span>{publication.venue}</span>
+                  <span className={compact ? "line-clamp-1" : ""}>
+                    {publication.venue}
+                  </span>
                 </p>
-                <p>{publication.role}</p>
+                {!compact && <p>{publication.role}</p>}
                 {publicationLinks.length > 0 && (
-                  <div className="flex flex-wrap gap-2 pt-2">
+                  <div className={`flex flex-wrap gap-2 ${compact ? "pt-1" : "pt-2"}`}>
                     {publicationLinks.map((publicationLink) => (
                       <Link
                         href={publicationLink.href}

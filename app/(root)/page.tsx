@@ -194,7 +194,10 @@ export default function IndexPage() {
             {pagesConfig.publications.description}
           </AnimatedText>
         </div>
-        <PublicationCard publications={featuredPublications} />
+        <PublicationCard
+          publications={featuredPublications}
+          variant="compact-cards"
+        />
         <AnimatedText delay={0.4} className="flex justify-center">
           <Link href="/publications">
             <Button variant={"outline"} className="rounded-xl">
@@ -230,7 +233,7 @@ export default function IndexPage() {
               delay={0.1 * (index + 1)}
               direction="up"
             >
-              <ProjectCard project={exp} />
+              <ProjectCard project={exp} compact />
             </AnimatedSection>
           ))}
         </div>
