@@ -16,7 +16,7 @@ export default function PublicationsPage() {
       title={pagesConfig.publications.title}
       description={pagesConfig.publications.description}
     >
-      <PublicationCard publications={publicationsByDate} />
+      <PublicationCard publications={publicationsByDate} variant="list" />
     </PageContainer>
   );
 }

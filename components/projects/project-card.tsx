@@ -8,12 +8,20 @@ import { ProjectInterface } from "@/config/projects";
 
 interface ProjectCardProps {
   project: ProjectInterface;
+  compact?: boolean;
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({
+  project,
+  compact = false,
+}: ProjectCardProps) {
   return (
-    <div className="relative p-6 max-w-sm bg-background border border-border rounded-lg">
-      <div className="relative w-full h-[200px]">
+    <article
+      className={`relative h-full bg-background border border-border rounded-lg ${
+        compact ? "max-w-none p-4" : "max-w-sm p-6"
+      }`}
+    >
+      <div className={`relative w-full ${compact ? "h-[148px]" : "h-[200px]"}`}>
         <Image
           className="rounded-lg border border-border object-cover"
           src={project.companyLogoImg}
@@ -21,44 +29,66 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           fill
         />
       </div>
-      <div className="pt-5 space-y-3">
-        <h5 className="text-2xl font-bold tracking-tight text-foreground">
+      <div className={compact ? "space-y-2 pt-4" : "space-y-3 pt-5"}>
+        <h5
+          className={`font-bold tracking-tight text-foreground ${
+            compact ? "text-xl leading-snug" : "text-2xl"
+          }`}
+        >
           {project.companyName}
         </h5>
-        <p className="line-clamp-3 font-normal text-muted-foreground">
+        <p
+          className={`${compact ? "line-clamp-2 text-sm" : "line-clamp-3"} font-normal text-muted-foreground`}
+        >
           {project.shortDescription}
         </p>
         {project.keyMetrics && (
-          <div className="grid grid-cols-3 gap-2 border-y border-border py-3">
+          <div
+            className={`grid grid-cols-3 gap-2 border-y border-border ${
+              compact ? "py-2" : "py-3"
+            }`}
+          >
             {project.keyMetrics.map((metric) => (
               <div key={metric.label} className="min-w-0 text-center">
-                <p className="text-sm font-bold text-foreground sm:text-base">
+                <p
+                  className={`${compact ? "text-sm" : "text-sm sm:text-base"} font-bold text-foreground`}
+                >
                   {metric.value}
                 </p>
-                <p className="text-[10px] leading-tight text-muted-foreground sm:text-xs">
+                <p
+                  className={`${compact ? "text-[10px]" : "text-[10px] sm:text-xs"} leading-tight text-muted-foreground`}
+                >
                   {metric.label}
                 </p>
               </div>
             ))}
           </div>
         )}
-        <div className="flex gap-2 flex-wrap">
-          <ChipContainer textArr={project.category} />
-        </div>
+        <ChipContainer
+          textArr={project.category}
+          compact={compact}
+          maxItems={compact ? 3 : undefined}
+        />
         <Link href={`/projects/${project.id}`}>
-          <Button variant={"default"} className="mt-2">
+          <Button
+            variant={compact ? "ghost" : "default"}
+            size={compact ? "sm" : "default"}
+            className={compact ? "-ml-3 mt-1" : "mt-2"}
+          >
             Read more
             <Icons.chevronRight className="w-4 ml-1" />
           </Button>
         </Link>
       </div>
-      <div className="absolute bottom-4 right-4 p-3 rounded-full bg-background border border-border">
-        {project.type === "AI" ? (
-          <Icons.userFill className="h-4 w-4" />
-        ) : (
-          <Icons.work className="h-4 w-4" />
-        )}
-      </div>
-    </div>
+      {!compact && (
+        <div className="absolute bottom-4 right-4 p-3 rounded-full bg-background border border-border">
+          {project.type === "AI" ? (
+            <Icons.userFill className="h-4 w-4" />
+          ) : (
+            <Icons.work className="h-4 w-4" />
+          )}
+        </div>
+      )}
+    </article>
   );
 }
