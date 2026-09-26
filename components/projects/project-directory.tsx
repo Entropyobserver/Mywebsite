@@ -19,14 +19,6 @@ const visibleProjects = Projects.filter(
 const orderProjects = (projects: ProjectInterface[]) => {
   let ordered = [...projects];
 
-  const shapleyIndex = ordered.findIndex(
-    (project) => project.id === "group-shapley-attribution"
-  );
-  if (shapleyIndex !== -1) {
-    const [shapleyProject] = ordered.splice(shapleyIndex, 1);
-    ordered.splice(Math.min(2, ordered.length), 0, shapleyProject);
-  }
-
   const aspectProjectIndex = ordered.findIndex(
     (project) => project.id === "aspect-controlled-biomedical-retrieval"
   );
@@ -39,6 +31,14 @@ const orderProjects = (projects: ProjectInterface[]) => {
       (project) => project.id === "structure-aware-graph-rag"
     );
     ordered.splice(updatedGraphRagIndex + 1, 0, aspectProject);
+  }
+
+  const shapleyIndex = ordered.findIndex(
+    (project) => project.id === "group-shapley-attribution"
+  );
+  if (shapleyIndex !== -1) {
+    const [shapleyProject] = ordered.splice(shapleyIndex, 1);
+    ordered.splice(Math.min(2, ordered.length), 0, shapleyProject);
   }
 
   return ordered;
