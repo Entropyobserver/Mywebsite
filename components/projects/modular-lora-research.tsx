@@ -726,7 +726,7 @@ export default function ModularLoraResearch() {
                 </tbody>
               </table>
             </div>
-            <p className="mt-4 text-xs leading-5 text-muted-foreground">
+            <p className="mt-4 text-sm leading-6 text-muted-foreground sm:text-base">
               Independent Experts use the expert matching the known source
               language, while MoE selects an expert automatically. Compare
               systems within each test setting; BLEU scores are not directly
@@ -737,12 +737,12 @@ export default function ModularLoraResearch() {
               authentic petroleum text, Independent Experts perform best, while
               MoE comes close and performs better than Multitask LoRA.
             </p>
-            <p className="mt-3 text-xs leading-5 text-muted-foreground">
+            <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
               The authentic-source test uses naturally occurring petroleum
               sentences with machine-assisted and manually reviewed Norwegian
               references.
             </p>
-            <p className="mt-5 rounded-xl bg-blue-50 px-5 py-4 font-semibold text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
+            <p className="mt-5 rounded-xl bg-blue-50 px-5 py-4 text-sm font-semibold leading-6 text-blue-950 dark:bg-blue-950/30 dark:text-blue-100 sm:text-base">
               Expert selection is more useful on authentic source text.
             </p>
           </div>
