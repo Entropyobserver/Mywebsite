@@ -258,6 +258,117 @@ export default function GroupShapleyResearch() {
         </p>
       </section>
 
+      <section id="coalition-space">
+        <SectionHeader title="All 16 Training-Data Combinations" />
+        <div className="max-w-3xl space-y-4 leading-7 text-muted-foreground">
+          <p>
+            A{" "}
+            <strong className="font-semibold text-foreground">coalition</strong>{" "}
+            is one possible selection of the four training-data groups. Each
+            group is either included or excluded, so the complete set contains:
+          </p>
+        </div>
+        <div className="my-6 flex justify-center">
+          <div className="rounded-2xl border border-blue-200 bg-blue-50 px-8 py-4 text-center dark:border-blue-900 dark:bg-blue-950/30">
+            <p className="font-heading text-4xl text-blue-700 dark:text-blue-300">
+              2<sup className="text-xl">4</sup> = 16
+            </p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              four include-or-exclude decisions
+            </p>
+          </div>
+        </div>
+        <a
+          href="/projects/group-shapley-attribution/coalition-space.svg"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Open the full 16-coalition diagram"
+          className="block overflow-hidden rounded-2xl border bg-background"
+        >
+          <Image
+            src="/projects/group-shapley-attribution/coalition-space.svg"
+            alt="All sixteen coalitions formed from the four training-data groups, organized by coalition size"
+            width={1600}
+            height={1040}
+            className="h-auto w-full"
+          />
+        </a>
+        <p className="mt-3 text-center text-sm leading-6 text-muted-foreground">
+          Each box is one training condition. The empty coalition uses the base
+          model; the other 15 coalitions are fine-tuned separately.
+        </p>
+
+        <div className="mt-8 rounded-2xl border bg-muted/20 p-5 sm:p-7">
+          <h3 className="font-heading text-2xl">
+            From Coalition Scores to Shapley Values
+          </h3>
+          <div className="mt-5 overflow-x-auto rounded-xl border bg-background px-5 py-6">
+            <div
+              className="min-w-[780px] text-center font-serif text-xl text-foreground sm:text-2xl"
+              role="math"
+              aria-label="phi sub g of m equals the sum over coalitions S not containing g of the Shapley weight multiplied by the change in utility caused by adding group g"
+            >
+              <span>
+                φ<sub>g</sub>(m) ={" "}
+              </span>
+              <span className="inline-flex flex-col align-middle">
+                <span className="text-4xl leading-7">∑</span>
+                <span className="mt-1 font-sans text-xs">S ⊆ G ∖ {"{g}"}</span>
+              </span>
+              <span className="mx-3 inline-flex flex-col align-middle text-center">
+                <span className="border-b border-foreground px-2 pb-1">
+                  |S|!(|G| − |S| − 1)!
+                </span>
+                <span className="pt-1">|G|!</span>
+              </span>
+              <span>
+                [v<sub>m</sub>(S ∪ {"{g}"}) − v<sub>m</sub>(S)]
+              </span>
+            </div>
+          </div>
+          <p className="mt-5 leading-7 text-muted-foreground">
+            For each group <span className="italic">g</span>, we measure how
+            much adding it changes metric <span className="italic">m</span> in
+            every coalition that does not already contain it. The exact Shapley
+            value is the weighted average of those changes.
+          </p>
+          <div className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
+            <p className="rounded-xl bg-background px-4 py-3">
+              <span className="font-serif italic">G</span>
+              <span className="text-muted-foreground">
+                {" "}
+                · all four training-data groups
+              </span>
+            </p>
+            <p className="rounded-xl bg-background px-4 py-3">
+              <span className="font-serif italic">S</span>
+              <span className="text-muted-foreground">
+                {" "}
+                · a coalition without group g
+              </span>
+            </p>
+            <p className="rounded-xl bg-background px-4 py-3">
+              <span className="font-serif italic">
+                v<sub>m</sub>(S)
+              </span>
+              <span className="text-muted-foreground">
+                {" "}
+                · coalition S’s score on metric m
+              </span>
+            </p>
+            <p className="rounded-xl bg-background px-4 py-3">
+              <span className="font-serif italic">
+                v<sub>m</sub>(S ∪ {"{g}"}) − v<sub>m</sub>(S)
+              </span>
+              <span className="text-muted-foreground">
+                {" "}
+                · the change caused by adding g
+              </span>
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section>
         <SectionHeader title="Exact Group-Level Attribution Overview" />
         <div className="grid gap-7 rounded-2xl border bg-muted/20 p-5 sm:p-7 lg:grid-cols-[minmax(300px,0.9fr)_minmax(0,1.1fr)] lg:items-center">
