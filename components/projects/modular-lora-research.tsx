@@ -745,17 +745,12 @@ export default function ModularLoraResearch() {
             </p>
           </div>
 
-          <div className="bg-slate-950 px-5 py-6 text-white sm:px-7">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
-              Conclusion
-            </p>
-            <p className="mt-2 text-base font-medium leading-7 sm:text-lg">
-              Better routing does not always mean better translation. Different
-              experts can give similar results. On authentic petroleum text,
-              MoE performs better than Multitask LoRA and comes close to the
-              matching expert.
-            </p>
-          </div>
+          <p className="border-t border-blue-200 bg-blue-50 px-5 py-4 font-medium leading-7 text-blue-950 dark:border-blue-900 dark:bg-blue-950/30 dark:text-blue-100 sm:px-6">
+            <strong>Conclusion:</strong> Better routing does not always mean
+            better translation. Different experts can give similar results. On
+            authentic petroleum text, MoE performs better than Multitask LoRA
+            and comes close to the matching expert.
+          </p>
         </div>
       </section>
     </div>
