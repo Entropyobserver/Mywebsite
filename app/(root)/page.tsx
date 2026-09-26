@@ -137,6 +137,50 @@ export default function IndexPage() {
               </Link>
             </AnimatedText>
           </div>
+          <AnimatedText
+            delay={1}
+            className="flex flex-wrap items-center justify-center gap-1 sm:gap-2"
+          >
+            <Link
+              href={siteConfig.links.googleScholar}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(
+                buttonVariants({ variant: "ghost", size: "sm" }),
+                "px-2.5 text-muted-foreground hover:text-foreground"
+              )}
+              aria-label="View Xiaojing Yang's Google Scholar profile"
+            >
+              <Icons.googleScholar className="mr-1.5 h-4 w-4" />
+              Google Scholar
+            </Link>
+            <Link
+              href={siteConfig.links.orcid}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(
+                buttonVariants({ variant: "ghost", size: "sm" }),
+                "px-2.5 text-muted-foreground hover:text-foreground"
+              )}
+              aria-label="View Xiaojing Yang's ORCID profile"
+            >
+              <Icons.orcid className="mr-1.5 h-4 w-4" />
+              ORCID
+            </Link>
+            <Link
+              href={siteConfig.links.aclAnthology}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(
+                buttonVariants({ variant: "ghost", size: "sm" }),
+                "px-2.5 text-muted-foreground hover:text-foreground"
+              )}
+              aria-label="View Xiaojing Yang's ACL Anthology author page"
+            >
+              <Icons.aclAnthology className="mr-1.5 h-4 w-4" />
+              ACL Anthology
+            </Link>
+          </AnimatedText>
           <AnimatedText delay={1.2}>
             <Icons.chevronDown className="h-6 w-6 mt-10" />
           </AnimatedText>
