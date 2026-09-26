@@ -483,55 +483,89 @@ export default function ModularLoraResearch() {
 
       <section id="rq3">
         <SectionHeader title={`RQ3 · ${researchQuestions[2]}`} />
-        <div className="space-y-6">
-          <h3 className="text-lg font-semibold">
-            Does more accurate routing improve translation?
-          </h3>
-          <div className="grid gap-6 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div className="overflow-hidden rounded-2xl border bg-background">
+          <div className="flex flex-wrap items-center justify-center gap-2 border-b bg-muted/25 px-5 py-4 text-sm font-semibold text-muted-foreground sm:gap-4">
+            <span className="text-foreground">Routing</span>
+            <span aria-hidden="true">→</span>
+            <span className="text-foreground">What drives it</span>
+            <span aria-hidden="true">→</span>
+            <span className="text-foreground">When it helps</span>
+          </div>
+
+          <div className="border-b p-5 sm:p-7">
+            <p className="mb-5 text-sm font-semibold uppercase tracking-[0.16em] text-blue-600 dark:text-blue-400">
+              01 · Does better routing improve translation?
+            </p>
+            <div className="grid gap-7 lg:grid-cols-2 lg:items-center">
             <div>
               <p className="mb-4 text-sm font-semibold">
                 Hard-routing confusion matrix
               </p>
               <ConfusionMatrix />
               <p className="mt-3 text-xs leading-5 text-muted-foreground">
-                Rows show the true source language; columns show the expert
-                selected by the hard router. Diagonal cells are correct routes,
-                while off-diagonal cells are misroutes.
+                Rows show source languages; columns show selected experts.
+                Diagonal cells are correct routes.
+              </p>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                The router gets <strong>64.8%</strong> of routes correct
+                overall. German is the hardest to route correctly (
+                <strong>40.1%</strong>), while Dutch is the easiest (
+                <strong>86.8%</strong>).
               </p>
             </div>
-            <p className="text-base leading-8 text-muted-foreground">
-              The learned hard router achieves{" "}
-              <strong className="font-semibold text-foreground">
-                64.8% overall routing accuracy
-              </strong>
-              , but its errors are strongly language-dependent. DE–NO is routed
-              correctly only{" "}
-              <strong className="font-semibold text-foreground">40.1%</strong>{" "}
-              of the time, with{" "}
-              <strong className="font-semibold text-foreground">49.4%</strong>{" "}
-              of German inputs routed to the NL expert. Replacing the learned
-              router with a LangID router increases routing accuracy to{" "}
-              <strong className="font-semibold text-foreground">77.5%</strong>,
-              but produces only modest improvements in BLEU (
-              <strong className="font-semibold text-foreground">
-                58.4 → 58.9
-              </strong>
-              ) and FTA (
-              <strong className="font-semibold text-foreground">
-                .711 → .720
-              </strong>
-              ).{" "}
-              <strong className="font-semibold text-foreground">
-                A +12.7 percentage-point improvement in routing accuracy
-                therefore yields only +0.5 BLEU and +.009 FTA.
-              </strong>
+              <div>
+                <p className="mb-4 text-sm font-semibold">
+                  Learned router vs. LangID router
+                </p>
+                <div className="overflow-hidden rounded-xl border">
+                  <table className="w-full text-sm">
+                    <thead className="bg-blue-700 text-white">
+                      <tr>
+                        <th className="px-4 py-3 text-left font-semibold" />
+                        <th className="px-4 py-3 text-right font-semibold">
+                          Learned
+                        </th>
+                        <th className="px-4 py-3 text-right font-semibold">
+                          LangID
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y">
+                      {[
+                        ["Routing accuracy", "64.8%", "77.5%"],
+                        ["BLEU", "58.4", "58.9"],
+                        ["FTA", ".711", ".720"],
+                      ].map(([metric, learned, langId]) => (
+                        <tr key={metric}>
+                          <td className="px-4 py-3 font-medium">{metric}</td>
+                          <td className="px-4 py-3 text-right font-mono tabular-nums">
+                            {learned}
+                          </td>
+                          <td className="px-4 py-3 text-right font-mono font-semibold tabular-nums text-blue-600 dark:text-blue-400">
+                            {langId}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <p className="mt-4 text-sm leading-6 text-muted-foreground sm:text-base">
+                  Replacing the learned router with LangID improves routing
+                  accuracy by <strong>12.7 points</strong>, but BLEU increases
+                  by only <strong>0.5</strong> and FTA by <strong>.009</strong>.
+                </p>
+              </div>
+            </div>
+            <p className="mt-6 rounded-xl bg-blue-50 px-5 py-4 font-semibold text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
+              More accurate routing does not automatically lead to much better
+              translation.
             </p>
           </div>
 
-          <h3 className="pt-2 text-lg font-semibold">
-            What information drives routing?
-          </h3>
-          <div className="rounded-2xl border bg-background p-5 sm:p-6">
+          <div className="border-b p-5 sm:p-7">
+            <p className="mb-5 text-sm font-semibold uppercase tracking-[0.16em] text-blue-600 dark:text-blue-400">
+              02 · What information does the router use?
+            </p>
             <Image
               src="/projects/modular-lora-experts/fig_representation_interventions.png"
               alt="Controlled routing interventions showing layer-wise language-subspace removal and router hidden-unit ablation"
@@ -540,122 +574,159 @@ export default function ModularLoraResearch() {
               className="h-auto w-full rounded-xl bg-white object-contain"
             />
             <p className="mt-3 text-xs leading-5 text-muted-foreground">
-              Controlled routing interventions averaged over three runs. Left:
-              routing-accuracy drop after removing a rank-3 language-related
-              subspace at encoder layers 3, 6, 9, and 12, with equal-rank random
-              controls. Right: routing-accuracy drop after removing the 16
-              highest-ranked router hidden units or 16 random units.
+              Controlled routing interventions averaged over three runs. The
+              left plot removes language-related information from different
+              encoder layers. The right plot removes important or random router
+              units. These runs use a separate 63.4% mean routing baseline.
             </p>
 
-            <div className="mt-6 grid gap-4 lg:grid-cols-2">
-              <div className="rounded-xl border bg-muted/30 p-5">
+            <div className="mt-6 grid gap-6 sm:grid-cols-2">
+              <div>
                 <p className="font-semibold text-foreground">
-                  Layer-wise representation intervention
+                  Language-related information
                 </p>
-                <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
-                  The targeted routing effect grows in deeper encoder layers.
-                  At layer 12, removing the language-related subspace lowers
-                  routing accuracy by <strong>22.6 points</strong> and changes{" "}
-                  <strong>33.5% of routes</strong>, while the equal-rank random
-                  control changes routing accuracy by only 0.4 points. BLEU
-                  falls by just <strong>0.74</strong>, and FTA does not change
-                  robustly.
+                <p className="mt-2 text-sm leading-6 text-muted-foreground sm:text-base">
+                  Removing language-related information strongly changes the
+                  router&apos;s decisions, especially in deeper encoder layers.
                 </p>
+                <ul className="mt-3 space-y-2 text-sm text-muted-foreground sm:text-base">
+                  <li>Layer 12: routing accuracy <strong>−22.6 points</strong></li>
+                  <li><strong>33.5%</strong> of routes change</li>
+                  <li>Random removal: only about <strong>0.4 points</strong></li>
+                </ul>
               </div>
-              <div className="rounded-xl border bg-muted/30 p-5">
+              <div>
                 <p className="font-semibold text-foreground">
-                  Router hidden-unit ablation
+                  Important router units
                 </p>
-                <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
-                  Removing the 16 highest-ranked router hidden units lowers
-                  routing accuracy by <strong>6.64 points</strong>, whereas
-                  removing 16 random units produces no robust reduction. This
-                  suggests that routing behaviour depends disproportionately
-                  on a small subset of hidden units.
+                <p className="mt-2 text-sm leading-6 text-muted-foreground sm:text-base">
+                  Removing the most important router units changes routing,
+                  while removing random units does not.
                 </p>
+                <ul className="mt-3 space-y-2 text-sm text-muted-foreground sm:text-base">
+                  <li>Top 16 units: routing accuracy <strong>−6.64 points</strong></li>
+                  <li>Random 16 units: <strong>no clear reduction</strong></li>
+                </ul>
               </div>
             </div>
-          </div>
-          <EvidenceConclusion>
-            The interventions provide controlled evidence that identifiable
-            language-related directions and a small subset of router units
-            influence expert selection. They do not show that language is the
-            sole basis of routing. The small translation effect is consistent
-            with the functional overlap observed in RQ2.
-          </EvidenceConclusion>
 
-          <h3 className="pt-2 text-lg font-semibold">
-            When does expert selection help?
-          </h3>
-          <div className="grid gap-6 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div>
-              <p className="mb-5 text-sm font-semibold">
-                Authentic-source BLEU
-              </p>
-              <div className="space-y-5">
-                {[
-                  ["Multitask LoRA", 39.3, "bg-blue-600"],
-                  ["MoE", 41.89, "bg-violet-600"],
-                  ["Oracle Experts", 42.1, "bg-teal-500"],
-                ].map(([label, rawValue, color]) => {
-                  const value = Number(rawValue);
-                  return (
-                    <div key={String(label)}>
-                      <div className="mb-2 flex items-center justify-between gap-4 text-sm">
-                        <span className="font-medium">{label}</span>
-                        <span className="font-mono font-semibold tabular-nums">
-                          {value.toFixed(2)}
-                        </span>
-                      </div>
-                      <div className="h-3 overflow-hidden rounded-full bg-muted">
-                        <div
-                          className={"h-full rounded-full " + color}
-                          style={{ width: (value / 45) * 100 + "%" }}
-                          role="img"
-                          aria-label={
-                            String(label) + ": " + value.toFixed(2) + " BLEU"
-                          }
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
+            <div className="mt-6 grid items-center gap-4 rounded-xl bg-muted/35 p-5 text-center sm:grid-cols-[1fr_auto_1fr]">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  Routing accuracy
+                </p>
+                <p className="mt-1 text-2xl font-semibold">−22.6 points</p>
               </div>
-              <p className="mt-4 text-xs leading-5 text-muted-foreground">
-                These scores come from the{" "}
-                <strong>authentic-source evaluation</strong>, using naturally
-                occurring petroleum-domain sentences with the same Norwegian
-                references for all systems: 180 sentences in total, 60 per
-                language. The Norwegian references were machine-assisted and
-                manually reviewed.
-              </p>
+              <span className="text-2xl text-muted-foreground" aria-hidden="true">
+                →
+              </span>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  BLEU
+                </p>
+                <p className="mt-1 text-2xl font-semibold">only −0.74</p>
+              </div>
             </div>
-            <p className="text-base leading-8 text-muted-foreground">
-              On the synthetic-source benchmark, Multitask LoRA leads the MoE
-              in BLEU (<strong className="font-semibold text-foreground">61.0 vs 58.4</strong>).
-              On authentic petroleum-domain source text, the ranking reverses:
-              the MoE reaches{" "}
-              <strong className="font-semibold text-foreground">
-                41.89 BLEU
-              </strong>
-              , outperforming Multitask LoRA by{" "}
-              <strong className="font-semibold text-foreground">
-                +2.59 BLEU
-              </strong>{" "}
-              and{" "}
-              <strong className="font-semibold text-foreground">
-                +2.00 chrF
-              </strong>{" "}
-              (<code className="text-sm text-foreground">p = .0002</code>),
-              while approaching the Oracle Experts result of{" "}
-              <strong className="font-semibold text-foreground">
-                42.10 BLEU
-              </strong>
-              .{" "}
-              <strong className="font-semibold text-foreground">
-                Learned routing therefore provides a clearer benefit under
-                authentic source distribution than on synthetic-source tests.
-              </strong>
+            <p className="mt-4 text-sm leading-6 text-muted-foreground sm:text-base">
+              Removing language-related information changes many expert
+              selections, but has only a small effect on translation quality.
+              This matches RQ2: the experts overlap, so different experts can
+              often produce similar translations.
+            </p>
+            <p className="mt-5 rounded-xl bg-blue-50 px-5 py-4 font-semibold text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
+              The router uses language-related information and a small number
+              of important units, but large routing changes produce much
+              smaller translation changes.
+            </p>
+          </div>
+          <div className="border-b p-5 sm:p-7">
+            <p className="mb-5 text-sm font-semibold uppercase tracking-[0.16em] text-blue-600 dark:text-blue-400">
+              03 · When does expert selection help?
+            </p>
+            <div className="grid gap-5 lg:grid-cols-2">
+              {[
+                {
+                  title: "Synthetic-source test",
+                  rows: [
+                    ["Multitask LoRA", "61.0", true],
+                    ["Independent Experts", "59.1", false],
+                    ["MoE", "58.4", false],
+                  ],
+                },
+                {
+                  title: "Authentic-source test",
+                  rows: [
+                    ["Oracle Experts", "42.10", true],
+                    ["MoE", "41.89", false],
+                    ["Multitask LoRA", "39.30", false],
+                  ],
+                },
+              ].map(({ title, rows }) => (
+                <div key={title} className="overflow-hidden rounded-xl border">
+                  <p className="border-b bg-muted/30 px-5 py-3 font-semibold">
+                    {title}
+                  </p>
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="text-muted-foreground">
+                        <th className="px-5 py-3 text-left font-medium">System</th>
+                        <th className="px-5 py-3 text-right font-medium">BLEU</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y">
+                      {rows.map(([system, score, best]) => (
+                        <tr key={String(system)}>
+                          <td className="px-5 py-3 font-medium">{system}</td>
+                          <td
+                            className={
+                              "px-5 py-3 text-right font-mono tabular-nums " +
+                              (best
+                                ? "font-semibold text-blue-600 dark:text-blue-400"
+                                : "")
+                            }
+                          >
+                            {score}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 text-xs leading-5 text-muted-foreground">
+              Independent/Oracle Experts use the expert matching the known
+              source language. BLEU scores should be compared within each test
+              setting, not directly across the two datasets.
+            </p>
+            <p className="mt-4 text-sm leading-6 text-muted-foreground sm:text-base">
+              On the synthetic-source test, Multitask LoRA performs best. On
+              authentic petroleum text, Oracle Experts perform best, while MoE
+              comes close and outperforms Multitask LoRA by{" "}
+              <strong>2.59 BLEU</strong> and <strong>2.00 chrF</strong> (
+              <code className="text-sm text-foreground">p = .0002</code>).
+            </p>
+            <p className="mt-3 text-xs leading-5 text-muted-foreground">
+              The authentic-source test contains{" "}
+              <strong>180 naturally occurring petroleum sentences</strong>,
+              with 60 sentences for each language. The Norwegian references
+              were machine-assisted and manually reviewed.
+            </p>
+            <p className="mt-5 rounded-xl bg-blue-50 px-5 py-4 font-semibold text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
+              Expert selection is more useful on authentic source text.
+            </p>
+          </div>
+
+          <div className="bg-slate-950 px-5 py-6 text-white sm:px-7">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-300">
+              RQ3 · Answer
+            </p>
+            <p className="mt-2 text-base font-medium leading-7 sm:text-lg">
+              Better routing alone produces only small translation gains. The
+              router uses language-related information, but the experts
+              overlap, so changing the selected expert often has a limited
+              effect. Expert selection becomes more useful on authentic source
+              text.
             </p>
           </div>
         </div>
