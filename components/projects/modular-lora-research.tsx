@@ -680,74 +680,67 @@ export default function ModularLoraResearch() {
             <p className="mb-5 text-sm font-semibold uppercase tracking-[0.16em] text-blue-600 dark:text-blue-400">
               03 · When does expert selection help?
             </p>
-            <div className="grid gap-5 lg:grid-cols-2">
-              {[
-                {
-                  title: "Synthetic-source test",
-                  rows: [
-                    ["Multitask LoRA", "61.0", true],
-                    ["Independent Experts", "59.1", false],
-                    ["MoE", "58.4", false],
-                  ],
-                },
-                {
-                  title: "Authentic-source test",
-                  rows: [
-                    ["Oracle Experts", "42.10", true],
-                    ["MoE", "41.89", false],
-                    ["Multitask LoRA", "39.30", false],
-                  ],
-                },
-              ].map(({ title, rows }) => (
-                <div key={title} className="overflow-hidden rounded-xl border">
-                  <p className="border-b bg-muted/30 px-5 py-3 font-semibold">
-                    {title}
-                  </p>
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="text-muted-foreground">
-                        <th className="px-5 py-3 text-left font-medium">System</th>
-                        <th className="px-5 py-3 text-right font-medium">BLEU</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y">
-                      {rows.map(([system, score, best]) => (
-                        <tr key={String(system)}>
-                          <td className="px-5 py-3 font-medium">{system}</td>
-                          <td
-                            className={
-                              "px-5 py-3 text-right font-mono tabular-nums " +
-                              (best
-                                ? "font-semibold text-blue-600 dark:text-blue-400"
-                                : "")
-                            }
-                          >
-                            {score}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              ))}
+            <div className="overflow-x-auto rounded-xl border">
+              <table className="w-full min-w-[620px] text-sm">
+                <thead className="bg-blue-700 text-white">
+                  <tr>
+                    <th className="px-5 py-4 text-left font-semibold">System</th>
+                    <th className="px-5 py-4 text-right font-semibold">
+                      Synthetic-source BLEU
+                    </th>
+                    <th className="px-5 py-4 text-right font-semibold">
+                      Authentic-source BLEU
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y">
+                  <tr>
+                    <td className="px-5 py-4 font-medium">Multitask LoRA</td>
+                    <td className="px-5 py-4 text-right font-mono font-semibold tabular-nums text-blue-600 dark:text-blue-400">
+                      61.0
+                    </td>
+                    <td className="px-5 py-4 text-right font-mono tabular-nums">
+                      39.30
+                    </td>
+                  </tr>
+                  <tr className="bg-muted/35">
+                    <td className="px-5 py-4 font-medium">
+                      Independent Experts
+                    </td>
+                    <td className="px-5 py-4 text-right font-mono tabular-nums">
+                      59.1
+                    </td>
+                    <td className="px-5 py-4 text-right font-mono font-semibold tabular-nums text-blue-600 dark:text-blue-400">
+                      42.10
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="px-5 py-4 font-medium">MoE</td>
+                    <td className="px-5 py-4 text-right font-mono tabular-nums">
+                      58.4
+                    </td>
+                    <td className="px-5 py-4 text-right font-mono tabular-nums">
+                      41.89
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
             <p className="mt-4 text-xs leading-5 text-muted-foreground">
-              Independent/Oracle Experts use the expert matching the known
-              source language. BLEU scores should be compared within each test
-              setting, not directly across the two datasets.
+              Independent Experts use the expert matching the known source
+              language, while MoE selects an expert automatically. Compare
+              systems within each test setting; BLEU scores are not directly
+              comparable across the two datasets.
             </p>
             <p className="mt-4 text-sm leading-6 text-muted-foreground sm:text-base">
               On the synthetic-source test, Multitask LoRA performs best. On
-              authentic petroleum text, Oracle Experts perform best, while MoE
-              comes close and outperforms Multitask LoRA by{" "}
-              <strong>2.59 BLEU</strong> and <strong>2.00 chrF</strong> (
-              <code className="text-sm text-foreground">p = .0002</code>).
+              authentic petroleum text, Independent Experts perform best, while
+              MoE comes close and performs better than Multitask LoRA.
             </p>
             <p className="mt-3 text-xs leading-5 text-muted-foreground">
-              The authentic-source test contains{" "}
-              <strong>180 naturally occurring petroleum sentences</strong>,
-              with 60 sentences for each language. The Norwegian references
-              were machine-assisted and manually reviewed.
+              The authentic-source test uses naturally occurring petroleum
+              sentences with machine-assisted and manually reviewed Norwegian
+              references.
             </p>
             <p className="mt-5 rounded-xl bg-blue-50 px-5 py-4 font-semibold text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
               Expert selection is more useful on authentic source text.
