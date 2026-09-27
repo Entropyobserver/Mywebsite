@@ -413,7 +413,7 @@ export default function GroupShapleyResearch() {
               },
             ].map((step, index) => (
               <li key={step.title} className="flex gap-4">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
+                <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
                   {index + 1}
                 </span>
                 <div className="min-w-0 pt-0.5">
