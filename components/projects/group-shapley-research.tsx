@@ -594,9 +594,8 @@ export default function GroupShapleyResearch() {
               3. Recompute attribution within each subset
             </h3>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              Using the saved predictions from all 16 coalitions, recompute the
-              Nynorsk-like group’s BLEU Shapley value for each reference ×
-              overlap subset. No models are retrained.
+              Using the saved predictions, we recompute the Nynorsk-like group’s
+              BLEU Shapley value for each subset. No retraining is needed.
             </p>
           </div>
         </div>
