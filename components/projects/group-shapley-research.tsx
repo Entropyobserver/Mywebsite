@@ -435,15 +435,20 @@ export default function GroupShapleyResearch() {
 
       <section id="rq1">
         <SectionHeader
-          title={"RQ1. " + researchQuestions[0]}
+          title="RQ1 · Exact Shapley Attribution"
           description={
             <>
-              Exact Shapley values from all 16 NLLB coalitions, averaged over
-              three training seeds.{" "}
-              <strong className="font-semibold text-foreground">
-                Blue indicates positive contributions; red indicates negative
-                contributions.
-              </strong>
+              <span className="block font-semibold text-foreground">
+                How does each training-data group contribute to model behavior?
+              </span>
+              <span className="mt-1 block italic">
+                Exact Shapley values from the NLLB-600M results across all 16
+                coalitions, averaged over three seeds.
+              </span>
+              <span className="block italic">
+                Blue = positive · Red = negative · Color intensity is normalized
+                within each metric.
+              </span>
             </>
           }
         />
@@ -506,16 +511,54 @@ export default function GroupShapleyResearch() {
             <span>Color intensity is normalized within each metric.</span>
           </div>
         </div>
-        <EvidenceConclusion>
-          High-Bokmål data is the main contributor to translation quality,
-          terminology accuracy, and Bokmål consistency. Nynorsk-like data has a
-          smaller positive effect on overall translation quality, but hurts
-          terminology accuracy and strongly increases Nynorsk-like outputs.{" "}
-          <strong>
-            The key point: a training-data group can improve one aspect of model
-            behavior while harming another.
-          </strong>
-        </EvidenceConclusion>
+        <div className="mx-auto mt-5 max-w-5xl rounded-xl border bg-muted/20 p-4 sm:p-5">
+          <h3 className="font-heading text-lg">Written-standard behavior</h3>
+          <div className="mt-3 grid gap-3 text-sm sm:grid-cols-2">
+            <p>
+              <strong>High-Bokmål rate</strong>
+              <span className="text-muted-foreground">
+                {" "}
+                = proportion of outputs classified as High-Bokmål
+              </span>
+            </p>
+            <p>
+              <strong>Nynorsk-like rate</strong>
+              <span className="text-muted-foreground">
+                {" "}
+                = proportion of outputs classified as Nynorsk-like
+              </span>
+            </p>
+          </div>
+          <p className="mt-3 text-xs text-muted-foreground">
+            Rate contributions are proportions: +0.381 corresponds to +38.1
+            percentage points.
+          </p>
+        </div>
+        <div className="mx-auto max-w-5xl">
+          <EvidenceConclusion>
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-700 dark:text-blue-300">
+              Key Finding
+            </p>
+            <div className="mt-3 grid gap-4 sm:grid-cols-2">
+              <div>
+                <p className="font-bold">High-Bokmål → broad gains</p>
+                <p className="mt-1 text-sm font-normal">
+                  Translation quality · terminology · High-Bokmål output
+                </p>
+              </div>
+              <div>
+                <p className="font-bold">Nynorsk-like → mixed effects</p>
+                <p className="mt-1 text-sm font-normal">
+                  ↑ Translation quality · ↓ terminology · ↑ Nynorsk-like output
+                </p>
+              </div>
+            </div>
+            <p className="mt-4 border-t border-blue-200 pt-4 font-bold dark:border-blue-900">
+              The same training data can improve one aspect of model behavior
+              while harming another.
+            </p>
+          </EvidenceConclusion>
+        </div>
       </section>
 
       <section>
