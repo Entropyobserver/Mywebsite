@@ -110,45 +110,33 @@ export default function IndexPage() {
             </p>
           </div>
 
-          <div className="flex flex-col mt-10 items-center justify-center sm:flex-row sm:space-x-4 gap-3">
-            <AnimatedText delay={0.6}>
-              <Link
-                href={"https://github.com/Entropyobserver"}
-                target="_blank"
-                className={cn(buttonVariants({ size: "lg" }))}
-                aria-label="View Xiaojing Yang's GitHub profile"
-              >
-                <Icons.gitHub className="w-4 h-4 mr-2" /> GitHub
-              </Link>
-            </AnimatedText>
-            <AnimatedText delay={0.8}>
-              <Link
-                href={"/contact"}
-                rel="noreferrer"
-                className={cn(
-                  buttonVariants({
-                    variant: "outline",
-                    size: "lg",
-                  })
-                )}
-                aria-label="Contact Xiaojing Yang"
-              >
-                <Icons.contact className="w-4 h-4 mr-2" /> Contact
-              </Link>
-            </AnimatedText>
-          </div>
           <AnimatedText
-            delay={1}
-            className="flex flex-wrap items-center justify-center gap-1 sm:gap-2"
+            delay={0.6}
+            className="mt-8 flex flex-wrap items-center justify-center gap-2"
           >
+            <Link
+              href={siteConfig.links.github}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+              aria-label="View Xiaojing Yang's GitHub profile"
+            >
+              <Icons.gitHub className="mr-1.5 h-4 w-4" />
+              GitHub
+            </Link>
+            <Link
+              href="mailto:sicper2011@gmail.com"
+              className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+              aria-label="Email Xiaojing Yang"
+            >
+              <Icons.gmail className="mr-1.5 h-4 w-4" />
+              Email
+            </Link>
             <Link
               href={siteConfig.links.googleScholar}
               target="_blank"
               rel="noreferrer"
-              className={cn(
-                buttonVariants({ variant: "ghost", size: "sm" }),
-                "px-2.5 text-muted-foreground hover:text-foreground"
-              )}
+              className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
               aria-label="View Xiaojing Yang's Google Scholar profile"
             >
               <Icons.googleScholar className="mr-1.5 h-4 w-4" />
@@ -158,10 +146,7 @@ export default function IndexPage() {
               href={siteConfig.links.orcid}
               target="_blank"
               rel="noreferrer"
-              className={cn(
-                buttonVariants({ variant: "ghost", size: "sm" }),
-                "px-2.5 text-muted-foreground hover:text-foreground"
-              )}
+              className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
               aria-label="View Xiaojing Yang's ORCID profile"
             >
               <Icons.orcid className="mr-1.5 h-4 w-4" />
@@ -171,10 +156,7 @@ export default function IndexPage() {
               href={siteConfig.links.aclAnthology}
               target="_blank"
               rel="noreferrer"
-              className={cn(
-                buttonVariants({ variant: "ghost", size: "sm" }),
-                "px-2.5 text-muted-foreground hover:text-foreground"
-              )}
+              className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
               aria-label="View Xiaojing Yang's ACL Anthology author page"
             >
               <Icons.aclAnthology className="mr-1.5 h-4 w-4" />
