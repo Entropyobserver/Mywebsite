@@ -654,8 +654,8 @@ export default function GroupShapleyResearch() {
               Nynorsk-like references → positive at every overlap level
             </p>
             <p className="rounded-xl bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
-              Within Nynorsk-like references, higher source overlap is
-              associated with substantially larger gains.
+              For Nynorsk-like references, the higher the source overlap, the
+              larger the gain.
             </p>
           </div>
         </div>
