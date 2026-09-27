@@ -756,15 +756,18 @@ export default function GroupShapleyResearch() {
           ))}
         </div>
 
-        <p className="mt-4 text-center text-sm leading-6 text-muted-foreground">
-          Random groups also contribute to translation quality, but much less
-          than the true High-Bokmål group.
-        </p>
         <EvidenceConclusion>
-          <strong>
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-700 dark:text-blue-300">
+            Key Finding
+          </p>
+          <p className="mt-2 font-normal">
+            Random groups also contribute to translation quality, but much less
+            than the true High-Bokmål group.
+          </p>
+          <p className="mt-2 font-bold">
             Group size matters, but group size alone does not explain the
             observed contribution.
-          </strong>
+          </p>
         </EvidenceConclusion>
       </section>
 
