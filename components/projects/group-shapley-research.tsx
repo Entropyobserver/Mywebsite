@@ -559,7 +559,7 @@ export default function GroupShapleyResearch() {
               1. Group the test references
             </h3>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              Use the SLIDE classifier to retain two reference groups:
+              Use the same SLIDE classifier to identify:
             </p>
             <ul className="mt-2 flex flex-wrap gap-2 text-sm font-semibold">
               <li className="rounded-full bg-muted px-3 py-1">High-Bokmål</li>
@@ -573,15 +573,15 @@ export default function GroupShapleyResearch() {
               For each English test source, find the most similar English
               training source.
             </p>
-            <p className="mt-3 text-center font-serif text-sm">
-              overlap = max(token Jaccard, 5-gram Jaccard, 5-gram containment)
+            <p className="mt-3 text-center text-sm font-semibold">
+              Overlap = maximum word- and 5-gram similarity score
             </p>
             <div className="mt-3 flex flex-wrap justify-center gap-2 text-xs">
               <span className="rounded-full bg-muted px-3 py-1">
                 <strong>Low:</strong> &lt;0.30
               </span>
               <span className="rounded-full bg-muted px-3 py-1">
-                <strong>Mid:</strong> 0.30≤s&lt;0.70
+                <strong>Mid:</strong> 0.30 ≤ score &lt; 0.70
               </span>
               <span className="rounded-full bg-muted px-3 py-1">
                 <strong>High:</strong> ≥0.70
@@ -591,11 +591,20 @@ export default function GroupShapleyResearch() {
 
           <div className="rounded-xl border bg-background p-4">
             <h3 className="font-heading text-lg">
-              3. Recompute attribution within each subset
+              3. Recompute attribution for each subset
             </h3>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              Using the saved predictions, we recompute the Nynorsk-like group’s
-              BLEU Shapley value for each subset. No retraining is needed.
+            <p className="mt-2 text-sm font-semibold leading-6">
+              6 subsets = Reference standard × Overlap level
+            </p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              For each subset:
+            </p>
+            <ul className="mt-1 list-disc space-y-1 pl-5 text-sm leading-6 text-muted-foreground">
+              <li>Calculate BLEU for all 16 coalitions</li>
+              <li>Recompute the Nynorsk-like Shapley value</li>
+            </ul>
+            <p className="mt-3 text-sm font-semibold">
+              Saved predictions · No retraining
             </p>
           </div>
         </div>
@@ -654,8 +663,7 @@ export default function GroupShapleyResearch() {
               Nynorsk-like references → positive at every overlap level
             </p>
             <p className="rounded-xl bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
-              For Nynorsk-like references, the higher the source overlap, the
-              larger the gain.
+              Higher overlap → larger gains for Nynorsk-like references
             </p>
           </div>
         </div>
