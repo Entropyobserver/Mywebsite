@@ -1,9 +1,9 @@
 import Image from "next/image";
 
 const researchQuestions = [
-  "How do different training-data groups contribute to translation quality, terminology performance, and written-standard behavior?",
-  "To what extent can group size alone explain these contributions?",
-  "How do these attribution patterns compare across encoder–decoder and decoder-only architectures?",
+  "How do training-data groups contribute to translation quality, terminology performance, and written-standard behavior?",
+  "Can group size alone explain these contributions?",
+  "How consistent are these attribution patterns across model architectures?",
 ];
 
 const shapleyRows = [
