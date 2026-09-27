@@ -25,14 +25,54 @@ const subsetRows = [
 ];
 
 const architectureRows = [
-  ["High-Bokmål → BLEU", "+19.83", "+15.31"],
-  ["High-Bokmål → TermF1", "+0.273", "+0.148"],
-  ["High-Bokmål → Bokmål output", "+38.1 pp", "+39.1 pp"],
-  ["Nynorsk-like → BLEU", "+3.21", "+1.56"],
-  ["Nynorsk-like → TermF1", "−0.028", "−0.092"],
-  ["Nynorsk-like → Bokmål output", "−45.9 pp", "−45.9 pp"],
-  ["Nynorsk-like → Nynorsk-like output", "+46.9 pp", "+47.8 pp"],
-  ["Uncertain-other → BLEU", "+0.61", "−1.30"],
+  {
+    group: "High-Bokmål",
+    values: [
+      ["+19.83", "+15.31"],
+      ["+13.56", "+10.95"],
+      ["+0.273", "+0.148"],
+      ["+38.1", "+39.1"],
+      ["−33.8", "−35.1"],
+    ],
+  },
+  {
+    group: "Boundary",
+    values: [
+      ["+2.04", "+0.36"],
+      ["+1.08", "−0.27"],
+      ["+0.038", "−0.018"],
+      ["−1.6", "−5.3"],
+      ["−0.8", "+2.0"],
+    ],
+  },
+  {
+    group: "Nynorsk-like",
+    values: [
+      ["+3.21", "+1.56"],
+      ["+2.60", "+1.20"],
+      ["−0.028", "−0.092"],
+      ["−45.9", "−45.9"],
+      ["+46.9", "+47.8"],
+    ],
+  },
+  {
+    group: "Uncertain-other",
+    values: [
+      ["+0.61", "−1.30"],
+      ["+0.56", "−1.45"],
+      ["+0.028", "−0.005"],
+      ["+1.2", "−0.3"],
+      ["−0.7", "−0.4"],
+    ],
+  },
+] as const;
+
+const architectureMetrics = [
+  "BLEU",
+  "chrF",
+  "TermF1",
+  "High-Bokmål output (pp)",
+  "Nynorsk-like output (pp)",
 ] as const;
 
 function SectionHeader({
@@ -776,81 +816,140 @@ export default function GroupShapleyResearch() {
           title={"RQ3. " + researchQuestions[2]}
           description={
             <>
-              We compare the group-level Shapley effects in{" "}
+              We compare the full group-level Shapley results from{" "}
               <strong className="font-semibold text-foreground">
                 NLLB-600M (encoder–decoder)
               </strong>{" "}
-              and{" "}
+              with{" "}
               <strong className="font-semibold text-foreground">
                 NorMistral-7B-warm (decoder-only)
-              </strong>
-              . The table shows representative results for{" "}
-              <strong className="font-semibold text-foreground">
-                translation quality, terminology, and written-standard behavior
               </strong>
               .
             </>
           }
         />
-        <div className="overflow-hidden rounded-2xl border bg-background">
+        <div className="overflow-hidden rounded-2xl border bg-background shadow-sm">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[640px] text-left text-sm">
-              <thead className="bg-blue-700 text-white">
-                <tr>
-                  <th className="px-5 py-4 font-semibold">
-                    Attribution effect
-                  </th>
-                  <th className="px-5 py-4 text-right font-semibold">NLLB</th>
-                  <th className="px-5 py-4 text-right font-semibold">
-                    NorMistral
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y">
-                {architectureRows.map(([effect, nllb, mistral], index) => (
-                  <tr key={effect} className={index % 2 ? "bg-muted/35" : ""}>
-                    <td className="px-5 py-4 font-medium">{effect}</td>
-                    {[nllb, mistral].map((value, valueIndex) => (
-                      <td
-                        key={valueIndex}
-                        className={`px-5 py-4 text-right font-mono font-semibold tabular-nums ${value.startsWith("+") ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}
+            <div className="grid min-w-[980px] grid-cols-[180px_repeat(5,minmax(145px,1fr))] text-sm">
+              <div className="sticky left-0 z-20 flex items-center bg-blue-700 px-5 py-4 font-semibold text-white">
+                Training group
+              </div>
+              {architectureMetrics.map((metric) => (
+                <div
+                  key={metric}
+                  className="flex min-h-16 items-center border-l border-blue-600 bg-blue-700 px-4 py-3 font-semibold leading-5 text-white"
+                >
+                  {metric}
+                </div>
+              ))}
+
+              {architectureRows.map((row, rowIndex) => (
+                <div key={row.group} className="contents">
+                  <div
+                    className={`sticky left-0 z-10 flex items-center border-t px-5 py-4 font-semibold ${
+                      row.group === "High-Bokmål"
+                        ? "bg-blue-50 text-blue-950 dark:bg-blue-950/40 dark:text-blue-100"
+                        : rowIndex % 2
+                          ? "bg-muted/50"
+                          : "bg-background"
+                    }`}
+                  >
+                    {row.group}
+                  </div>
+                  {row.values.map((pair, metricIndex) => {
+                    const emphasized =
+                      (row.group === "Nynorsk-like" && metricIndex >= 3) ||
+                      (row.group === "Uncertain-other" && metricIndex === 0);
+                    return (
+                      <div
+                        key={`${row.group}-${architectureMetrics[metricIndex]}`}
+                        className={`border-l border-t px-4 py-3 ${
+                          row.group === "High-Bokmål"
+                            ? "bg-blue-50/70 dark:bg-blue-950/25"
+                            : rowIndex % 2
+                              ? "bg-muted/30"
+                              : "bg-background"
+                        } ${emphasized ? "shadow-[inset_0_0_0_2px_rgba(37,99,235,0.22)]" : ""}`}
                       >
-                        {value}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                        {pair.map((value, modelIndex) => (
+                          <div
+                            key={modelIndex}
+                            className="flex items-center justify-between gap-3 py-1"
+                          >
+                            <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] font-bold text-muted-foreground">
+                              {modelIndex === 0 ? "N" : "M"}
+                            </span>
+                            <span
+                              className={`font-mono font-semibold tabular-nums ${
+                                value.startsWith("+")
+                                  ? "text-blue-600 dark:text-blue-400"
+                                  : "text-rose-600 dark:text-rose-400"
+                              }`}
+                            >
+                              {value}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
           </div>
-          <p className="border-t px-5 py-4 text-sm italic leading-6 text-muted-foreground">
-            Output-rate values are Shapley contributions to output proportions,
-            reported in percentage points (pp).
-          </p>
+          <div className="flex flex-wrap gap-x-5 gap-y-2 border-t bg-muted/20 px-5 py-3 text-xs text-muted-foreground">
+            <span>
+              <strong className="text-foreground">N</strong> = NLLB-600M
+            </span>
+            <span>
+              <strong className="text-foreground">M</strong> =
+              NorMistral-7B-warm
+            </span>
+            <span>
+              <span className="font-semibold text-blue-600 dark:text-blue-400">
+                Blue
+              </span>{" "}
+              = positive
+            </span>
+            <span>
+              <span className="font-semibold text-rose-600 dark:text-rose-400">
+                Red
+              </span>{" "}
+              = negative
+            </span>
+            <span>Output changes are reported in percentage points (pp).</span>
+          </div>
         </div>
-        <div className="mt-6 max-w-3xl space-y-4 leading-7 text-muted-foreground">
-          <p>
-            The main effects are similar in both architectures.{" "}
-            <strong className="font-semibold text-foreground">
-              High-Bokmål data makes the largest positive contribution to BLEU
-              and also increases Bokmål output. Nynorsk-like data shows the
-              opposite written-standard effect: it reduces Bokmål output and
-              increases Nynorsk-like output in both models.
-            </strong>
-          </p>
-          <p>
-            Some smaller effects differ between the models. For example,{" "}
-            <strong className="font-semibold text-foreground">
-              Uncertain-other contributes +0.61 BLEU in NLLB but −1.30 BLEU in
-              NorMistral.
-            </strong>
-          </p>
+
+        <div className="mt-6 grid gap-3 md:grid-cols-3">
+          {[
+            [
+              "High-Bokmål",
+              "Strong positive quality and Bokmål-output effects in both models",
+            ],
+            [
+              "Nynorsk-like",
+              "The same output shift in both models: less Bokmål, more Nynorsk-like",
+            ],
+            [
+              "Smaller groups",
+              "Boundary and uncertain-other effects depend more on the architecture",
+            ],
+          ].map(([label, finding]) => (
+            <div key={label} className="rounded-2xl border bg-muted/20 p-5">
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-600 dark:text-blue-400">
+                {label}
+              </p>
+              <p className="mt-2 font-semibold leading-6">{finding}</p>
+            </div>
+          ))}
         </div>
         <EvidenceConclusion>
-          <strong>
-            Overall, both architectures show the same main attribution patterns,
-            but some smaller group effects differ.
-          </strong>
+          <strong>Key Finding</strong>
+          <span className="ml-2">
+            The main attribution patterns are consistent, but smaller effects
+            can depend on the model architecture.
+          </span>
         </EvidenceConclusion>
       </section>
 
