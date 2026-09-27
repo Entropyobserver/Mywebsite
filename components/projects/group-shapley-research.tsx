@@ -260,14 +260,14 @@ export default function GroupShapleyResearch() {
 
       <section id="coalition-space">
         <SectionHeader title="All 16 Training-Data Combinations" />
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
-          <div>
+        <div className="overflow-hidden rounded-2xl border bg-muted/20 lg:grid lg:grid-cols-2">
+          <div className="flex flex-col justify-center p-5 sm:p-6 lg:border-r">
             <a
               href="/projects/group-shapley-attribution/coalition-space.svg"
               target="_blank"
               rel="noreferrer"
               aria-label="Open the full 16-coalition diagram"
-              className="block overflow-hidden rounded-2xl border bg-background"
+              className="mx-auto block w-full max-w-[92%] overflow-hidden rounded-xl border bg-background"
             >
               <Image
                 src="/projects/group-shapley-attribution/coalition-space.svg"
@@ -277,13 +277,13 @@ export default function GroupShapleyResearch() {
                 className="h-auto w-full"
               />
             </a>
-            <p className="mt-2 text-center text-xs leading-5 text-muted-foreground">
+            <p className="mt-3 text-center text-xs leading-5 text-muted-foreground">
               The empty coalition uses the base model; the other 15 are
               fine-tuned separately.
             </p>
           </div>
 
-          <div className="rounded-2xl border bg-muted/20 p-5 sm:p-6">
+          <div className="flex flex-col justify-center border-t p-5 sm:p-6 lg:border-t-0">
             <p className="leading-7 text-muted-foreground">
               A{" "}
               <strong className="font-semibold text-foreground">
@@ -292,39 +292,52 @@ export default function GroupShapleyResearch() {
               is one possible selection of the four groups. Each group is either
               included or excluded.
             </p>
-            <div className="my-4 rounded-xl border border-blue-200 bg-blue-50 px-5 py-3 text-center dark:border-blue-900 dark:bg-blue-950/30">
-              <p className="font-heading text-3xl text-blue-700 dark:text-blue-300">
+            <div className="my-4 rounded-xl border border-blue-200 bg-blue-50 px-5 py-2.5 text-center dark:border-blue-900 dark:bg-blue-950/30">
+              <p className="font-heading text-2xl text-blue-700 dark:text-blue-300 sm:text-3xl">
                 2<sup className="text-base">4</sup> = 16 coalitions
               </p>
             </div>
 
-            <h3 className="font-heading text-xl">
-              From Coalition Scores to Shapley Values
-            </h3>
-            <div className="mt-3 overflow-x-auto rounded-xl border bg-background px-3 py-4">
+            <h3 className="font-heading text-xl">Exact Shapley Value</h3>
+            <div className="mt-3 rounded-xl border bg-background px-4 py-4">
               <div
-                className="min-w-[520px] text-center font-serif text-[15px] text-foreground sm:text-base"
+                className="text-center font-serif text-foreground"
                 role="math"
                 aria-label="phi sub g of m equals the sum over coalitions S not containing g of the Shapley weight multiplied by the change in utility caused by adding group g"
               >
-                <span>
-                  φ<sub>g</sub>(m) ={" "}
-                </span>
-                <span className="inline-flex flex-col align-middle">
-                  <span className="text-3xl leading-6">∑</span>
-                  <span className="mt-1 font-sans text-[10px]">
-                    S ⊆ G ∖ {"{g}"}
-                  </span>
-                </span>
-                <span className="mx-2 inline-flex flex-col align-middle text-center">
-                  <span className="border-b border-foreground px-1 pb-1">
-                    |S|!(|G| − |S| − 1)!
-                  </span>
-                  <span className="pt-1">|G|!</span>
-                </span>
-                <span>
-                  [v<sub>m</sub>(S ∪ {"{g}"}) − v<sub>m</sub>(S)]
-                </span>
+                <div className="text-lg sm:text-xl">
+                  φ<sub>g</sub>(m) = ∑ w(S,g) Δ<sub>g</sub>v<sub>m</sub>(S)
+                </div>
+                <div className="mt-1 font-sans text-[11px] text-muted-foreground">
+                  S ⊆ G ∖ {"{g}"}
+                </div>
+                <div className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
+                  <div className="rounded-lg bg-muted/40 px-3 py-3">
+                    <div className="mb-2 text-xs text-muted-foreground">
+                      Shapley weight
+                    </div>
+                    <span>
+                      w(S,g) ={" "}
+                      <span className="inline-flex flex-col align-middle text-center">
+                        <span className="border-b border-foreground px-1 pb-0.5">
+                          |S|!(|G| − |S| − 1)!
+                        </span>
+                        <span className="pt-0.5">|G|!</span>
+                      </span>
+                    </span>
+                  </div>
+                  <div className="rounded-lg bg-muted/40 px-3 py-3">
+                    <div className="mb-2 text-xs text-muted-foreground">
+                      Marginal contribution
+                    </div>
+                    <span>
+                      Δ<sub>g</sub>v<sub>m</sub>(S) =
+                    </span>
+                    <span className="mt-1 block whitespace-nowrap">
+                      v<sub>m</sub>(S ∪ {"{g}"}) − v<sub>m</sub>(S)
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
             <p className="mt-4 text-sm leading-6 text-muted-foreground">
