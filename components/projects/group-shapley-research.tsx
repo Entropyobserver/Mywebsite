@@ -68,19 +68,21 @@ function HeatmapCell({
   value,
   maxAbs,
   label,
+  digits,
 }: {
   value: number;
   maxAbs: number;
   label: string;
+  digits?: number;
 }) {
   const positive = value > 0;
-  const digits = Math.abs(value) < 1 ? 3 : 2;
+  const displayDigits = digits ?? (Math.abs(value) < 1 ? 3 : 2);
   const intensity = 0.12 + 0.68 * (Math.abs(value) / maxAbs);
 
   return (
     <div
       role="cell"
-      aria-label={`${label}: ${positive ? "positive" : "negative"} ${Math.abs(value).toFixed(digits)}`}
+      aria-label={`${label}: ${positive ? "positive" : "negative"} ${Math.abs(value).toFixed(displayDigits)}`}
       className="flex min-h-[64px] items-center justify-center rounded-xl px-3 py-3 text-center font-mono text-sm font-semibold tabular-nums text-slate-950 dark:text-white sm:text-base"
       style={{
         backgroundColor: positive
@@ -89,7 +91,7 @@ function HeatmapCell({
       }}
     >
       {positive ? "+" : ""}
-      {value.toFixed(digits)}
+      {value.toFixed(displayDigits)}
     </div>
   );
 }
@@ -435,21 +437,12 @@ export default function GroupShapleyResearch() {
 
       <section id="rq1">
         <SectionHeader
-          title="RQ1 · Exact Shapley Attribution"
+          title={"RQ1. " + researchQuestions[0]}
           description={
-            <>
-              <span className="block font-semibold text-foreground">
-                How does each training-data group contribute to model behavior?
-              </span>
-              <span className="mt-1 block italic">
-                Exact Shapley values from the NLLB-600M results across all 16
-                coalitions, averaged over three seeds.
-              </span>
-              <span className="block italic">
-                Blue = positive · Red = negative · Color intensity is normalized
-                within each metric.
-              </span>
-            </>
+            <span className="italic">
+              Exact Shapley attribution · NLLB-600M · all 16 coalitions ·
+              three-seed average
+            </span>
           }
         />
         <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl border bg-background p-3 sm:p-5">
@@ -464,8 +457,8 @@ export default function GroupShapleyResearch() {
                 "BLEU",
                 "chrF",
                 "TermF1",
-                "High-Bokmål rate",
-                "Nynorsk-like rate",
+                "High-Bokmål output change (pp)",
+                "Nynorsk-like output change (pp)",
               ].map((heading, index) => (
                 <div
                   key={heading}
@@ -487,9 +480,14 @@ export default function GroupShapleyResearch() {
                   {values.map((value, index) => (
                     <HeatmapCell
                       key={`${name}-${index}`}
-                      value={value}
-                      maxAbs={metricMaxAbs[index]}
-                      label={`${name}, ${["BLEU", "chrF", "TermF1", "High-Bokmål rate", "Nynorsk-like rate"][index]}`}
+                      value={index >= 3 ? value * 100 : value}
+                      maxAbs={
+                        index >= 3
+                          ? metricMaxAbs[index] * 100
+                          : metricMaxAbs[index]
+                      }
+                      digits={index >= 3 ? 1 : undefined}
+                      label={`${name}, ${["BLEU", "chrF", "TermF1", "High-Bokmål output change", "Nynorsk-like output change"][index]}`}
                     />
                   ))}
                 </div>
@@ -508,31 +506,10 @@ export default function GroupShapleyResearch() {
               <span className="h-4 w-7 rounded bg-red-400" aria-hidden="true" />
               Negative contribution
             </span>
-            <span>Color intensity is normalized within each metric.</span>
+            <span>
+              pp = percentage points · Intensity normalized within each metric
+            </span>
           </div>
-        </div>
-        <div className="mx-auto mt-5 max-w-5xl rounded-xl border bg-muted/20 p-4 sm:p-5">
-          <h3 className="font-heading text-lg">Written-standard behavior</h3>
-          <div className="mt-3 grid gap-3 text-sm sm:grid-cols-2">
-            <p>
-              <strong>High-Bokmål rate</strong>
-              <span className="text-muted-foreground">
-                {" "}
-                = proportion of outputs classified as High-Bokmål
-              </span>
-            </p>
-            <p>
-              <strong>Nynorsk-like rate</strong>
-              <span className="text-muted-foreground">
-                {" "}
-                = proportion of outputs classified as Nynorsk-like
-              </span>
-            </p>
-          </div>
-          <p className="mt-3 text-xs text-muted-foreground">
-            Rate contributions are proportions: +0.381 corresponds to +38.1
-            percentage points.
-          </p>
         </div>
         <div className="mx-auto max-w-5xl">
           <EvidenceConclusion>
