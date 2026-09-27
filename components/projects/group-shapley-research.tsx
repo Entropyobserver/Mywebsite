@@ -671,77 +671,99 @@ export default function GroupShapleyResearch() {
 
       <section id="rq2">
         <SectionHeader title={"RQ2. " + researchQuestions[1]} />
-        <div className="space-y-6 rounded-2xl border bg-muted/20 p-5 sm:p-7">
-          <div>
-            <a
-              href="/projects/group-shapley-attribution/random-baseline-barchart.png"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Open the size-matched baseline chart at full size"
-            >
-              <Image
-                src="/projects/group-shapley-attribution/random-baseline-barchart.png"
-                alt="True High-Bokmål group compared with random same-size groups across quality, terminology, and written-standard Shapley values"
-                width={1600}
-                height={900}
-                className="mx-auto h-auto w-full rounded-xl border bg-white"
-              />
-            </a>
-            <p className="mt-2 text-center text-xs text-muted-foreground">
-              True High-Bokmål group versus random same-size groups.
-            </p>
+        <div className="overflow-hidden rounded-2xl border bg-border">
+          <div className="grid gap-px sm:grid-cols-2">
+            <div className="bg-background p-5 sm:p-6">
+              <p className="text-xs font-bold uppercase tracking-[0.15em] text-blue-600 dark:text-blue-400">
+                Why test this?
+              </p>
+              <p className="mt-2 leading-7 text-muted-foreground">
+                The High-Bokmål group has the strongest contribution, but it is
+                also the largest group.{" "}
+                <strong className="font-semibold text-foreground">
+                  Could this simply be a size effect?
+                </strong>
+              </p>
+            </div>
+            <div className="bg-background p-5 sm:p-6">
+              <p className="text-xs font-bold uppercase tracking-[0.15em] text-blue-600 dark:text-blue-400">
+                Size-matched test
+              </p>
+              <p className="mt-2 leading-7 text-muted-foreground">
+                Compare the true High-Bokmål group with three random groups of
+                the same size.
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2 text-xs font-semibold">
+                <span className="rounded-full bg-muted px-3 py-1">
+                  3 random groups
+                </span>
+                <span className="rounded-full bg-muted px-3 py-1">
+                  Same size
+                </span>
+                <span className="rounded-full bg-muted px-3 py-1">
+                  Different examples
+                </span>
+              </div>
+            </div>
           </div>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {[
-              ["BLEU", "19.83", "11.85"],
-              ["chrF", "13.56", "7.88"],
-              ["TermF1", ".273", ".088"],
-            ].map(([metric, actual, random]) => (
-              <div key={metric} className="rounded-xl border bg-background p-4">
-                <p className="text-sm font-semibold">{metric}</p>
-                <div className="mt-2 grid grid-cols-2 gap-3 text-sm">
-                  <div>
-                    <span className="text-muted-foreground">True group</span>
-                    <p className="font-mono text-xl font-semibold text-blue-600 dark:text-blue-400">
-                      {actual}
-                    </p>
+        </div>
+
+        <div className="mt-5 grid gap-4 sm:grid-cols-3">
+          {[
+            ["BLEU", 19.83, 11.85, 2],
+            ["chrF", 13.56, 7.88, 2],
+            ["TermF1", 0.273, 0.088, 3],
+          ].map(([metric, actual, random, digits]) => (
+            <div key={metric} className="rounded-xl border bg-background p-4">
+              <p className="font-heading text-lg">{metric}</p>
+              <div className="mt-4 space-y-3">
+                <div>
+                  <div className="flex items-end justify-between gap-3">
+                    <span className="text-xs font-semibold text-blue-700 dark:text-blue-300">
+                      True High-Bokmål
+                    </span>
+                    <span className="font-mono text-xl font-bold text-blue-700 dark:text-blue-300">
+                      {(actual as number).toFixed(digits as number)}
+                    </span>
                   </div>
-                  <div>
-                    <span className="text-muted-foreground">Random</span>
-                    <p className="font-mono text-xl font-semibold">{random}</p>
+                  <div className="mt-1 h-2 rounded-full bg-blue-100 dark:bg-blue-950">
+                    <div className="h-full w-full rounded-full bg-blue-600" />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex items-end justify-between gap-3">
+                    <span className="text-xs text-muted-foreground">
+                      Random same-size mean
+                    </span>
+                    <span className="font-mono font-semibold">
+                      {(random as number).toFixed(digits as number)}
+                    </span>
+                  </div>
+                  <div className="mt-1 h-2 rounded-full bg-muted">
+                    <div
+                      className="h-full rounded-full bg-slate-400"
+                      style={{
+                        width:
+                          String(
+                            ((random as number) / (actual as number)) * 100
+                          ) + "%",
+                      }}
+                    />
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-        <div className="mt-6 max-w-3xl space-y-4 leading-7 text-muted-foreground">
-          <p>
-            If group size alone drives the attribution, random groups with the
-            same size should produce similar Shapley values.
-          </p>
-          <p>
-            We compare the true High-Bokmål group with{" "}
-            <strong className="font-semibold text-foreground">
-              three random groups of the same size
-            </strong>
-            . The random groups contain the same number of training examples,
-            but different examples.
-          </p>
-          <p>
-            The true High-Bokmål group has substantially higher Shapley values
-            than the random groups across{" "}
-            <strong className="font-semibold text-foreground">
-              translation quality and terminology
-            </strong>
-            . Thus, simply having the same amount of training data does not
-            reproduce the contribution of the true group.
-          </p>
-        </div>
+
+        <p className="mt-4 text-center text-sm leading-6 text-muted-foreground">
+          Random groups also contribute to translation quality, but much less
+          than the true High-Bokmål group.
+        </p>
         <EvidenceConclusion>
           <strong>
-            Group size matters, but the identity of the training examples
-            matters more.
+            Group size matters, but group size alone does not explain the
+            observed contribution.
           </strong>
         </EvidenceConclusion>
       </section>
