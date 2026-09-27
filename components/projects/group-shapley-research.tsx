@@ -81,7 +81,7 @@ function HeatmapCell({
     <div
       role="cell"
       aria-label={`${label}: ${positive ? "positive" : "negative"} ${Math.abs(value).toFixed(digits)}`}
-      className="flex min-h-[72px] items-center justify-center rounded-xl px-3 py-4 text-center font-mono text-base font-semibold tabular-nums text-slate-950 dark:text-white"
+      className="flex min-h-[64px] items-center justify-center rounded-xl px-3 py-3 text-center font-mono text-sm font-semibold tabular-nums text-slate-950 dark:text-white sm:text-base"
       style={{
         backgroundColor: positive
           ? `rgba(59, 130, 246, ${intensity})`
@@ -361,14 +361,14 @@ export default function GroupShapleyResearch() {
       </section>
 
       <section>
-        <SectionHeader title="Exact Group-Level Attribution Overview" />
+        <SectionHeader title="Experimental Pipeline" />
         <div className="grid gap-7 rounded-2xl border bg-muted/20 p-5 sm:p-7 lg:grid-cols-[minmax(300px,0.9fr)_minmax(0,1.1fr)] lg:items-center">
           <div>
             <a
               href="/projects/group-shapley-attribution/attribution-overview.png"
               target="_blank"
               rel="noreferrer"
-              aria-label="Open the full attribution protocol overview"
+              aria-label="Open the full experimental pipeline"
               className="block"
             >
               <Image
@@ -380,88 +380,56 @@ export default function GroupShapleyResearch() {
               />
             </a>
             <p className="mt-3 text-center text-xs text-muted-foreground">
-              Complete group-level attribution protocol.
+              Complete group-level attribution pipeline.
             </p>
           </div>
-          <div className="space-y-4 leading-7 text-muted-foreground">
-            <p>
-              We divide{" "}
-              <strong className="font-semibold text-foreground">
-                13,935 English–Norwegian petroleum-domain training pairs
-              </strong>{" "}
-              into four groups using SLIDE scores:{" "}
-              <strong className="font-semibold text-foreground">
-                high-Bokmål, boundary, Nynorsk-like, and uncertain-other
-              </strong>
-              .
-            </p>
-            <p>
-              We manually check{" "}
-              <strong className="font-semibold text-foreground">
-                200 examples
-              </strong>{" "}
-              , with 50 from each group. Two annotators label the written
-              standard without seeing the SLIDE labels. They agree on{" "}
-              <strong className="font-semibold text-foreground">
-                94.5% of the examples (Cohen’s κ = 0.918)
-              </strong>
-              . The check shows that the{" "}
-              <strong className="font-semibold text-foreground">
-                boundary group mainly reflects classifier uncertainty rather
-                than a clear linguistic category
-              </strong>
-              .
-            </p>
-            <p>
-              The four groups give{" "}
-              <strong className="font-semibold text-foreground">
-                16 possible combinations
-              </strong>
-              , including the empty one. We fine-tune every non-empty
-              combination with{" "}
-              <strong className="font-semibold text-foreground">
-                three seeds
-              </strong>
-              , using the original base model for the empty one. We run the
-              experiment with{" "}
-              <strong className="font-semibold text-foreground">
-                NLLB-600M
-              </strong>{" "}
-              and repeat it with{" "}
-              <strong className="font-semibold text-foreground">
-                NorMistral-7B-warm
-              </strong>
-              .
-            </p>
-            <p>
-              We evaluate all combinations on the same{" "}
-              <strong className="font-semibold text-foreground">
-                1,742-example test set
-              </strong>{" "}
-              using{" "}
-              <strong className="font-semibold text-foreground">
-                BLEU, chrF, terminology F1, high-Bokmål output rate (percentage
-                of outputs classified as high-Bokmål), and Nynorsk-like output
-                rate (percentage of outputs classified as Nynorsk-like)
-              </strong>
-              . We then calculate{" "}
-              <strong className="font-semibold text-foreground">
-                exact Shapley values
-              </strong>{" "}
-              to measure each group’s contribution to each metric.
-            </p>
-            <p>
-              We also compare the real groups with{" "}
-              <strong className="font-semibold text-foreground">
-                three random groupings of the same sizes
-              </strong>{" "}
-              and use{" "}
-              <strong className="font-semibold text-foreground">
-                test-subset, bootstrap, training-schedule, and threshold checks
-              </strong>{" "}
-              to assess the results.
-            </p>
-          </div>
+          <ol className="space-y-4">
+            {[
+              {
+                title: "Group the corpus",
+                primary: "13,935 training pairs → 4 operational groups",
+                secondary: "SLIDE-based grouping · 200-item manual audit",
+              },
+              {
+                title: "Enumerate coalitions",
+                primary: "4 groups → 2⁴ = 16 coalitions",
+                secondary: "including the empty coalition",
+              },
+              {
+                title: "Train and evaluate",
+                primary: "15 non-empty coalitions · 3 seeds · 2 architectures",
+                secondary: "NLLB-600M · NorMistral-7B-warm",
+              },
+              {
+                title: "Compute exact Shapley values",
+                primary: "Use all 16 coalition scores",
+                secondary: "→ one contribution value per group and metric",
+              },
+              {
+                title: "Stress-test the results",
+                primary:
+                  "Size-matched random groups · test subsets · bootstrap CIs",
+                secondary: "training-schedule and grouping-threshold checks",
+              },
+            ].map((step, index) => (
+              <li key={step.title} className="flex gap-4">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
+                  {index + 1}
+                </span>
+                <div className="min-w-0 pt-0.5">
+                  <h3 className="font-heading text-lg leading-6 text-foreground">
+                    {step.title}
+                  </h3>
+                  <p className="mt-1 text-sm font-medium leading-6 text-foreground">
+                    {step.primary}
+                  </p>
+                  <p className="text-sm leading-6 text-muted-foreground">
+                    {step.secondary}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
@@ -479,12 +447,12 @@ export default function GroupShapleyResearch() {
             </>
           }
         />
-        <div className="overflow-hidden rounded-2xl border bg-background p-3 sm:p-5">
+        <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl border bg-background p-3 sm:p-5">
           <div className="overflow-x-auto pb-2">
             <div
               role="table"
               aria-label="Exact Shapley contributions by training group and evaluation metric"
-              className="grid min-w-[920px] grid-cols-[190px_repeat(5,minmax(130px,1fr))] gap-2"
+              className="grid min-w-[860px] grid-cols-[170px_repeat(5,minmax(120px,1fr))] gap-2"
             >
               {[
                 "Training group",
@@ -497,7 +465,7 @@ export default function GroupShapleyResearch() {
                 <div
                   key={heading}
                   role="columnheader"
-                  className={`flex min-h-[54px] items-center px-3 py-2 text-sm font-semibold text-muted-foreground ${index === 0 ? "justify-start" : "justify-center text-center"}`}
+                  className={`flex min-h-[48px] items-center px-3 py-2 text-sm font-semibold text-muted-foreground ${index === 0 ? "justify-start" : "justify-center text-center"}`}
                 >
                   {heading}
                 </div>
@@ -507,7 +475,7 @@ export default function GroupShapleyResearch() {
                 <div className="contents" role="row" key={name}>
                   <div
                     role="rowheader"
-                    className="flex min-h-[72px] items-center px-3 py-4 text-sm font-semibold sm:text-base"
+                    className="flex min-h-[64px] items-center px-3 py-3 text-sm font-semibold sm:text-base"
                   >
                     {name}
                   </div>
