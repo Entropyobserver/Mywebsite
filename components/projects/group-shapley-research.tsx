@@ -539,96 +539,127 @@ export default function GroupShapleyResearch() {
       </section>
 
       <section>
-        <SectionHeader title="Why does Nynorsk-like data have positive value?" />
-        <div className="mb-6 max-w-3xl space-y-4 leading-7 text-muted-foreground">
-          <p>
-            The Nynorsk-like group has an overall{" "}
-            <strong className="font-semibold text-foreground">
+        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="font-heading text-3xl leading-tight lg:text-4xl">
+              Why does Nynorsk-like data have positive value?
+            </h2>
+          </div>
+          <p className="shrink-0 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm dark:border-blue-900 dark:bg-blue-950/30">
+            Overall contribution on the full test set:{" "}
+            <strong className="text-blue-700 dark:text-blue-300">
               +3.21 BLEU
-            </strong>{" "}
-            contribution. But where does this gain come from?
-          </p>
-          <p>We break the test set down by two factors:</p>
-          <ul className="list-disc space-y-2 pl-6">
-            <li>
-              <strong className="font-semibold text-foreground">
-                Reference standard:
-              </strong>{" "}
-              whether the Norwegian reference is{" "}
-              <strong className="font-semibold text-foreground">
-                High-Bokmål
-              </strong>{" "}
-              or{" "}
-              <strong className="font-semibold text-foreground">
-                Nynorsk-like
-              </strong>
-            </li>
-            <li>
-              <strong className="font-semibold text-foreground">
-                Source overlap:
-              </strong>{" "}
-              how similar the English test sentence is to the English sentences
-              in the training data
-            </li>
-          </ul>
-          <p>
-            We then examine the Nynorsk-like group’s Shapley contribution within
-            each subset.
+            </strong>
           </p>
         </div>
-        <div className="grid gap-4 rounded-2xl border bg-background p-5 sm:p-6 lg:grid-cols-2">
-          {["High-Bokmål", "Nynorsk-like"].map((reference) => (
-            <div key={reference} className="rounded-xl bg-muted/25 p-4">
-              <p className="mb-4 font-semibold">{reference} references</p>
-              <div className="space-y-4">
-                {subsetRows
-                  .filter((row) => row.reference === reference)
-                  .map((row) => {
-                    const width = Math.max(9, (Math.abs(row.bleu) / 42) * 100);
-                    return (
-                      <div key={`${row.reference}-${row.overlap}`}>
-                        <div className="mb-1.5 flex items-center justify-between gap-4 text-xs">
-                          <span>
-                            {row.overlap} overlap · n={row.n}
-                          </span>
-                          <span
-                            className={`font-mono font-semibold tabular-nums ${row.bleu > 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}
-                          >
-                            {row.bleu > 0 ? "+" : ""}
-                            {row.bleu.toFixed(2)} BLEU
-                          </span>
-                        </div>
-                        <div className="h-3 overflow-hidden rounded-full bg-muted">
-                          <div
-                            className={`h-full rounded-full ${row.bleu > 0 ? "bg-emerald-500" : "bg-rose-500"}`}
-                            style={{ width: `${width}%` }}
-                            role="img"
-                            aria-label={`${row.overlap} overlap: ${row.bleu} BLEU Shapley value`}
-                          />
-                        </div>
-                      </div>
-                    );
-                  })}
-              </div>
+
+        <div className="grid gap-4 lg:grid-cols-3">
+          <div className="rounded-xl border bg-background p-4">
+            <h3 className="font-heading text-lg">
+              1. Group the test references
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">
+              Use the SLIDE classifier to retain two reference groups:
+            </p>
+            <ul className="mt-2 flex flex-wrap gap-2 text-sm font-semibold">
+              <li className="rounded-full bg-muted px-3 py-1">High-Bokmål</li>
+              <li className="rounded-full bg-muted px-3 py-1">Nynorsk-like</li>
+            </ul>
+          </div>
+
+          <div className="rounded-xl border bg-background p-4">
+            <h3 className="font-heading text-lg">2. Measure source overlap</h3>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">
+              For each English test source, find the most similar English
+              training source.
+            </p>
+            <p className="mt-3 text-center font-serif text-sm">
+              overlap = max(token Jaccard, 5-gram Jaccard, 5-gram containment)
+            </p>
+            <div className="mt-3 flex flex-wrap justify-center gap-2 text-xs">
+              <span className="rounded-full bg-muted px-3 py-1">
+                <strong>Low:</strong> &lt;0.30
+              </span>
+              <span className="rounded-full bg-muted px-3 py-1">
+                <strong>Mid:</strong> 0.30≤s&lt;0.70
+              </span>
+              <span className="rounded-full bg-muted px-3 py-1">
+                <strong>High:</strong> ≥0.70
+              </span>
             </div>
-          ))}
+          </div>
+
+          <div className="rounded-xl border bg-background p-4">
+            <h3 className="font-heading text-lg">
+              3. Recompute attribution within each subset
+            </h3>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">
+              Using the saved predictions from all 16 coalitions, recompute the
+              Nynorsk-like group’s BLEU Shapley value for each reference ×
+              overlap subset. No models are retrained.
+            </p>
+          </div>
         </div>
-        <EvidenceConclusion>
-          The pattern is clear:{" "}
-          <strong>
-            Nynorsk-like training data helps Nynorsk-like references but hurts
-            High-Bokmål references.
-          </strong>{" "}
-          Within the Nynorsk-like subsets, the positive contribution also
-          increases with source overlap.
-          <br />
-          <br />
-          <strong>
-            The overall +3.21 BLEU contribution therefore comes from its strong
-            positive effect on Nynorsk-like test examples, while its effect on
-            High-Bokmål examples is negative.
-          </strong>
-        </EvidenceConclusion>
+
+        <div className="mt-5 overflow-x-auto rounded-xl border bg-background">
+          <div className="grid min-w-[680px] grid-cols-[1.2fr_repeat(3,1fr)] text-sm">
+            {[
+              "Reference standard",
+              "Low overlap",
+              "Mid overlap",
+              "High overlap",
+            ].map((heading) => (
+              <div
+                key={heading}
+                className="border-b bg-muted/40 px-4 py-3 font-semibold text-muted-foreground"
+              >
+                {heading}
+              </div>
+            ))}
+            {["High-Bokmål", "Nynorsk-like"].flatMap((reference) => [
+              <div
+                key={`${reference}-label`}
+                className="border-b px-4 py-4 font-semibold last:border-b-0"
+              >
+                {reference}
+              </div>,
+              ...subsetRows
+                .filter((row) => row.reference === reference)
+                .map((row) => (
+                  <div
+                    key={`${reference}-${row.overlap}`}
+                    className="border-b px-4 py-4 last:border-b-0"
+                  >
+                    <span
+                      className={`font-mono font-semibold tabular-nums ${row.bleu > 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}
+                    >
+                      {row.bleu > 0 ? "+" : ""}
+                      {row.bleu.toFixed(2)}
+                    </span>{" "}
+                    <span className="text-xs italic text-muted-foreground">
+                      (n={row.n})
+                    </span>
+                  </div>
+                )),
+            ])}
+          </div>
+        </div>
+
+        <div className="mt-5">
+          <h3 className="font-heading text-lg">Key Finding</h3>
+          <div className="mt-3 grid gap-3 sm:grid-cols-3">
+            <p className="rounded-xl bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
+              High-Bokmål references → negative at every overlap level
+            </p>
+            <p className="rounded-xl bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
+              Nynorsk-like references → positive at every overlap level
+            </p>
+            <p className="rounded-xl bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
+              Within Nynorsk-like references, higher source overlap is
+              associated with substantially larger gains.
+            </p>
+          </div>
+        </div>
       </section>
 
       <section id="rq2">
