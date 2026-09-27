@@ -520,7 +520,7 @@ export default function GroupShapleyResearch() {
               <div>
                 <p className="font-bold">High-Bokmål → broad gains</p>
                 <p className="mt-1 text-sm font-normal">
-                  Translation quality · terminology · High-Bokmål output
+                  ↑ Translation quality · ↑ terminology · ↑ High-Bokmål output
                 </p>
               </div>
               <div>
