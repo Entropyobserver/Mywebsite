@@ -183,26 +183,18 @@ export default function IndexPage() {
           <div className="mt-6 space-y-5 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
             <AnimatedText as="p" delay={0.1}>
               I am an AI and NLP researcher completing an MSc in Language
-              Technology at Uppsala University. I have a background in Business
-              Analytics and four years of experience as a data analyst, which
-              shaped my approach to empirical research, data analysis, and
-              solving real-world problems.
-            </AnimatedText>
-            <AnimatedText as="p" delay={0.15}>
-              My research began with low-resource machine translation and
-              efficient model adaptation using LoRA, leading to my first
-              peer-reviewed publication. I later extended this work in my
-              master&apos;s thesis to multilingual adaptation using modular
-              experts and language-specific adapters.
+              Technology at Uppsala University, with a background in Business
+              Analytics and four years of experience as a data analyst. My
+              research focuses on how training data and system design shape
+              multilingual model behaviour.
             </AnimatedText>
             <AnimatedText as="p" delay={0.2}>
-              My current research focuses on three connected areas: efficient
-              and modular model adaptation, training-data attribution and
-              behavioural evaluation, and information retrieval and evidence
-              grounding. Across these areas, I study how training data and
-              system design affect model behaviour across languages and
-              domains. My broader goal is to develop AI systems that are
-              adaptable, understandable, auditable, and reliable.
+              I work across three connected areas: efficient and modular model
+              adaptation, training-data attribution and behavioural
+              evaluation, and information retrieval and evidence grounding.
+              Across these areas, I study not only whether models work, but why
+              they behave the way they do and how their behaviour can be made
+              more controllable and reliable.
             </AnimatedText>
           </div>
         </div>
