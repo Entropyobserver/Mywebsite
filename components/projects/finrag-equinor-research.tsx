@@ -180,10 +180,10 @@ export default function FinragEquinorResearch() {
                       Unrestricted
                     </td>
                     <td className="px-5 py-4 text-right font-mono sm:px-6">
-                      51.5%
+                      52.4%
                     </td>
                     <td className="px-5 py-4 text-right font-mono sm:px-6">
-                      60.3%
+                      61.2%
                     </td>
                   </tr>
                   <tr className="bg-blue-50/70 dark:bg-blue-950/20">
@@ -191,10 +191,10 @@ export default function FinragEquinorResearch() {
                       Reference-year filtered
                     </td>
                     <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
-                      75.6%
+                      76.5%
                     </td>
                     <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
-                      85.0%
+                      85.8%
                     </td>
                   </tr>
                 </tbody>
@@ -212,7 +212,7 @@ export default function FinragEquinorResearch() {
               </p>
               <p className="border-l-4 border-blue-600 pl-4 font-medium">
                 Reference-year filtering raises exact-object Recall@10 from
-                51.5% to 75.6%, showing that cross-year competition is a major
+                52.4% to 76.5%, showing that cross-year competition is a major
                 source of retrieval error.
               </p>
             </div>
@@ -249,10 +249,10 @@ export default function FinragEquinorResearch() {
                 </thead>
                 <tbody className="divide-y">
                   {[
-                    ["Object BM25-year", "75.6%", "85.0%"],
-                    ["Page BM25-year", "90.5%", "90.5%"],
-                    ["Page-window", "87.6%", "87.6%"],
-                    ["Object-window", "88.3%", "91.7%"],
+                    ["Object BM25-year", "76.5%", "85.8%"],
+                    ["Page BM25-year", "91.2%", "91.2%"],
+                    ["Page-window", "88.5%", "88.5%"],
+                    ["Object-window", "89.2%", "92.4%"],
                   ].map(([unit, chunkRecall, pageRecall], index) => (
                     <tr key={unit} className={index % 2 ? "bg-muted/35" : ""}>
                       <td className="px-5 py-4 font-medium sm:px-6">{unit}</td>
@@ -295,9 +295,9 @@ export default function FinragEquinorResearch() {
             </div>
             <div className="border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p>
-                Whole pages achieve the highest Chunk Recall@10 at 90.5%. Larger
+                Whole pages achieve the highest Chunk Recall@10 at 91.2%. Larger
                 windows do not improve chunk retrieval, although object windows
-                achieve the highest Page Recall@10 at 91.7%.
+                achieve the highest Page Recall@10 at 92.4%.
               </p>
             </div>
           </div>
@@ -354,14 +354,14 @@ export default function FinragEquinorResearch() {
                   </thead>
                   <tbody className="divide-y">
                     {[
-                      { method: "BM25", values: ["75.6%", "9.4%", "9.7%"] },
+                      { method: "BM25", values: ["76.5%", "9.2%", "9.2%"] },
                       {
                         method: "BGE-M3",
-                        values: ["82.1%", "6.8%", "8.2%"],
+                        values: ["83.0%", "6.8%", "7.3%"],
                       },
                       {
                         method: "BM25 + E5",
-                        values: ["83.8%", "7.0%", "5.9%"],
+                        values: ["84.5%", "6.8%", "5.3%"],
                       },
                     ].map(({ method, values }, rowIndex) => (
                       <tr
@@ -440,10 +440,10 @@ export default function FinragEquinorResearch() {
                         Exact evidence ranked first
                       </td>
                       <td className="px-5 py-4 text-right font-mono sm:px-6">
-                        40.2%
+                        41.1%
                       </td>
                       <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
-                        63.6%
+                        64.7%
                       </td>
                     </tr>
                   </tbody>
@@ -544,10 +544,10 @@ export default function FinragEquinorResearch() {
               </thead>
               <tbody className="divide-y">
                 {[
-                  ["Question only (closed-book)", "2.9%"],
-                  ["BM25-year evidence", "58.5%"],
-                  ["Hybrid + reranked evidence", "70.9%"],
-                  ["Annotated reference evidence", "82.0%"],
+                  ["Question only (closed-book)", "3.2%"],
+                  ["BM25-year evidence", "58.9%"],
+                  ["Hybrid + reranked evidence", "71.4%"],
+                  ["Annotated reference evidence", "82.4%"],
                 ].map(([evidence, accuracy], index) => (
                   <tr key={evidence} className={index % 2 ? "bg-muted/35" : ""}>
                     <td className="px-5 py-4 font-medium sm:px-6">
@@ -583,7 +583,7 @@ export default function FinragEquinorResearch() {
         <EvidenceConclusion>
           Hybrid + reranked evidence improves answer accuracy by{" "}
           <strong>12.4 percentage points</strong> over BM25-year, but remains{" "}
-          <strong>11.1 points</strong> below annotated reference evidence.
+          <strong>about 11 points</strong> below annotated reference evidence.
           Better evidence leads to more accurate answers; the remaining gap
           shows that both retrieval and generation can still improve.
         </EvidenceConclusion>
