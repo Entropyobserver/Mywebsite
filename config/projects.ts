@@ -438,7 +438,7 @@ export const Projects: ProjectInterface[] = [
   {
     id: "finrag-equinor",
     companyName:
-      "FinRAG-Equinor: A Reliability-Audited Benchmark for Evidence Localization in Longitudinal Annual Reports",
+      "LongFinRAG: A Benchmark for Finding the Right Evidence in Annual Reports",
     type: "Research",
     category: [
       "Research",
@@ -476,7 +476,7 @@ export const Projects: ProjectInterface[] = [
     ],
     descriptionDetails: {
       paragraphs: [
-        "FinRAG-Equinor is a reliability-audited benchmark for evidence-grounded RAG on long annual reports. It is built from 15 Equinor/Statoil annual reports (2010–2024) and includes 720 QA items with traceable report-, page-, and object-level evidence.",
+        "LongFinRAG is a reliability-audited benchmark for evidence-grounded RAG on long annual reports. It is built from 15 Equinor/Statoil annual reports (2010–2024) and includes 720 QA items with traceable report-, page-, and object-level evidence.",
         "The benchmark evaluates whether RAG systems can identify the right report, locate the relevant page, and find the exact evidence needed to answer each question.",
         "As the first author and experimental lead, I led the design and implementation of the benchmark and retrieval evaluation pipeline, from evidence construction and QA development to systematic evaluation of sparse, dense, hybrid, hierarchical, and reranked retrieval methods.",
       ],
