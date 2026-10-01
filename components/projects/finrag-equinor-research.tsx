@@ -266,6 +266,10 @@ export default function FinragEquinorResearch() {
                 EXPERIMENT 2
               </p>
               <h3 className="font-heading text-2xl">Does more context help?</h3>
+              <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
+                We search only within the correct report and compare objects,
+                pages, page-windows, and object-windows.
+              </p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[520px] text-left text-sm">
@@ -318,18 +322,24 @@ export default function FinragEquinorResearch() {
                 contains eight nearby objects.
               </p>
               <p>
-                <strong className="text-foreground">Chunk Recall@10</strong>{" "}
-                shows whether one of the top 10 results contains the evidence.{" "}
-                <strong className="text-foreground">Page Recall@10</strong>{" "}
-                shows whether one of the results reaches the correct report and
-                page.
+                <strong className="text-foreground">Evidence found</strong>{" "}
+                means that one of the top 10 results contains the needed
+                evidence.{" "}
+                <strong className="text-foreground">Correct page found</strong>{" "}
+                means that one of the top 10 results reaches the correct page.
               </p>
             </div>
             <div className="border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p>
-                Whole pages work best for finding evidence. Object windows work
-                best for finding the correct page. Adding more context does not
-                always improve the result.
+                Whole-page retrieval gives the best result for finding the
+                evidence. For 91.2% of the questions, one of the top 10 results
+                contains the needed evidence. Object-window retrieval gives the
+                best result for finding the correct page, reaching it for 92.4%
+                of the questions.
+                <span className="mt-2 block font-semibold text-blue-700 dark:text-blue-300">
+                  Takeaway: The best choice depends on what we want to find.
+                  More context can help, but bigger is not always better.
+                </span>
               </p>
             </div>
           </div>
