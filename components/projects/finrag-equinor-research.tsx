@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const researchQuestions = [
   "What helps the system find the right evidence?",
   "Where does retrieval fail?",
@@ -141,6 +143,22 @@ export default function FinragEquinorResearch() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section>
+        <SectionHeader
+          title="How We Evaluate LongFinRAG"
+          description="We evaluate LongFinRAG in two ways: evidence retrieval and end-to-end question answering. The first tests whether the system can find the right evidence, while the second tests whether better evidence leads to better answers."
+        />
+        <div className="overflow-hidden rounded-2xl border bg-background">
+          <Image
+            src="/projects/finrag-equinor/evaluation-pipeline.png"
+            alt="LongFinRAG evaluation pipeline showing evidence retrieval for RQ1 and RQ2 and end-to-end question answering for RQ3"
+            width={1600}
+            height={560}
+            className="h-auto w-full"
+          />
         </div>
       </section>
 
