@@ -176,6 +176,10 @@ export default function FinragEquinorResearch() {
               <h3 className="font-heading text-2xl">
                 Does knowing the correct report help?
               </h3>
+              <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
+                We compare searching all 15 reports with searching only the
+                correct report.
+              </p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[520px] text-left text-sm">
@@ -183,24 +187,21 @@ export default function FinragEquinorResearch() {
                   <tr>
                     <th className="px-5 py-3 font-semibold sm:px-6">Method</th>
                     <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      All reports
+                      Find the exact evidence
                     </th>
                     <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Correct report
-                    </th>
-                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Gain
+                      Find the correct page
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
                   {[
-                    ["BM25", "52.4%", "76.5%", "+24.1"],
-                    ["BGE-M3", "71.5%", "83.0%", "+11.5"],
-                    ["BM25 + E5", "67.1%", "84.5%", "+17.4"],
+                    ["BM25", "52.4%", "76.5%", "61.2%", "85.8%"],
+                    ["BGE-M3", "71.5%", "83.0%", "79.1%", "89.8%"],
+                    ["BM25 + E5", "67.1%", "84.5%", "75.5%", "91.4%"],
                   ].map(
                     (
-                      [method, allReports, correctReport, improvement],
+                      [method, exactBefore, exactAfter, pageBefore, pageAfter],
                       index
                     ) => (
                       <tr
@@ -211,15 +212,28 @@ export default function FinragEquinorResearch() {
                           {method}
                         </td>
                         <td className="px-5 py-4 text-right font-mono sm:px-6">
-                          {allReports}
+                          {exactBefore} <span aria-hidden="true">→</span>{" "}
+                          <span
+                            className={
+                              index === 2
+                                ? "font-bold text-blue-700 dark:text-blue-300"
+                                : ""
+                            }
+                          >
+                            {exactAfter}
+                          </span>
                         </td>
-                        <td
-                          className={`px-5 py-4 text-right font-mono sm:px-6 ${index === 2 ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}
-                        >
-                          {correctReport}
-                        </td>
-                        <td className="px-5 py-4 text-right font-mono font-semibold sm:px-6">
-                          {improvement}
+                        <td className="px-5 py-4 text-right font-mono sm:px-6">
+                          {pageBefore} <span aria-hidden="true">→</span>{" "}
+                          <span
+                            className={
+                              index === 2
+                                ? "font-bold text-blue-700 dark:text-blue-300"
+                                : ""
+                            }
+                          >
+                            {pageAfter}
+                          </span>
                         </td>
                       </tr>
                     )
@@ -229,16 +243,19 @@ export default function FinragEquinorResearch() {
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p className="text-muted-foreground">
-                These numbers show how often the exact evidence appears in the
-                top 10 results.
+                <strong className="text-foreground">Exact evidence</strong>{" "}
+                means finding the paragraph or table that contains the answer.{" "}
+                <strong className="text-foreground">Correct page</strong> means
+                finding the page where that evidence appears.
               </p>
               <p className="border-l-4 border-blue-600 pl-4 font-medium">
-                Searching only the correct report helps all three methods. BM25
-                improves the most. BM25 + E5 gives the best result at 84.5%.
-              </p>
-              <p className="text-muted-foreground">
-                For BM25, finding the correct page also improves from 61.2% to
-                85.8%.
+                Searching only the correct report improves both results for all
+                three methods. BM25 + E5 gives the highest results: 84.5% for
+                the exact evidence and 91.4% for the correct page.
+                <span className="mt-2 block font-semibold text-blue-700 dark:text-blue-300">
+                  Takeaway: Knowing the correct report makes it easier to find
+                  both the right page and the exact evidence.
+                </span>
               </p>
             </div>
           </div>
