@@ -1,5 +1,5 @@
 const researchQuestions = [
-  "Does finding the right report and the right page make it easier to find the exact evidence?",
+  "What helps the system find the right evidence?",
   "Where does retrieval fail?",
   "Does retrieving better evidence lead to more accurate answers?",
 ];
@@ -147,7 +147,7 @@ export default function FinragEquinorResearch() {
       <section id="rq1">
         <SectionHeader
           title={`RQ1. ${researchQuestions[0]}`}
-          description="RQ1 tests two things: whether searching only the correct report helps, and whether page-sized context makes the exact evidence easier to retrieve."
+          description="We test two things. First, we search all 15 reports or only the correct report. Second, we compare different amounts of retrieved content."
         />
         <div className="space-y-8">
           <div className="overflow-hidden rounded-2xl border bg-background">
@@ -156,64 +156,71 @@ export default function FinragEquinorResearch() {
                 EXPERIMENT 1
               </p>
               <h3 className="font-heading text-2xl">
-                Does searching the correct report help?
+                Does knowing the correct report help?
               </h3>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[520px] text-left text-sm">
                 <thead className="bg-blue-700 text-white">
                   <tr>
-                    <th className="px-5 py-3 font-semibold sm:px-6">
-                      BM25 setting
+                    <th className="px-5 py-3 font-semibold sm:px-6">Method</th>
+                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                      All reports
                     </th>
                     <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Object R@10
+                      Correct report
                     </th>
                     <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Page R@10
+                      Gain
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
-                  <tr>
-                    <td className="px-5 py-4 font-medium sm:px-6">
-                      Unrestricted
-                    </td>
-                    <td className="px-5 py-4 text-right font-mono sm:px-6">
-                      52.4%
-                    </td>
-                    <td className="px-5 py-4 text-right font-mono sm:px-6">
-                      61.2%
-                    </td>
-                  </tr>
-                  <tr className="bg-blue-50/70 dark:bg-blue-950/20">
-                    <td className="px-5 py-4 font-semibold sm:px-6">
-                      Reference-year filtered
-                    </td>
-                    <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
-                      76.5%
-                    </td>
-                    <td className="px-5 py-4 text-right font-mono font-bold text-blue-700 dark:text-blue-300 sm:px-6">
-                      85.8%
-                    </td>
-                  </tr>
+                  {[
+                    ["BM25", "52.4%", "76.5%", "+24.1"],
+                    ["BGE-M3", "71.5%", "83.0%", "+11.5"],
+                    ["BM25 + E5", "67.1%", "84.5%", "+17.4"],
+                  ].map(
+                    (
+                      [method, allReports, correctReport, improvement],
+                      index
+                    ) => (
+                      <tr
+                        key={method}
+                        className={index % 2 ? "bg-muted/35" : ""}
+                      >
+                        <td className="px-5 py-4 font-semibold sm:px-6">
+                          {method}
+                        </td>
+                        <td className="px-5 py-4 text-right font-mono sm:px-6">
+                          {allReports}
+                        </td>
+                        <td
+                          className={`px-5 py-4 text-right font-mono sm:px-6 ${index === 2 ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}
+                        >
+                          {correctReport}
+                        </td>
+                        <td className="px-5 py-4 text-right font-mono font-semibold sm:px-6">
+                          {improvement}
+                        </td>
+                      </tr>
+                    )
+                  )}
                 </tbody>
               </table>
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p className="text-muted-foreground">
-                <strong className="text-foreground">Object Recall@10</strong>{" "}
-                requires the exact reference evidence object to appear in the
-                top 10.{" "}
-                <strong className="text-foreground">Page Recall@10</strong>{" "}
-                requires a result from the same report and page. Reference-year
-                filtering uses the benchmark&apos;s known report year, so it is
-                a controlled oracle setting rather than a learned report router.
+                These numbers show how often the exact evidence appears in the
+                top 10 results.
               </p>
               <p className="border-l-4 border-blue-600 pl-4 font-medium">
-                Reference-year filtering raises exact-object Recall@10 from
-                52.4% to 76.5%, showing that cross-year competition is a major
-                source of retrieval error.
+                Searching only the correct report helps all three methods. BM25
+                improves the most. BM25 + E5 gives the best result at 84.5%.
+              </p>
+              <p className="text-muted-foreground">
+                For BM25, finding the correct page also improves from 61.2% to
+                85.8%.
               </p>
             </div>
           </div>
@@ -223,14 +230,7 @@ export default function FinragEquinorResearch() {
               <p className="mb-1 font-mono text-sm font-bold text-blue-600 dark:text-blue-400">
                 EXPERIMENT 2
               </p>
-              <h3 className="font-heading text-2xl">
-                Does retrieving more context help?
-              </h3>
-              <p className="mt-3 max-w-4xl text-sm leading-6 text-muted-foreground">
-                Using the{" "}
-                <strong className="text-foreground">correct report year</strong>
-                , we compare objects, pages, page windows, and object windows.
-              </p>
+              <h3 className="font-heading text-2xl">Does more context help?</h3>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[520px] text-left text-sm">
@@ -240,17 +240,17 @@ export default function FinragEquinorResearch() {
                       Retrieval unit
                     </th>
                     <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Chunk Recall@10
+                      Evidence found
                     </th>
                     <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Page Recall@10
+                      Correct page found
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
                   {[
-                    ["Object BM25-year", "76.5%", "85.8%"],
-                    ["Page BM25-year", "91.2%", "91.2%"],
+                    ["Object", "76.5%", "85.8%"],
+                    ["Page", "91.2%", "91.2%"],
                     ["Page-window", "88.5%", "88.5%"],
                     ["Object-window", "89.2%", "92.4%"],
                   ].map(([unit, chunkRecall, pageRecall], index) => (
@@ -276,37 +276,33 @@ export default function FinragEquinorResearch() {
                 An <strong className="text-foreground">object</strong> is one
                 paragraph, heading, or table. A{" "}
                 <strong className="text-foreground">page</strong> contains all
-                retrieval objects on one PDF page. A{" "}
+                the objects on one PDF page. A{" "}
                 <strong className="text-foreground">page-window</strong>{" "}
-                combines up to three consecutive pages: the previous, current,
-                and next pages. An{" "}
+                contains up to three nearby pages. An{" "}
                 <strong className="text-foreground">object-window</strong>{" "}
-                combines eight neighboring objects within the same report, with
-                a two-object overlap.
+                contains eight nearby objects.
               </p>
               <p>
                 <strong className="text-foreground">Chunk Recall@10</strong>{" "}
-                measures whether at least one of the top 10 retrieved chunks
-                contains an annotated reference evidence object.{" "}
+                shows whether one of the top 10 results contains the evidence.{" "}
                 <strong className="text-foreground">Page Recall@10</strong>{" "}
-                measures whether at least one of the top 10 chunks covers the
-                same report and page as a reference evidence object.
+                shows whether one of the results reaches the correct report and
+                page.
               </p>
             </div>
             <div className="border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p>
-                Whole pages achieve the highest Chunk Recall@10 at 91.2%. Larger
-                windows do not improve chunk retrieval, although object windows
-                achieve the highest Page Recall@10 at 92.4%.
+                Whole pages work best for finding evidence. Object windows work
+                best for finding the correct page. Adding more context does not
+                always improve the result.
               </p>
             </div>
           </div>
         </div>
         <EvidenceConclusion>
-          Finding the correct report produces the largest improvement in exact
-          evidence retrieval. Larger retrieval units improve evidence coverage,
-          but finding a page that contains the evidence is not the same as
-          retrieving the exact supporting object.
+          Knowing the correct report gives the largest improvement. More context
+          can help, but finding the correct page does not always mean finding
+          the exact paragraph or table.
         </EvidenceConclusion>
       </section>
 
