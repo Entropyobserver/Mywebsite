@@ -330,7 +330,7 @@ export default function FinragEquinorResearch() {
               </p>
             </div>
             <div className="border-t px-5 py-5 text-sm leading-6 sm:px-6">
-              <p>
+              <p className="border-l-4 border-blue-600 pl-4 font-medium">
                 Whole-page retrieval gives the best result for finding the
                 evidence. For 91.2% of the questions, one of the top 10 results
                 contains the needed evidence. Object-window retrieval gives the
