@@ -344,11 +344,6 @@ export default function FinragEquinorResearch() {
             </div>
           </div>
         </div>
-        <EvidenceConclusion>
-          Knowing the correct report gives the largest improvement. More context
-          can help, but finding the correct page does not always mean finding
-          the exact paragraph or table.
-        </EvidenceConclusion>
       </section>
 
       <section id="rq2">
