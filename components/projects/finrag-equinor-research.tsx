@@ -597,11 +597,6 @@ export default function FinragEquinorResearch() {
             </div>
           </div>
         </div>
-        <EvidenceConclusion>
-          Retrieval may search in the wrong place, rank the correct evidence
-          too low, or miss part of the required evidence. Report filtering and
-          reranking help, but complete evidence retrieval remains difficult.
-        </EvidenceConclusion>
       </section>
 
       <section id="rq3">
