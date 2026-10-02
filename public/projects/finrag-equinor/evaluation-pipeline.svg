@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="600" viewBox="0 0 1600 600">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#64748B"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+    <style>
+      text { font-family: Inter, Arial, Helvetica, sans-serif; letter-spacing: 0; }
+      .top-title { font-size: 31px; font-weight: 750; fill: #FFFFFF; }
+      .top-meta { font-size: 22px; font-weight: 500; fill: #CBD5E1; }
+      .branch-title { font-size: 31px; font-weight: 750; }
+      .branch-meta { font-size: 21px; font-weight: 650; }
+      .step-title { font-size: 24px; font-weight: 750; }
+      .step-text { font-size: 20px; font-weight: 450; fill: #475569; }
+      .step-detail { font-size: 18px; font-weight: 500; fill: #64748B; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="600" fill="#F8FAFC"/>
+
+  <rect x="500" y="22" width="600" height="82" rx="16" fill="#0F172A" filter="url(#shadow)"/>
+  <text x="800" y="58" text-anchor="middle" class="top-title">LongFinRAG benchmark</text>
+  <text x="800" y="87" text-anchor="middle" class="top-meta">660 answerable  ·  60 unanswerable</text>
+
+  <path d="M800 104 L800 128 L402 128 L402 151" fill="none" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <path d="M800 128 L1198 128 L1198 151" fill="none" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <rect x="32" y="160" width="744" height="412" rx="18" fill="#EFF6FF" stroke="#93C5FD" stroke-width="2"/>
+  <text x="70" y="204" class="branch-title" fill="#1D4ED8">Evidence Retrieval</text>
+  <text x="70" y="234" class="branch-meta" fill="#2563EB">RQ1–RQ2  ·  660 answerable questions</text>
+
+  <rect x="70" y="256" width="668" height="78" rx="12" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="2" filter="url(#shadow)"/>
+  <text x="404" y="286" text-anchor="middle" class="step-title" fill="#1D4ED8">1. Search</text>
+  <text x="404" y="315" text-anchor="middle" class="step-text">All reports  or  reference-year report</text>
+
+  <path d="M404 334 L404 352" fill="none" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="70" y="360" width="668" height="78" rx="12" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="2" filter="url(#shadow)"/>
+  <text x="404" y="390" text-anchor="middle" class="step-title" fill="#1D4ED8">2. Retrieve &amp; Rerank</text>
+  <text x="404" y="419" text-anchor="middle" class="step-text">BM25  ·  Dense  ·  Hybrid  ·  Hierarchical  ·  Cross-encoder</text>
+
+  <path d="M404 438 L404 456" fill="none" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="70" y="464" width="668" height="88" rx="12" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="2" filter="url(#shadow)"/>
+  <text x="404" y="493" text-anchor="middle" class="step-title" fill="#1D4ED8">3. Evaluate Retrieval</text>
+  <text x="404" y="520" text-anchor="middle" class="step-detail">Localization: Report → Page → Exact object</text>
+  <text x="404" y="543" text-anchor="middle" class="step-detail">Completeness: Any evidence → All evidence</text>
+
+  <rect x="824" y="160" width="744" height="412" rx="18" fill="#F0FDFA" stroke="#99F6E4" stroke-width="2"/>
+  <text x="862" y="204" class="branch-title" fill="#0F766E">End-to-End QA</text>
+  <text x="862" y="234" class="branch-meta" fill="#0D9488">RQ3  ·  660 answerable + 60 unanswerable</text>
+
+  <rect x="862" y="256" width="668" height="78" rx="12" fill="#FFFFFF" stroke="#99F6E4" stroke-width="2" filter="url(#shadow)"/>
+  <text x="1196" y="286" text-anchor="middle" class="step-title" fill="#0F766E">1. Supply Evidence</text>
+  <text x="1196" y="315" text-anchor="middle" class="step-text">Closed-book  ·  BM25-year  ·  Hybrid + rerank  ·  Oracle evidence</text>
+
+  <path d="M1196 334 L1196 352" fill="none" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="862" y="360" width="668" height="78" rx="12" fill="#FFFFFF" stroke="#99F6E4" stroke-width="2" filter="url(#shadow)"/>
+  <text x="1196" y="390" text-anchor="middle" class="step-title" fill="#0F766E">2. Generate</text>
+  <text x="1196" y="419" text-anchor="middle" class="step-text">Same generator for every evidence condition</text>
+
+  <path d="M1196 438 L1196 456" fill="none" stroke="#64748B" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="862" y="464" width="668" height="88" rx="12" fill="#FFFFFF" stroke="#99F6E4" stroke-width="2" filter="url(#shadow)"/>
+  <text x="1196" y="499" text-anchor="middle" class="step-title" fill="#0F766E">3. Evaluate Answer Quality</text>
+  <text x="1196" y="531" text-anchor="middle" class="step-text">Answer accuracy  ·  Correct abstention</text>
+</svg>
