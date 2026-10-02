@@ -165,7 +165,7 @@ export default function FinragEquinorResearch() {
       <section id="rq1">
         <SectionHeader
           title={`RQ1. ${researchQuestions[0]}`}
-          description="We test two things. First, we search all 15 reports or only the correct report. Second, we compare different amounts of retrieved content."
+          description="We test two things. First, we compare Without year filter with With reference-year filter. Second, we compare different amounts of retrieved content."
         />
         <div className="space-y-8">
           <div className="overflow-hidden rounded-2xl border bg-background">
@@ -174,11 +174,11 @@ export default function FinragEquinorResearch() {
                 EXPERIMENT 1
               </p>
               <h3 className="font-heading text-2xl">
-                Does knowing the correct report help?
+                Does the reference-year filter help?
               </h3>
               <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
-                We compare searching all 15 reports with searching only the
-                correct report.
+                Without year filter searches all 15 reports. With
+                reference-year filter searches only the correct report.
               </p>
             </div>
             <div className="overflow-x-auto">
@@ -249,12 +249,12 @@ export default function FinragEquinorResearch() {
                 finding the page where that evidence appears.
               </p>
               <p className="border-l-4 border-blue-600 pl-4 font-medium">
-                Searching only the correct report improves both results for all
-                three methods. BM25 + E5 gives the highest results: 84.5% for
-                the exact evidence and 91.4% for the correct page.
+                The With reference-year filter setting improves both results
+                for all three methods. BM25 + E5 gives the highest results:
+                84.5% for the exact evidence and 91.4% for the correct page.
                 <span className="mt-2 block font-semibold text-blue-700 dark:text-blue-300">
-                  Takeaway: Knowing the correct report makes it easier to find
-                  both the right page and the exact evidence.
+                  Takeaway: The With reference-year filter setting makes it
+                  easier to find both the correct page and the exact evidence.
                 </span>
               </p>
             </div>
@@ -267,8 +267,8 @@ export default function FinragEquinorResearch() {
               </p>
               <h3 className="font-heading text-2xl">Does more context help?</h3>
               <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
-                We search only within the correct report and compare objects,
-                pages, page-windows, and object-windows.
+                We use the With reference-year filter setting and compare
+                objects, pages, page-windows, and object-windows.
               </p>
             </div>
             <div className="overflow-x-auto">
@@ -428,13 +428,15 @@ export default function FinragEquinorResearch() {
                 methods except BM25 use reference-year filtering.
               </p>
               <p className="border-l-4 border-blue-600 pl-4 font-medium">
-                BM25 can retrieve evidence from the wrong report. Searching
-                only the correct report removes this error. BGE-M3, E5-large,
-                and the hybrid methods find the exact evidence more often than
-                BM25, but they can still select the wrong page or object.
+                Without year filter, BM25 can retrieve evidence from the wrong
+                report. The With reference-year filter setting removes this
+                error. BGE-M3, E5-large, and the hybrid methods find the exact
+                evidence more often than BM25, but they can still select the
+                wrong page or object.
                 <span className="mt-2 block font-semibold text-blue-700 dark:text-blue-300">
-                  Takeaway: Report filtering removes wrong-report errors, but
-                  errors within the correct report remain.
+                  Takeaway: The With reference-year filter setting removes
+                  wrong-report errors, but errors within the correct report
+                  remain.
                 </span>
               </p>
             </div>
