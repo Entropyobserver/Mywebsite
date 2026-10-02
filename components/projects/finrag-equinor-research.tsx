@@ -589,12 +589,10 @@ export default function FinragEquinorResearch() {
                 reference-year filtering.
               </p>
               <p className="border-l-4 border-blue-600 pl-4 font-medium">
-                Finding one piece of evidence is much easier than finding the
-                complete evidence set.
-                <span className="mt-2 block font-semibold text-blue-700 dark:text-blue-300">
-                  Takeaway: A retrieval result can look successful even when
-                  some evidence needed for the answer is missing.
-                </span>
+                Finding one evidence item is common, but retrieving the
+                complete set remains difficult because the required evidence
+                can be spread across different pages, sections, or object
+                types.
               </p>
             </div>
           </div>
