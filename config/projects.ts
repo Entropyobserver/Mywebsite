@@ -468,10 +468,10 @@ export const Projects: ProjectInterface[] = [
     companyLogoImg: "/projects/finrag-equinor/cover-v2.svg",
     pagesInfoArr: [
       {
-        title: "PDF-to-Benchmark Pipeline",
+        title: "LongFinRAG Benchmark Pipeline",
         description:
           "The pipeline converts 4,369 annual-report pages into 41,736 traceable retrieval units and a 720-item benchmark with report-, page-, and object-level evidence identifiers.",
-        imgArr: ["/projects/finrag-equinor/cover.png"],
+        imgArr: ["/projects/finrag-equinor/cover-v2.svg"],
       },
     ],
     descriptionDetails: {

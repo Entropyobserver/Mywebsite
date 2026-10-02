@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const researchQuestions = [
-  "What helps the system find the right evidence?",
+  "How do the year filter and retrieval-unit size affect evidence retrieval?",
   "Where and how does retrieval fail?",
   "Does retrieving better evidence lead to more accurate answers?",
 ];
@@ -38,6 +38,39 @@ function EvidenceConclusion({ children }: { children: React.ReactNode }) {
   return (
     <div className="mt-6 rounded-r-xl border-l-4 border-blue-600 bg-blue-50 px-5 py-4 font-medium leading-relaxed text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
       {children}
+    </div>
+  );
+}
+
+function MetricBar({
+  label,
+  value,
+  color = "bg-blue-600",
+  highlight = false,
+}: {
+  label: string;
+  value: number;
+  color?: string;
+  highlight?: boolean;
+}) {
+  return (
+    <div>
+      <div className="mb-1.5 flex items-end justify-between gap-4 text-sm">
+        <span className="font-medium">{label}</span>
+        <span
+          className={`font-mono tabular-nums ${
+            highlight ? "font-bold text-blue-700 dark:text-blue-300" : ""
+          }`}
+        >
+          {value.toFixed(1)}%
+        </span>
+      </div>
+      <div className="h-2.5 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+        <div
+          className={`h-full rounded-full ${color}`}
+          style={{ width: `${value}%` }}
+        />
+      </div>
     </div>
   );
 }
@@ -99,11 +132,7 @@ export default function FinragEquinorResearch() {
           description="The benchmark covers nine question types. We manually checked all 720 QA items and separately audited PDF extraction and QA quality."
         />
         <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="overflow-hidden rounded-2xl border bg-background">
-            <div className="grid grid-cols-2 bg-blue-700 px-5 py-3 text-sm font-semibold text-white">
-              <span>Question type</span>
-              <span className="text-right">Items</span>
-            </div>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             {[
               ["Direct factual", 90],
               ["Numerical extraction", 90],
@@ -111,16 +140,18 @@ export default function FinragEquinorResearch() {
               ["Causal explanation", 75],
               ["Temporal, year-specific", 75],
               ["Table-grounded", 90],
-              ["Multi-hop", 90],
-              ["Visual / chart layout", 90],
+              ["Multi-evidence", 90],
+              ["Layout-sensitive", 90],
               ["Unanswerable", 60],
-            ].map(([label, count], index) => (
+            ].map(([label, count]) => (
               <div
                 key={String(label)}
-                className={`grid grid-cols-2 px-5 py-2.5 text-sm ${index % 2 ? "bg-muted/35" : ""}`}
+                className="flex min-h-28 flex-col justify-between rounded-2xl border bg-background p-4"
               >
-                <span>{label}</span>
-                <span className="text-right font-mono tabular-nums">
+                <span className="text-sm leading-5 text-muted-foreground">
+                  {label}
+                </span>
+                <span className="mt-3 font-heading text-3xl text-blue-700 dark:text-blue-300">
                   {count}
                 </span>
               </div>
@@ -153,7 +184,7 @@ export default function FinragEquinorResearch() {
         />
         <div className="overflow-hidden rounded-2xl border bg-background">
           <Image
-            src="/projects/finrag-equinor/evaluation-pipeline.svg"
+            src="/projects/finrag-equinor/paper-evaluation-framework.svg"
             alt="LongFinRAG evaluation pipeline showing evidence retrieval for RQ1 and RQ2 and end-to-end question answering for RQ3"
             width={1600}
             height={600}
@@ -165,7 +196,7 @@ export default function FinragEquinorResearch() {
       <section id="rq1">
         <SectionHeader
           title={`RQ1. ${researchQuestions[0]}`}
-          description="We test two things. First, we compare Without year filter with With reference-year filter. Second, we compare different amounts of retrieved content."
+          description="We test two things. First, we compare Without year filter with With reference-year filter. Second, we compare objects, pages, page-windows, and object-windows as retrieval units."
         />
         <div className="space-y-8">
           <div className="overflow-hidden rounded-2xl border bg-background">
@@ -181,65 +212,67 @@ export default function FinragEquinorResearch() {
                 reference-year filter searches only the correct report.
               </p>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[520px] text-left text-sm">
-                <thead className="bg-blue-700 text-white">
-                  <tr>
-                    <th className="px-5 py-3 font-semibold sm:px-6">Method</th>
-                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Find the exact evidence
-                    </th>
-                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Find the correct page
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y">
-                  {[
-                    ["BM25", "52.4%", "76.5%", "61.2%", "85.8%"],
-                    ["BGE-M3", "71.5%", "83.0%", "79.1%", "89.8%"],
-                    ["BM25 + E5", "67.1%", "84.5%", "75.5%", "91.4%"],
-                  ].map(
-                    (
-                      [method, exactBefore, exactAfter, pageBefore, pageAfter],
-                      index
-                    ) => (
-                      <tr
-                        key={method}
-                        className={index % 2 ? "bg-muted/35" : ""}
-                      >
-                        <td className="px-5 py-4 font-semibold sm:px-6">
-                          {method}
-                        </td>
-                        <td className="px-5 py-4 text-right font-mono sm:px-6">
-                          {exactBefore} <span aria-hidden="true">→</span>{" "}
-                          <span
-                            className={
-                              index === 2
-                                ? "font-bold text-blue-700 dark:text-blue-300"
-                                : ""
-                            }
-                          >
-                            {exactAfter}
-                          </span>
-                        </td>
-                        <td className="px-5 py-4 text-right font-mono sm:px-6">
-                          {pageBefore} <span aria-hidden="true">→</span>{" "}
-                          <span
-                            className={
-                              index === 2
-                                ? "font-bold text-blue-700 dark:text-blue-300"
-                                : ""
-                            }
-                          >
-                            {pageAfter}
-                          </span>
-                        </td>
-                      </tr>
-                    )
-                  )}
-                </tbody>
-              </table>
+            <div className="grid gap-8 p-5 sm:p-6 lg:grid-cols-2">
+              {[
+                {
+                  title: "Find the exact evidence",
+                  metric: "Object Recall@10",
+                  values: [
+                    ["BM25", 52.4, 76.5],
+                    ["BGE-M3", 71.5, 83.0],
+                    ["BM25 + E5", 67.1, 84.5],
+                  ],
+                },
+                {
+                  title: "Find the correct page",
+                  metric: "Page Recall@10",
+                  values: [
+                    ["BM25", 61.2, 85.8],
+                    ["BGE-M3", 79.1, 89.8],
+                    ["BM25 + E5", 75.5, 91.4],
+                  ],
+                },
+              ].map(({ title, metric, values }) => (
+                <div key={title}>
+                  <div className="text-center">
+                    <h4 className="font-semibold">{title}</h4>
+                    <p className="mt-1 text-xs text-muted-foreground">{metric}</p>
+                  </div>
+                  <div className="mt-8 grid grid-cols-3 gap-3 border-b border-slate-300 px-2 dark:border-slate-700">
+                    {values.map(([method, withoutFilter, withFilter]) => (
+                      <div key={String(method)} className="text-center">
+                        <div className="flex h-40 items-end justify-center gap-1.5">
+                          {[
+                            [withoutFilter, "bg-blue-300 dark:bg-blue-500"],
+                            [withFilter, "bg-emerald-500"],
+                          ].map(([value, color]) => (
+                            <div
+                              key={`${method}-${value}`}
+                              className={`relative w-8 sm:w-10 ${color}`}
+                              style={{ height: `${Number(value)}%` }}
+                            >
+                              <span className="absolute -top-6 left-1/2 -translate-x-1/2 font-mono text-[11px] font-semibold text-foreground sm:text-xs">
+                                {Number(value).toFixed(1)}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                        <p className="py-3 text-xs font-medium sm:text-sm">{method}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground lg:col-span-2">
+                <span className="flex items-center gap-2">
+                  <span className="h-2.5 w-2.5 bg-blue-300 dark:bg-blue-500" />
+                  Without year filter
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="h-2.5 w-2.5 bg-emerald-500" />
+                  With reference-year filter
+                </span>
+              </div>
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p className="text-muted-foreground">
@@ -271,44 +304,42 @@ export default function FinragEquinorResearch() {
                 objects, pages, page-windows, and object-windows.
               </p>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[520px] text-left text-sm">
-                <thead className="bg-blue-700 text-white">
-                  <tr>
-                    <th className="px-5 py-3 font-semibold sm:px-6">
-                      Retrieval unit
-                    </th>
-                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Evidence found
-                    </th>
-                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Correct page found
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y">
-                  {[
-                    ["Object", "76.5%", "85.8%"],
-                    ["Page", "91.2%", "91.2%"],
-                    ["Page-window", "88.5%", "88.5%"],
-                    ["Object-window", "89.2%", "92.4%"],
-                  ].map(([unit, chunkRecall, pageRecall], index) => (
-                    <tr key={unit} className={index % 2 ? "bg-muted/35" : ""}>
-                      <td className="px-5 py-4 font-medium sm:px-6">{unit}</td>
-                      <td
-                        className={`px-5 py-4 text-right font-mono sm:px-6 ${index === 1 ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}
-                      >
-                        {chunkRecall}
-                      </td>
-                      <td
-                        className={`px-5 py-4 text-right font-mono sm:px-6 ${index === 3 ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}
-                      >
-                        {pageRecall}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="p-5 sm:p-6">
+              <div className="mb-4 flex flex-wrap gap-x-6 gap-y-2 text-xs font-semibold text-muted-foreground">
+                <span className="flex items-center gap-2">
+                  <span className="h-2.5 w-2.5 rounded-full bg-blue-600" />
+                  Chunk R@10
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="h-2.5 w-2.5 rounded-full bg-teal-500" />
+                  Page R@10
+                </span>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+              {[
+                ["Object", 76.5, 85.8],
+                ["Page", 91.2, 91.2],
+                ["Page-window", 88.5, 88.5],
+                ["Object-window", 89.2, 92.4],
+              ].map(([unit, chunkRecall, pageRecall]) => (
+                <div key={String(unit)} className="rounded-xl border bg-muted/10 p-4">
+                  <h4 className="mb-4 font-semibold">{unit}</h4>
+                  <div className="space-y-4">
+                    <MetricBar
+                      label="Evidence-containing chunk"
+                      value={Number(chunkRecall)}
+                      highlight={unit === "Page"}
+                    />
+                    <MetricBar
+                      label="Correct page"
+                      value={Number(pageRecall)}
+                      color="bg-teal-500"
+                      highlight={unit === "Object-window"}
+                    />
+                  </div>
+                </div>
+              ))}
+              </div>
             </div>
             <div className="space-y-2 border-t bg-muted/20 px-5 py-4 text-xs leading-5 text-muted-foreground sm:px-6 sm:text-sm sm:leading-6">
               <p>
@@ -362,64 +393,14 @@ export default function FinragEquinorResearch() {
                 We compare the top-10 results with the reference evidence.
               </p>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[920px] text-left text-sm">
-                <thead className="bg-blue-700 text-white">
-                  <tr>
-                    <th className="px-4 py-3 font-semibold sm:px-5">Method</th>
-                    <th className="px-4 py-3 text-right font-semibold sm:px-5">
-                      Exact object
-                    </th>
-                    <th className="px-4 py-3 text-right font-semibold sm:px-5">
-                      Right page, wrong object
-                    </th>
-                    <th className="px-4 py-3 text-right font-semibold sm:px-5">
-                      Adjacent page
-                    </th>
-                    <th className="px-4 py-3 text-right font-semibold sm:px-5">
-                      Right report, wrong page
-                    </th>
-                    <th className="px-4 py-3 text-right font-semibold sm:px-5">
-                      Wrong report
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y">
-                  {[
-                    ["BM25", "52.4%", "8.8%", "6.7%", "23.6%", "8.5%"],
-                    ["BM25-year", "76.5%", "9.2%", "5.0%", "9.2%", "0.0%"],
-                    ["BGE-M3-year", "83.0%", "6.8%", "2.9%", "7.3%", "0.0%"],
-                    ["E5-year", "80.0%", "7.9%", "4.8%", "7.3%", "0.0%"],
-                    ["BM25 + BGE", "84.2%", "7.1%", "2.9%", "5.8%", "0.0%"],
-                    ["BM25 + E5", "84.5%", "6.8%", "3.3%", "5.3%", "0.0%"],
-                  ].map(([method, ...values], rowIndex) => (
-                    <tr
-                      key={method}
-                      className={
-                        rowIndex === 5
-                          ? "bg-blue-50/70 dark:bg-blue-950/20"
-                          : rowIndex % 2
-                            ? "bg-muted/25"
-                            : ""
-                      }
-                    >
-                      <td className="px-4 py-4 font-semibold sm:px-5">{method}</td>
-                      {values.map((value, columnIndex) => {
-                        const isBest =
-                          rowIndex === 5 && [0, 1, 3].includes(columnIndex);
-                        return (
-                          <td
-                            key={`${method}-${columnIndex}`}
-                            className={`px-4 py-4 text-right font-mono sm:px-5 ${isBest ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}
-                          >
-                            {value}
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="bg-white p-4 dark:bg-slate-950 sm:p-6">
+              <Image
+                src="/projects/finrag-equinor/paper-error-location.png"
+                alt="Top-10 BM25 retrieval outcomes without and with the reference-year filter"
+                width={882}
+                height={468}
+                className="mx-auto h-auto w-full max-w-4xl"
+              />
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p className="text-muted-foreground">
@@ -455,62 +436,24 @@ export default function FinragEquinorResearch() {
                 A cross-encoder reorders the same top-10 results.
               </p>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[600px] text-left text-sm">
-                  <thead className="bg-blue-700 text-white">
-                    <tr>
-                      <th className="px-5 py-3 font-semibold">Method</th>
-                      <th className="px-5 py-3 text-right font-semibold">
-                        <span className="block">Object Recall@1</span>
-                        <span className="mt-0.5 block text-xs font-medium text-blue-100">
-                          Before → After
-                        </span>
-                      </th>
-                      <th className="px-5 py-3 text-right font-semibold">
-                        <span className="block">MRR</span>
-                        <span className="mt-0.5 block text-xs font-medium text-blue-100">
-                          Before → After
-                        </span>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y">
-                    {[
-                      ["BM25", "41.1%", "64.7%", "0.524", "0.689"],
-                      ["BGE-M3", "52.6%", "67.3%", "0.628", "0.728"],
-                      ["E5-large", "48.6%", "64.7%", "0.590", "0.701"],
-                      ["Qwen3-0.6B", "43.8%", "62.7%", "0.542", "0.675"],
-                      ["BM25 + BGE", "49.8%", "68.3%", "0.616", "0.740"],
-                      ["BM25 + E5", "46.8%", "68.2%", "0.595", "0.739"],
-                      ["BM25 + Qwen3", "45.9%", "67.1%", "0.583", "0.725"],
-                    ].map(([method, rankBefore, rankAfter, mrrBefore, mrrAfter], rowIndex) => (
-                      <tr
-                        key={method}
-                        className={
-                          rowIndex === 4
-                            ? "bg-blue-50/70 dark:bg-blue-950/20"
-                            : rowIndex % 2
-                              ? "bg-muted/25"
-                              : ""
-                        }
-                      >
-                        <td className="px-5 py-4 font-semibold">{method}</td>
-                        <td className="px-5 py-4 text-right font-mono">
-                          {rankBefore} →{" "}
-                          <span className={rowIndex === 4 ? "font-bold text-blue-700 dark:text-blue-300" : ""}>
-                            {rankAfter}
-                          </span>
-                        </td>
-                        <td className="px-5 py-4 text-right font-mono">
-                          {mrrBefore} →{" "}
-                          <span className={rowIndex === 4 ? "font-bold text-blue-700 dark:text-blue-300" : ""}>
-                            {mrrAfter}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-              </table>
+            <div className="grid gap-4 p-5 sm:grid-cols-2 sm:p-6">
+              <div className="rounded-2xl border bg-muted/15 p-5">
+                <p className="text-sm font-medium text-muted-foreground">
+                  BM25 · Object Recall@1
+                </p>
+                <p className="mt-2 font-mono text-2xl">
+                  41.1% <span className="text-muted-foreground">→</span>{" "}
+                  <strong className="text-blue-700 dark:text-blue-300">64.7%</strong>
+                </p>
+              </div>
+              <div className="rounded-2xl border bg-blue-50/70 p-5 dark:bg-blue-950/20">
+                <p className="text-sm font-medium text-muted-foreground">
+                  Best hybrid · Object Recall@1 / MRR
+                </p>
+                <p className="mt-2 font-mono text-2xl">
+                  <strong className="text-blue-700 dark:text-blue-300">68.3% / 0.740</strong>
+                </p>
+              </div>
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p className="text-muted-foreground">
@@ -540,50 +483,14 @@ export default function FinragEquinorResearch() {
                 finding any required evidence with finding the complete set.
               </p>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[600px] text-left text-sm">
-                  <thead className="bg-blue-700 text-white">
-                    <tr>
-                      <th className="px-5 py-3 font-semibold">Method</th>
-                      <th className="px-5 py-3 text-right font-semibold">
-                        Any evidence R@10
-                      </th>
-                      <th className="px-5 py-3 text-right font-semibold">
-                        All evidence R@10
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y">
-                    {[
-                      ["Object BM25", "91.1%", "53.3%"],
-                      ["Page BM25", "95.6%", "63.3%"],
-                      ["Object Qwen3", "95.6%", "61.1%"],
-                      ["BM25 + BGE hybrid", "98.9%", "74.4%"],
-                      ["BM25 + E5 hybrid", "100.0%", "67.8%"],
-                    ].map(([method, anyEvidence, allEvidence], rowIndex) => (
-                      <tr
-                        key={method}
-                        className={
-                          rowIndex === 3
-                            ? "bg-blue-50/70 dark:bg-blue-950/20"
-                            : rowIndex % 2
-                              ? "bg-muted/25"
-                              : ""
-                        }
-                      >
-                        <td className="px-5 py-4 font-semibold">{method}</td>
-                        <td className="px-5 py-4 text-right font-mono">
-                          {anyEvidence}
-                        </td>
-                        <td
-                          className={`px-5 py-4 text-right font-mono ${rowIndex === 3 ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}
-                        >
-                          {allEvidence}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-              </table>
+            <div className="bg-white p-4 dark:bg-slate-950 sm:p-6">
+              <Image
+                src="/projects/finrag-equinor/paper-evidence-completeness.png"
+                alt="Any-evidence and all-evidence Recall at 10 across five retrieval methods"
+                width={760}
+                height={466}
+                className="mx-auto h-auto w-full max-w-3xl"
+              />
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p className="text-muted-foreground">
@@ -612,38 +519,21 @@ export default function FinragEquinorResearch() {
               Answer accuracy on 660 questions
             </h3>
           </div>
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[520px] text-left text-sm">
-              <thead className="bg-blue-700 text-white">
-                <tr>
-                  <th className="px-5 py-3 font-semibold sm:px-6">
-                    Evidence given to the generator
-                  </th>
-                  <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                    Answer accuracy
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y">
-                {[
-                  ["Question only (closed-book)", "3.2%"],
-                  ["BM25-year evidence", "58.9%"],
-                  ["Hybrid + reranked evidence", "71.4%"],
-                  ["Annotated reference evidence", "82.4%"],
-                ].map(([evidence, accuracy], index) => (
-                  <tr key={evidence} className={index % 2 ? "bg-muted/35" : ""}>
-                    <td className="px-5 py-4 font-medium sm:px-6">
-                      {evidence}
-                    </td>
-                    <td
-                      className={`px-5 py-4 text-right font-mono sm:px-6 ${index >= 2 ? "font-bold text-blue-700 dark:text-blue-300" : ""}`}
-                    >
-                      {accuracy}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="space-y-6 p-5 sm:p-6">
+            {[
+              ["Question only (closed-book)", 3.2],
+              ["BM25-year evidence", 58.9],
+              ["Hybrid + reranked evidence", 71.4],
+              ["Annotated reference evidence", 82.4],
+            ].map(([evidence, accuracy], index) => (
+              <MetricBar
+                key={String(evidence)}
+                label={String(evidence)}
+                value={Number(accuracy)}
+                color={index === 3 ? "bg-teal-600" : "bg-blue-600"}
+                highlight={index >= 2}
+              />
+            ))}
           </div>
           <div className="border-t bg-muted/20 px-5 py-4 text-sm leading-6 sm:px-6">
             <p className="text-muted-foreground">
@@ -663,26 +553,36 @@ export default function FinragEquinorResearch() {
           </div>
         </div>
         <EvidenceConclusion>
-          Hybrid + reranked evidence improves answer accuracy by{" "}
-          <strong>12.4 percentage points</strong> over BM25-year, but remains{" "}
-          <strong>about 11 points</strong> below annotated reference evidence.
-          Better evidence leads to more accurate answers; the remaining gap
-          shows that both retrieval and generation can still improve.
+          Better retrieved evidence leads to more accurate answers. However,
+          even annotated reference evidence does not solve every question,
+          especially layout-sensitive questions.
         </EvidenceConclusion>
         <p className="mt-3 text-sm leading-6 text-muted-foreground">
-          RQ2&apos;s multi-hop results explain part of this gap: retrieval may
-          find relevant evidence while still missing information required for a
-          complete answer.
+          For multi-evidence questions, retrieval may find one useful evidence
+          item while still missing the complete evidence set.
         </p>
       </section>
 
       <section>
-        <SectionHeader title="Scope" />
-        <p className="max-w-4xl leading-7 text-muted-foreground">
-          This is a controlled longitudinal study of one company and 15 English
-          annual reports. Cross-company, multilingual, and fully multimodal
-          evaluation remain future work.
-        </p>
+        <SectionHeader title="What We Learned" />
+        <div className="grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="rounded-2xl border border-blue-200 bg-blue-50/70 p-6 dark:border-blue-900 dark:bg-blue-950/20">
+            <p className="leading-7 text-blue-950 dark:text-blue-100">
+              LongFinRAG shows that reliable financial RAG requires more than
+              finding a relevant report. A system must locate the correct
+              page, retrieve the complete evidence, and use that evidence
+              correctly.
+            </p>
+          </div>
+          <div className="rounded-2xl border bg-muted/20 p-6">
+            <h3 className="font-heading text-xl">Scope</h3>
+            <p className="mt-3 text-sm leading-6 text-muted-foreground">
+              This is a controlled longitudinal study of one company and 15
+              English annual reports. Cross-company, multilingual, and fully
+              multimodal evaluation remain future work.
+            </p>
+          </div>
+        </div>
       </section>
     </div>
   );
