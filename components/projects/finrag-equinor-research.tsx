@@ -280,19 +280,23 @@ export default function FinragEquinorResearch() {
               </div>
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
+              <p className="font-semibold">
+                Without year filter → With reference-year filter
+              </p>
               <p className="text-muted-foreground">
-                <strong className="text-foreground">Exact evidence</strong>{" "}
-                means finding the paragraph or table that contains the answer.{" "}
-                <strong className="text-foreground">Correct page</strong> means
-                finding the page where that evidence appears.
+                <strong className="text-foreground">Exact evidence:</strong>{" "}
+                the paragraph or table that contains the answer.
+                <br />
+                <strong className="text-foreground">Correct page:</strong>{" "}
+                the page where that evidence appears.
               </p>
               <p className="border-l-4 border-blue-600 pl-4 font-medium">
-                The With reference-year filter setting improves both results
-                for all three methods. BM25 + E5 gives the highest results:
-                84.5% for the exact evidence and 91.4% for the correct page.
+                The reference-year filter improves both results for all three
+                methods. BM25 + E5 gives the highest results: 84.5% for exact
+                evidence and 91.4% for the correct page.
                 <span className="mt-2 block font-semibold text-blue-700 dark:text-blue-300">
-                  Takeaway: The With reference-year filter setting makes it
-                  easier to find both the correct page and the exact evidence.
+                  Takeaway: The reference-year filter makes it easier to find
+                  both the correct page and the exact evidence.
                 </span>
               </p>
             </div>
@@ -581,10 +585,8 @@ export default function FinragEquinorResearch() {
                 reference object. MRR summarizes the overall ranking.
               </p>
               <p className="border-l-4 border-blue-600 pl-4 font-medium">
-                Both rerankers improve the first result and the overall
-                ranking. Their results are very similar: MiniLM performs
-                slightly better on BM25 and BM25 + BGE, while BGE performs
-                slightly better on E5 and Qwen3.
+                Both rerankers improve the two candidate sets shown above.
+                MiniLM performs slightly better in both cases.
                 <span className="mt-2 block font-semibold text-blue-700 dark:text-blue-300">
                   Takeaway: It cannot recover evidence that was not retrieved.
                 </span>
