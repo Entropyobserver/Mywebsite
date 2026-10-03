@@ -588,21 +588,36 @@ export default function FinragEquinorResearch() {
                 Can retrieval find all the evidence?
               </h3>
               <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
-                Some questions need several pieces of evidence. We compare
-                finding any required evidence with finding the complete set.
+                Some questions need more than one piece of evidence.
               </p>
+              <div className="mt-3 text-sm leading-6 text-muted-foreground">
+                <p className="font-medium text-foreground">We look at two things:</p>
+                <ul className="mt-1 list-disc space-y-1 pl-5">
+                  <li>
+                    <strong className="text-foreground">Any evidence:</strong>{" "}
+                    at least one required evidence item is found
+                  </li>
+                  <li>
+                    <strong className="text-foreground">All evidence:</strong>{" "}
+                    all required evidence items are found
+                  </li>
+                </ul>
+              </div>
             </div>
             <div className="p-5 sm:p-6">
+              <h4 className="mb-5 text-center font-semibold">
+                Any vs. All Evidence Recall@10
+              </h4>
               <div className="overflow-x-auto pb-2">
                 <div className="min-w-[720px]">
                   <div className="mb-6 flex justify-center gap-6 text-xs font-semibold text-muted-foreground">
                     <span className="flex items-center gap-2">
                       <span className="h-3 w-3 rounded-sm bg-blue-500" />
-                      Any evidence Recall@10
+                      Any evidence
                     </span>
                     <span className="flex items-center gap-2">
                       <span className="h-3 w-3 rounded-sm bg-emerald-500" />
-                      All evidence Recall@10
+                      All evidence
                     </span>
                   </div>
 
@@ -678,15 +693,14 @@ export default function FinragEquinorResearch() {
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p className="text-muted-foreground">
-                Results cover 90 multi-evidence questions. All methods use
-                reference-year filtering, and the hybrid results use RRF
-                fusion.
+                Results on 90 multi-evidence questions. All methods use
+                reference-year filtering; hybrid results use RRF fusion.
               </p>
               <p className="border-l-4 border-blue-600 pl-4 font-medium">
-                Finding one evidence item is common, but retrieving the
-                complete set remains difficult because the required evidence
-                can be spread across different pages, sections, or object
-                types.
+                <span className="font-semibold text-blue-700 dark:text-blue-300">
+                  Takeaway: Finding at least one piece of evidence is common,
+                  but finding all the evidence is much harder.
+                </span>
               </p>
             </div>
           </div>
