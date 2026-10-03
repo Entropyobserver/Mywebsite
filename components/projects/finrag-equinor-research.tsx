@@ -460,10 +460,9 @@ export default function FinragEquinorResearch() {
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p className="text-muted-foreground">
-                For questions with several evidence objects, an exact-object
-                hit means that at least one reference object is found. The five
-                outcomes are mutually exclusive, so each setting adds up to
-                100%.
+                If a question has multiple reference evidence objects, finding
+                at least one counts as an exact-object hit. The five categories
+                do not overlap, so each row adds up to 100%.
               </p>
               <p className="border-l-4 border-blue-600 pl-4 font-medium">
                 <span className="font-semibold text-blue-700 dark:text-blue-300">
