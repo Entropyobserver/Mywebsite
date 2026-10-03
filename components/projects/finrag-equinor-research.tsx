@@ -768,23 +768,25 @@ export default function FinragEquinorResearch() {
 
       <section>
         <SectionHeader title="What We Learned" />
-        <p className="max-w-4xl leading-7 text-muted-foreground">
-          Reliable RAG must move from the correct report to the correct answer,
-          without losing evidence along the way.
+        <p className="leading-7 text-muted-foreground">
+          LongFinRAG shows that finding the right report is not enough. A
+          reliable RAG system also needs to:
         </p>
-        <div className="mt-5 flex flex-wrap items-center gap-2 rounded-2xl border bg-muted/20 px-5 py-5 text-sm font-semibold sm:px-6 sm:text-base">
-          {["Right report", "Right page", "Exact evidence", "Complete evidence", "Correct answer"].map(
-            (step, index) => (
-              <div key={step} className="flex items-center gap-2">
-                {index > 0 && (
-                  <span className="text-blue-600 dark:text-blue-400">→</span>
-                )}
-                <span>{step}</span>
-              </div>
-            ),
-          )}
-        </div>
-        <p className="mt-4 border-l-2 border-border pl-4 text-sm leading-6 text-muted-foreground">
+        <ul className="mt-4 space-y-3 text-base leading-7">
+          <li className="flex gap-3">
+            <span className="font-bold text-blue-600 dark:text-blue-400">•</span>
+            <span>Find the right page and exact evidence.</span>
+          </li>
+          <li className="flex gap-3">
+            <span className="font-bold text-blue-600 dark:text-blue-400">•</span>
+            <span>Find all the evidence when a question needs more than one piece.</span>
+          </li>
+          <li className="flex gap-3">
+            <span className="font-bold text-blue-600 dark:text-blue-400">•</span>
+            <span>Use the evidence to produce the correct answer.</span>
+          </li>
+        </ul>
+        <p className="mt-6 border-t pt-4 text-sm leading-6 text-muted-foreground">
           <strong className="text-foreground">Scope:</strong> LongFinRAG studies
           one company and 15 English annual reports. Cross-company,
           multilingual, and multimodal evaluation remain future work.
