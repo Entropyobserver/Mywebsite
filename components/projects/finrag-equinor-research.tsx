@@ -568,48 +568,87 @@ export default function FinragEquinorResearch() {
               </p>
             </div>
             <div className="p-5 sm:p-6">
-              <div className="mb-5 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs font-semibold text-muted-foreground">
-                <span className="flex items-center gap-2">
-                  <span className="h-2.5 w-2.5 rounded-full bg-blue-500" />
-                  Any evidence Recall@10
-                </span>
-                <span className="flex items-center gap-2">
-                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
-                  All evidence Recall@10
-                </span>
-              </div>
+              <div className="overflow-x-auto pb-2">
+                <div className="min-w-[720px]">
+                  <div className="mb-6 flex justify-center gap-6 text-xs font-semibold text-muted-foreground">
+                    <span className="flex items-center gap-2">
+                      <span className="h-3 w-3 rounded-sm bg-blue-500" />
+                      Any evidence Recall@10
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <span className="h-3 w-3 rounded-sm bg-emerald-500" />
+                      All evidence Recall@10
+                    </span>
+                  </div>
 
-              <div className="overflow-hidden rounded-xl border">
-                {[
-                  ["Object BM25", 91.1, 53.3],
-                  ["Page BM25", 95.6, 63.3],
-                  ["Object Qwen3", 95.6, 61.1],
-                  ["BM25 + BGE hybrid", 98.9, 74.4],
-                  ["BM25 + E5 hybrid", 100.0, 67.8],
-                ].map(([method, anyEvidence, allEvidence], index) => (
-                  <div
-                    key={String(method)}
-                    className={`grid gap-4 px-4 py-4 sm:grid-cols-[160px_1fr] sm:items-center sm:px-5 ${
-                      index > 0 ? "border-t" : ""
-                    } ${index % 2 ? "bg-muted/25" : ""}`}
-                  >
-                    <h4 className="text-sm font-semibold">{method}</h4>
-                    <div className="grid gap-3 sm:grid-cols-2 sm:gap-5">
-                      <MetricBar
-                        label="Any evidence"
-                        value={Number(anyEvidence)}
-                        color="bg-blue-500"
-                        highlight={Number(anyEvidence) === 100}
-                      />
-                      <MetricBar
-                        label="All evidence"
-                        value={Number(allEvidence)}
-                        color="bg-emerald-500"
-                        highlight={Number(allEvidence) === 74.4}
-                      />
+                  <div className="relative ml-12 h-[250px] border-b border-l border-slate-300 dark:border-slate-700">
+                    {[0, 25, 50, 75, 100].map((tick) => (
+                      <div
+                        key={tick}
+                        className="absolute left-0 right-0 border-t border-slate-200 dark:border-slate-800"
+                        style={{ bottom: `${tick * 2.1}px` }}
+                      >
+                        <span className="absolute -left-10 -translate-y-1/2 font-mono text-[11px] text-muted-foreground">
+                          {tick}
+                        </span>
+                      </div>
+                    ))}
+
+                    <div className="absolute inset-x-4 bottom-0 top-0 flex items-end justify-around">
+                      {[
+                        ["Object BM25", 91.1, 53.3],
+                        ["Page BM25", 95.6, 63.3],
+                        ["Object Qwen3", 95.6, 61.1],
+                        ["BM25 + BGE hybrid", 98.9, 74.4],
+                        ["BM25 + E5 hybrid", 100.0, 67.8],
+                      ].map(([method, anyEvidence, allEvidence]) => (
+                        <div
+                          key={String(method)}
+                          className="flex h-full items-end gap-2"
+                          title={`${method}: any evidence ${Number(anyEvidence).toFixed(1)}%, all evidence ${Number(allEvidence).toFixed(1)}%`}
+                        >
+                          {[
+                            [anyEvidence, "bg-blue-500"],
+                            [allEvidence, "bg-emerald-500"],
+                          ].map(([value, color], barIndex) => (
+                            <div
+                              key={barIndex}
+                              className="flex h-full w-10 flex-col justify-end"
+                            >
+                              <span
+                                className={`mb-1 text-center font-mono text-[11px] font-bold tabular-nums ${
+                                  Number(value) === 100 || Number(value) === 74.4
+                                    ? "text-blue-700 dark:text-blue-300"
+                                    : "text-foreground"
+                                }`}
+                              >
+                                {Number(value).toFixed(1)}
+                              </span>
+                              <div
+                                className={`w-full rounded-t-md ${color} shadow-sm`}
+                                style={{ height: `${Number(value) * 2.1}px` }}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      ))}
                     </div>
                   </div>
-                ))}
+
+                  <div className="ml-12 grid grid-cols-5 px-4 pt-3 text-center text-xs font-semibold leading-4">
+                    {[
+                      "Object BM25",
+                      "Page BM25",
+                      "Object Qwen3",
+                      "BM25 + BGE hybrid",
+                      "BM25 + E5 hybrid",
+                    ].map((method) => (
+                      <span key={method} className="px-2">
+                        {method}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
