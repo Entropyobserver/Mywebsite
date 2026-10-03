@@ -132,30 +132,35 @@ export default function FinragEquinorResearch() {
           description="The benchmark covers nine question types. We manually checked all 720 QA items and separately audited PDF extraction and QA quality."
         />
         <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {[
-              ["Direct factual", 90],
-              ["Numerical extraction", 90],
-              ["Definition / policy", 60],
-              ["Causal explanation", 75],
-              ["Temporal, year-specific", 75],
-              ["Table-grounded", 90],
-              ["Multi-evidence", 90],
-              ["Layout-sensitive", 90],
-              ["Unanswerable", 60],
-            ].map(([label, count]) => (
-              <div
-                key={String(label)}
-                className="flex min-h-28 flex-col justify-between rounded-2xl border bg-background p-4"
-              >
-                <span className="text-sm leading-5 text-muted-foreground">
-                  {label}
-                </span>
-                <span className="mt-3 font-heading text-3xl text-blue-700 dark:text-blue-300">
-                  {count}
-                </span>
-              </div>
-            ))}
+          <div className="overflow-hidden rounded-2xl border bg-background">
+            <table className="w-full text-left text-sm">
+              <thead className="bg-blue-700 text-white">
+                <tr>
+                  <th className="px-5 py-3 font-semibold">Question type</th>
+                  <th className="px-5 py-3 text-right font-semibold">Items</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                {[
+                  ["Direct factual", 90],
+                  ["Numerical extraction", 90],
+                  ["Definition / policy", 60],
+                  ["Causal explanation", 75],
+                  ["Temporal, year-specific", 75],
+                  ["Table-grounded", 90],
+                  ["Multi-evidence", 90],
+                  ["Layout-sensitive", 90],
+                  ["Unanswerable", 60],
+                ].map(([label, count], index) => (
+                  <tr key={String(label)} className={index % 2 ? "bg-muted/35" : ""}>
+                    <td className="px-5 py-2.5">{label}</td>
+                    <td className="px-5 py-2.5 text-right font-mono tabular-nums">
+                      {count}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
           <div className="space-y-4">
             {[
