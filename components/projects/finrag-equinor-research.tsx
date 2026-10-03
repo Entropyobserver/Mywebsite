@@ -309,8 +309,8 @@ export default function FinragEquinorResearch() {
               </p>
               <h3 className="font-heading text-2xl">Does more context help?</h3>
               <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
-                We use the With reference-year filter setting and compare
-                objects, pages, page-windows, and object-windows.
+                We use the <strong>With reference-year filter</strong> setting
+                and compare four retrieval units.
               </p>
             </div>
             <div className="overflow-x-auto">
@@ -321,10 +321,10 @@ export default function FinragEquinorResearch() {
                       Retrieval unit
                     </th>
                     <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Chunk Recall@10
+                      Evidence found @10
                     </th>
                     <th className="px-5 py-3 text-right font-semibold sm:px-6">
-                      Page Recall@10
+                      Correct page found @10
                     </th>
                   </tr>
                 </thead>
@@ -360,35 +360,37 @@ export default function FinragEquinorResearch() {
                 </tbody>
               </table>
             </div>
-            <div className="space-y-2 border-t bg-muted/20 px-5 py-4 text-xs leading-5 text-muted-foreground sm:px-6 sm:text-sm sm:leading-6">
-              <p>
-                An <strong className="text-foreground">object</strong> is one
-                paragraph, heading, or table. A{" "}
-                <strong className="text-foreground">page</strong> contains all
-                the objects on one PDF page. A{" "}
-                <strong className="text-foreground">page-window</strong>{" "}
-                contains up to three nearby pages. An{" "}
-                <strong className="text-foreground">object-window</strong>{" "}
-                contains eight nearby objects.
-              </p>
-              <p>
-                <strong className="text-foreground">Evidence found</strong>{" "}
-                means that one of the top 10 results contains the needed
-                evidence.{" "}
-                <strong className="text-foreground">Correct page found</strong>{" "}
-                means that one of the top 10 results reaches the correct page.
-              </p>
+            <div className="grid gap-5 border-t bg-muted/20 px-5 py-5 text-xs leading-5 text-muted-foreground sm:grid-cols-2 sm:px-6 sm:text-sm sm:leading-6">
+              <div>
+                <h4 className="mb-2 font-semibold text-foreground">
+                  What does each unit contain?
+                </h4>
+                <ul className="list-disc space-y-1 pl-4">
+                  <li><strong className="text-foreground">Object:</strong> one paragraph, heading, or table</li>
+                  <li><strong className="text-foreground">Page:</strong> all objects on one PDF page</li>
+                  <li><strong className="text-foreground">Page-window:</strong> up to three nearby pages</li>
+                  <li><strong className="text-foreground">Object-window:</strong> eight nearby objects</li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="mb-2 font-semibold text-foreground">Metrics</h4>
+                <ul className="list-disc space-y-1 pl-4">
+                  <li><strong className="text-foreground">Evidence found:</strong> a top-10 result contains the needed evidence</li>
+                  <li><strong className="text-foreground">Correct page found:</strong> a top-10 result reaches the correct page</li>
+                </ul>
+              </div>
             </div>
             <div className="border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p className="border-l-4 border-blue-600 pl-4 font-medium">
-                Whole-page retrieval gives the best result for finding the
-                evidence. For 91.2% of the questions, one of the top 10 results
-                contains the needed evidence. Object-window retrieval gives the
-                best result for finding the correct page, reaching it for 92.4%
-                of the questions.
+                <strong>
+                  Whole-page retrieval works best for finding the evidence
+                  (91.2%). Object-window retrieval works best for finding the
+                  correct page (92.4%).
+                </strong>
                 <span className="mt-2 block font-semibold text-blue-700 dark:text-blue-300">
-                  Takeaway: The best choice depends on what we want to find.
-                  More context can help, but bigger is not always better.
+                  Takeaway: One page works best for finding the exact evidence,
+                  while adding nearby objects helps find the correct page.
+                  Adding more pages does not improve the results.
                 </span>
               </p>
             </div>
