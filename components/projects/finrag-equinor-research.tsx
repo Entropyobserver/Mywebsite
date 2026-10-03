@@ -3,7 +3,7 @@ import Image from "next/image";
 const researchQuestions = [
   "How do the year filter and retrieval-unit size affect evidence retrieval?",
   "Where and how does retrieval fail?",
-  "Does retrieving better evidence lead to more accurate answers?",
+  "Does better evidence lead to better answers?",
 ];
 
 function SectionHeader({
@@ -710,7 +710,7 @@ export default function FinragEquinorResearch() {
       <section id="rq3">
         <SectionHeader
           title={`RQ3. ${researchQuestions[2]}`}
-          description="To answer RQ3, we use an end-to-end experiment: the same answer generator is given different evidence, and we compare the resulting answer accuracy."
+          description="We use the same questions and the same answer model, but provide different evidence."
         />
         <div className="overflow-hidden rounded-2xl border bg-background">
           <div className="border-b bg-muted/30 px-5 py-5 sm:px-6">
@@ -718,68 +718,82 @@ export default function FinragEquinorResearch() {
               Answer accuracy on 660 questions
             </h3>
           </div>
-          <div className="space-y-6 p-5 sm:p-6">
-            {[
-              ["Question only (closed-book)", 3.2],
-              ["BM25-year evidence", 58.9],
-              ["Hybrid + reranked evidence", 71.4],
-              ["Annotated reference evidence", 82.4],
-            ].map(([evidence, accuracy], index) => (
-              <MetricBar
-                key={String(evidence)}
-                label={String(evidence)}
-                value={Number(accuracy)}
-                color={index === 3 ? "bg-teal-600" : "bg-blue-600"}
-                highlight={index >= 2}
-              />
-            ))}
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[480px] text-left text-sm">
+              <thead className="bg-blue-700 text-white">
+                <tr>
+                  <th className="px-5 py-3 font-semibold sm:px-6">
+                    Evidence given to the model
+                  </th>
+                  <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                    Accuracy
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y">
+                {[
+                  ["Question only", "3.2%"],
+                  ["BM25-year evidence", "58.9%"],
+                  ["Hybrid + reranked evidence", "71.4%"],
+                  ["Annotated reference evidence", "82.4%"],
+                ].map(([evidence, accuracy], index) => (
+                  <tr key={evidence} className={index % 2 ? "bg-muted/35" : ""}>
+                    <td className="px-5 py-4 font-medium sm:px-6">{evidence}</td>
+                    <td className="px-5 py-4 text-right font-mono font-bold tabular-nums text-blue-700 dark:text-blue-300 sm:px-6">
+                      {accuracy}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-          <div className="border-t bg-muted/20 px-5 py-4 text-sm leading-6 sm:px-6">
-            <p className="text-muted-foreground">
-              <strong className="text-foreground">
-                Question only (closed-book)
-              </strong>{" "}
-              means that the model receives no retrieved evidence.{" "}
-              <strong className="text-foreground">BM25-year</strong> and{" "}
-              <strong className="text-foreground">Hybrid + reranked</strong> use
-              automatically retrieved evidence.{" "}
-              <strong className="text-foreground">
-                Annotated reference evidence
-              </strong>{" "}
-              gives the model the evidence linked to each question in the
-              benchmark.
+          <div className="space-y-1 border-t bg-muted/20 px-5 py-4 text-sm leading-6 text-muted-foreground sm:px-6">
+            <p><strong className="text-foreground">Question only:</strong> No retrieved evidence</p>
+            <p><strong className="text-foreground">BM25-year / Hybrid + reranked:</strong> Automatically retrieved evidence</p>
+            <p><strong className="text-foreground">Annotated reference evidence:</strong> Evidence linked to each question</p>
+            <p className="pt-2 font-medium text-foreground">
+              All four settings correctly abstain on all 60 unanswerable questions.
             </p>
           </div>
         </div>
+        <h3 className="mt-8 font-heading text-2xl">Takeaway</h3>
         <EvidenceConclusion>
-          Better retrieved evidence leads to more accurate answers. However,
-          even annotated reference evidence does not solve every question,
-          especially layout-sensitive questions.
+          <p className="font-semibold">Better evidence leads to better answers.</p>
+          <p className="mt-2">
+            Even with annotated reference evidence, some questions remain
+            difficult, especially layout-sensitive questions.
+          </p>
         </EvidenceConclusion>
-        <p className="mt-3 text-sm leading-6 text-muted-foreground">
-          For multi-evidence questions, retrieval may find one useful evidence
-          item while still missing the complete evidence set.
-        </p>
       </section>
 
       <section>
         <SectionHeader title="What We Learned" />
-        <div className="grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-2xl border border-blue-200 bg-blue-50/70 p-6 dark:border-blue-900 dark:bg-blue-950/20">
-            <p className="leading-7 text-blue-950 dark:text-blue-100">
-              LongFinRAG shows that reliable financial RAG requires more than
-              finding a relevant report. A system must locate the correct
-              page, retrieve the complete evidence, and use that evidence
-              correctly.
-            </p>
+        <div className="overflow-hidden rounded-2xl border bg-background">
+          <div className="grid divide-y sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+            {[
+              ["01", "Locate the evidence", "Find the correct report, page, paragraph, or table."],
+              ["02", "Retrieve complete evidence", "Find every required item for multi-evidence questions."],
+              ["03", "Use the evidence", "Turn the retrieved evidence into an accurate answer."],
+            ].map(([number, title, description]) => (
+              <div key={number} className="p-5 sm:p-6">
+                <span className="font-mono text-sm font-bold text-blue-600 dark:text-blue-400">
+                  {number}
+                </span>
+                <h3 className="mt-2 font-heading text-lg">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  {description}
+                </p>
+              </div>
+            ))}
           </div>
-          <div className="rounded-2xl border bg-muted/20 p-6">
-            <h3 className="font-heading text-xl">Scope</h3>
-            <p className="mt-3 text-sm leading-6 text-muted-foreground">
-              This is a controlled longitudinal study of one company and 15
-              English annual reports. Cross-company, multilingual, and fully
-              multimodal evaluation remain future work.
-            </p>
+          <div className="border-t border-blue-200 bg-blue-50/70 px-5 py-4 text-blue-950 dark:border-blue-900 dark:bg-blue-950/20 dark:text-blue-100 sm:px-6">
+            <strong>Better evidence leads to better answers.</strong>
+          </div>
+          <div className="border-t px-5 py-4 text-sm leading-6 text-muted-foreground sm:px-6">
+            <strong className="text-foreground">Scope:</strong> LongFinRAG is a
+            controlled study of one company and 15 English annual reports.
+            Cross-company, multilingual, and multimodal evaluation remain
+            future work.
           </div>
         </div>
       </section>
