@@ -488,70 +488,92 @@ export default function FinragEquinorResearch() {
                 results.
               </p>
             </div>
-            <div className="grid gap-4 p-5 sm:grid-cols-2 sm:p-6">
-              {[
-                {
-                  method: "BM25 candidates",
-                  results: [
-                    ["Before", "41.1%", "0.524"],
-                    ["MiniLM", "64.7%", "0.689"],
-                    ["BGE", "63.6%", "0.685"],
-                  ],
-                },
-                {
-                  method: "BM25 + BGE candidates",
-                  results: [
-                    ["Before", "49.8%", "0.616"],
-                    ["MiniLM", "68.3%", "0.740"],
-                    ["BGE", "68.0%", "0.739"],
-                  ],
-                },
-              ].map(({ method, results }) => (
-                <div key={method} className="overflow-hidden rounded-2xl border">
-                  <h4 className="border-b bg-muted/25 px-4 py-3 text-sm font-semibold">
-                    {method}
-                  </h4>
-                  <div className="grid grid-cols-3 divide-x">
-                    {results.map(([reranker, recall, mrr], index) => (
-                      <div
-                        key={reranker}
-                        className={`px-3 py-4 text-center ${
-                          index === 1
-                            ? "bg-blue-50/80 dark:bg-blue-950/25"
-                            : ""
-                        }`}
-                      >
-                        <p className="text-xs font-semibold text-muted-foreground">
-                          {reranker}
-                        </p>
-                        <p
-                          className={`mt-2 font-mono text-xl font-bold ${
-                            index === 1
-                              ? "text-blue-700 dark:text-blue-300"
-                              : ""
-                          }`}
-                        >
-                          {recall}
-                        </p>
-                        <p className="mt-1 font-mono text-[11px] text-muted-foreground">
-                          MRR {mrr}
-                        </p>
-                      </div>
+            <div className="p-5 sm:p-6">
+              <div className="mb-6 flex flex-wrap items-center justify-center gap-2 text-xs font-semibold sm:text-sm">
+                <span className="rounded-full bg-muted px-3 py-1.5">Retrieve top 10</span>
+                <span className="text-muted-foreground">→</span>
+                <span className="rounded-full bg-blue-50 px-3 py-1.5 text-blue-700 dark:bg-blue-950/30 dark:text-blue-300">
+                  MiniLM / BGE rerank
+                </span>
+                <span className="text-muted-foreground">→</span>
+                <span className="rounded-full bg-muted px-3 py-1.5">Check rank 1</span>
+              </div>
+
+              <div className="overflow-x-auto pb-2">
+                <div className="min-w-[560px]">
+                  <div className="mb-5 flex justify-center gap-6 text-xs font-semibold text-muted-foreground">
+                    {[
+                      ["Before", "bg-slate-400"],
+                      ["MiniLM", "bg-blue-500"],
+                      ["BGE", "bg-emerald-500"],
+                    ].map(([label, color]) => (
+                      <span key={label} className="flex items-center gap-2">
+                        <span className={`h-3 w-3 rounded-sm ${color}`} />
+                        {label}
+                      </span>
                     ))}
                   </div>
+
+                  <div className="relative ml-10 h-[205px] border-b border-l border-slate-300 dark:border-slate-700">
+                    {[0, 20, 40, 60, 80].map((tick) => (
+                      <div
+                        key={tick}
+                        className="absolute left-0 right-0 border-t border-slate-200 dark:border-slate-800"
+                        style={{ bottom: `${tick * 2.25}px` }}
+                      >
+                        <span className="absolute -left-8 -translate-y-1/2 font-mono text-[11px] text-muted-foreground">
+                          {tick}
+                        </span>
+                      </div>
+                    ))}
+
+                    <div className="absolute inset-x-10 bottom-0 top-0 flex items-end justify-around">
+                      {[
+                        ["BM25", 41.1, 64.7, 63.6],
+                        ["BM25 + BGE", 49.8, 68.3, 68.0],
+                      ].map(([method, before, miniLm, bge]) => (
+                        <div key={String(method)} className="flex h-full items-end gap-3">
+                          {[
+                            [before, "bg-slate-400"],
+                            [miniLm, "bg-blue-500"],
+                            [bge, "bg-emerald-500"],
+                          ].map(([value, color], index) => (
+                            <div key={index} className="flex h-full w-12 flex-col justify-end">
+                              <span className="mb-1 text-center font-mono text-xs font-bold tabular-nums">
+                                {Number(value).toFixed(1)}
+                              </span>
+                              <div
+                                className={`w-full rounded-t-md ${color} shadow-sm`}
+                                style={{ height: `${Number(value) * 2.25}px` }}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="ml-10 grid grid-cols-2 px-10 pt-3 text-center text-sm font-semibold">
+                    <span>BM25</span>
+                    <span>BM25 + BGE</span>
+                  </div>
+                  <p className="mt-4 text-center text-xs text-muted-foreground">
+                    Object Recall@1 · Higher is better
+                  </p>
                 </div>
-              ))}
+              </div>
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p className="text-muted-foreground">
                 Object Recall@1 measures how often the first result is an exact
-                reference object. MRR summarizes the overall ranking.
+                reference object. MRR also improves with both rerankers.
               </p>
               <p className="border-l-4 border-blue-600 pl-4 font-medium">
-                Both rerankers improve the two candidate sets shown above.
-                MiniLM performs slightly better in both cases.
+                Reranking improves the top result for both candidate sets.
+                MiniLM is slightly better in both cases.
                 <span className="mt-2 block font-semibold text-blue-700 dark:text-blue-300">
-                  Takeaway: It cannot recover evidence that was not retrieved.
+                  Takeaway: Reranking cannot find evidence that is not already
+                  in the top 10.
                 </span>
               </p>
             </div>
