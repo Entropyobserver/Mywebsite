@@ -304,42 +304,52 @@ export default function FinragEquinorResearch() {
                 objects, pages, page-windows, and object-windows.
               </p>
             </div>
-            <div className="p-5 sm:p-6">
-              <div className="mb-4 flex flex-wrap gap-x-6 gap-y-2 text-xs font-semibold text-muted-foreground">
-                <span className="flex items-center gap-2">
-                  <span className="h-2.5 w-2.5 rounded-full bg-blue-600" />
-                  Chunk R@10
-                </span>
-                <span className="flex items-center gap-2">
-                  <span className="h-2.5 w-2.5 rounded-full bg-teal-500" />
-                  Page R@10
-                </span>
-              </div>
-              <div className="grid gap-4 md:grid-cols-2">
-              {[
-                ["Object", 76.5, 85.8],
-                ["Page", 91.2, 91.2],
-                ["Page-window", 88.5, 88.5],
-                ["Object-window", 89.2, 92.4],
-              ].map(([unit, chunkRecall, pageRecall]) => (
-                <div key={String(unit)} className="rounded-xl border bg-muted/10 p-4">
-                  <h4 className="mb-4 font-semibold">{unit}</h4>
-                  <div className="space-y-4">
-                    <MetricBar
-                      label="Evidence-containing chunk"
-                      value={Number(chunkRecall)}
-                      highlight={unit === "Page"}
-                    />
-                    <MetricBar
-                      label="Correct page"
-                      value={Number(pageRecall)}
-                      color="bg-teal-500"
-                      highlight={unit === "Object-window"}
-                    />
-                  </div>
-                </div>
-              ))}
-              </div>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[520px] text-left text-sm">
+                <thead className="bg-blue-700 text-white">
+                  <tr>
+                    <th className="px-5 py-3 font-semibold sm:px-6">
+                      Retrieval unit
+                    </th>
+                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                      Chunk Recall@10
+                    </th>
+                    <th className="px-5 py-3 text-right font-semibold sm:px-6">
+                      Page Recall@10
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y">
+                  {[
+                    ["Object", "76.5%", "85.8%"],
+                    ["Page", "91.2%", "91.2%"],
+                    ["Page-window", "88.5%", "88.5%"],
+                    ["Object-window", "89.2%", "92.4%"],
+                  ].map(([unit, chunkRecall, pageRecall], index) => (
+                    <tr key={unit} className={index % 2 ? "bg-muted/35" : ""}>
+                      <td className="px-5 py-4 font-medium sm:px-6">{unit}</td>
+                      <td
+                        className={`px-5 py-4 text-right font-mono sm:px-6 ${
+                          index === 1
+                            ? "font-bold text-blue-700 dark:text-blue-300"
+                            : ""
+                        }`}
+                      >
+                        {chunkRecall}
+                      </td>
+                      <td
+                        className={`px-5 py-4 text-right font-mono sm:px-6 ${
+                          index === 3
+                            ? "font-bold text-blue-700 dark:text-blue-300"
+                            : ""
+                        }`}
+                      >
+                        {pageRecall}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
             <div className="space-y-2 border-t bg-muted/20 px-5 py-4 text-xs leading-5 text-muted-foreground sm:px-6 sm:text-sm sm:leading-6">
               <p>
@@ -393,31 +403,100 @@ export default function FinragEquinorResearch() {
                 We compare the top-10 results with the reference evidence.
               </p>
             </div>
-            <div className="bg-white p-4 dark:bg-slate-950 sm:p-6">
-              <Image
-                src="/projects/finrag-equinor/paper-error-location.png"
-                alt="Top-10 BM25 retrieval outcomes without and with the reference-year filter"
-                width={882}
-                height={468}
-                className="mx-auto h-auto w-full max-w-4xl"
-              />
+            <div className="p-5 sm:p-6">
+              <div className="grid gap-4 lg:grid-cols-2">
+                {[
+                  {
+                    setting: "Without year filter",
+                    summary: "Searches all 15 reports",
+                    values: [52.4, 8.8, 6.7, 23.6, 8.5],
+                  },
+                  {
+                    setting: "With reference-year filter",
+                    summary: "Searches only the correct report",
+                    values: [76.5, 9.2, 5.0, 9.2, 0],
+                  },
+                ].map(({ setting, summary, values }) => {
+                  const categories = [
+                    ["Exact object", "bg-emerald-500"],
+                    ["Right page, wrong object", "bg-cyan-400"],
+                    ["Nearby page", "bg-sky-300"],
+                    ["Right report, wrong page", "bg-indigo-500"],
+                    ["Wrong report", "bg-rose-500"],
+                  ];
+
+                  return (
+                    <div key={setting} className="rounded-xl border bg-muted/15 p-4 sm:p-5">
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <h4 className="font-semibold">{setting}</h4>
+                          <p className="mt-1 text-xs text-muted-foreground">
+                            {summary}
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-mono text-2xl font-bold text-emerald-600 dark:text-emerald-400">
+                            {values[0].toFixed(1)}%
+                          </p>
+                          <p className="text-[11px] text-muted-foreground">
+                            exact object
+                          </p>
+                        </div>
+                      </div>
+
+                      <div
+                        className="mt-5 flex h-7 overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800"
+                        aria-label={`${setting}: ${values.join(", ")} percent across the five retrieval outcomes`}
+                      >
+                        {categories.map(([label, color], index) =>
+                          values[index] > 0 ? (
+                            <div
+                              key={label}
+                              className={`${color} flex h-full items-center justify-center text-[9px] font-bold text-white first:rounded-l-lg last:rounded-r-lg sm:text-[10px]`}
+                              style={{ width: `${values[index]}%` }}
+                              title={`${label}: ${values[index].toFixed(1)}%`}
+                            >
+                              {values[index].toFixed(1)}
+                            </div>
+                          ) : null,
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs font-medium text-muted-foreground">
+                {[
+                  ["Exact object", "bg-emerald-500"],
+                  ["Right page, wrong object", "bg-cyan-400"],
+                  ["Nearby page", "bg-sky-300"],
+                  ["Right report, wrong page", "bg-indigo-500"],
+                  ["Wrong report", "bg-rose-500"],
+                ].map(([label, color]) => (
+                  <span key={label} className="flex items-center gap-2">
+                    <span className={`h-2.5 w-2.5 rounded-full ${color}`} />
+                    {label}
+                  </span>
+                ))}
+              </div>
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p className="text-muted-foreground">
                 For questions with several evidence objects, an exact-object
-                hit means that at least one reference object is found. All
-                methods except BM25 use reference-year filtering.
+                hit means that at least one reference object is found. The five
+                outcomes are mutually exclusive, so each setting adds up to
+                100%.
               </p>
               <p className="border-l-4 border-blue-600 pl-4 font-medium">
-                Without year filter, BM25 can retrieve evidence from the wrong
-                report. The With reference-year filter setting removes this
-                error. BGE-M3, E5-large, and the hybrid methods find the exact
-                evidence more often than BM25, but they can still select the
-                wrong page or object.
+                Without year filter, BM25 finds the exact object for 52.4% of
+                questions and sometimes searches the wrong report. With the
+                reference-year filter, exact-object retrieval rises to 76.5%
+                and wrong-report errors fall to zero. Wrong-page and
+                wrong-object errors still remain.
                 <span className="mt-2 block font-semibold text-blue-700 dark:text-blue-300">
-                  Takeaway: The With reference-year filter setting removes
-                  wrong-report errors, but errors within the correct report
-                  remain.
+                  Takeaway: The reference-year filter removes wrong-report
+                  errors, but it does not solve errors within the correct
+                  report.
                 </span>
               </p>
             </div>
