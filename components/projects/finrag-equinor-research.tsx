@@ -768,34 +768,27 @@ export default function FinragEquinorResearch() {
 
       <section>
         <SectionHeader title="What We Learned" />
-        <div className="overflow-hidden rounded-2xl border bg-background">
-          <div className="grid divide-y sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-            {[
-              ["01", "Locate the evidence", "Find the correct report, page, paragraph, or table."],
-              ["02", "Retrieve complete evidence", "Find every required item for multi-evidence questions."],
-              ["03", "Use the evidence", "Turn the retrieved evidence into an accurate answer."],
-            ].map(([number, title, description]) => (
-              <div key={number} className="p-5 sm:p-6">
-                <span className="font-mono text-sm font-bold text-blue-600 dark:text-blue-400">
-                  {number}
-                </span>
-                <h3 className="mt-2 font-heading text-lg">{title}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  {description}
-                </p>
+        <p className="max-w-4xl leading-7 text-muted-foreground">
+          Reliable RAG must move from the correct report to the correct answer,
+          without losing evidence along the way.
+        </p>
+        <div className="mt-5 flex flex-wrap items-center gap-2 rounded-2xl border bg-muted/20 px-5 py-5 text-sm font-semibold sm:px-6 sm:text-base">
+          {["Right report", "Right page", "Exact evidence", "Complete evidence", "Correct answer"].map(
+            (step, index) => (
+              <div key={step} className="flex items-center gap-2">
+                {index > 0 && (
+                  <span className="text-blue-600 dark:text-blue-400">→</span>
+                )}
+                <span>{step}</span>
               </div>
-            ))}
-          </div>
-          <div className="border-t border-blue-200 bg-blue-50/70 px-5 py-4 text-blue-950 dark:border-blue-900 dark:bg-blue-950/20 dark:text-blue-100 sm:px-6">
-            <strong>Better evidence leads to better answers.</strong>
-          </div>
-          <div className="border-t px-5 py-4 text-sm leading-6 text-muted-foreground sm:px-6">
-            <strong className="text-foreground">Scope:</strong> LongFinRAG is a
-            controlled study of one company and 15 English annual reports.
-            Cross-company, multilingual, and multimodal evaluation remain
-            future work.
-          </div>
+            ),
+          )}
         </div>
+        <p className="mt-4 border-l-2 border-border pl-4 text-sm leading-6 text-muted-foreground">
+          <strong className="text-foreground">Scope:</strong> LongFinRAG studies
+          one company and 15 English annual reports. Cross-company,
+          multilingual, and multimodal evaluation remain future work.
+        </p>
       </section>
     </div>
   );
