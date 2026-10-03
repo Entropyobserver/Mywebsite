@@ -517,27 +517,63 @@ export default function FinragEquinorResearch() {
               </h3>
               <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
                 The correct evidence may be in the top 10 but ranked too low.
-                A cross-encoder reorders the same top-10 results.
+                Two cross-encoders, MiniLM and BGE, reorder the same top-10
+                results.
               </p>
             </div>
             <div className="grid gap-4 p-5 sm:grid-cols-2 sm:p-6">
-              <div className="rounded-2xl border bg-muted/15 p-5">
-                <p className="text-sm font-medium text-muted-foreground">
-                  BM25 · Object Recall@1
-                </p>
-                <p className="mt-2 font-mono text-2xl">
-                  41.1% <span className="text-muted-foreground">→</span>{" "}
-                  <strong className="text-blue-700 dark:text-blue-300">64.7%</strong>
-                </p>
-              </div>
-              <div className="rounded-2xl border bg-blue-50/70 p-5 dark:bg-blue-950/20">
-                <p className="text-sm font-medium text-muted-foreground">
-                  Best hybrid · Object Recall@1 / MRR
-                </p>
-                <p className="mt-2 font-mono text-2xl">
-                  <strong className="text-blue-700 dark:text-blue-300">68.3% / 0.740</strong>
-                </p>
-              </div>
+              {[
+                {
+                  method: "BM25 candidates",
+                  results: [
+                    ["Before", "41.1%", "0.524"],
+                    ["MiniLM", "64.7%", "0.689"],
+                    ["BGE", "63.6%", "0.685"],
+                  ],
+                },
+                {
+                  method: "BM25 + BGE candidates",
+                  results: [
+                    ["Before", "49.8%", "0.616"],
+                    ["MiniLM", "68.3%", "0.740"],
+                    ["BGE", "68.0%", "0.739"],
+                  ],
+                },
+              ].map(({ method, results }) => (
+                <div key={method} className="overflow-hidden rounded-2xl border">
+                  <h4 className="border-b bg-muted/25 px-4 py-3 text-sm font-semibold">
+                    {method}
+                  </h4>
+                  <div className="grid grid-cols-3 divide-x">
+                    {results.map(([reranker, recall, mrr], index) => (
+                      <div
+                        key={reranker}
+                        className={`px-3 py-4 text-center ${
+                          index === 1
+                            ? "bg-blue-50/80 dark:bg-blue-950/25"
+                            : ""
+                        }`}
+                      >
+                        <p className="text-xs font-semibold text-muted-foreground">
+                          {reranker}
+                        </p>
+                        <p
+                          className={`mt-2 font-mono text-xl font-bold ${
+                            index === 1
+                              ? "text-blue-700 dark:text-blue-300"
+                              : ""
+                          }`}
+                        >
+                          {recall}
+                        </p>
+                        <p className="mt-1 font-mono text-[11px] text-muted-foreground">
+                          MRR {mrr}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p className="text-muted-foreground">
@@ -545,8 +581,10 @@ export default function FinragEquinorResearch() {
                 reference object. MRR summarizes the overall ranking.
               </p>
               <p className="border-l-4 border-blue-600 pl-4 font-medium">
-                Reranking improves both the top result and the overall ranking
-                for every retriever.
+                Both rerankers improve the first result and the overall
+                ranking. Their results are very similar: MiniLM performs
+                slightly better on BM25 and BM25 + BGE, while BGE performs
+                slightly better on E5 and Qwen3.
                 <span className="mt-2 block font-semibold text-blue-700 dark:text-blue-300">
                   Takeaway: It cannot recover evidence that was not retrieved.
                 </span>
@@ -654,7 +692,8 @@ export default function FinragEquinorResearch() {
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p className="text-muted-foreground">
                 Results cover 90 multi-evidence questions. All methods use
-                reference-year filtering.
+                reference-year filtering, and the hybrid results use RRF
+                fusion.
               </p>
               <p className="border-l-4 border-blue-600 pl-4 font-medium">
                 Finding one evidence item is common, but retrieving the
