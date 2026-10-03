@@ -567,14 +567,50 @@ export default function FinragEquinorResearch() {
                 finding any required evidence with finding the complete set.
               </p>
             </div>
-            <div className="bg-white p-4 dark:bg-slate-950 sm:p-6">
-              <Image
-                src="/projects/finrag-equinor/paper-evidence-completeness.png"
-                alt="Any-evidence and all-evidence Recall at 10 across five retrieval methods"
-                width={760}
-                height={466}
-                className="mx-auto h-auto w-full max-w-3xl"
-              />
+            <div className="p-5 sm:p-6">
+              <div className="mb-5 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs font-semibold text-muted-foreground">
+                <span className="flex items-center gap-2">
+                  <span className="h-2.5 w-2.5 rounded-full bg-blue-500" />
+                  Any evidence Recall@10
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                  All evidence Recall@10
+                </span>
+              </div>
+
+              <div className="overflow-hidden rounded-xl border">
+                {[
+                  ["Object BM25", 91.1, 53.3],
+                  ["Page BM25", 95.6, 63.3],
+                  ["Object Qwen3", 95.6, 61.1],
+                  ["BM25 + BGE hybrid", 98.9, 74.4],
+                  ["BM25 + E5 hybrid", 100.0, 67.8],
+                ].map(([method, anyEvidence, allEvidence], index) => (
+                  <div
+                    key={String(method)}
+                    className={`grid gap-4 px-4 py-4 sm:grid-cols-[160px_1fr] sm:items-center sm:px-5 ${
+                      index > 0 ? "border-t" : ""
+                    } ${index % 2 ? "bg-muted/25" : ""}`}
+                  >
+                    <h4 className="text-sm font-semibold">{method}</h4>
+                    <div className="grid gap-3 sm:grid-cols-2 sm:gap-5">
+                      <MetricBar
+                        label="Any evidence"
+                        value={Number(anyEvidence)}
+                        color="bg-blue-500"
+                        highlight={Number(anyEvidence) === 100}
+                      />
+                      <MetricBar
+                        label="All evidence"
+                        value={Number(allEvidence)}
+                        color="bg-emerald-500"
+                        highlight={Number(allEvidence) === 74.4}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="space-y-4 border-t px-5 py-5 text-sm leading-6 sm:px-6">
               <p className="text-muted-foreground">
