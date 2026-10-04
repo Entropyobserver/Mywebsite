@@ -1,3 +1,17 @@
+import {
+  ArrowRight,
+  BrainCircuit,
+  CheckCircle2,
+  Combine,
+  Database,
+  GitBranch,
+  Languages,
+  Layers,
+  Router,
+  Sparkles,
+} from "lucide-react";
+import Image from "next/image";
+
 const researchQuestions = [
   "Can Target-Anchored Synthesis provide useful training data?",
   "Do language-specific LoRA experts specialise, and how much do they overlap?",
@@ -138,6 +152,194 @@ function CrossExpertMatrix() {
   );
 }
 
+function ProjectOverview() {
+  const flowSteps = [
+    {
+      title: "Authentic EN–NO data",
+      description: "English sources and Norwegian target anchors from NPD.",
+      icon: Database,
+      tone: "teal",
+    },
+    {
+      title: "Target-Anchored Synthesis",
+      description:
+        "GPT-4o-mini generates DE, NL and FR sources with terminology and quality checks.",
+      icon: Sparkles,
+      tone: "teal",
+    },
+    {
+      title: "41,527 training pairs",
+      description: "Synthetic DE–NO, NL–NO and FR–NO petroleum data.",
+      icon: Languages,
+      tone: "teal",
+    },
+    {
+      title: "Frozen NLLB-200",
+      description: "One shared backbone with three adaptation strategies.",
+      icon: BrainCircuit,
+      tone: "violet",
+    },
+  ] as const;
+
+  const models = [
+    { title: "Multitask LoRA", note: "one shared adapter", icon: Combine },
+    {
+      title: "Independent Experts",
+      note: "one expert per language",
+      icon: Layers,
+    },
+    { title: "MoE Router", note: "automatic expert selection", icon: Router },
+  ];
+
+  const questions = [
+    {
+      label: "RQ1",
+      question: "Is the synthetic data useful?",
+      evidence: "Human validation and translation evaluation",
+      answer: "Useful controlled training signal",
+      tone: "blue",
+    },
+    {
+      label: "RQ2",
+      question: "What do the experts learn?",
+      evidence: "Cross-expert translation evaluation",
+      answer: "Experts specialise, but also overlap",
+      tone: "violet",
+    },
+    {
+      label: "RQ3",
+      question: "When does expert selection help?",
+      evidence: "Routing tests, interventions and authentic-source evaluation",
+      answer: "Its benefit depends on the source data",
+      tone: "orange",
+    },
+  ] as const;
+
+  const toneClasses = {
+    blue: {
+      border: "border-blue-500",
+      text: "text-blue-700 dark:text-blue-300",
+      soft: "bg-blue-50 dark:bg-blue-950/35",
+    },
+    violet: {
+      border: "border-violet-500",
+      text: "text-violet-700 dark:text-violet-300",
+      soft: "bg-violet-50 dark:bg-violet-950/35",
+    },
+    orange: {
+      border: "border-orange-500",
+      text: "text-orange-700 dark:text-orange-300",
+      soft: "bg-orange-50 dark:bg-orange-950/35",
+    },
+  } as const;
+
+  return (
+    <section>
+      <SectionHeader
+        eyebrow="Project overview"
+        title="Synthetic Data and Expert Adapters for Low-Resource Petroleum MT"
+        description="Data → Synthesis → Models → Evidence"
+      />
+
+      <div className="rounded-2xl border bg-background p-5 sm:p-7">
+        <div className="grid items-stretch gap-3 lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr]">
+          {flowSteps.map(({ title, description, icon: Icon, tone }, index) => (
+            <div className="contents" key={title}>
+              <div
+                className={`rounded-xl border-t-4 bg-muted/35 p-4 ${
+                  tone === "violet"
+                    ? "border-violet-500"
+                    : "border-teal-600"
+                }`}
+              >
+                <span
+                  className={`mb-3 flex h-9 w-9 items-center justify-center rounded-lg ${
+                    tone === "violet"
+                      ? "bg-violet-100 text-violet-700 dark:bg-violet-950/60 dark:text-violet-300"
+                      : "bg-teal-100 text-teal-700 dark:bg-teal-950/60 dark:text-teal-300"
+                  }`}
+                >
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <h3 className="font-semibold leading-snug">{title}</h3>
+                <p className="mt-1 text-sm leading-5 text-muted-foreground">
+                  {description}
+                </p>
+              </div>
+              {index < flowSteps.length - 1 && (
+                <div className="flex items-center justify-center text-muted-foreground/50 max-lg:h-7 max-lg:rotate-90">
+                  <ArrowRight className="h-6 w-6" aria-hidden="true" />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="my-4 grid gap-3 md:grid-cols-3">
+          {models.map(({ title, note, icon: Icon }) => (
+            <div
+              key={title}
+              className="flex items-center gap-3 rounded-xl border bg-background px-4 py-3"
+            >
+              <Icon
+                className="h-5 w-5 shrink-0 text-violet-600 dark:text-violet-300"
+                aria-hidden="true"
+              />
+              <div>
+                <p className="font-semibold">{title}</p>
+                <p className="text-xs text-muted-foreground">{note}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid gap-3 lg:grid-cols-3">
+          {questions.map(({ label, question, evidence, answer, tone }) => {
+            const colors = toneClasses[tone];
+            return (
+              <div
+                key={label}
+                className={`rounded-xl border-t-4 bg-muted/35 p-4 ${colors.border}`}
+              >
+                <p
+                  className={`text-xs font-semibold uppercase tracking-[0.14em] ${colors.text}`}
+                >
+                  {label}
+                </p>
+                <h3 className="mt-1 font-semibold leading-snug">{question}</h3>
+                <p className="mt-3 min-h-10 text-sm leading-5 text-muted-foreground">
+                  {evidence}
+                </p>
+                <div
+                  className={`mt-4 flex min-h-16 items-center gap-2 rounded-lg px-3 py-3 text-sm font-semibold leading-5 ${colors.soft}`}
+                >
+                  <CheckCircle2
+                    className={`h-4 w-4 shrink-0 ${colors.text}`}
+                    aria-hidden="true"
+                  />
+                  {answer}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-4 flex gap-3 rounded-r-xl border-l-4 border-teal-600 bg-teal-50 px-4 py-4 text-sm font-semibold leading-6 text-teal-950 dark:bg-teal-950/35 dark:text-teal-100">
+          <GitBranch
+            className="mt-0.5 h-5 w-5 shrink-0 text-teal-700 dark:text-teal-300"
+            aria-hidden="true"
+          />
+          <p>
+            Synthetic data supports low-resource adaptation; experts learn
+            different but overlapping capabilities; and the value of routing
+            depends on the source data.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function ModularLoraResearch() {
   return (
     <div className="space-y-16">
@@ -159,6 +361,8 @@ export default function ModularLoraResearch() {
           ))}
         </div>
       </section>
+
+      <ProjectOverview />
 
       <section>
         <SectionHeader title="System Overview" />
@@ -756,4 +960,3 @@ export default function ModularLoraResearch() {
     </div>
   );
 }
-import Image from "next/image";
