@@ -33,24 +33,26 @@ const finragMetadata = {
 };
 
 export function generateMetadata({ params }: ProjectPageProps): Metadata {
-  const project = Projects.find((val) => val.id === params.projectId);
+  const projectId =
+    params.projectId === "finrag-equinor" ? "longfinrag" : params.projectId;
+  const project = Projects.find((val) => val.id === projectId);
 
   if (!project) {
     return {};
   }
 
-  const canonical = `${siteConfig.url}/projects/${params.projectId}`;
+  const canonical = `${siteConfig.url}/projects/${projectId}`;
   const title =
-    project.id === "finrag-equinor"
+    project.id === "longfinrag"
       ? finragMetadata.title
       : project.companyName;
   const description =
-    project.id === "finrag-equinor"
+    project.id === "longfinrag"
       ? finragMetadata.description
       : project.shortDescription;
   const socialImage =
-    project.id === "finrag-equinor"
-      ? "/projects/finrag-equinor/cover.png"
+    project.id === "longfinrag"
+      ? "/projects/longfinrag/project-summary-2026.png"
       : project.companyLogoImg;
 
   return {
@@ -79,6 +81,10 @@ export function generateMetadata({ params }: ProjectPageProps): Metadata {
 }
 
 export default function Project({ params }: ProjectPageProps) {
+  if (params.projectId === "finrag-equinor") {
+    redirect("/projects/longfinrag");
+  }
+
   let project = Projects.find((val) => val.id === params.projectId);
   if (!project) {
     redirect("/projects");
@@ -89,7 +95,7 @@ export default function Project({ params }: ProjectPageProps) {
       className={cn(
         "container relative py-6 lg:py-10",
         project.id === "modular-lora-experts" ||
-          project.id === "finrag-equinor" ||
+          project.id === "longfinrag" ||
           project.id === "group-shapley-attribution" ||
           project.id === "structure-aware-graph-rag" ||
           project.id === "continual-petroleum-mt"
@@ -206,7 +212,7 @@ export default function Project({ params }: ProjectPageProps) {
 
       {project.id === "modular-lora-experts" ? (
         <ModularLoraResearch />
-      ) : project.id === "finrag-equinor" ? (
+      ) : project.id === "longfinrag" ? (
         <FinragEquinorResearch />
       ) : project.id === "group-shapley-attribution" ? (
         <GroupShapleyResearch />

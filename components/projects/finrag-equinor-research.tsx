@@ -189,7 +189,7 @@ export default function FinragEquinorResearch() {
         />
         <div className="overflow-hidden rounded-2xl border bg-background">
           <Image
-            src="/projects/finrag-equinor/paper-evaluation-framework.svg"
+            src="/projects/longfinrag/paper-evaluation-framework.svg"
             alt="LongFinRAG evaluation pipeline showing evidence retrieval for RQ1 and RQ2 and end-to-end question answering for RQ3"
             width={1600}
             height={600}
