@@ -594,86 +594,58 @@ export default function ModularLoraResearch() {
 
           <div className="border-b p-5 sm:p-7">
             <p className="mb-5 text-sm font-semibold uppercase tracking-[0.16em] text-blue-600 dark:text-blue-400">
-              02 · What information does the router use?
+              02 · What information drives routing?
             </p>
             <Image
               src="/projects/modular-lora-experts/fig_representation_interventions.png"
-              alt="Controlled routing interventions showing layer-wise language-subspace removal and router hidden-unit ablation"
-              width={1655}
-              height={540}
+              alt="Routing-accuracy drop after removing a probe-derived language-related subspace from encoder layers 3, 6, 9, and 12, compared with equal-rank random controls"
+              width={1200}
+              height={720}
               className="h-auto w-full rounded-xl bg-white object-contain"
             />
             <p className="mt-3 text-xs leading-5 text-muted-foreground">
-              Controlled routing interventions averaged over three runs. The
-              left plot removes language information from different encoder
-              layers. The right plot removes important or random hidden units
-              from the router. These runs use a separate 63.4% mean routing
+              Routing-accuracy change after removing a probe-derived,
+              rank-3 language-related subspace from encoder layers 3, 6, 9,
+              and 12. Equal-rank random removals provide the control. Results
+              are averaged over three runs with a separate 63.4% mean routing
               baseline.
             </p>
 
-            <div className="mt-6 grid gap-6 sm:grid-cols-2">
-              <div>
-                <p className="font-semibold text-foreground">
-                  Language information
-                </p>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground sm:text-base">
-                  We removed language information from different encoder layers
-                  and checked whether the router selected a different expert.
-                </p>
-                <ul className="mt-3 space-y-2 text-sm text-muted-foreground sm:text-base">
-                  <li>Layer 12: routing accuracy <strong>−22.6 points</strong></li>
-                  <li><strong>33.5%</strong> of routes change</li>
-                  <li>Random removal: only about <strong>0.4 points</strong></li>
-                </ul>
-                <p className="mt-3 font-semibold text-foreground">
-                  The router uses language information to choose an expert.
-                </p>
-              </div>
-              <div>
-                <p className="font-semibold text-foreground">
-                  Important router units
-                </p>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground sm:text-base">
-                  We removed the 16 hidden units that were most important to
-                  the router and compared them with 16 random units.
-                </p>
-                <ul className="mt-3 space-y-2 text-sm text-muted-foreground sm:text-base">
-                  <li>Top 16 units: routing accuracy <strong>−6.64 points</strong></li>
-                  <li>Random 16 units: <strong>no clear reduction</strong></li>
-                </ul>
-                <p className="mt-3 font-semibold text-foreground">
-                  A small number of hidden units are especially important for
-                  choosing the expert.
-                </p>
-              </div>
+            <p className="mt-5 max-w-4xl text-sm leading-6 text-muted-foreground sm:text-base">
+              Removing the identified language-related subspace has a larger
+              effect in deeper encoder layers, while the equal-rank random
+              control has little effect.
+            </p>
+
+            <div className="mt-6 grid gap-4 sm:grid-cols-3">
+              {[
+                ["Routing accuracy", "−22.6 points", "at encoder layer 12"],
+                ["Routes changed", "33.5%", "at encoder layer 12"],
+                ["Translation quality", "−0.74 BLEU", "a much smaller change"],
+              ].map(([label, value, note]) => (
+                <div
+                  key={label}
+                  className="rounded-xl border bg-muted/30 px-5 py-5 text-center"
+                >
+                  <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    {label}
+                  </p>
+                  <p className="mt-2 text-2xl font-semibold tabular-nums text-blue-600 dark:text-blue-400">
+                    {value}
+                  </p>
+                  <p className="mt-1 text-sm text-muted-foreground">{note}</p>
+                </div>
+              ))}
             </div>
 
-            <p className="mb-3 mt-6 text-sm font-semibold">
-              Does changing the expert change translation?
-            </p>
-            <div className="grid items-center gap-4 rounded-xl bg-muted/35 p-5 text-center sm:grid-cols-[1fr_auto_1fr]">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Routing accuracy
-                </p>
-                <p className="mt-1 text-2xl font-semibold">−22.6 points</p>
-              </div>
-              <span className="text-2xl text-muted-foreground" aria-hidden="true">
-                →
-              </span>
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  BLEU
-                </p>
-                <p className="mt-1 text-2xl font-semibold">only −0.74</p>
-              </div>
-            </div>
-            <p className="mt-4 text-sm leading-6 text-muted-foreground sm:text-base">
-              This result fits the expert overlap seen in RQ2.
-            </p>
             <p className="mt-5 rounded-xl bg-blue-50 px-5 py-4 font-semibold text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
-              The router uses language information to pick an expert. But a
-              different expert often gives a similar translation.
+              Language-related directions influence expert selection, but
+              changing many routing decisions has a much smaller effect on
+              translation quality.
+            </p>
+            <p className="mt-3 text-xs leading-5 text-muted-foreground sm:text-sm">
+              This intervention shows influence, not a complete explanation of
+              how the router works.
             </p>
           </div>
           <div className="border-b p-5 sm:p-7">
