@@ -138,6 +138,152 @@ function CrossExpertMatrix() {
   );
 }
 
+function LayerInterventionChart() {
+  const layers = ["3", "6", "9", "12"];
+  const languageDrops = [4.42, 7.84, 12.86, 22.58];
+  const randomDrops = [-0.32, -0.08, -0.43, 0.37];
+  const ticks = [-5, 0, 5, 10, 15, 20, 25];
+  const xPositions = [110, 295, 480, 665];
+  const yScale = (value: number) => 330 - ((value + 5) / 30) * 280;
+  const languagePoints = languageDrops
+    .map((value, index) => `${xPositions[index]},${yScale(value)}`)
+    .join(" ");
+  const randomPoints = randomDrops
+    .map((value, index) => `${xPositions[index]},${yScale(value)}`)
+    .join(" ");
+
+  return (
+    <div className="rounded-2xl border bg-white p-4 dark:bg-slate-950 sm:p-5">
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm font-semibold text-foreground">
+          Routing-accuracy drop by encoder layer
+        </p>
+        <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
+          <span className="flex items-center gap-2">
+            <span className="h-0.5 w-6 bg-blue-600" />
+            Language subspace
+          </span>
+          <span className="flex items-center gap-2">
+            <span className="h-0.5 w-6 bg-slate-400" />
+            Random control
+          </span>
+        </div>
+      </div>
+      <svg
+        viewBox="0 0 720 390"
+        className="h-auto w-full"
+        role="img"
+        aria-label="Line chart showing that removing the language-related subspace causes larger routing-accuracy drops in deeper encoder layers, while the random control remains near zero"
+      >
+        <rect x="615" y="42" width="100" height="296" rx="12" fill="#eff6ff" />
+        {ticks.map((tick) => {
+          const y = yScale(tick);
+          return (
+            <g key={tick}>
+              <line
+                x1="72"
+                y1={y}
+                x2="700"
+                y2={y}
+                stroke={tick === 0 ? "#94a3b8" : "#e2e8f0"}
+                strokeWidth={tick === 0 ? "1.5" : "1"}
+                strokeDasharray={tick === 0 ? undefined : "4 5"}
+              />
+              <text
+                x="58"
+                y={y + 5}
+                textAnchor="end"
+                fontSize="13"
+                fill="#64748b"
+              >
+                {tick}
+              </text>
+            </g>
+          );
+        })}
+        <line x1="72" y1="50" x2="72" y2="330" stroke="#94a3b8" strokeWidth="1.5" />
+        <line x1="72" y1="330" x2="700" y2="330" stroke="#94a3b8" strokeWidth="1.5" />
+
+        <polyline
+          points={randomPoints}
+          fill="none"
+          stroke="#94a3b8"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <polyline
+          points={languagePoints}
+          fill="none"
+          stroke="#2563eb"
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+
+        {randomDrops.map((value, index) => (
+          <circle
+            key={`random-${layers[index]}`}
+            cx={xPositions[index]}
+            cy={yScale(value)}
+            r="5"
+            fill="#94a3b8"
+          />
+        ))}
+        {languageDrops.map((value, index) => (
+          <g key={`language-${layers[index]}`}>
+            <circle
+              cx={xPositions[index]}
+              cy={yScale(value)}
+              r={index === 3 ? "8" : "6"}
+              fill="#2563eb"
+              stroke="white"
+              strokeWidth="3"
+            />
+            <text
+              x={xPositions[index]}
+              y={yScale(value) - 14}
+              textAnchor="middle"
+              fontSize="13"
+              fontWeight="700"
+              fill="#1d4ed8"
+            >
+              {value.toFixed(2)}
+            </text>
+          </g>
+        ))}
+        {layers.map((layer, index) => (
+          <text
+            key={layer}
+            x={xPositions[index]}
+            y="356"
+            textAnchor="middle"
+            fontSize="14"
+            fontWeight={index === 3 ? "700" : "500"}
+            fill={index === 3 ? "#1d4ed8" : "#475569"}
+          >
+            Layer {layer}
+          </text>
+        ))}
+        <text
+          x="18"
+          y="190"
+          transform="rotate(-90 18 190)"
+          textAnchor="middle"
+          fontSize="13"
+          fill="#64748b"
+        >
+          Routing-accuracy drop (points)
+        </text>
+      </svg>
+      <p className="mt-1 text-xs leading-5 text-muted-foreground">
+        Probe-derived rank-3 language-subspace removal compared with an
+        equal-rank random control; three-run mean.
+      </p>
+    </div>
+  );
+}
+
 export default function ModularLoraResearch() {
   return (
     <div className="space-y-16">
@@ -596,47 +742,40 @@ export default function ModularLoraResearch() {
             <p className="mb-5 text-sm font-semibold uppercase tracking-[0.16em] text-blue-600 dark:text-blue-400">
               02 · What information drives routing?
             </p>
-            <Image
-              src="/projects/modular-lora-experts/fig_representation_interventions.png"
-              alt="Routing-accuracy drop after removing a probe-derived language-related subspace from encoder layers 3, 6, 9, and 12, compared with equal-rank random controls"
-              width={1200}
-              height={720}
-              className="h-auto w-full rounded-xl bg-white object-contain"
-            />
-            <p className="mt-3 text-xs leading-5 text-muted-foreground">
-              Routing-accuracy change after removing a probe-derived,
-              rank-3 language-related subspace from encoder layers 3, 6, 9,
-              and 12. Equal-rank random removals provide the control. Results
-              are averaged over three runs with a separate 63.4% mean routing
-              baseline.
-            </p>
+            <div className="grid grid-cols-[minmax(180px,0.42fr)_minmax(0,1.58fr)] items-stretch gap-5">
+              <div className="grid grid-cols-1 gap-3">
+                {[
+                  ["Routing accuracy", "−22.6 points", "at encoder layer 12"],
+                  ["Routes changed", "33.5%", "at encoder layer 12"],
+                  ["Translation quality", "−0.74 BLEU", "a much smaller change"],
+                ].map(([label, value, note], index) => (
+                  <div
+                    key={label}
+                    className={
+                      "flex flex-col justify-center rounded-xl border px-5 py-5 " +
+                      (index === 0
+                        ? "border-blue-200 bg-blue-50/70 dark:border-blue-900 dark:bg-blue-950/25"
+                        : "bg-muted/25")
+                    }
+                  >
+                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      {label}
+                    </p>
+                    <p className="mt-2 text-2xl font-semibold tabular-nums text-blue-600 dark:text-blue-400">
+                      {value}
+                    </p>
+                    <p className="mt-1 text-sm text-muted-foreground">{note}</p>
+                  </div>
+                ))}
+              </div>
+              <LayerInterventionChart />
+            </div>
 
             <p className="mt-5 max-w-4xl text-sm leading-6 text-muted-foreground sm:text-base">
               Removing the identified language-related subspace has a larger
               effect in deeper encoder layers, while the equal-rank random
-              control has little effect.
+              control remains close to zero.
             </p>
-
-            <div className="mt-6 grid gap-4 sm:grid-cols-3">
-              {[
-                ["Routing accuracy", "−22.6 points", "at encoder layer 12"],
-                ["Routes changed", "33.5%", "at encoder layer 12"],
-                ["Translation quality", "−0.74 BLEU", "a much smaller change"],
-              ].map(([label, value, note]) => (
-                <div
-                  key={label}
-                  className="rounded-xl border bg-muted/30 px-5 py-5 text-center"
-                >
-                  <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    {label}
-                  </p>
-                  <p className="mt-2 text-2xl font-semibold tabular-nums text-blue-600 dark:text-blue-400">
-                    {value}
-                  </p>
-                  <p className="mt-1 text-sm text-muted-foreground">{note}</p>
-                </div>
-              ))}
-            </div>
 
             <p className="mt-5 rounded-xl bg-blue-50 px-5 py-4 font-semibold text-blue-950 dark:bg-blue-950/30 dark:text-blue-100">
               Language-related directions influence expert selection, but
