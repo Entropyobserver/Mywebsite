@@ -52,7 +52,7 @@ export function generateMetadata({ params }: ProjectPageProps): Metadata {
       : project.shortDescription;
   const socialImage =
     project.id === "longfinrag"
-      ? "/projects/longfinrag/project-summary-2026.png"
+      ? "/projects/longfinrag/project-summary-2026-v2.png"
       : project.companyLogoImg;
 
   return {

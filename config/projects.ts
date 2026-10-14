@@ -465,13 +465,13 @@ export const Projects: ProjectInterface[] = [
     ],
     startDate: new Date("2026-02-01"),
     endDate: new Date("2026-08-01"),
-    companyLogoImg: "/projects/longfinrag/project-summary-2026.png",
+    companyLogoImg: "/projects/longfinrag/project-summary-2026-v2.png",
     pagesInfoArr: [
       {
         title: "LongFinRAG Benchmark Pipeline",
         description:
           "The pipeline converts 4,369 annual-report pages into 41,736 traceable retrieval units and a 720-item benchmark with report-, page-, and object-level evidence identifiers.",
-        imgArr: ["/projects/longfinrag/project-summary-2026.png"],
+        imgArr: ["/projects/longfinrag/project-summary-2026-v2.png"],
       },
     ],
     descriptionDetails: {
