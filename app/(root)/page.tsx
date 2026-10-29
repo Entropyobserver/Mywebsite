@@ -47,25 +47,6 @@ export default function IndexPage() {
     ],
   };
 
-  // Structured data for website as a software application (template)
-  const softwareSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: "Next.js Portfolio Template",
-    applicationCategory: "DeveloperApplication",
-    operatingSystem: "Web",
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-    },
-    author: {
-      "@type": "Person",
-      name: siteConfig.authorName,
-      url: siteConfig.url,
-    },
-  };
-
   return (
     <ClientPageWrapper>
       <Script
@@ -73,12 +54,6 @@ export default function IndexPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
       />
-      <Script
-        id="schema-software"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
-      />
-
       <section className="space-y-6 pb-8 pt-6 mb-0 md:pb-12 md:py-20 lg:py-32 h-screen flex items-center">
         <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center -mt-20">
           <Image
@@ -182,7 +157,7 @@ export default function IndexPage() {
           </AnimatedText>
           <div className="mt-6 space-y-5 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
             <AnimatedText as="p" delay={0.1}>
-              I am an AI and NLP researcher completing an MSc in Language
+              I am an AI and NLP researcher completing an MA in Language
               Technology at Uppsala University, with a background in Business
               Analytics and four years of experience as a data analyst. My
               research focuses on how training data and system design shape

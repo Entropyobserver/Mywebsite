@@ -53,7 +53,7 @@ export const publications: PublicationInterface[] = [
       "Modular Expert Architectures for Multilingual Domain Adaptation: Parameter-Efficient Norwegian Petroleum Translation with LoRA and Gated Routing",
     authors: "Xiaojing Yang",
     status: "Thesis",
-    venue: "MSc Thesis, Uppsala University, 46 pages",
+    venue: "MA Thesis, Uppsala University, 46 pages",
     date: "June 2026",
     role: "Thesis author; framework design and experimental lead",
     description:
@@ -81,7 +81,7 @@ export const publications: PublicationInterface[] = [
     title:
       "Beyond Routing: Diagnosing Modular LoRA Experts for Low-Resource Multilingual Petroleum-Domain Translation",
     authors: "Xiaojing Yang, Zhihan Li, Meriem Beloucif",
-    status: "In Preparation",
+    status: "Under Review",
     venue: "COLING 2027 via ACL Rolling Review (ARR)",
     date: "October 2026",
     role: "First author; framework design and experimental lead",
@@ -125,7 +125,7 @@ export const publications: PublicationInterface[] = [
     title:
       "LongFinRAG: A Benchmark for Finding the Right Evidence in Annual Reports",
     authors: "Xiaojing Yang, Zhihan Li, Meriem Beloucif",
-    status: "In Preparation",
+    status: "Under Review",
     venue: "COLING 2027 via ACL Rolling Review (ARR)",
     date: "October 2026",
     role: "First author; benchmark construction and retrieval evaluation lead",
@@ -138,13 +138,13 @@ const fixedPublications = publications.filter(
   ({ status }) => status === "Published" || status === "Thesis"
 );
 
-const manuscriptsInPreparation = publications
+const otherManuscripts = publications
   .filter(({ status }) => status !== "Published" && status !== "Thesis")
   .sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
 
 export const publicationsByDate: PublicationInterface[] = [
   ...fixedPublications,
-  ...manuscriptsInPreparation,
+  ...otherManuscripts,
 ];
 
 export const featuredPublications: PublicationInterface[] =

@@ -116,7 +116,7 @@ export default function Project({ params }: ProjectPageProps) {
       <div>
         {project.id !== "modular-lora-experts" && (
           <time
-            dateTime={Date.now().toString()}
+            dateTime={project.startDate.toISOString().slice(0, 10)}
             className="block text-sm text-muted-foreground"
           >
             {formatDateFromObj(project.startDate)}

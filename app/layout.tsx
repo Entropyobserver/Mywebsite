@@ -75,7 +75,7 @@ export const metadata = {
     shortcut: siteConfig.logoIcon,
     apple: siteConfig.logoIcon,
   },
-  manifest: `${siteConfig.url}/site.webmanifest`,
+  manifest: `${siteConfig.url}/manifest.webmanifest`,
   robots: {
     index: true,
     follow: true,

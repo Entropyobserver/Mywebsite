@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
+import { siteConfig } from "@/config/site";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Naman Barkiya Portfolio",
-    short_name: "Naman's Portfolio",
-    description:
-      "Naman Barkiya's modern developer portfolio built with Next.js - available as an open-source template",
+    name: "Xiaojing Yang | Research Portfolio",
+    short_name: "Xiaojing Yang",
+    description: siteConfig.description,
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",
@@ -14,25 +14,10 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         src: "/favicon.ico",
         sizes: "64x64",
-        type: "image/png",
-      },
-      {
-        src: "/favicon.ico",
-        sizes: "64x64",
-        type: "image/png",
-        purpose: "maskable",
+        type: "image/x-icon",
       },
     ],
-    categories: [
-      "portfolio",
-      "template",
-      "development",
-      "nextjs",
-      "react",
-      "developer",
-      "web development",
-      "open source",
-    ],
+    categories: ["portfolio", "research", "education"],
     lang: "en",
     dir: "ltr",
     scope: "/",

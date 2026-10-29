@@ -8,7 +8,7 @@ import { skills } from "@/config/skills";
 
 const technicalBackground = [
   "My technical background spans data analysis, machine learning, NLP, and research engineering. My previous experience as a data analyst provided a strong foundation in Python, SQL, R, statistical modelling, machine learning, and experimental design, together with practical experience working with real-world data and evaluating analytical results.",
-  "During my MSc in Language Technology, I extended this foundation into NLP research, working with PyTorch and Hugging Face on transformer-based models, machine translation, large language models, information retrieval, and model adaptation methods such as LoRA and Mixture-of-Experts.",
+  "During my MA in Language Technology, I extended this foundation into NLP research, working with PyTorch and Hugging Face on transformer-based models, machine translation, large language models, information retrieval, and model adaptation methods such as LoRA and Mixture-of-Experts.",
   "My research places a strong emphasis on rigorous evaluation. I have experience with statistical testing, bootstrap confidence intervals, ablation studies, error analysis, and human evaluation, using these methods to understand model behaviour and assess the reliability of experimental findings.",
   "More recently, my work has moved toward data-centric research, including corpus analysis, data filtering, and training-data attribution with Shapley values. From an engineering perspective, I use Git, Linux, Docker, and HPC/GPU environments to support reproducible research and large-scale experimentation.",
 ];
