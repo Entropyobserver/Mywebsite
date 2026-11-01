@@ -168,9 +168,12 @@ export default function Project({ params }: ProjectPageProps) {
       <Image
         src={project.companyLogoImg}
         alt={project.companyName}
-        width={720}
-        height={405}
-        className="my-8 rounded-md border bg-muted transition-colors"
+        width={project.id === "modular-lora-experts" ? 960 : 720}
+        height={project.id === "modular-lora-experts" ? 540 : 405}
+        className={cn(
+          "my-8 rounded-md border bg-muted transition-colors",
+          project.id === "modular-lora-experts" && "h-auto w-full"
+        )}
         priority
       />
 
