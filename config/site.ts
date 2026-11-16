@@ -1,9 +1,9 @@
 export const siteConfig = {
-  name: "Xiaojing Yang | AI & NLP Researcher | Machine Learning Engineer",
+  name: "Xiaojing Yang | AI & NLP Research · Applied AI Engineering",
   authorName: "Xiaojing Yang",
   username: "Entropyobserver",
   description:
-    "Xiaojing Yang is an AI and NLP researcher and machine learning engineer working across multilingual NLP, responsible AI, data-centric ML, and intelligent systems.",
+    "Xiaojing Yang works across AI and NLP research and applied AI engineering, with a focus on multilingual NLP, responsible AI, and data-centric ML.",
   url: "https://nordic-ai.top",
   links: {
     twitter: "https://x.com/Entropyobserver",
@@ -23,7 +23,7 @@ export const siteConfig = {
     "Xiaojing Yang",
     "AI Researcher",
     "NLP Researcher",
-    "Machine Learning Engineer",
+    "Applied AI Engineering",
     "Multilingual NLP",
     "Machine Translation",
     "Model Adaptation",
